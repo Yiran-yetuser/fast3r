@@ -159,3 +159,21 @@ configs/local/default.yaml
 
 # Aim logging
 .aim
+
+# ============================================================
+# [LOCAL-PATCH] 2026-09-06 本地复现新增（追加于 local-demo 分支，未改动官方原有条目）
+# 说明见桌面《fast3r复现日志.md》§5.1 改动清单
+# ============================================================
+# 预下载的官方权重（约 2.6GB，勿上传）
+checkpoints/
+# gradio demo 运行产物
+demo_outputs/
+gradio_tmp_dir/
+temp_preview_frames/
+.gradio/
+# 训练 / 评估常见产物（备用）
+wandb/
+outputs/
+lightning_logs/
+multiview_output/
+*.ckpt
