@@ -1125,7 +1125,10 @@ def main():
     demo = create_demo(args.checkpoint_dir, args.examples_dir, args.output_dir, device=device, 
                        is_lightning_checkpoint=args.is_lightning_checkpoint)
     demo.queue(default_concurrency_limit=2)
-    demo.launch(share=True)
+    # [LOCAL-PATCH] 2026-09-06: share=True -> False。
+    # 原因: share=True 需要从 gradio CDN 下载 frpc 隧道二进制生成本地无法访问的公共分享链接(本网络不可达, 见日志)。
+    # 本地复现不需要公共链接; 如需恢复官方行为, 改回 share=True 即可。
+    demo.launch(share=False)
 
 if __name__ == "__main__":
     main()
