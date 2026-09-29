@@ -68,6 +68,12 @@ The demo is a Gradio interface where you can upload images or a video and visual
 </div>
 </details>
 
+## Reproduction Notebook
+
+For a step-by-step, educational reproduction of the local inference pipeline, see [`fast3r_reproduction.ipynb`](fast3r_reproduction.ipynb) and the accompanying [`REPRODUCTION.md`](REPRODUCTION.md). The notebook covers video frame extraction, one-pass multi-view inference, fast-PnP camera estimation, confidence visualization, point-cloud export, and a small view-scaling experiment.
+
+The notebook separates functional inference from the paper's dataset benchmark. The latter requires the prepared evaluation datasets and a Lightning `last.ckpt`; the local Hugging Face `model.safetensors` checkpoint is intended for Demo/inference.
+
 ## Using Fast3R in Your Own Project
 
 To use Fast3R in your own project, you can import the `Fast3R` class from `fast3r.models.fast3r` and use it as a regular PyTorch model.
@@ -84,6 +90,7 @@ from fast3r.models.multiview_dust3r_module import MultiViewDUSt3RLitModule
 model = Fast3R.from_pretrained("jedyang97/Fast3R_ViT_Large_512")  # If you have networking issues, try pre-download the HF checkpoint dir and change the path here to a local directory
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = model.to(device)
+precision = "16-mixed" if device.type == "cuda" else "32"
 
 # Create a lightweight lightning module wrapper for the model.
 # This provides functions to estimate camera poses, evaluate 3D reconstruction, etc.
@@ -99,14 +106,17 @@ filelist = ["path/to/image1.jpg", "path/to/image2.jpg", "path/to/image3.jpg"]
 images = load_images(filelist, size=512, verbose=True)
 
 # --- Run Inference ---
-# The inference function returns a dictionary with predictions and view information.
-output_dict, profiling_info = inference(
+# profiling=True uses CUDA synchronization, so disable it on CPU.
+inference_result = inference(
     images,
     model,
     device,
-    dtype=torch.float32,  # or use torch.bfloat16 if supported
+    dtype=precision,
     verbose=True,
-    profiling=True,
+    profiling=(device.type == "cuda"),
+)
+output_dict, profiling_info = (
+    inference_result if device.type == "cuda" else (inference_result, None)
 )
 
 # --- Estimate Camera Poses ---
