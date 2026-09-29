@@ -74,6 +74,8 @@ For a step-by-step, educational reproduction of the local inference pipeline, se
 
 The notebook separates functional inference from the paper's dataset benchmark. The latter requires the prepared evaluation datasets and a Lightning `last.ckpt`; the local Hugging Face `model.safetensors` checkpoint is intended for Demo/inference.
 
+When only the public Hugging Face checkpoint is available, [`scripts/fast3r_hf_dtu_eval.py`](scripts/fast3r_hf_dtu_eval.py) evaluates DTU with the repository's official reconstruction metric implementation. See [`REPRODUCTION.md`](REPRODUCTION.md) for the dry-run, single-scene, and full-22-scene commands.
+
 ## Using Fast3R in Your Own Project
 
 To use Fast3R in your own project, you can import the `Fast3R` class from `fast3r.models.fast3r` and use it as a regular PyTorch model.

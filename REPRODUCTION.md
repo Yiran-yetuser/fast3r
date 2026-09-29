@@ -46,6 +46,39 @@ python -m ipykernel install --user --name fast3r --display-name "fast3r"
 
 6. DTU 单元默认只检查数据和 checkpoint 是否存在，不会自动下载数 GB 数据。需要下载时，显式把 `ALLOW_DATA_DOWNLOAD` 改成 `True`。
 
+## 论文级 DTU 重建指标
+
+公开 Hugging Face 权重不是 Lightning `last.ckpt`，因此不能直接传给官方 `fast3r/eval.py`。本分支新增的 `scripts/fast3r_hf_dtu_eval.py` 保留 Hugging Face 权重格式，但直接复用 `MultiViewDUSt3RLitModule.evaluate_reconstruction` 及仓库中的 accuracy、completion、normal consistency 实现。
+
+先做不加载模型的数据检查：
+
+```bash
+python scripts/fast3r_hf_dtu_eval.py \
+  --device cpu \
+  --dry-run \
+  --max-scenes 2 \
+  --output-json /tmp/fast3r_dtu_dry_run.json
+```
+
+在有 CUDA GPU 的机器上先跑一个场景确认显存和耗时：
+
+```bash
+python scripts/fast3r_hf_dtu_eval.py \
+  --device cuda \
+  --scenes scan12 \
+  --output-json demo_outputs/paper_eval/dtu_scan12.json
+```
+
+确认单场景成功后运行全部 22 个 DTU 场景：
+
+```bash
+python scripts/fast3r_hf_dtu_eval.py \
+  --device cuda \
+  --output-json demo_outputs/paper_eval/dtu_all.json
+```
+
+脚本默认遵循仓库评测配置：512 分辨率、`kf_every=5`、局部头对齐置信度 85%、指标阶段置信度 0%。输出 JSON 包含每个场景和全体场景均值。它是“公开 HF checkpoint 的官方指标实现复现”，与原始训练 Lightning checkpoint 的严格复现实验应分别标注。
+
 ## 已记录的本地结果
 
 在 `fast3r` 环境、NVIDIA GeForce RTX 5070 Ti Laptop GPU（11.5 GB）上，12 个视频视角的历史运行记录为：
@@ -65,4 +98,3 @@ python -m ipykernel install --user --name fast3r --display-name "fast3r"
 > **Fast3R 多视图 3D 重建复现（PyTorch / CUDA）**：基于官方 ViT-L/512 checkpoint，搭建从视频抽帧、图像归一化、多视图一次前向到 fast-PnP 相机估计的端到端推理流程；实现置信度热力图、相机轨迹和 RGB 点云可视化，并导出 `.ply` / `.npz` 复现产物。通过 forward hook 检查 patch embedding、encoder、decoder、global/local head 的输出形状与数值有效性，记录不同视角规模下的耗时和显存。
 
 面试时应明确说“完成官方模型的功能性复现”；只有准备好 Lightning checkpoint 和官方数据后，才应进一步声称复现论文指标。
-
