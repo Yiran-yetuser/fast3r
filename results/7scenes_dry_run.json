@@ -1,0 +1,7 @@
+{
+  "mode": "dry_run",
+  "data_root": "data/7_scenes_processed",
+  "scenes": [
+    "chess/seq-03"
+  ]
+}

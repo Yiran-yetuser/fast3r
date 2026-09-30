@@ -1,0 +1,418 @@
+{
+  "mode": "hf_checkpoint_official_metrics",
+  "dataset": "nrgbd",
+  "checkpoint_dir": "checkpoints/Fast3R_ViT_Large_512",
+  "data_root": "data/neural_rgbd",
+  "device": "cuda",
+  "precision": "16-mixed",
+  "seed": 42,
+  "head": "both",
+  "head_chunk_size": 2,
+  "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+  "torch": "2.7.1+cu128",
+  "python": "3.11.16",
+  "resolution": 512,
+  "kf_every": 40,
+  "alignment_confidence_percentile": 85.0,
+  "metric_confidence_percentile": 0.0,
+  "scene_count": 9,
+  "aggregate_mean": {
+    "accuracy": 0.09710843547918814,
+    "accuracy_median": 0.040165241178122583,
+    "completion": 0.031291807755244455,
+    "completion_median": 0.012001021962735982,
+    "nc1": 0.7659634143404187,
+    "nc1_median": 0.9189364267778196,
+    "nc2": 0.7489077460920082,
+    "nc2_median": 0.9048333176955458
+  },
+  "paper_distance_multiplier": 100,
+  "scenes": [
+    {
+      "scene": "breakfast_room",
+      "views": 30,
+      "seed": 2744021041,
+      "wall_time_seconds": 103.46240569299971,
+      "forward_time_seconds": 5.5941972732543945,
+      "metrics": {
+        "accuracy": 0.05156923955484933,
+        "accuracy_median": 0.021250073552004468,
+        "completion": 0.018502345198705097,
+        "completion_median": 0.004672192539863575,
+        "nc1": 0.738635390764547,
+        "nc1_median": 0.8872405609157576,
+        "nc2": 0.733264742015765,
+        "nc2_median": 0.8871861731530715
+      },
+      "metrics_by_head": {
+        "local": {
+          "accuracy": 0.05156923955484933,
+          "accuracy_median": 0.021250073552004468,
+          "completion": 0.018502345198705097,
+          "completion_median": 0.004672192539863575,
+          "nc1": 0.738635390764547,
+          "nc1_median": 0.8872405609157576,
+          "nc2": 0.733264742015765,
+          "nc2_median": 0.8871861731530715
+        },
+        "global": {
+          "accuracy": 0.05086661273879372,
+          "accuracy_median": 0.0191166471500412,
+          "completion": 0.019647924177685093,
+          "completion_median": 0.004154578275521235,
+          "nc1": 0.725521773174005,
+          "nc1_median": 0.8700311878529279,
+          "nc2": 0.7235894699883856,
+          "nc2_median": 0.8684632811107329
+        }
+      },
+      "paired_same_forward": true
+    },
+    {
+      "scene": "complete_kitchen",
+      "views": 31,
+      "seed": 1238568347,
+      "wall_time_seconds": 225.19953431900012,
+      "forward_time_seconds": 5.512042999267578,
+      "metrics": {
+        "accuracy": 0.10447592136028068,
+        "accuracy_median": 0.05530286107379938,
+        "completion": 0.03724345682225537,
+        "completion_median": 0.019672946437068795,
+        "nc1": 0.7547709060780688,
+        "nc1_median": 0.9180252384815459,
+        "nc2": 0.694519280158819,
+        "nc2_median": 0.8550723767368196
+      },
+      "metrics_by_head": {
+        "local": {
+          "accuracy": 0.10447592136028068,
+          "accuracy_median": 0.05530286107379938,
+          "completion": 0.03724345682225537,
+          "completion_median": 0.019672946437068795,
+          "nc1": 0.7547709060780688,
+          "nc1_median": 0.9180252384815459,
+          "nc2": 0.694519280158819,
+          "nc2_median": 0.8550723767368196
+        },
+        "global": {
+          "accuracy": 0.10538282391268819,
+          "accuracy_median": 0.05331053650885677,
+          "completion": 0.033344235496452185,
+          "completion_median": 0.01929910001433522,
+          "nc1": 0.7260493144746487,
+          "nc1_median": 0.8707041626224609,
+          "nc2": 0.6925107436658269,
+          "nc2_median": 0.8384189430304825
+        }
+      },
+      "paired_same_forward": true
+    },
+    {
+      "scene": "green_room",
+      "views": 37,
+      "seed": 700705457,
+      "wall_time_seconds": 313.1900294980005,
+      "forward_time_seconds": 7.843130826950073,
+      "metrics": {
+        "accuracy": 0.0382295332638711,
+        "accuracy_median": 0.022289000741071076,
+        "completion": 0.05329952539289901,
+        "completion_median": 0.004937520450474846,
+        "nc1": 0.8041904460609691,
+        "nc1_median": 0.9515530006635582,
+        "nc2": 0.7806192961360862,
+        "nc2_median": 0.947395615980671
+      },
+      "metrics_by_head": {
+        "local": {
+          "accuracy": 0.0382295332638711,
+          "accuracy_median": 0.022289000741071076,
+          "completion": 0.05329952539289901,
+          "completion_median": 0.004937520450474846,
+          "nc1": 0.8041904460609691,
+          "nc1_median": 0.9515530006635582,
+          "nc2": 0.7806192961360862,
+          "nc2_median": 0.947395615980671
+        },
+        "global": {
+          "accuracy": 0.03586667647048153,
+          "accuracy_median": 0.02077989353137207,
+          "completion": 0.05065161591597228,
+          "completion_median": 0.0050505912498351405,
+          "nc1": 0.7889247873091185,
+          "nc1_median": 0.9303496435286762,
+          "nc2": 0.7597418381507929,
+          "nc2_median": 0.9135100882275946
+        }
+      },
+      "paired_same_forward": true
+    },
+    {
+      "scene": "grey_white_room",
+      "views": 38,
+      "seed": 3083030414,
+      "wall_time_seconds": 839.7283778760002,
+      "forward_time_seconds": 7.439185380935669,
+      "metrics": {
+        "accuracy": 0.18390204774117797,
+        "accuracy_median": 0.07502214488248712,
+        "completion": 0.058043365026811046,
+        "completion_median": 0.02588573908951223,
+        "nc1": 0.7456619186579069,
+        "nc1_median": 0.922302454774511,
+        "nc2": 0.747374218048648,
+        "nc2_median": 0.9197123862607525
+      },
+      "metrics_by_head": {
+        "local": {
+          "accuracy": 0.18390204774117797,
+          "accuracy_median": 0.07502214488248712,
+          "completion": 0.058043365026811046,
+          "completion_median": 0.02588573908951223,
+          "nc1": 0.7456619186579069,
+          "nc1_median": 0.922302454774511,
+          "nc2": 0.747374218048648,
+          "nc2_median": 0.9197123862607525
+        },
+        "global": {
+          "accuracy": 0.174223141357997,
+          "accuracy_median": 0.06523228333432479,
+          "completion": 0.055474509634366696,
+          "completion_median": 0.027919530356928304,
+          "nc1": 0.7110423057818188,
+          "nc1_median": 0.8462038461781756,
+          "nc2": 0.7008104622884759,
+          "nc2_median": 0.8318500603322518
+        }
+      },
+      "paired_same_forward": true
+    },
+    {
+      "scene": "kitchen",
+      "views": 38,
+      "seed": 2597876059,
+      "wall_time_seconds": 92.79344779599978,
+      "forward_time_seconds": 8.016550779342651,
+      "metrics": {
+        "accuracy": 0.050168427000633266,
+        "accuracy_median": 0.03127438547042946,
+        "completion": 0.028792792636111272,
+        "completion_median": 0.012414378386637259,
+        "nc1": 0.8267513745961432,
+        "nc1_median": 0.9722112913623265,
+        "nc2": 0.821616204201163,
+        "nc2_median": 0.9722711030462747
+      },
+      "metrics_by_head": {
+        "local": {
+          "accuracy": 0.050168427000633266,
+          "accuracy_median": 0.03127438547042946,
+          "completion": 0.028792792636111272,
+          "completion_median": 0.012414378386637259,
+          "nc1": 0.8267513745961432,
+          "nc1_median": 0.9722112913623265,
+          "nc2": 0.821616204201163,
+          "nc2_median": 0.9722711030462747
+        },
+        "global": {
+          "accuracy": 0.047338245429501644,
+          "accuracy_median": 0.030203350082877452,
+          "completion": 0.028738087047609284,
+          "completion_median": 0.013962769879215787,
+          "nc1": 0.8044536718896201,
+          "nc1_median": 0.9485754343654692,
+          "nc2": 0.8047467433050048,
+          "nc2_median": 0.9537937004481232
+        }
+      },
+      "paired_same_forward": true
+    },
+    {
+      "scene": "morning_apartment",
+      "views": 23,
+      "seed": 2199579833,
+      "wall_time_seconds": 45.81160928300051,
+      "forward_time_seconds": 3.4681854248046875,
+      "metrics": {
+        "accuracy": 0.015532541188107415,
+        "accuracy_median": 0.010980289660508635,
+        "completion": 0.011269901202858782,
+        "completion_median": 0.005410689239437355,
+        "nc1": 0.815444773964924,
+        "nc1_median": 0.958955316825432,
+        "nc2": 0.8195593718205874,
+        "nc2_median": 0.9605484372947082
+      },
+      "metrics_by_head": {
+        "local": {
+          "accuracy": 0.015532541188107415,
+          "accuracy_median": 0.010980289660508635,
+          "completion": 0.011269901202858782,
+          "completion_median": 0.005410689239437355,
+          "nc1": 0.815444773964924,
+          "nc1_median": 0.958955316825432,
+          "nc2": 0.8195593718205874,
+          "nc2_median": 0.9605484372947082
+        },
+        "global": {
+          "accuracy": 0.016338005266536684,
+          "accuracy_median": 0.011729521324297098,
+          "completion": 0.013482215493543236,
+          "completion_median": 0.007190058142344908,
+          "nc1": 0.8109287760840833,
+          "nc1_median": 0.9505232212196711,
+          "nc2": 0.8100073186081829,
+          "nc2_median": 0.947030358849459
+        }
+      },
+      "paired_same_forward": true
+    },
+    {
+      "scene": "staircase",
+      "views": 29,
+      "seed": 3559068649,
+      "wall_time_seconds": 169.00750815100037,
+      "forward_time_seconds": 5.52787709236145,
+      "metrics": {
+        "accuracy": 0.11237556682948262,
+        "accuracy_median": 0.05010526668674169,
+        "completion": 0.03537803188668485,
+        "completion_median": 0.012554617023251207,
+        "nc1": 0.6714479394536415,
+        "nc1_median": 0.7881133859855602,
+        "nc2": 0.6510946679243553,
+        "nc2_median": 0.7599165988009493
+      },
+      "metrics_by_head": {
+        "local": {
+          "accuracy": 0.11237556682948262,
+          "accuracy_median": 0.05010526668674169,
+          "completion": 0.03537803188668485,
+          "completion_median": 0.012554617023251207,
+          "nc1": 0.6714479394536415,
+          "nc1_median": 0.7881133859855602,
+          "nc2": 0.6510946679243553,
+          "nc2_median": 0.7599165988009493
+        },
+        "global": {
+          "accuracy": 0.10551725117057088,
+          "accuracy_median": 0.04975061344357695,
+          "completion": 0.04214648656995275,
+          "completion_median": 0.011310767313334403,
+          "nc1": 0.6659951090373235,
+          "nc1_median": 0.7686414237269703,
+          "nc2": 0.6427524518102181,
+          "nc2_median": 0.7418193380058131
+        }
+      },
+      "paired_same_forward": true
+    },
+    {
+      "scene": "thin_geometry",
+      "views": 10,
+      "seed": 915509448,
+      "wall_time_seconds": 55.51718738100044,
+      "forward_time_seconds": 1.2328343391418457,
+      "metrics": {
+        "accuracy": 0.2932634282109115,
+        "accuracy_median": 0.08070049084160147,
+        "completion": 0.02948542988164885,
+        "completion_median": 0.01846848080901362,
+        "nc1": 0.7765409306145289,
+        "nc1_median": 0.9560710680514979,
+        "nc2": 0.7430298718907331,
+        "nc2_median": 0.9316338379684594
+      },
+      "metrics_by_head": {
+        "local": {
+          "accuracy": 0.2932634282109115,
+          "accuracy_median": 0.08070049084160147,
+          "completion": 0.02948542988164885,
+          "completion_median": 0.01846848080901362,
+          "nc1": 0.7765409306145289,
+          "nc1_median": 0.9560710680514979,
+          "nc2": 0.7430298718907331,
+          "nc2_median": 0.9316338379684594
+        },
+        "global": {
+          "accuracy": 0.2714608279073689,
+          "accuracy_median": 0.08473072801384447,
+          "completion": 0.030437362197302375,
+          "completion_median": 0.015482377078133349,
+          "nc1": 0.6931973675770063,
+          "nc1_median": 0.8198656844402428,
+          "nc2": 0.6941693104401583,
+          "nc2_median": 0.8393695889791462
+        }
+      },
+      "paired_same_forward": true
+    },
+    {
+      "scene": "whiteroom",
+      "views": 42,
+      "seed": 2395845963,
+      "wall_time_seconds": 97.86207670400017,
+      "forward_time_seconds": 8.62855863571167,
+      "metrics": {
+        "accuracy": 0.024459214163379206,
+        "accuracy_median": 0.014562657694459923,
+        "completion": 0.00961142174922581,
+        "completion_median": 0.00399263368936496,
+        "nc1": 0.7602270488730394,
+        "nc1_median": 0.915955523940187,
+        "nc2": 0.7490920626319167,
+        "nc2_median": 0.909763330018206
+      },
+      "metrics_by_head": {
+        "local": {
+          "accuracy": 0.024459214163379206,
+          "accuracy_median": 0.014562657694459923,
+          "completion": 0.00961142174922581,
+          "completion_median": 0.00399263368936496,
+          "nc1": 0.7602270488730394,
+          "nc1_median": 0.915955523940187,
+          "nc2": 0.7490920626319167,
+          "nc2_median": 0.909763330018206
+        },
+        "global": {
+          "accuracy": 0.02635432142695774,
+          "accuracy_median": 0.01480905233460539,
+          "completion": 0.012181689692712959,
+          "completion_median": 0.004226872062906176,
+          "nc1": 0.7520995334342546,
+          "nc1_median": 0.9016568473647724,
+          "nc2": 0.7406506681237879,
+          "nc2_median": 0.8933363163859988
+        }
+      },
+      "paired_same_forward": true
+    }
+  ],
+  "scope_note": "Metrics reuse fast3r.models.multiview_dust3r_module.MultiViewDUSt3RLitModule and are evaluated with the public Hugging Face inference checkpoint; this is distinct from running fast3r/eval.py with the original Lightning checkpoint. Both heads reuse exactly the same predictions and GT. Metric selection does not disable computation of the local head.",
+  "aggregate_by_head": {
+    "local": {
+      "accuracy": 0.09710843547918814,
+      "accuracy_median": 0.040165241178122583,
+      "completion": 0.031291807755244455,
+      "completion_median": 0.012001021962735982,
+      "nc1": 0.7659634143404187,
+      "nc1_median": 0.9189364267778196,
+      "nc2": 0.7489077460920082,
+      "nc2_median": 0.9048333176955458
+    },
+    "global": {
+      "accuracy": 0.0925942117423218,
+      "accuracy_median": 0.038851402858199574,
+      "completion": 0.03178934735839965,
+      "completion_median": 0.012066293819172725,
+      "nc1": 0.7420236265290977,
+      "nc1_median": 0.8785057168110406,
+      "nc2": 0.729886556264537,
+      "nc2_median": 0.8697324083744002
+    }
+  },
+  "aggregate_mean_head": "local",
+  "paired_same_forward": true,
+  "paper_mapping": "5.4/Table 5; mean distance, not Table 3 median distance"
+}

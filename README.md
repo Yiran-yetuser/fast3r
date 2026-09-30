@@ -101,9 +101,15 @@ The 2026-10-01 local run completed all 9 scenes (278 sampled views) with the pub
 
 [`scripts/queue_nrgbd_reproduction.sh`](scripts/queue_nrgbd_reproduction.sh) verifies the extracted scene/frame/pose inventory before downloading. Complete extracted data can be reused without the ZIP or preparation manifest. This checks layout and nonempty files, not image decoding or CRC.
 
-### Next paper experiments (running, not completed)
+### Paired NRGBD result and prepared 7-Scenes data
 
-Paired NRGBD local/global evaluation now uses `--head both` to share one forward pass. The 7-Scenes preparation pipeline reads official TestSplit archives via HTTP Range, checks sequence CRC/SHA256, registers depth using pinned SimpleRecon calibration, and stores only the original stride-20 selected frames. The loader preserves original frame numbering and refuses incompatible sparse-storage protocols. GPU evaluation queues behind NRGBD and free-memory checks; disk usage retains a 1GiB reserve. Eight offline preparation tests and a real 50-view heads-sequence dry-run passed. Full result JSONs must be validated before reporting scores; these pipelines do not constitute complete-paper reproduction. See [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md) and the notebook for status and remaining training/data requirements.
+The complete 9-scene report is [`results/nrgbd_paired_seed42_stride40.json`](results/nrgbd_paired_seed42_stride40.json). All local metrics exactly reproduced the earlier seeded run. Under the Table 5 **mean-distance x100** convention, local Accuracy/Completion are **9.7108 / 3.1292**, versus global **9.2594 / 3.1789**. Local improves Completion and normal consistency but not Accuracy, so this run does not fully reproduce the paper's local-head advantage. These means must not be compared to Table 3 medians.
+
+All official 7-Scenes TestSplit data are prepared: **7 scene categories, 18 trajectories, 850 stride-20 views**, verified against splits, frame inventories and sequence CRC/SHA256 records in [`results/7scenes_data_manifest.json`](results/7scenes_data_manifest.json). GPU evaluation is queued; no 7-Scenes score is reported yet.
+
+### Next paper experiments (7-Scenes evaluation pending)
+
+Paired NRGBD local/global evaluation used `--head both` to share one forward pass. The 7-Scenes preparation pipeline reads official TestSplit archives via HTTP Range, checks sequence CRC/SHA256, registers depth using pinned SimpleRecon calibration, and stores only the original stride-20 selected frames. The loader preserves original frame numbering and refuses incompatible sparse-storage protocols. GPU evaluation queues behind NRGBD and free-memory checks; disk usage retains a 1GiB reserve. Eight offline preparation tests and a real 50-view heads-sequence dry-run passed. Full result JSONs must be validated before reporting scores; these pipelines do not constitute complete-paper reproduction. See [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md) and the notebook for status and remaining training/data requirements.
 
 ## Using Fast3R in Your Own Project
 
