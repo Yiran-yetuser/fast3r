@@ -13,6 +13,7 @@ from collections import deque
 
 from fast3r.dust3r.utils.image import imread_cv2
 from .base_many_view_dataset import BaseManyViewDataset
+from .sparse_eval_frames import sparse_frame_count
 
 
 class SevenScenes(BaseManyViewDataset):
@@ -103,7 +104,9 @@ class SevenScenes(BaseManyViewDataset):
             seq_id = idx % self.num_seq
 
             data_path = osp.join(self.ROOT, scene_id)
-            num_files = len([name for name in os.listdir(data_path) if 'color' in name])
+            num_files = sparse_frame_count(data_path, full_video=self.full_video, kf_every=self.kf_every)
+            if num_files is None:
+                num_files = len([name for name in os.listdir(data_path) if 'color' in name])
             img_idxs = [f'{i:06d}' for i in range(num_files)]
             img_idxs = self.sample_frame_idx(img_idxs, rng, full_video=self.full_video)
         
@@ -155,6 +158,5 @@ class SevenScenes(BaseManyViewDataset):
 
 
                     
-
 
 

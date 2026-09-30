@@ -41,8 +41,8 @@ def parse_args() -> argparse.Namespace:
         help="Seed for Python, NumPy, dataset and randomized image-index embeddings.",
     )
     parser.add_argument(
-        "--head", choices=("local", "global"), default="local",
-        help="Aligned local pointmap or raw global pointmap (paper section 5.4).",
+        "--head", choices=("local", "global", "both"), default="local",
+        help="Aligned local, raw global, or paired metrics from the same forward (section 5.4).",
     )
     parser.add_argument(
         "--head-chunk-size", type=int, default=2,
@@ -273,18 +273,22 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
             )
         predictions, profile = result if profiling else (result, None)
 
-        lit_module.evaluate_reconstruction(
-            eval_views,
-            predictions["preds"],
-            dataset_name=args.dataset,
-            use_pts3d_from_local_head=args.head == "local",
-            min_conf_thr_percentile_for_local_alignment_and_icp=args.alignment_confidence_percentile,
-            min_conf_thr_percentile_for_metric_cacluation=args.metric_confidence_percentile,
-        )
-        metrics_by_scene = lit_module.reconstruction_metrics_per_epoch.pop(args.dataset, {})
-        metrics = metrics_by_scene.get(scene_name, {})
-        if not metrics or not all(np.isfinite(value) for value in metrics.values()):
-            raise ValueError(f"Missing or nonfinite metrics for {scene_name}")
+        metrics_by_head = {}
+        for head in (["local", "global"] if args.head == "both" else [args.head]):
+            lit_module.evaluate_reconstruction(
+                eval_views,
+                predictions["preds"],
+                dataset_name=args.dataset,
+                use_pts3d_from_local_head=head == "local",
+                min_conf_thr_percentile_for_local_alignment_and_icp=args.alignment_confidence_percentile,
+                min_conf_thr_percentile_for_metric_cacluation=args.metric_confidence_percentile,
+            )
+            metrics_by_scene = lit_module.reconstruction_metrics_per_epoch.pop(args.dataset, {})
+            metrics = metrics_by_scene.get(scene_name, {})
+            if not metrics or not all(np.isfinite(value) for value in metrics.values()):
+                raise ValueError(f"Missing or nonfinite metrics for {scene_name}/{head}")
+            metrics_by_head[head] = {key: float(value) for key, value in metrics.items()}
+        metrics = metrics_by_head['local' if args.head == 'both' else args.head]
         report = {
             "scene": scene_name,
             "views": len(raw_views),
@@ -293,15 +297,20 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
             "forward_time_seconds": profile.get("total_time") if profile else None,
             "metrics": {key: float(value) for key, value in metrics.items()},
         }
+        if args.head == 'both':
+            report['metrics_by_head'] = metrics_by_head
+            report['paired_same_forward'] = True
         scene_reports.append(report)
         print(json.dumps(report, ensure_ascii=False))
+        # Explicitly release large CPU prediction/GT tensors between trajectories.
+        del predictions, result, model_views, eval_views, raw_views
 
     metric_names = sorted({key for report in scene_reports for key in report["metrics"]})
     aggregate = {
         key: float(np.mean([report["metrics"][key] for report in scene_reports if key in report["metrics"]]))
         for key in metric_names
     }
-    return {
+    report = {
         "mode": "hf_checkpoint_official_metrics",
         "dataset": args.dataset,
         "checkpoint_dir": str(args.checkpoint_dir),
@@ -328,10 +337,24 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
             "this is distinct from running fast3r/eval.py with the original Lightning checkpoint."
         ),
     }
+    if args.head == 'both':
+        report['aggregate_by_head'] = {
+            head: {key: float(np.mean([row['metrics_by_head'][head][key]
+                                      for row in scene_reports])) for key in metric_names}
+            for head in ['local', 'global']
+        }
+        report['aggregate_mean_head'] = 'local'
+        report['paired_same_forward'] = True
+        report['paper_mapping'] = '5.4/Table 5; mean distance, not Table 3 median distance'
+        report['scope_note'] += (' Both heads reuse exactly the same predictions and GT. '
+                                 'Metric selection does not disable computation of the local head.')
+    return report
 
 
 def main() -> None:
     args = parse_args()
+    if args.output_json.exists() and not args.dry_run:
+        raise FileExistsError(f'Refusing to overwrite {args.output_json}; choose a new output path')
     report = evaluate(args)
     load_report(args.output_json, report)
     print(f"Report written to {args.output_json}")
