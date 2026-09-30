@@ -115,3 +115,15 @@ python scripts/fast3r_hf_dtu_eval.py \
 > **Fast3R 多视图 3D 重建复现（PyTorch / CUDA）**：基于官方 ViT-L/512 checkpoint，搭建从视频抽帧、图像归一化、多视图一次前向到 fast-PnP 相机估计的端到端推理流程；实现置信度热力图、相机轨迹和 RGB 点云可视化，并导出 `.ply` / `.npz` 复现产物。通过 forward hook 检查 patch embedding、encoder、decoder、global/local head 的输出形状与数值有效性，记录不同视角规模下的耗时和显存。
 
 面试时可以说“完成公开权重推理、DTU 全量评测及推理消融”。应同时说明：Table 4 的 median 数值尚未对齐，其他数据集与重新训练实验未完成。见 Notebook 末尾与论文逐项对应表。
+
+## 逐项论文实验与新结果
+
+Notebook末尾已经添加独立可运行的“论文逐项核对”单元，包含损失数值/梯度检查（§3.2）、22场景固定种子DTU（§4.3/Table 4）、3/5/10/20视角与head消融（§5.1/Figure 5、§5.4/Table 5）和预热后的性能图（§4.1/Table 2的本机适配）。
+
+- [`results/dtu_seed42_stride5.json`](results/dtu_seed42_stride5.json)：22场景，seed42、stride5，Accuracy/Completion median为2.0827/1.0311。
+- [`results/dtu_paper_experiments.json`](results/dtu_paper_experiments.json)：88组视角实验，额外22组local/global配对指标。
+- [`results/loss_checks.json`](results/loss_checks.json)：合成点图归一化、扰动和有限梯度检查。
+- [`results/checkpoint_manifest.json`](results/checkpoint_manifest.json)：实际配置与权重的SHA256；原始下载revision未记录。
+- 科学图：[`results/figures/`](results/figures/)。
+
+Neural RGB-D数据正由官方公开链接下载，后续入口支持 `python scripts/fast3r_hf_dtu_eval.py --dataset nrgbd --device cuda --output-json results/nrgbd_seed42_stride40.json`。默认stride40；Table 3比较时将native距离乘100。完整实验状态、限制与余下前提请查阅 [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md)。

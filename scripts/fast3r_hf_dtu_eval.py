@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate a local Hugging Face Fast3R checkpoint on the prepared DTU split.
+"""Evaluate local Hugging Face Fast3R weights on prepared reconstruction data.
 
 The official ``fast3r/eval.py`` entry point expects a Lightning ``last.ckpt``
 directory.  The released Hugging Face model is an inference checkpoint instead,
@@ -17,6 +17,7 @@ import argparse
 import json
 import random
 import platform
+import hashlib
 import time
 from pathlib import Path
 from typing import Any
@@ -25,6 +26,8 @@ import numpy as np
 import torch
 
 from fast3r.data.components.spann3r_datasets.dtu import DTU
+from fast3r.data.components.spann3r_datasets.nrgbd import NRGBD
+from fast3r.data.components.spann3r_datasets.seven_scenes import SevenScenes
 from fast3r.dust3r.inference_multiview import inference
 from fast3r.models.fast3r import Fast3R
 from fast3r.models.multiview_dust3r_module import MultiViewDUSt3RLitModule
@@ -32,6 +35,7 @@ from fast3r.models.multiview_dust3r_module import MultiViewDUSt3RLitModule
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--dataset", choices=("dtu", "nrgbd", "7scenes"), default="dtu")
     parser.add_argument(
         "--seed", type=int, default=42,
         help="Seed for Python, NumPy, dataset and randomized image-index embeddings.",
@@ -83,7 +87,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--kf-every",
         type=int,
-        default=5,
+        default=None,
         help="Temporal stride used by the official DTU configuration.",
     )
     parser.add_argument(
@@ -165,7 +169,7 @@ def select_scene_indices(dataset: DTU, scenes: list[str] | None, max_scenes: int
 
 
 def run_dry_run(dataset: DTU, scene_indices: list[int]) -> None:
-    print(f"DTU scenes available: {len(dataset.scene_list)}")
+    print(f"{type(dataset).__name__} scenes available: {len(dataset.scene_list)}")
     print(f"Scenes selected: {[dataset.scene_list[index] for index in scene_indices]}")
     for scene_index in scene_indices:
         views = dataset[scene_index]
@@ -186,11 +190,17 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
     random.seed(args.seed)
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
+    specs = {"dtu": (DTU, "dtu_test_mvsnet_release", 5),
+             "nrgbd": (NRGBD, "neural_rgbd", 40),
+             "7scenes": (SevenScenes, "7_scenes_processed", 20)}
+    dataset_cls, subdir, default_stride = specs[args.dataset]
+    if args.kf_every is None:
+        args.kf_every = default_stride
     if args.head_chunk_size < 1 or args.kf_every < 1:
         raise ValueError("Head chunk size and kf-every must be positive")
-    dtu_root = args.data_root / "dtu_test_mvsnet_release"
+    dtu_root = args.data_root / subdir
     if not dtu_root.is_dir():
-        raise FileNotFoundError(f"DTU directory not found: {dtu_root}")
+        raise FileNotFoundError(f"{args.dataset} directory not found: {dtu_root}")
 
     device = torch.device(args.device)
     if device.type == "cuda" and not torch.cuda.is_available():
@@ -199,7 +209,7 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
             "or run on a machine with the required GPU."
         )
 
-    dataset = DTU(
+    dataset = dataset_cls(
         split="test",
         ROOT=str(dtu_root),
         resolution=args.resolution,
@@ -209,6 +219,13 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         seed=args.seed,
     )
     dataset.scene_list = sorted(dataset.scene_list)
+    if args.dataset == "nrgbd":
+        dataset.scene_list = [name for name in dataset.scene_list
+                              if (dtu_root/name/"poses.txt").is_file()
+                              and (dtu_root/name/"images").is_dir()
+                              and (dtu_root/name/"depth").is_dir()]
+        if not dataset.scene_list:
+            raise ValueError("No prepared Neural RGB-D sequences found")
     scene_indices = select_scene_indices(dataset, args.scenes, args.max_scenes)
     if args.dry_run:
         run_dry_run(dataset, scene_indices)
@@ -236,7 +253,9 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         eval_views = make_eval_views(raw_views)
 
         # Repeatable irrespective of scene selection/order or model initialization.
-        scene_seed = args.seed + int(scene_name.removeprefix("scan"))
+        scene_seed = args.seed + int.from_bytes(hashlib.sha256(scene_name.encode()).digest()[:4], 'little')
+        if args.dataset == 'dtu':
+            scene_seed = args.seed + int(scene_name.removeprefix('scan'))
         torch.manual_seed(scene_seed)
         if device.type == "cuda":
             torch.cuda.manual_seed_all(scene_seed)
@@ -257,12 +276,12 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         lit_module.evaluate_reconstruction(
             eval_views,
             predictions["preds"],
-            dataset_name="dtu",
+            dataset_name=args.dataset,
             use_pts3d_from_local_head=args.head == "local",
             min_conf_thr_percentile_for_local_alignment_and_icp=args.alignment_confidence_percentile,
             min_conf_thr_percentile_for_metric_cacluation=args.metric_confidence_percentile,
         )
-        metrics_by_scene = lit_module.reconstruction_metrics_per_epoch.pop("dtu", {})
+        metrics_by_scene = lit_module.reconstruction_metrics_per_epoch.pop(args.dataset, {})
         metrics = metrics_by_scene.get(scene_name, {})
         if not metrics or not all(np.isfinite(value) for value in metrics.values()):
             raise ValueError(f"Missing or nonfinite metrics for {scene_name}")
@@ -284,6 +303,7 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
     }
     return {
         "mode": "hf_checkpoint_official_metrics",
+        "dataset": args.dataset,
         "checkpoint_dir": str(args.checkpoint_dir),
         "data_root": str(dtu_root),
         "device": str(device),
@@ -300,6 +320,7 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         "metric_confidence_percentile": args.metric_confidence_percentile,
         "scene_count": len(scene_reports),
         "aggregate_mean": aggregate,
+        "paper_distance_multiplier": 1 if args.dataset == "dtu" else 100,
         "scenes": scene_reports,
         "scope_note": (
             "Metrics reuse fast3r.models.multiview_dust3r_module.MultiViewDUSt3RLitModule "

@@ -1,0 +1,16 @@
+{
+  "source": "https://huggingface.co/jedyang97/Fast3R_ViT_Large_512",
+  "source_revision": "Not recorded by original download; local SHA256 identifies actual evaluated files",
+  "files": [
+    {
+      "path": "checkpoints/Fast3R_ViT_Large_512/config.json",
+      "size_bytes": 941,
+      "sha256": "88edc53ba652ad835b86af27d980a46808d722b4d8f9d0d4360d05c789ada92b"
+    },
+    {
+      "path": "checkpoints/Fast3R_ViT_Large_512/model.safetensors",
+      "size_bytes": 2590286416,
+      "sha256": "1357d42e74539ba03510ea1986c7464a7facf17157779e2b7ebd6284e79e0427"
+    }
+  ]
+}

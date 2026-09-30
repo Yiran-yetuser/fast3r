@@ -1,0 +1,7 @@
+{
+  "mode": "dry_run",
+  "data_root": "data/neural_rgbd",
+  "scenes": [
+    "breakfast_room"
+  ]
+}

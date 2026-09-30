@@ -1,0 +1,351 @@
+{
+  "status": "completed",
+  "seed": 42,
+  "checkpoint_dir": "checkpoints/Fast3R_ViT_Large_512",
+  "config_sha256": "88edc53ba652ad835b86af27d980a46808d722b4d8f9d0d4360d05c789ada92b",
+  "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+  "torch": "2.7.1+cu128",
+  "cuda_runtime": "12.8",
+  "python": "3.11.16",
+  "precision": "16-mixed",
+  "resolution": 512,
+  "head_chunk_size": 2,
+  "sampling": "Uniform indices over the loader-ordered full 49-view sequence; first anchor preserved. Different view counts also change the evaluated GT point union.",
+  "alignment_confidence_percentile": 85,
+  "metric_confidence_percentile": 0,
+  "paper_mapping": [
+    "4.1/Table 2 (local timing adaptation)",
+    "4.3/Table 4 (DTU extension)",
+    "5.1/Figure 5 (uniform-view adaptation)",
+    "5.4/Table 5 (DTU paired head comparison)"
+  ],
+  "scope_note": "Released HF checkpoint. No retraining or new training checkpoints. Local hardware, sampling and DPT chunking differ from paper.",
+  "scenes_expected": [
+    "scan12"
+  ],
+  "view_counts_expected": [
+    3,
+    5,
+    10,
+    20
+  ],
+  "performance": [
+    {
+      "scene": "scan12",
+      "view_count": 3,
+      "warmup": 1,
+      "repeats": 3,
+      "samples": [
+        {
+          "forward_seconds": 0.2568230628967285,
+          "inference_wall_seconds": 0.2647430600000007,
+          "peak_allocated_gib": 4.430478572845459,
+          "peak_reserved_gib": 4.873046875
+        },
+        {
+          "forward_seconds": 0.3575146198272705,
+          "inference_wall_seconds": 0.3658153639999,
+          "peak_allocated_gib": 4.430478572845459,
+          "peak_reserved_gib": 4.873046875
+        },
+        {
+          "forward_seconds": 0.33000969886779785,
+          "inference_wall_seconds": 0.3382640160000392,
+          "peak_allocated_gib": 4.430478572845459,
+          "peak_reserved_gib": 4.873046875
+        }
+      ]
+    },
+    {
+      "scene": "scan12",
+      "view_count": 5,
+      "warmup": 1,
+      "repeats": 3,
+      "samples": [
+        {
+          "forward_seconds": 0.6065623760223389,
+          "inference_wall_seconds": 0.6183743569999933,
+          "peak_allocated_gib": 4.564925193786621,
+          "peak_reserved_gib": 5.1171875
+        },
+        {
+          "forward_seconds": 0.46791625022888184,
+          "inference_wall_seconds": 0.47989070200014794,
+          "peak_allocated_gib": 4.564925193786621,
+          "peak_reserved_gib": 5.1171875
+        },
+        {
+          "forward_seconds": 0.6037135124206543,
+          "inference_wall_seconds": 0.6166032749999886,
+          "peak_allocated_gib": 4.564925193786621,
+          "peak_reserved_gib": 5.1171875
+        }
+      ]
+    },
+    {
+      "scene": "scan12",
+      "view_count": 10,
+      "warmup": 1,
+      "repeats": 3,
+      "samples": [
+        {
+          "forward_seconds": 1.1900146007537842,
+          "inference_wall_seconds": 1.211441270000023,
+          "peak_allocated_gib": 4.90891170501709,
+          "peak_reserved_gib": 5.296875
+        },
+        {
+          "forward_seconds": 1.187164306640625,
+          "inference_wall_seconds": 1.2080354949998764,
+          "peak_allocated_gib": 4.90891170501709,
+          "peak_reserved_gib": 5.296875
+        },
+        {
+          "forward_seconds": 1.2742972373962402,
+          "inference_wall_seconds": 1.2949727789998633,
+          "peak_allocated_gib": 4.90891170501709,
+          "peak_reserved_gib": 5.296875
+        }
+      ]
+    },
+    {
+      "scene": "scan12",
+      "view_count": 20,
+      "warmup": 1,
+      "repeats": 3,
+      "samples": [
+        {
+          "forward_seconds": 2.9288735389709473,
+          "inference_wall_seconds": 2.969219083000098,
+          "peak_allocated_gib": 5.582724571228027,
+          "peak_reserved_gib": 5.92578125
+        },
+        {
+          "forward_seconds": 2.9582085609436035,
+          "inference_wall_seconds": 2.997303587000033,
+          "peak_allocated_gib": 5.582724571228027,
+          "peak_reserved_gib": 5.92578125
+        },
+        {
+          "forward_seconds": 3.035407543182373,
+          "inference_wall_seconds": 3.0754475050000565,
+          "peak_allocated_gib": 5.582724571228027,
+          "peak_reserved_gib": 5.92578125
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "scene": "scan12",
+      "view_count": 3,
+      "input_labels": [
+        "scan12/00000048.jpg",
+        "scan12/00000024.jpg",
+        "scan12/00000000.jpg"
+      ],
+      "status": "completed",
+      "metrics": {
+        "local": {
+          "accuracy": 11.901996332582492,
+          "accuracy_median": 10.14405876244797,
+          "completion": 11.035596747059277,
+          "completion_median": 7.181612431276543,
+          "nc1": 0.6495304569260486,
+          "nc1_median": 0.719627763973594,
+          "nc2": 0.6900987910918316,
+          "nc2_median": 0.7647033554592818
+        }
+      },
+      "seed": 12045,
+      "inference_wall_seconds": 0.6011170350000157,
+      "forward_seconds": 0.5858252048492432,
+      "peak_allocated_gib": 4.431088924407959,
+      "peak_reserved_gib": 4.623046875
+    },
+    {
+      "scene": "scan12",
+      "view_count": 5,
+      "input_labels": [
+        "scan12/00000048.jpg",
+        "scan12/00000036.jpg",
+        "scan12/00000024.jpg",
+        "scan12/00000012.jpg",
+        "scan12/00000000.jpg"
+      ],
+      "status": "completed",
+      "metrics": {
+        "local": {
+          "accuracy": 5.335315509818566,
+          "accuracy_median": 3.474521626871434,
+          "completion": 4.5842324466831705,
+          "completion_median": 1.9880102794803638,
+          "nc1": 0.7225191977811224,
+          "nc1_median": 0.807606991372555,
+          "nc2": 0.6691009104088329,
+          "nc2_median": 0.7428978016166441
+        }
+      },
+      "seed": 12047,
+      "inference_wall_seconds": 0.46515763100001095,
+      "forward_seconds": 0.4516313076019287,
+      "peak_allocated_gib": 4.564192771911621,
+      "peak_reserved_gib": 5.1171875
+    },
+    {
+      "scene": "scan12",
+      "view_count": 10,
+      "input_labels": [
+        "scan12/00000048.jpg",
+        "scan12/00000043.jpg",
+        "scan12/00000037.jpg",
+        "scan12/00000032.jpg",
+        "scan12/00000027.jpg",
+        "scan12/00000021.jpg",
+        "scan12/00000016.jpg",
+        "scan12/00000011.jpg",
+        "scan12/00000005.jpg",
+        "scan12/00000000.jpg"
+      ],
+      "status": "completed",
+      "metrics": {
+        "local": {
+          "accuracy": 3.065011511794112,
+          "accuracy_median": 1.5349404172524432,
+          "completion": 1.7628707584015693,
+          "completion_median": 0.6511985188543166,
+          "nc1": 0.698488727061178,
+          "nc1_median": 0.7850479894995023,
+          "nc2": 0.639947182826669,
+          "nc2_median": 0.7067999343992819
+        },
+        "global": {
+          "accuracy": 2.824906710715297,
+          "accuracy_median": 1.5208471487423538,
+          "completion": 1.9215187280432648,
+          "completion_median": 0.6914062951452906,
+          "nc1": 0.6880028748283413,
+          "nc1_median": 0.7733130880280098,
+          "nc2": 0.6409991260161046,
+          "nc2_median": 0.7106279293333213
+        }
+      },
+      "seed": 12052,
+      "inference_wall_seconds": 1.2212386030000744,
+      "forward_seconds": 1.1931886672973633,
+      "peak_allocated_gib": 4.91062068939209,
+      "peak_reserved_gib": 5.296875
+    },
+    {
+      "scene": "scan12",
+      "view_count": 20,
+      "input_labels": [
+        "scan12/00000048.jpg",
+        "scan12/00000045.jpg",
+        "scan12/00000043.jpg",
+        "scan12/00000040.jpg",
+        "scan12/00000038.jpg",
+        "scan12/00000035.jpg",
+        "scan12/00000033.jpg",
+        "scan12/00000030.jpg",
+        "scan12/00000028.jpg",
+        "scan12/00000025.jpg",
+        "scan12/00000023.jpg",
+        "scan12/00000020.jpg",
+        "scan12/00000018.jpg",
+        "scan12/00000015.jpg",
+        "scan12/00000013.jpg",
+        "scan12/00000010.jpg",
+        "scan12/00000008.jpg",
+        "scan12/00000005.jpg",
+        "scan12/00000003.jpg",
+        "scan12/00000000.jpg"
+      ],
+      "status": "completed",
+      "metrics": {
+        "local": {
+          "accuracy": 3.180951252695447,
+          "accuracy_median": 1.5422259810938161,
+          "completion": 2.571946870056906,
+          "completion_median": 0.4763423073830571,
+          "nc1": 0.664508023384925,
+          "nc1_median": 0.7455672370178525,
+          "nc2": 0.6195159351410705,
+          "nc2_median": 0.6823186652562424
+        }
+      },
+      "seed": 12062,
+      "inference_wall_seconds": 2.995602728999984,
+      "forward_seconds": 2.9518983364105225,
+      "peak_allocated_gib": 5.582724571228027,
+      "peak_reserved_gib": 5.92578125
+    }
+  ],
+  "aggregate": {
+    "3_views_local": {
+      "scene_count": 1,
+      "aggregate_mean": {
+        "accuracy": 11.901996332582492,
+        "accuracy_median": 10.14405876244797,
+        "completion": 11.035596747059277,
+        "completion_median": 7.181612431276543,
+        "nc1": 0.6495304569260486,
+        "nc1_median": 0.719627763973594,
+        "nc2": 0.6900987910918316,
+        "nc2_median": 0.7647033554592818
+      }
+    },
+    "5_views_local": {
+      "scene_count": 1,
+      "aggregate_mean": {
+        "accuracy": 5.335315509818566,
+        "accuracy_median": 3.474521626871434,
+        "completion": 4.5842324466831705,
+        "completion_median": 1.9880102794803638,
+        "nc1": 0.7225191977811224,
+        "nc1_median": 0.807606991372555,
+        "nc2": 0.6691009104088329,
+        "nc2_median": 0.7428978016166441
+      }
+    },
+    "10_views_local": {
+      "scene_count": 1,
+      "aggregate_mean": {
+        "accuracy": 3.065011511794112,
+        "accuracy_median": 1.5349404172524432,
+        "completion": 1.7628707584015693,
+        "completion_median": 0.6511985188543166,
+        "nc1": 0.698488727061178,
+        "nc1_median": 0.7850479894995023,
+        "nc2": 0.639947182826669,
+        "nc2_median": 0.7067999343992819
+      }
+    },
+    "10_views_global": {
+      "scene_count": 1,
+      "aggregate_mean": {
+        "accuracy": 2.824906710715297,
+        "accuracy_median": 1.5208471487423538,
+        "completion": 1.9215187280432648,
+        "completion_median": 0.6914062951452906,
+        "nc1": 0.6880028748283413,
+        "nc1_median": 0.7733130880280098,
+        "nc2": 0.6409991260161046,
+        "nc2_median": 0.7106279293333213
+      }
+    },
+    "20_views_local": {
+      "scene_count": 1,
+      "aggregate_mean": {
+        "accuracy": 3.180951252695447,
+        "accuracy_median": 1.5422259810938161,
+        "completion": 2.571946870056906,
+        "completion_median": 0.4763423073830571,
+        "nc1": 0.664508023384925,
+        "nc1_median": 0.7455672370178525,
+        "nc2": 0.6195159351410705,
+        "nc2_median": 0.6823186652562424
+      }
+    }
+  }
+}

@@ -12,7 +12,7 @@
 | §3.2，Eq. (1)–(3) | 归一化点图回归、置信度加权损失 | `results/loss_checks.json` | 数值/梯度检查通过；尚未重新训练 |
 | §3.4；§4.1；Table 2 | 视角数增加时耗时与显存如何变化？ | `results/dtu_paper_experiments.json` 的 performance | 本机适配实验；单卡不覆盖论文 A100/多卡设置 |
 | §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | 官方 pose 配置与脚本 | 缺对应测试集；PnP Demo 不能代替这些指标 |
-| §4.3；Table 3 | 7-Scenes / NRGBD 重建 | 官方数据加载器 | 缺对应预处理数据 |
+| §4.3；Table 3 | 7-Scenes / NRGBD 重建 | NRGBD官方9序列已准备；全量评测进行中 | 7-Scenes仍缺预处理数据 |
 | §4.3；Table 4 | DTU 完整 22 场景重建 | `demo_outputs/paper_eval/dtu_all.json` | 已运行；论文数值尚未对齐 |
 | §5.1；Figure 5 | 测试视角数对重建质量的影响 | 新脚本 3/5/10/20 视角 | 本地均匀采样适配实验 |
 | §5.1；Figures 6–7 | 不同训练视角数的模型比较 | 官方训练配置 | 缺各组训练权重；未执行 |
@@ -48,11 +48,29 @@ python scripts/fast3r_paper_experiments.py \
 
 Notebook 末尾的“论文逐项核对”单元独立读取结果，验证 22 场景、逐场景均值、论文 median 对照，绘制视角数、耗时、峰值显存与 local/global 差异图。阅读这些单元无需重新加载模型或 GPU。
 
+### 2026-10-01 新实测结果
+
+官方 stride=5、seed=42、DPT chunk=2 的独立运行完成22场景，见 [`results/dtu_seed42_stride5.json`](results/dtu_seed42_stride5.json)。Accuracy/Completion median 为 **2.0827 / 1.0311**，仍高于 Table 4 的 **1.706 / 0.857**。历史运行与新运行同时存在seed、场景遍历顺序与head分块差异，尚未做单变量实验，不能将数值差异全归因于某一因素。
+
+视角数适配实验共88次评测前向全部完成，每组覆盖22场景，见 [`results/dtu_paper_experiments.json`](results/dtu_paper_experiments.json)：
+
+| 视角数/点图 | Accuracy median | Completion median |
+| --- | ---: | ---: |
+| 3 / aligned local | 3.3735 | 2.9197 |
+| 5 / aligned local | 2.6129 | 1.8621 |
+| 10 / aligned local | 1.9145 | 0.9070 |
+| 10 / global | 2.0541 | 1.0239 |
+| 20 / aligned local | 1.7020 | 0.9653 |
+
+10视角配对结果支持在这组DTU设置下aligned local降低距离误差。增加视角改善了Accuracy，但Completion在20视角时回升，normal consistency也未随视角持续改善，因此没有验证论文所有指标均持续改善的完整结论。20视角的数值不能与Table 4的10视角直接对齐。
+
+Neural RGB-D 官方数据包已下载并通过ZIP解压CRC检查，9个序列已准备（`results/nrgbd_data_manifest.json`）。单序列数据检查通过，首个序列有30视角，图像512×512，有效深度比例约0.994。宿主服务 `fast3r-nrgbd-reproduction.service` 正执行stride=40全量评测；日志为 `results/nrgbd_pipeline.log`。得到完整JSON之前，该项仍标记为未完成。
+
 ## 剩余工作的确切前提
 
 官方入口 `fast3r/eval.py` 接受 Lightning checkpoint；公开 HF 权重可以通过官方 `load_for_inference` 接口评测，因此“只能 Demo，不能评测”是不准确的。checkpoint 文件格式本身不是不能复现指标的证明；当前无法验证公开权重与各论文实验训练权重的对应关系。
 
-缺少数据目录：`data/co3d_50_seqs_per_category_subset_processed`、`data/7_scenes_processed`、`data/neural_rgbd`，以及 RealEstate10K 测试样本。请遵循 [官方 README](https://github.com/facebookresearch/fast3r#datasets) 与 [Spann3R 预处理说明](https://github.com/HengyiWang/spann3r/blob/main/docs/data_preprocess.md)，注意 7-Scenes 要求预处理深度，视频 Demo 没有相应 GT。
+仍缺数据目录：`data/co3d_50_seqs_per_category_subset_processed`、`data/7_scenes_processed`，以及RealEstate10K测试样本。`data/neural_rgbd`现已准备。请遵循 [官方 README](https://github.com/facebookresearch/fast3r#datasets) 与 [Spann3R 预处理说明](https://github.com/HengyiWang/spann3r/blob/main/docs/data_preprocess.md)，注意7-Scenes要求预处理深度，视频Demo没有相应GT。
 
 论文 §4 的完整训练使用 128 张 A100-80GB、174K steps；当前单张约 12 GiB 显卡不能完成同规格训练。训练视角、模型规模、数据规模和无位置插值消融需要对应独立模型。Table 2 的 1000–1500 视角实验也超出当前硬件的原始设置。需要这些数据与权重/算力后，才能逐项将未完成状态改成真实实验完成。
 
