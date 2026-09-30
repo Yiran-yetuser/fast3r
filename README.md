@@ -72,7 +72,7 @@ The demo is a Gradio interface where you can upload images or a video and visual
 
 For a step-by-step, educational reproduction of the local inference pipeline, see [`fast3r_reproduction.ipynb`](fast3r_reproduction.ipynb) and the accompanying [`REPRODUCTION.md`](REPRODUCTION.md). The notebook covers video frame extraction, one-pass multi-view inference, fast-PnP camera estimation, confidence visualization, point-cloud export, and a small view-scaling experiment.
 
-The notebook separates functional inference from the paper's dataset benchmark. The latter requires the prepared evaluation datasets and a Lightning `last.ckpt`; the local Hugging Face `model.safetensors` checkpoint is intended for Demo/inference.
+The notebook records inference and dataset evaluation separately. Released HF weights can be evaluated through the official inference wrapper and metric implementation; the original `fast3r/eval.py` entry point expects a Lightning checkpoint. See the section-by-section audit in [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md) for completed experiments and remaining requirements.
 
 When only the public Hugging Face checkpoint is available, [`scripts/fast3r_hf_dtu_eval.py`](scripts/fast3r_hf_dtu_eval.py) evaluates DTU with the repository's official reconstruction metric implementation. See [`REPRODUCTION.md`](REPRODUCTION.md) for the dry-run, single-scene, and full-22-scene commands.
 
@@ -91,7 +91,9 @@ The full 22-scene run completed locally on 2026-09-30 with the public Hugging Fa
 | Normal consistency 2 | 0.6364 |
 | Normal consistency 2 (median) | 0.7041 |
 
-These are local results from the public HF checkpoint and the repository's official metric implementation; strict comparison with the paper requires the original Lightning checkpoint and its exact evaluation setup.
+These are local results from the public HF checkpoint and the repository's official metric implementation. Table 4 reports **medians**, so the corresponding local values are **2.9306 / 1.8200**, compared with the paper's **1.706 / 0.857**. The paper's numerical result has not been matched. Weight provenance and the full evaluation protocol still need to be checked.
+
+The notebook now includes paper references, seeded DTU view/head ablations, warmed-up timing and VRAM figures. Run [`scripts/fast3r_paper_experiments.py`](scripts/fast3r_paper_experiments.py) to reproduce the local adaptations of Sections 4.1, 5.1 and 5.4.
 
 ## Using Fast3R in Your Own Project
 

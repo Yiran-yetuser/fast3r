@@ -4,14 +4,14 @@
 
 ## 复现范围
 
-本分支完成的是官方模型的功能性复现：
+本分支完成了公开权重的端到端推理、DTU 22 场景评测，并继续开展视角数与 local/global 点图消融。整篇论文尚未复现完成，逐项状态与实验条件见 [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md)。推理链路为：
 
 ```text
 示例视频 → 抽帧 → 图片归一化 → Fast3R 一次多视图前向
          → 点图/置信度 → fast-PnP 相机位姿 → PLY 点云与可视化
 ```
 
-论文中的 DTU、7-Scenes、Neural-RGBD 等数值指标属于另一层工作，需要对应的预处理数据和 Lightning `last.ckpt`。Hugging Face 的 `model.safetensors` 可以直接做 Demo/推理，但不能直接传给 `fast3r/eval.py` 作为 Lightning checkpoint；Notebook 会显式检查这一点。
+数据集评测需要对应预处理数据。公开 HF 权重可以通过官方 `load_for_inference` 与指标实现评测；原始 `fast3r/eval.py` 则读取 Lightning checkpoint。当前尚未核实各论文实验权重与公开权重的对应关系，不能仅用格式差别解释数值差距。
 
 ## 环境准备
 
@@ -114,4 +114,4 @@ python scripts/fast3r_hf_dtu_eval.py \
 
 > **Fast3R 多视图 3D 重建复现（PyTorch / CUDA）**：基于官方 ViT-L/512 checkpoint，搭建从视频抽帧、图像归一化、多视图一次前向到 fast-PnP 相机估计的端到端推理流程；实现置信度热力图、相机轨迹和 RGB 点云可视化，并导出 `.ply` / `.npz` 复现产物。通过 forward hook 检查 patch embedding、encoder、decoder、global/local head 的输出形状与数值有效性，记录不同视角规模下的耗时和显存。
 
-面试时应明确说“完成官方模型的功能性复现”；只有准备好 Lightning checkpoint 和官方数据后，才应进一步声称复现论文指标。
+面试时可以说“完成公开权重推理、DTU 全量评测及推理消融”。应同时说明：Table 4 的 median 数值尚未对齐，其他数据集与重新训练实验未完成。见 Notebook 末尾与论文逐项对应表。

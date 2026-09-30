@@ -15,6 +15,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import random
+import platform
 import time
 from pathlib import Path
 from typing import Any
@@ -30,6 +32,18 @@ from fast3r.models.multiview_dust3r_module import MultiViewDUSt3RLitModule
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--seed", type=int, default=42,
+        help="Seed for Python, NumPy, dataset and randomized image-index embeddings.",
+    )
+    parser.add_argument(
+        "--head", choices=("local", "global"), default="local",
+        help="Aligned local pointmap or raw global pointmap (paper section 5.4).",
+    )
+    parser.add_argument(
+        "--head-chunk-size", type=int, default=2,
+        help="Max views processed together by DPT heads (lower reduces VRAM).",
+    )
     parser.add_argument(
         "--checkpoint-dir",
         type=Path,
@@ -169,6 +183,11 @@ def load_report(path: Path, report: dict[str, Any]) -> None:
 
 
 def evaluate(args: argparse.Namespace) -> dict[str, Any]:
+    random.seed(args.seed)
+    np.random.seed(args.seed)
+    torch.manual_seed(args.seed)
+    if args.head_chunk_size < 1 or args.kf_every < 1:
+        raise ValueError("Head chunk size and kf-every must be positive")
     dtu_root = args.data_root / "dtu_test_mvsnet_release"
     if not dtu_root.is_dir():
         raise FileNotFoundError(f"DTU directory not found: {dtu_root}")
@@ -187,7 +206,9 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         num_seq=1,
         full_video=True,
         kf_every=args.kf_every,
+        seed=args.seed,
     )
+    dataset.scene_list = sorted(dataset.scene_list)
     scene_indices = select_scene_indices(dataset, args.scenes, args.max_scenes)
     if args.dry_run:
         run_dry_run(dataset, scene_indices)
@@ -202,6 +223,7 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
 
     print(f"Loading Fast3R checkpoint from {args.checkpoint_dir}")
     model = Fast3R.from_pretrained(str(args.checkpoint_dir)).to(device).eval()
+    model.set_max_parallel_views_for_head(args.head_chunk_size)
     lit_module = MultiViewDUSt3RLitModule.load_for_inference(model)
     precision = "16-mixed" if device.type == "cuda" else "32"
     profiling = device.type == "cuda"
@@ -212,6 +234,13 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         raw_views = dataset[scene_index]
         model_views = make_model_views(raw_views)
         eval_views = make_eval_views(raw_views)
+
+        # Repeatable irrespective of scene selection/order or model initialization.
+        scene_seed = args.seed + int(scene_name.removeprefix("scan"))
+        torch.manual_seed(scene_seed)
+        if device.type == "cuda":
+            torch.cuda.manual_seed_all(scene_seed)
+            torch.cuda.reset_peak_memory_stats()
 
         start = time.perf_counter()
         with torch.inference_mode():
@@ -229,15 +258,18 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
             eval_views,
             predictions["preds"],
             dataset_name="dtu",
-            use_pts3d_from_local_head=True,
+            use_pts3d_from_local_head=args.head == "local",
             min_conf_thr_percentile_for_local_alignment_and_icp=args.alignment_confidence_percentile,
             min_conf_thr_percentile_for_metric_cacluation=args.metric_confidence_percentile,
         )
         metrics_by_scene = lit_module.reconstruction_metrics_per_epoch.pop("dtu", {})
         metrics = metrics_by_scene.get(scene_name, {})
+        if not metrics or not all(np.isfinite(value) for value in metrics.values()):
+            raise ValueError(f"Missing or nonfinite metrics for {scene_name}")
         report = {
             "scene": scene_name,
             "views": len(raw_views),
+            "seed": scene_seed,
             "wall_time_seconds": time.perf_counter() - start,
             "forward_time_seconds": profile.get("total_time") if profile else None,
             "metrics": {key: float(value) for key, value in metrics.items()},
@@ -256,6 +288,12 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         "data_root": str(dtu_root),
         "device": str(device),
         "precision": precision,
+        "seed": args.seed,
+        "head": args.head,
+        "head_chunk_size": args.head_chunk_size,
+        "gpu": torch.cuda.get_device_name(device) if device.type == "cuda" else None,
+        "torch": torch.__version__,
+        "python": platform.python_version(),
         "resolution": args.resolution,
         "kf_every": args.kf_every,
         "alignment_confidence_percentile": args.alignment_confidence_percentile,
@@ -280,4 +318,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

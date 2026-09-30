@@ -15,8 +15,8 @@ from copy import copy, deepcopy
 import torch
 import torch.nn as nn
 
-from dust3r.inference import find_opt_scaling, get_pred_pts3d
-from dust3r.utils.geometry import (
+from fast3r.dust3r.inference_multiview import find_opt_scaling, get_pred_pts3d
+from fast3r.dust3r.utils.geometry import (
     geotrf,
     get_joint_pointcloud_center_scale,
     get_joint_pointcloud_depth,
