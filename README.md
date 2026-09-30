@@ -101,6 +101,10 @@ The 2026-10-01 local run completed all 9 scenes (278 sampled views) with the pub
 
 [`scripts/queue_nrgbd_reproduction.sh`](scripts/queue_nrgbd_reproduction.sh) verifies the extracted scene/frame/pose inventory before downloading. Complete extracted data can be reused without the ZIP or preparation manifest. This checks layout and nonempty files, not image decoding or CRC.
 
+### Next paper experiments (running, not completed)
+
+Paired NRGBD local/global evaluation now uses `--head both` to share one forward pass. The 7-Scenes preparation pipeline reads official TestSplit archives via HTTP Range, checks sequence CRC/SHA256, registers depth using pinned SimpleRecon calibration, and stores only the original stride-20 selected frames. The loader preserves original frame numbering and refuses incompatible sparse-storage protocols. GPU evaluation queues behind NRGBD and free-memory checks; disk usage retains a 1GiB reserve. Eight offline preparation tests and a real 50-view heads-sequence dry-run passed. Full result JSONs must be validated before reporting scores; these pipelines do not constitute complete-paper reproduction. See [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md) and the notebook for status and remaining training/data requirements.
+
 ## Using Fast3R in Your Own Project
 
 To use Fast3R in your own project, you can import the `Fast3R` class from `fast3r.models.fast3r` and use it as a regular PyTorch model.

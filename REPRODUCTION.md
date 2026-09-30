@@ -118,6 +118,8 @@ python scripts/fast3r_hf_dtu_eval.py \
 
 ## 逐项论文实验与新结果
 
+后续执行入口（2026-10-01）：`--head both` 在同一次预测上报告local/global配对指标；NRGBD输出 `results/nrgbd_paired_seed42_stride40.json`。`bash scripts/queue_7scenes_reproduction.sh` 准备官方7-Scenes TestSplit的stride20采样帧、注册深度，等待NRGBD消融结束及GPU空闲后输出 `results/7scenes_paired_seed42_stride20.json`。只有完整结果产生并通过Notebook校验才报告成绩。空间节省仅改变存储方式，不改变该stride的实际输入/GT；不能用该稀疏目录训练或评测其他stride。
+
 Notebook末尾已经添加独立可运行的“论文逐项核对”单元，包含损失数值/梯度检查（§3.2）、22场景固定种子DTU（§4.3/Table 4）、3/5/10/20视角与head消融（§5.1/Figure 5、§5.4/Table 5）和预热后的性能图（§4.1/Table 2的本机适配）。
 
 - [`results/dtu_seed42_stride5.json`](results/dtu_seed42_stride5.json)：22场景，seed42、stride5，Accuracy/Completion median为2.0827/1.0311。
