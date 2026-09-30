@@ -79,6 +79,23 @@ python scripts/fast3r_hf_dtu_eval.py \
 
 脚本默认遵循仓库评测配置：512 分辨率、`kf_every=5`、局部头对齐置信度 85%、指标阶段置信度 0%。输出 JSON 包含每个场景和全体场景均值。它是“公开 HF checkpoint 的官方指标实现复现”，与原始训练 Lightning checkpoint 的严格复现实验应分别标注。
 
+### 已完成的全量 DTU 运行
+
+2026-09-30，在 NVIDIA GeForce RTX 5070 Ti Laptop GPU 上完成了公开 Hugging Face checkpoint 的全量 22 场景运行。运行配置为 CUDA、16-mixed、512 分辨率、每场景 10 个视角；原始逐场景结果见 [`demo_outputs/paper_eval/dtu_all.json`](demo_outputs/paper_eval/dtu_all.json)。下表是该 JSON 中 `aggregate_mean` 的 22 场景均值：
+
+| 指标 | 22 场景均值 |
+| --- | ---: |
+| Accuracy | 5.2460 |
+| Accuracy (median) | 2.9306 |
+| Completion | 3.6110 |
+| Completion (median) | 1.8200 |
+| Normal consistency 1 | 0.6720 |
+| Normal consistency 1 (median) | 0.7526 |
+| Normal consistency 2 | 0.6364 |
+| Normal consistency 2 (median) | 0.7041 |
+
+这些是本分支使用公开 HF 推理 checkpoint、官方仓库指标实现得到的可复现实验结果；它们不等同于论文中使用原始 Lightning `last.ckpt` 的官方表格数值，也没有用论文参考值替代本地结果。
+
 ## 已记录的本地结果
 
 在 `fast3r` 环境、NVIDIA GeForce RTX 5070 Ti Laptop GPU（11.5 GB）上，12 个视频视角的历史运行记录为：

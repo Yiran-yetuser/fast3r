@@ -1,0 +1,377 @@
+{
+  "mode": "hf_checkpoint_official_metrics",
+  "checkpoint_dir": "checkpoints/Fast3R_ViT_Large_512",
+  "data_root": "data/dtu_test_mvsnet_release",
+  "device": "cuda",
+  "precision": "16-mixed",
+  "resolution": 512,
+  "kf_every": 5,
+  "alignment_confidence_percentile": 85.0,
+  "metric_confidence_percentile": 0.0,
+  "scene_count": 22,
+  "aggregate_mean": {
+    "accuracy": 5.246036999136254,
+    "accuracy_median": 2.930606360937743,
+    "completion": 3.6109831797071634,
+    "completion_median": 1.819959681512055,
+    "nc1": 0.6719644436139911,
+    "nc1_median": 0.7525551314281156,
+    "nc2": 0.6364247002766613,
+    "nc2_median": 0.7041113732538129
+  },
+  "scenes": [
+    {
+      "scene": "scan12",
+      "views": 10,
+      "wall_time_seconds": 7.641429748997325,
+      "forward_time_seconds": 1.776244878768921,
+      "metrics": {
+        "accuracy": 3.117922520651843,
+        "accuracy_median": 1.5445120460177926,
+        "completion": 2.0282331935330125,
+        "completion_median": 0.6413501060948574,
+        "nc1": 0.6994310176862762,
+        "nc1_median": 0.7852814299686277,
+        "nc2": 0.6528147293002166,
+        "nc2_median": 0.7254317330403399
+      }
+    },
+    {
+      "scene": "scan13",
+      "views": 10,
+      "wall_time_seconds": 16.623814010999922,
+      "forward_time_seconds": 1.4169726371765137,
+      "metrics": {
+        "accuracy": 6.7030288403349765,
+        "accuracy_median": 3.96329204353835,
+        "completion": 6.341298217217115,
+        "completion_median": 3.619106889916167,
+        "nc1": 0.6883242582841067,
+        "nc1_median": 0.7768795568324158,
+        "nc2": 0.6502837995710752,
+        "nc2_median": 0.7275011750065647
+      }
+    },
+    {
+      "scene": "scan77",
+      "views": 10,
+      "wall_time_seconds": 3.800171759998193,
+      "forward_time_seconds": 1.4233767986297607,
+      "metrics": {
+        "accuracy": 5.051149893201903,
+        "accuracy_median": 2.1999645501699336,
+        "completion": 8.27467720633878,
+        "completion_median": 0.8804129053988959,
+        "nc1": 0.6596443335549824,
+        "nc1_median": 0.7441919469267421,
+        "nc2": 0.6263274431367424,
+        "nc2_median": 0.6968269144358852
+      }
+    },
+    {
+      "scene": "scan29",
+      "views": 10,
+      "wall_time_seconds": 5.156280429997423,
+      "forward_time_seconds": 1.4132654666900635,
+      "metrics": {
+        "accuracy": 5.695365021558123,
+        "accuracy_median": 1.239189321911408,
+        "completion": 2.2217358072525877,
+        "completion_median": 0.9662603030829053,
+        "nc1": 0.6498155843053239,
+        "nc1_median": 0.7197364586375373,
+        "nc2": 0.6190418089612432,
+        "nc2_median": 0.676575754022099
+      }
+    },
+    {
+      "scene": "scan23",
+      "views": 10,
+      "wall_time_seconds": 7.277850774000399,
+      "forward_time_seconds": 1.411975622177124,
+      "metrics": {
+        "accuracy": 2.3171529558534036,
+        "accuracy_median": 1.0717892522302335,
+        "completion": 1.4867881905225353,
+        "completion_median": 0.8118888821692285,
+        "nc1": 0.6516458977641628,
+        "nc1_median": 0.7278978211868861,
+        "nc2": 0.6326891589628066,
+        "nc2_median": 0.6985459302339745
+      }
+    },
+    {
+      "scene": "scan11",
+      "views": 10,
+      "wall_time_seconds": 8.295292351998796,
+      "forward_time_seconds": 1.4138967990875244,
+      "metrics": {
+        "accuracy": 5.6783421282728535,
+        "accuracy_median": 3.3666387788596426,
+        "completion": 2.725433012188405,
+        "completion_median": 1.637827373580383,
+        "nc1": 0.6857713623135641,
+        "nc1_median": 0.7771745907766943,
+        "nc2": 0.645237188671265,
+        "nc2_median": 0.7195604801452393
+      }
+    },
+    {
+      "scene": "scan32",
+      "views": 10,
+      "wall_time_seconds": 6.079643826000392,
+      "forward_time_seconds": 1.4166579246520996,
+      "metrics": {
+        "accuracy": 8.374420586483145,
+        "accuracy_median": 4.247776913375303,
+        "completion": 2.7038553024842744,
+        "completion_median": 1.2407725865324388,
+        "nc1": 0.7003316045341532,
+        "nc1_median": 0.7856094079045273,
+        "nc2": 0.6402686759941545,
+        "nc2_median": 0.7132482595419928
+      }
+    },
+    {
+      "scene": "scan34",
+      "views": 10,
+      "wall_time_seconds": 6.847280032998242,
+      "forward_time_seconds": 1.4201600551605225,
+      "metrics": {
+        "accuracy": 1.2384664033671908,
+        "accuracy_median": 0.5292905603888616,
+        "completion": 0.7160422052389426,
+        "completion_median": 0.45211177130389213,
+        "nc1": 0.678596662763686,
+        "nc1_median": 0.763540660020191,
+        "nc2": 0.6447535575736929,
+        "nc2_median": 0.7164035590820967
+      }
+    },
+    {
+      "scene": "scan15",
+      "views": 10,
+      "wall_time_seconds": 9.362867497002298,
+      "forward_time_seconds": 1.411802053451538,
+      "metrics": {
+        "accuracy": 5.087207702497027,
+        "accuracy_median": 0.7303246048563192,
+        "completion": 1.111192280855528,
+        "completion_median": 0.5466541917395034,
+        "nc1": 0.6370126266015413,
+        "nc1_median": 0.7075074471475208,
+        "nc2": 0.6178509596231967,
+        "nc2_median": 0.6772434233286169
+      }
+    },
+    {
+      "scene": "scan114",
+      "views": 10,
+      "wall_time_seconds": 6.144212024002627,
+      "forward_time_seconds": 1.4276049137115479,
+      "metrics": {
+        "accuracy": 1.6385125206533564,
+        "accuracy_median": 0.7806335848267254,
+        "completion": 0.7390072561088517,
+        "completion_median": 0.4989945494068567,
+        "nc1": 0.7087939372106866,
+        "nc1_median": 0.7980775222558735,
+        "nc2": 0.6643399582541147,
+        "nc2_median": 0.7431454560084101
+      }
+    },
+    {
+      "scene": "scan62",
+      "views": 10,
+      "wall_time_seconds": 5.847347506998631,
+      "forward_time_seconds": 1.4136097431182861,
+      "metrics": {
+        "accuracy": 4.28883650154158,
+        "accuracy_median": 2.2132093076413835,
+        "completion": 1.2825789439292608,
+        "completion_median": 0.8091079155287999,
+        "nc1": 0.7055678762942272,
+        "nc1_median": 0.7924458001684709,
+        "nc2": 0.6523427799556965,
+        "nc2_median": 0.7217778383037325
+      }
+    },
+    {
+      "scene": "scan1",
+      "views": 10,
+      "wall_time_seconds": 7.24893080900074,
+      "forward_time_seconds": 1.421600580215454,
+      "metrics": {
+        "accuracy": 3.2386713742827493,
+        "accuracy_median": 0.8556188574598504,
+        "completion": 1.1430750092736008,
+        "completion_median": 0.5387511436669099,
+        "nc1": 0.7167498547318787,
+        "nc1_median": 0.8100994757190019,
+        "nc2": 0.6669730627780878,
+        "nc2_median": 0.749285290390222
+      }
+    },
+    {
+      "scene": "scan49",
+      "views": 10,
+      "wall_time_seconds": 8.135069242998725,
+      "forward_time_seconds": 1.410726547241211,
+      "metrics": {
+        "accuracy": 13.429944258027925,
+        "accuracy_median": 9.210437191004026,
+        "completion": 8.561500361605532,
+        "completion_median": 5.459962616121814,
+        "nc1": 0.6067050287162827,
+        "nc1_median": 0.6651105096179106,
+        "nc2": 0.589430804174579,
+        "nc2_median": 0.6349386589142537
+      }
+    },
+    {
+      "scene": "scan48",
+      "views": 10,
+      "wall_time_seconds": 7.127043239001068,
+      "forward_time_seconds": 1.4194748401641846,
+      "metrics": {
+        "accuracy": 5.965589587888728,
+        "accuracy_median": 4.010141982638494,
+        "completion": 2.2194842029742765,
+        "completion_median": 1.2882780315363274,
+        "nc1": 0.7066832077457642,
+        "nc1_median": 0.7975446687772438,
+        "nc2": 0.6807810504774847,
+        "nc2_median": 0.7618946242801156
+      }
+    },
+    {
+      "scene": "scan118",
+      "views": 10,
+      "wall_time_seconds": 5.012260774994502,
+      "forward_time_seconds": 1.4186437129974365,
+      "metrics": {
+        "accuracy": 1.573721664944989,
+        "accuracy_median": 0.7533370681364384,
+        "completion": 1.1568347525911198,
+        "completion_median": 0.5895325578124977,
+        "nc1": 0.6563053550901715,
+        "nc1_median": 0.7342450822541756,
+        "nc2": 0.6406187945444591,
+        "nc2_median": 0.7102172016683781
+      }
+    },
+    {
+      "scene": "scan10",
+      "views": 10,
+      "wall_time_seconds": 28.96091500899638,
+      "forward_time_seconds": 1.4134011268615723,
+      "metrics": {
+        "accuracy": 15.173838431343246,
+        "accuracy_median": 10.769206740485965,
+        "completion": 8.53358326152672,
+        "completion_median": 3.443527895022075,
+        "nc1": 0.6818268964042821,
+        "nc1_median": 0.7639438704023525,
+        "nc2": 0.6632928004026366,
+        "nc2_median": 0.7431204269687917
+      }
+    },
+    {
+      "scene": "scan4",
+      "views": 10,
+      "wall_time_seconds": 6.315818731003674,
+      "forward_time_seconds": 1.4021978378295898,
+      "metrics": {
+        "accuracy": 3.7317112952106295,
+        "accuracy_median": 1.460202155683049,
+        "completion": 1.5035024285609182,
+        "completion_median": 0.7994952118772246,
+        "nc1": 0.6913822538130251,
+        "nc1_median": 0.7764151625561543,
+        "nc2": 0.6305750171627451,
+        "nc2_median": 0.6949246021003377
+      }
+    },
+    {
+      "scene": "scan75",
+      "views": 10,
+      "wall_time_seconds": 5.005033276996983,
+      "forward_time_seconds": 1.3964524269104004,
+      "metrics": {
+        "accuracy": 3.1754541219983405,
+        "accuracy_median": 1.1451642830496085,
+        "completion": 2.398439199547665,
+        "completion_median": 0.6419997308184717,
+        "nc1": 0.6777328333822497,
+        "nc1_median": 0.7583780971561283,
+        "nc2": 0.6351585588887166,
+        "nc2_median": 0.7034082921124014
+      }
+    },
+    {
+      "scene": "scan110",
+      "views": 10,
+      "wall_time_seconds": 5.0276141700014705,
+      "forward_time_seconds": 1.395453691482544,
+      "metrics": {
+        "accuracy": 1.938574906692904,
+        "accuracy_median": 0.8755685883598261,
+        "completion": 1.7303074693486036,
+        "completion_median": 0.5806160492572615,
+        "nc1": 0.6781294635609744,
+        "nc1_median": 0.763580726531754,
+        "nc2": 0.6375098237443109,
+        "nc2_median": 0.7063148091144067
+      }
+    },
+    {
+      "scene": "scan9",
+      "views": 10,
+      "wall_time_seconds": 6.861112900005537,
+      "forward_time_seconds": 1.3956654071807861,
+      "metrics": {
+        "accuracy": 1.8798288147648194,
+        "accuracy_median": 0.7045228967052581,
+        "completion": 1.0988800706375794,
+        "completion_median": 0.5144178699210856,
+        "nc1": 0.6476444812343128,
+        "nc1_median": 0.7222763298000192,
+        "nc2": 0.6277361237730233,
+        "nc2_median": 0.6931928529665167
+      }
+    },
+    {
+      "scene": "scan24",
+      "views": 10,
+      "wall_time_seconds": 6.705301456000598,
+      "forward_time_seconds": 1.402420997619629,
+      "metrics": {
+        "accuracy": 2.1266079561690394,
+        "accuracy_median": 0.9711168817021184,
+        "completion": 0.9316629774952169,
+        "completion_median": 0.6100717515428721,
+        "nc1": 0.6678327774406937,
+        "nc1_median": 0.7530114142302975,
+        "nc2": 0.6411449932064245,
+        "nc2_median": 0.7151689775038693
+      }
+    },
+    {
+      "scene": "scan33",
+      "views": 10,
+      "wall_time_seconds": 15.391977747000055,
+      "forward_time_seconds": 1.3886423110961914,
+      "metrics": {
+        "accuracy": 13.988466495258805,
+        "accuracy_median": 11.831402331589755,
+        "completion": 20.53351860432707,
+        "completion_median": 13.467972660934734,
+        "nc1": 0.5872904460754597,
+        "nc1_median": 0.6332649125480199,
+        "nc2": 0.5421723169298758,
+        "nc2_median": 0.5617239524156381
+      }
+    }
+  ],
+  "scope_note": "Metrics reuse fast3r.models.multiview_dust3r_module.MultiViewDUSt3RLitModule and are evaluated with the public Hugging Face inference checkpoint; this is distinct from running fast3r/eval.py with the original Lightning checkpoint."
+}

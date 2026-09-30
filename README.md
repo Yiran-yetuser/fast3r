@@ -76,6 +76,23 @@ The notebook separates functional inference from the paper's dataset benchmark. 
 
 When only the public Hugging Face checkpoint is available, [`scripts/fast3r_hf_dtu_eval.py`](scripts/fast3r_hf_dtu_eval.py) evaluates DTU with the repository's official reconstruction metric implementation. See [`REPRODUCTION.md`](REPRODUCTION.md) for the dry-run, single-scene, and full-22-scene commands.
 
+### Completed DTU run
+
+The full 22-scene run completed locally on 2026-09-30 with the public Hugging Face checkpoint on an RTX 5070 Ti Laptop GPU (CUDA, 16-mixed, 512 resolution, 10 views per scene). The aggregate means are recorded in [`demo_outputs/paper_eval/dtu_all.json`](demo_outputs/paper_eval/dtu_all.json):
+
+| Metric | Mean over 22 scenes |
+| --- | ---: |
+| Accuracy | 5.2460 |
+| Accuracy (median) | 2.9306 |
+| Completion | 3.6110 |
+| Completion (median) | 1.8200 |
+| Normal consistency 1 | 0.6720 |
+| Normal consistency 1 (median) | 0.7526 |
+| Normal consistency 2 | 0.6364 |
+| Normal consistency 2 (median) | 0.7041 |
+
+These are local results from the public HF checkpoint and the repository's official metric implementation; strict comparison with the paper requires the original Lightning checkpoint and its exact evaluation setup.
+
 ## Using Fast3R in Your Own Project
 
 To use Fast3R in your own project, you can import the `Fast3R` class from `fast3r.models.fast3r` and use it as a regular PyTorch model.
