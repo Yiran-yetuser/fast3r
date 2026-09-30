@@ -95,6 +95,12 @@ These are local results from the public HF checkpoint and the repository's offic
 
 The notebook now includes paper references, seeded DTU view/head ablations, warmed-up timing and VRAM figures. Run [`scripts/fast3r_paper_experiments.py`](scripts/fast3r_paper_experiments.py) to reproduce the local adaptations of Sections 4.1, 5.1 and 5.4.
 
+### Completed Neural RGB-D run (Section 4.3 / Table 3)
+
+The 2026-10-01 local run completed all 9 scenes (278 sampled views) with the public HF weights, stride 40, seed 42, CUDA 16-mixed and DPT head chunks of 2. [`results/nrgbd_seed42_stride40.json`](results/nrgbd_seed42_stride40.json) contains finite per-scene metrics and verified aggregate means. The mean of scene median distances, multiplied by 100 as in Table 3, is **4.0165 / 1.2001** (Accuracy / Completion), versus paper references **3.40 / 1.01**. These local errors are 18.13% / 18.82% higher; the paper numbers have not been matched, and correspondence of public weights to the specific paper checkpoint remains unverified. The notebook saves actual result tables; see [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md) for protocol details and remaining experiments.
+
+[`scripts/queue_nrgbd_reproduction.sh`](scripts/queue_nrgbd_reproduction.sh) verifies the extracted scene/frame/pose inventory before downloading. Complete extracted data can be reused without the ZIP or preparation manifest. This checks layout and nonempty files, not image decoding or CRC.
+
 ## Using Fast3R in Your Own Project
 
 To use Fast3R in your own project, you can import the `Fast3R` class from `fast3r.models.fast3r` and use it as a regular PyTorch model.

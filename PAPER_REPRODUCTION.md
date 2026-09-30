@@ -4,7 +4,7 @@
 
 ## 完成标准
 
-当前完成了公开权重的推理链路与 DTU 22 场景指标运行；整篇论文复现尚未完成。运行结束只说明实验产生了结果，还需要核对指标、采样协议、模型版本与论文数值的差距。以下区分实测、代码核对、缺数据与缺训练算力。
+当前完成了公开权重的推理链路、DTU 22 场景和 Neural RGB-D 9 场景指标运行；整篇论文复现尚未完成。运行结束只说明实验产生了结果，还需要核对指标、采样协议、模型版本与论文数值的差距。以下区分实测、代码核对、缺数据与缺训练算力。
 
 | 论文位置 | 要验证的问题 | 本项目证据 | 状态 |
 | --- | --- | --- | --- |
@@ -12,7 +12,7 @@
 | §3.2，Eq. (1)–(3) | 归一化点图回归、置信度加权损失 | `results/loss_checks.json` | 数值/梯度检查通过；尚未重新训练 |
 | §3.4；§4.1；Table 2 | 视角数增加时耗时与显存如何变化？ | `results/dtu_paper_experiments.json` 的 performance | 本机适配实验；单卡不覆盖论文 A100/多卡设置 |
 | §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | 官方 pose 配置与脚本 | 缺对应测试集；PnP Demo 不能代替这些指标 |
-| §4.3；Table 3 | 7-Scenes / NRGBD 重建 | NRGBD官方9序列已准备；全量评测进行中 | 7-Scenes仍缺预处理数据 |
+| §4.3；Table 3 | 7-Scenes / NRGBD 重建 | `results/nrgbd_seed42_stride40.json`；NRGBD完整9场景 | NRGBD已运行，未对齐论文数值；7-Scenes仍缺预处理数据 |
 | §4.3；Table 4 | DTU 完整 22 场景重建 | `demo_outputs/paper_eval/dtu_all.json` | 已运行；论文数值尚未对齐 |
 | §5.1；Figure 5 | 测试视角数对重建质量的影响 | 新脚本 3/5/10/20 视角 | 本地均匀采样适配实验 |
 | §5.1；Figures 6–7 | 不同训练视角数的模型比较 | 官方训练配置 | 缺各组训练权重；未执行 |
@@ -64,7 +64,18 @@ Notebook 末尾的“论文逐项核对”单元独立读取结果，验证 22 �
 
 10视角配对结果支持在这组DTU设置下aligned local降低距离误差。增加视角改善了Accuracy，但Completion在20视角时回升，normal consistency也未随视角持续改善，因此没有验证论文所有指标均持续改善的完整结论。20视角的数值不能与Table 4的10视角直接对齐。
 
-Neural RGB-D 官方数据包已下载并通过ZIP解压CRC检查，9个序列已准备（`results/nrgbd_data_manifest.json`）。单序列数据检查通过，首个序列有30视角，图像512×512，有效深度比例约0.994。宿主服务 `fast3r-nrgbd-reproduction.service` 正执行stride=40全量评测；日志为 `results/nrgbd_pipeline.log`。得到完整JSON之前，该项仍标记为未完成。
+### 步骤 4：Neural RGB-D 全量评测与核验（§4.3 / Table 3）
+
+2026-10-01 01:55（Asia/Shanghai），宿主服务正常退出（退出码0），日志记录 `PIPELINE COMPLETE`。结果 [`results/nrgbd_seed42_stride40.json`](results/nrgbd_seed42_stride40.json) 覆盖官方9个场景、共278个采样视角；场景集合与数据清单一致，所有逐场景指标有限，aggregate逐项核对等于9场景的算术平均。
+
+| Table 3 指标（距离×100） | 本地公开权重 | 论文参考 | 相对误差增加 |
+| --- | ---: | ---: | ---: |
+| Accuracy median | 4.0165 | 3.40 | 18.13% |
+| Completion median | 1.2001 | 1.01 | 18.82% |
+
+本地native median为0.0401652412 / 0.0120010220米；这里先算每场景median再平均，最后乘100，不能用mean距离替代。数据最初通过ZIP解压CRC检查（`results/nrgbd_data_manifest.json`），ZIP现已移除但解压数据保留。Notebook分析单元读取实际JSON并保存对照表和逐场景结果。
+
+协议使用官方NRGBD加载器、stride40完整有效轨迹、512分辨率、aligned local点图与官方指标实现，seed42，alignment置信度percentile85、metric percentile0。为适配12GiB显存，DPT按2视角分块；这是硬件适配，不是论文训练配置。公开HF权重与论文Table 3所用具体训练权重的对应关系、原始下载revision未验证；不把数值差距归因于未经单变量实验核实的因素，也不将论文251.1 FPS参考冒充本机性能。当前完成了该数据集的运行与报告，尚未匹配论文数值。
 
 ## 剩余工作的确切前提
 
@@ -74,4 +85,4 @@ Neural RGB-D 官方数据包已下载并通过ZIP解压CRC检查，9个序列已
 
 论文 §4 的完整训练使用 128 张 A100-80GB、174K steps；当前单张约 12 GiB 显卡不能完成同规格训练。训练视角、模型规模、数据规模和无位置插值消融需要对应独立模型。Table 2 的 1000–1500 视角实验也超出当前硬件的原始设置。需要这些数据与权重/算力后，才能逐项将未完成状态改成真实实验完成。
 
-简历可以表述为“基于官方公开权重复现多视图重建流程，完成 DTU 22 场景评测并开展视角数与点图头消融”；目前不能写“完整复现所有论文实验并达到论文指标”。
+简历可以表述为“基于官方公开权重复现多视图重建流程，完成 DTU 22 场景与 Neural RGB-D 9 场景评测，开展视角数与点图头消融并分析论文指标差距”；目前不能写“完整复现所有论文实验并达到论文指标”。

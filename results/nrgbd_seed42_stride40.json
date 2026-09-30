@@ -1,0 +1,186 @@
+{
+  "mode": "hf_checkpoint_official_metrics",
+  "dataset": "nrgbd",
+  "checkpoint_dir": "checkpoints/Fast3R_ViT_Large_512",
+  "data_root": "data/neural_rgbd",
+  "device": "cuda",
+  "precision": "16-mixed",
+  "seed": 42,
+  "head": "local",
+  "head_chunk_size": 2,
+  "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+  "torch": "2.7.1+cu128",
+  "python": "3.11.16",
+  "resolution": 512,
+  "kf_every": 40,
+  "alignment_confidence_percentile": 85.0,
+  "metric_confidence_percentile": 0.0,
+  "scene_count": 9,
+  "aggregate_mean": {
+    "accuracy": 0.09710843547918814,
+    "accuracy_median": 0.040165241178122583,
+    "completion": 0.031291807755244455,
+    "completion_median": 0.012001021962735982,
+    "nc1": 0.7659634143404187,
+    "nc1_median": 0.9189364267778196,
+    "nc2": 0.7489077460920082,
+    "nc2_median": 0.9048333176955458
+  },
+  "paper_distance_multiplier": 100,
+  "scenes": [
+    {
+      "scene": "breakfast_room",
+      "views": 30,
+      "seed": 2744021041,
+      "wall_time_seconds": 57.00694617799991,
+      "forward_time_seconds": 5.625404357910156,
+      "metrics": {
+        "accuracy": 0.05156923955484933,
+        "accuracy_median": 0.021250073552004468,
+        "completion": 0.018502345198705097,
+        "completion_median": 0.004672192539863575,
+        "nc1": 0.738635390764547,
+        "nc1_median": 0.8872405609157576,
+        "nc2": 0.733264742015765,
+        "nc2_median": 0.8871861731530715
+      }
+    },
+    {
+      "scene": "complete_kitchen",
+      "views": 31,
+      "seed": 1238568347,
+      "wall_time_seconds": 128.5087333849997,
+      "forward_time_seconds": 5.601551055908203,
+      "metrics": {
+        "accuracy": 0.10447592136028068,
+        "accuracy_median": 0.05530286107379938,
+        "completion": 0.03724345682225537,
+        "completion_median": 0.019672946437068795,
+        "nc1": 0.7547709060780688,
+        "nc1_median": 0.9180252384815459,
+        "nc2": 0.694519280158819,
+        "nc2_median": 0.8550723767368196
+      }
+    },
+    {
+      "scene": "green_room",
+      "views": 37,
+      "seed": 700705457,
+      "wall_time_seconds": 175.0333577199999,
+      "forward_time_seconds": 7.347836017608643,
+      "metrics": {
+        "accuracy": 0.0382295332638711,
+        "accuracy_median": 0.022289000741071076,
+        "completion": 0.05329952539289901,
+        "completion_median": 0.004937520450474846,
+        "nc1": 0.8041904460609691,
+        "nc1_median": 0.9515530006635582,
+        "nc2": 0.7806192961360862,
+        "nc2_median": 0.947395615980671
+      }
+    },
+    {
+      "scene": "grey_white_room",
+      "views": 38,
+      "seed": 3083030414,
+      "wall_time_seconds": 345.87136614500014,
+      "forward_time_seconds": 7.52814507484436,
+      "metrics": {
+        "accuracy": 0.18390204774117797,
+        "accuracy_median": 0.07502214488248712,
+        "completion": 0.058043365026811046,
+        "completion_median": 0.02588573908951223,
+        "nc1": 0.7456619186579069,
+        "nc1_median": 0.922302454774511,
+        "nc2": 0.747374218048648,
+        "nc2_median": 0.9197123862607525
+      }
+    },
+    {
+      "scene": "kitchen",
+      "views": 38,
+      "seed": 2597876059,
+      "wall_time_seconds": 49.74325234099979,
+      "forward_time_seconds": 8.38575005531311,
+      "metrics": {
+        "accuracy": 0.050168427000633266,
+        "accuracy_median": 0.03127438547042946,
+        "completion": 0.028792792636111272,
+        "completion_median": 0.012414378386637259,
+        "nc1": 0.8267513745961432,
+        "nc1_median": 0.9722112913623265,
+        "nc2": 0.821616204201163,
+        "nc2_median": 0.9722711030462747
+      }
+    },
+    {
+      "scene": "morning_apartment",
+      "views": 23,
+      "seed": 2199579833,
+      "wall_time_seconds": 23.336272827000357,
+      "forward_time_seconds": 3.6454012393951416,
+      "metrics": {
+        "accuracy": 0.015532541188107415,
+        "accuracy_median": 0.010980289660508635,
+        "completion": 0.011269901202858782,
+        "completion_median": 0.005410689239437355,
+        "nc1": 0.815444773964924,
+        "nc1_median": 0.958955316825432,
+        "nc2": 0.8195593718205874,
+        "nc2_median": 0.9605484372947082
+      }
+    },
+    {
+      "scene": "staircase",
+      "views": 29,
+      "seed": 3559068649,
+      "wall_time_seconds": 91.44674694800051,
+      "forward_time_seconds": 5.311872720718384,
+      "metrics": {
+        "accuracy": 0.11237556682948262,
+        "accuracy_median": 0.05010526668674169,
+        "completion": 0.03537803188668485,
+        "completion_median": 0.012554617023251207,
+        "nc1": 0.6714479394536415,
+        "nc1_median": 0.7881133859855602,
+        "nc2": 0.6510946679243553,
+        "nc2_median": 0.7599165988009493
+      }
+    },
+    {
+      "scene": "thin_geometry",
+      "views": 10,
+      "seed": 915509448,
+      "wall_time_seconds": 27.032738038999923,
+      "forward_time_seconds": 1.207887887954712,
+      "metrics": {
+        "accuracy": 0.2932634282109115,
+        "accuracy_median": 0.08070049084160147,
+        "completion": 0.02948542988164885,
+        "completion_median": 0.01846848080901362,
+        "nc1": 0.7765409306145289,
+        "nc1_median": 0.9560710680514979,
+        "nc2": 0.7430298718907331,
+        "nc2_median": 0.9316338379684594
+      }
+    },
+    {
+      "scene": "whiteroom",
+      "views": 42,
+      "seed": 2395845963,
+      "wall_time_seconds": 49.042930558999615,
+      "forward_time_seconds": 8.829564094543457,
+      "metrics": {
+        "accuracy": 0.024459214163379206,
+        "accuracy_median": 0.014562657694459923,
+        "completion": 0.00961142174922581,
+        "completion_median": 0.00399263368936496,
+        "nc1": 0.7602270488730394,
+        "nc1_median": 0.915955523940187,
+        "nc2": 0.7490920626319167,
+        "nc2_median": 0.909763330018206
+      }
+    }
+  ],
+  "scope_note": "Metrics reuse fast3r.models.multiview_dust3r_module.MultiViewDUSt3RLitModule and are evaluated with the public Hugging Face inference checkpoint; this is distinct from running fast3r/eval.py with the original Lightning checkpoint."
+}

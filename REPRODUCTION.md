@@ -124,6 +124,7 @@ Notebook末尾已经添加独立可运行的“论文逐项核对”单元，包
 - [`results/dtu_paper_experiments.json`](results/dtu_paper_experiments.json)：88组视角实验，额外22组local/global配对指标。
 - [`results/loss_checks.json`](results/loss_checks.json)：合成点图归一化、扰动和有限梯度检查。
 - [`results/checkpoint_manifest.json`](results/checkpoint_manifest.json)：实际配置与权重的SHA256；原始下载revision未记录。
+- [`results/nrgbd_seed42_stride40.json`](results/nrgbd_seed42_stride40.json)：Neural RGB-D完整9场景、278视角，seed42/stride40/chunk2；Table 3口径（逐场景median平均×100）Accuracy/Completion为4.0165/1.2001，论文参考3.40/1.01，尚未匹配。Notebook已核验场景、aggregate并保存真实分析输出；公开权重与论文具体权重对应关系仍未验证。
 - 科学图：[`results/figures/`](results/figures/)。
 
 Neural RGB-D官方9个序列已解压。`bash scripts/queue_nrgbd_reproduction.sh` 会先检查实际目录中的全部RGB/深度帧、非空文件与位姿数量；检查通过即跳过下载和解压，即使ZIP或manifest不存在。只有数据不完整时才恢复下载/解压；已有完整ZIP则复用，无需重下。可运行 `python scripts/check_nrgbd_data.py` 单独检查（这是文件布局/数量检查，不是重新解码PNG或CRC校验）。可选PID参数仅用于数据不完整时等待已有下载进程。后续评测入口支持 `python scripts/fast3r_hf_dtu_eval.py --dataset nrgbd --device cuda --output-json results/nrgbd_seed42_stride40.json`。默认stride40；Table 3比较时将native距离乘100。完整实验状态、限制与余下前提请查阅 [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md)。
