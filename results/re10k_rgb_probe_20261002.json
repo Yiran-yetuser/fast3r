@@ -1,0 +1,59 @@
+{
+  "status": "bounded_format_probe_only",
+  "zip_member": "re10k/test/000063.torch",
+  "member_sha256": "80046bc31d9aa850e063a92bc2c64a70310e23a28ef7d3fae56b93db60f586a3",
+  "member_crc_verified": true,
+  "safe_weights_only_load": true,
+  "probe_clip_count": 17,
+  "decoded_image_shapes_h_w": [
+    [
+      360,
+      640
+    ]
+  ],
+  "prescribed_matches": [
+    {
+      "scene": "3ce8f87fcfc988a8",
+      "frames": 105,
+      "maximum_camera_abs_delta": 3.393438730014964e-08
+    },
+    {
+      "scene": "2ceec371086f5d82",
+      "frames": 62,
+      "maximum_camera_abs_delta": 2.952816768875266e-08
+    },
+    {
+      "scene": "1beb8e6662d36ee6",
+      "frames": 72,
+      "maximum_camera_abs_delta": 2.22139404648658e-07
+    },
+    {
+      "scene": "3d4645318868a4f3",
+      "frames": 76,
+      "maximum_camera_abs_delta": 2.694088740984313e-08
+    },
+    {
+      "scene": "0498c9066256055c",
+      "frames": 157,
+      "maximum_camera_abs_delta": 2.3781591806937286e-07
+    },
+    {
+      "scene": "11357e0934f26aed",
+      "frames": 279,
+      "maximum_camera_abs_delta": 2.3657446313052333e-07
+    },
+    {
+      "scene": "0ecdc87c3391ce98",
+      "frames": 96,
+      "maximum_camera_abs_delta": 5.874053976562266e-08
+    },
+    {
+      "scene": "172bd46c6ddda95d",
+      "frames": 124,
+      "maximum_camera_abs_delta": 1.3657348674200875e-07
+    }
+  ],
+  "issues": [],
+  "full_split_coverage_verified": false,
+  "paper_equivalence": "not established; first chunk is not a complete dataset audit"
+}

@@ -118,9 +118,18 @@ python scripts/fast3r_hf_dtu_eval.py \
 
 ## 逐项论文实验与新结果
 
+步骤7（2026-10-02，§4.2/Table1）：扩容后恢复数据准备，官方RE10K1832相机TXT全部核验；
+test-only RGB归档55.6GB后台下载中。首chunk17个clip全量图像解码360×640，8个规定ID相机/时间戳
+与官方GT吻合，仅是format probe。新HF单卡入口用真实1个scene/10视角完成接线测试，PnP0失败，
+RRA@15=1.0、RTA@15=0.0889、mAA30=0.1627；这是smoke而不是正式Table1成绩。
+断点再运行的JSON与首次结果完全相同，47项离线测试通过。Notebook已记录数据准备与smoke分析，
+不覆盖DTU/NRGBD/7-Scenes历史结果。下一步核验RGB全量覆盖、GT与裁剪协议后运行完整1832集合。
+续接任务每30分钟回到本聊天，配合[磁盘检查点](CONTINUATION.md)和独立后台下载；
+额度不足也会影响定时任务，不能保证精确重置时刻自动恢复，需要开机与应用运行。
+
 最新新增步骤6（§3.2、§4.2–4.3、§5.4）：[`PROTOCOL_AUDIT.md`](PROTOCOL_AUDIT.md)与[`results/protocol_audit_20261001.json`](results/protocol_audit_20261001.json)核实本地权重/配置匹配当前HF公开revision，但未证明各论文实验的checkpoint映射。记录RoMa对应点注册/ICP文字与置信度项符号差异，不武断归因。Notebook新增独立审计分析单元并保存真实输出。
 
-`python scripts/check_pose_data.py`只读检查规定测试清单及RGB/相机GT，10项合成测试通过；缺失或损坏返回incomplete，CLI退出码2。当前CO3D清单缺失，RealEstate10K规定1,832个唯一视频ID的目标目录均未准备。数据完整性不等于论文协议一致，预检查不计作Table 1指标。项目盘约2.38GiB空闲且须预留1GiB；后续数据阶段需要更大可写目录或已有规定数据路径。未下载不匹配的替代子集，未改动未挂载分区。
+`python scripts/check_pose_data.py`只读检查规定测试清单及RGB/相机GT，10项合成测试通过；缺失或损坏返回incomplete，CLI退出码2。2026-10-01的CO3D清单缺失、RE10K RGB未准备、空闲2.38GiB是历史检查点。2026-10-02扩容后初查空闲122G，官方1832个测试相机TXT已齐备；作者test-only RGB归档正在独立后台下载，覆盖/GT等价性仍待核验。数据完整性不等于论文协议一致，预检查不计作Table 1指标。新单卡HF位姿入口具备固定采样与断点恢复，但尚无正式Table1分数；参见下述步骤7与[续接检查点](CONTINUATION.md)。
 
 最新完成阶段：7-Scenes全部7类场景、18条TestSplit轨迹、850个stride20视角的同次前向local/global评测已正常结束（2026-10-01 12:44:47，Asia/Shanghai）。`python scripts/validate_7scenes_report.py`核验完整集合、视角/seed、全部有限aggregate与配对标记。Table3逐轨迹median平均×100为3.3035/3.1058，论文参考1.58/0.93，误差高109.08%/233.95%；Table5 mean×100为local6.3613/7.0516、global6.9567/6.3510。local降低Accuracy但未改善Completion，不能宣称达到论文成绩或全面local优势。NRGBD配对结果与历史JSON保留不变。
 

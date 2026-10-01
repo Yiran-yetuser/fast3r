@@ -176,4 +176,5 @@ wandb/
 outputs/
 lightning_logs/
 multiview_output/
+results/*_progress/
 *.ckpt

@@ -1,0 +1,12 @@
+{
+  "scope": "one real clip GPU wiring smoke, not full Table1",
+  "scene": "3ce8f87fcfc988a8",
+  "original_candidate_frames": 105,
+  "all_candidate_frames_saved": true,
+  "rgb_shape_h_w": [
+    360,
+    640
+  ],
+  "gt_camera_verified": true,
+  "source_member_sha256": "80046bc31d9aa850e063a92bc2c64a70310e23a28ef7d3fae56b93db60f586a3"
+}

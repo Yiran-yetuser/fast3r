@@ -98,6 +98,8 @@ python scripts/test_pose_data.py
 
 ## 4. 下一步需要的具体资源
 
+本节保留2026-10-01历史资源快照。2026-10-02用户扩容后空间限制已解除，见第5节；不再要求用户为此重复提供存储。
+
 本次宿主检查：项目文件系统剩余2,550,480,896 bytes（约2.38GiB），
 每次下载/预处理仍须预留1GiB。未发现已挂载的额外数据存储。
 大 NTFS 分区未挂载，不把其容量当作已获授权的可用目录，也不改分区。
@@ -117,3 +119,20 @@ RealEstate10K RGB的选择帧大小、视频可用性也未验证。没有启动
 单一公开权重不满足此条件，短训练不等同论文128张A100-80GB的完整训练。
 附录C/D/E仍缺规定数据和可用的splatting/BA/RobustMVD完整评测环境，尚无新增成绩。
 当前后台重建阶段已结束；到此是需资源选择的检查点，不是整篇论文完成。
+
+## 5. 扩容后更新（2026-10-02）
+
+初查项目分区约251G、可用122G。RE10K官方归档752332631bytes已核验MD5与SHA256，
+1832个规定相机TXT全部解析通过，清单记录各文件SHA。仅代表metadata_prepared，RGB还未就绪。
+pixelSplat作者test-only镜像55,604,889,849bytes已启动预算约束的后台下载；
+服务器不支持Range，重启通过验证并重新传输已有前缀后追加，禁止把200响应直接附加导致损坏。
+镜像coverage、分辨率、cropped intrinsics和官方GT一致性要在下载后验证，不自动认定等价。
+
+新HF单卡位姿入口不再绑定原作者绝对路径/两GPU/Lightning checkpoint，
+仍沿用原RE10K512×288 crop、first-view global focal以及公开PyTorch relative-pose/AUC函数。
+固定逐scene随机采样、OpenCV seed与顺序PnP、16-mixed、chunk2都是记录在案的本机适配。
+实际公开PnP mask为`conf>1.0`；函数虽然接收`min_conf_thr_percentile=85`，相关mask代码被注释，
+因此不能称该PnP按85-percentile过滤（重建对齐的percentile85是另一条路径）。
+失败identity fallback保留但单独计数；不将默认identity伪装为成功PnP。
+恢复时校验协议/输入哈希，并从存储的pred/GT位姿重新计算指标。
+正式全量RGB预检查当前仍失败，没有新增Table1成绩。

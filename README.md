@@ -20,6 +20,8 @@ Official implementation of **Fast3R: Towards 3D Reconstruction of 1000+ Images i
 
 ## Installation
 
+本地复现进度（2026-10-02）：已完成DTU22场景、NRGBD9场景、7-Scenes全部18测试轨迹的公开权重评测，尚未匹配论文数值或完成整篇实验。扩容后已准备RealEstate10K规定1832个相机记录，正在下载作者test-only RGB归档；新单卡HF位姿入口支持固定采样和断点恢复。正式Table1位姿指标尚未运行。[逐项论文对应](PAPER_REPRODUCTION.md)、[Notebook](fast3r_reproduction.ipynb)、[下一步检查点](CONTINUATION.md)。
+
 ```bash
 # clone project
 git clone https://github.com/facebookresearch/fast3r

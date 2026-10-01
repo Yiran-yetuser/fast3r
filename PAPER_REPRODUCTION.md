@@ -1,6 +1,6 @@
 # Fast3R：逐项复现与论文对应表
 
-核对版本：[arXiv v2，2025-03-19](https://arxiv.org/html/2501.13928v2)。本记录更新于 2026-10-01。
+核对版本：[arXiv v2，2025-03-19](https://arxiv.org/html/2501.13928v2)。本记录更新于 2026-10-02。
 
 ## 完成标准
 
@@ -11,7 +11,7 @@
 | §3.1；§3.3；Figure 2 | 多张图是否一次输出 global/local 点图与置信度？ | Notebook 的推理与模块 hook；`config.json` | 推理验证已执行 |
 | §3.2，Eq. (1)–(3) | 归一化点图回归、置信度加权损失 | `results/loss_checks.json` | 数值/梯度检查通过；尚未重新训练 |
 | §3.4；§4.1；Table 2 | 视角数增加时耗时与显存如何变化？ | `results/dtu_paper_experiments.json` 的 performance | 本机适配实验；单卡不覆盖论文 A100/多卡设置 |
-| §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | 官方 pose 配置与脚本 | 缺对应测试集；PnP Demo 不能代替这些指标 |
+| §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | 单卡HF位姿入口；RE10K1832相机记录清单 | RE10K元数据齐备、RGB归档下载中；尚无正式位姿指标 |
 | §4.3；Table 3 | 7-Scenes / NRGBD 重建 | `results/nrgbd_seed42_stride40.json`；`results/7scenes_paired_seed42_stride20.json` | NRGBD完整9场景、7-Scenes全部18测试轨迹已运行核验；未对齐论文数值 |
 | §4.3；Table 4 | DTU 完整 22 场景重建 | `demo_outputs/paper_eval/dtu_all.json` | 已运行；论文数值尚未对齐 |
 | §5.1；Figure 5 | 测试视角数对重建质量的影响 | 新脚本 3/5/10/20 视角 | 本地均匀采样适配实验 |
@@ -123,6 +123,45 @@ NRGBD Table 5口径（9场景mean距离平均×100，越低越好）：
 新增只读`check_pose_data.py`：按全量规定清单检查RGB/GT/相机元数据，缺损返回incomplete，不静默跳过。10项合成离线测试通过。当前CO3D processed测试清单缺失；RE10K指定文件实际含1,832个唯一ID，当前目标目录0个数据对准备好。该预检查不是位姿评测，原作者绝对路径/HF加载适配尚未完成，不填报Table 1指标。
 
 宿主项目盘仅余约2.38GiB，仍需留1GiB，未有已挂载的额外数据存储。官方CO3D的8.9GB挑战single-sequence子集不是规定测试划分；不能用它替换，也不假称必须下载全部5.5TB。稀疏下载的正确选择/峰值预算尚未验证。下一步需要提供更大的可写目录或已有规定数据路径，先算预算再下载必要部分；不会擅自挂载或写入未挂载NTFS分区。独立训练消融另外需要权重来源或训练资源授权。
+
+### 步骤7：扩容后恢复Table 1数据阶段（2026-10-02）
+
+项目分区已扩为约251G，初查可用122G；步骤6的2.38GiB限制是历史状态，不再作为当前阻塞。
+规定RE10K测试文件仍为1832个唯一ID，未因文件名“1800”或镜像可用性改变集合。
+官方相机元数据下载、长度/MD5/SHA256与逐TXT解析已完成；服务正常退出0，
+01:55:16日志记录完成。清单见[`results/re10k_metadata_manifest.json`](results/re10k_metadata_manifest.json)。
+prepared清单及全部文件哈希匹配时重跑跳过网络，不重复下载。
+
+新入口[`scripts/fast3r_hf_re10k_pose_eval.py`](scripts/fast3r_hf_re10k_pose_eval.py)使用公开HF权重，
+沿用原RE10K principal-point crop/resize到512×288、first-view global focal、官方相对位姿指标。
+单卡16-mixed、DPT chunk2、seed42；10视角按scene稳定抽取并记录timestamp和输入SHA。
+GT相机不输入网络和PnP。顺序OpenCV RANSAC固定seed是可追踪适配，不冒充原线程执行和未公布frame draws。
+PnP实际mask为conf>1，公开函数的percentile参数并未用于该mask；失败identity fallback保留并单独计数。
+逐scene JSON支持恢复并重新计算已保存位姿的指标，协议/输入哈希不一致拒绝复用，最终报告不覆盖。
+13项初版离线合成测试通过，随后补充3项RGB下载恢复测试；它们不是Table 1实测。
+真实全量dry-run因1832个RGB目录缺失而拒绝运行，没有生成正式位姿成绩。
+随后用下载中的首个完整chunk做CRC与safe weights-only格式probe：17个clip全部RGB解码为360×640，
+其中8个规定ID的camera/timestamp与官方TXT核对通过，最大绝对差约2.38e-7。
+独立保存其中一个真实clip的全部105候选帧并随机抽10视角，HF单卡前向→focal→PnP→45对指标成功，
+PnP失败0/10。该接线测试的RRA@15为1.0、RTA@15约0.0889、mAA30约0.1627；
+这些是1个scene的smoke值，不是Table1全量成绩，不能拿来声称论文效果复现。
+原始probe和smoke输出分别保存，不与1832-scene正式输出混用。
+断点再运行没有重新加载模型，独立输出与首次smoke JSON逐字节一致；全部47项离线测试通过。
+
+扩容后预算允许下载pixelSplat作者公开test-only归档（55,604,889,849bytes，约51.79GiB），
+无需下载完整训练集。`fast3r-re10k-rgb-archive.service`于02:02:47启动；
+`results/re10k_rgb_archive.log`和`data/re10k_test_only.zip.part`记录进度。
+镜像从[作者README](https://github.com/dcharatan/pixelsplat#acquiring-datasets)确认，
+已读取少量ZIP头；作者loader预期JPEG为360×640，但本机尚未解码整个归档核验。
+下载仅说明获得候选数据：后续必须核验1832 ID完整覆盖、timestamp/官方相机GT、RGB裁剪与分辨率，
+逐chunk安全解析/CRC检查后只保留规定测试scene。不同项目的evaluation_index不替换Fast3R清单。
+该服务器不支持HTTP Range；恢复时重新传输并校验已有前缀再追加，网络流量可能增加，磁盘数据不抹掉。
+每次下载预算留至少1GiB并持续检查空间；没有无预算整包解压，也没有使用不受限制的torch pickle。
+
+Notebook新增数据准备与真实smoke分析，完整续接顺序见[`CONTINUATION.md`](CONTINUATION.md)。
+当前聊天已创建每30分钟的heartbeat接续，不保证额度重置瞬间恢复；需要开机和应用运行。
+确定性后台下载与Codex额度独立，额度可用后的定时触发从检查点继续；不购买额度、不兑换重置权益。
+CO3D规定测试选择、RE10K正式指标与独立训练实验仍未完成。
 
 ### 后续推进顺序与真实边界
 
