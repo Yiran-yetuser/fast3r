@@ -1,0 +1,741 @@
+{
+  "status": "official_metadata_selection_reconstructed_not_rgb_ready",
+  "paper_mapping": "section 4.2 / Table 1 prerequisites only",
+  "paper_categories_describe": "unseen trajectories from 41 object categories, NOT 41 unseen categories",
+  "co3d_revision": "eb51d7583c56ff23dc918d9deafee50f4d8178c3",
+  "dust3r_revision": "4c24a6ebf04809f2cfe59915e51779c8984aaa40",
+  "preprocessor_sha256": "ef637270c45ce7489b9163576439bbf94841355687f2c7d7e9a3667125354d74",
+  "links_sha256": "3ed4997dc39ac01a20eb97eef03bc15fe49cd9895b8e1b0cad8aa4f7de9ccf97",
+  "checksums_sha256": "09de118b3c0b58fa3f878cf7e529c6f0e2ab9055ba6fcb87922e99380067a9c8",
+  "category_count_downloaded": 51,
+  "nonempty_selected_category_count": 51,
+  "selected_sequence_count": 2511,
+  "candidate_frame_count": 498757,
+  "selected_manifest_sha256": "6c51c776f175632e60aedb0a452c47baba72c77f39345a162dfe4ba6de6bdf39",
+  "metadata_archives": {
+    "apple": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_000.zip",
+      "archive_bytes": 31587519,
+      "archive_sha256": "a3947c0bf884a0bfd9b1b9763ee582d86b2f48fe38ae4d7f4fbc98b3de939691",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "apple/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9563,
+      "frame_annotations_member": "apple/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "backpack": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/backpack_000.zip",
+      "archive_bytes": 51540117,
+      "archive_sha256": "a7283ac346d8d2292eaf785975bdac37d9b560afbebd1fd95716c824a615a780",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "backpack/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10055,
+      "frame_annotations_member": "backpack/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "ball": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/ball_000.zip",
+      "archive_bytes": 32929517,
+      "archive_sha256": "f144eda00355309e88fe7097278f5fbbd3f5d816ccdb43fd9b2bea1e99d5e028",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "ball/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9948,
+      "frame_annotations_member": "ball/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "banana": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/banana_000.zip",
+      "archive_bytes": 23822476,
+      "archive_sha256": "1207bcb145c2e7d4c462ad48503aa53ebac6faf429371fd1daa38c122a6fe71e",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "banana/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10042,
+      "frame_annotations_member": "banana/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "baseballbat": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/baseballbat_000.zip",
+      "archive_bytes": 4803139,
+      "archive_sha256": "30205e053877daa03059c3bd4b7d60f9e6246bada0344da2e4c07ca6d9cd2177",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "baseballbat/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9991,
+      "frame_annotations_member": "baseballbat/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "baseballglove": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/baseballglove_000.zip",
+      "archive_bytes": 4961807,
+      "archive_sha256": "dbe49f467e08fc61c9a5a6656a1a2393a723044ac849852d2cc58c91ff819f39",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "baseballglove/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10048,
+      "frame_annotations_member": "baseballglove/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "bench": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/bench_000.zip",
+      "archive_bytes": 29458750,
+      "archive_sha256": "5c69b28801ae77466755146cdbf5443f56d38baeed59af93cbc9bb8393b6845a",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "bench/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9876,
+      "frame_annotations_member": "bench/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "bicycle": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/bicycle_000.zip",
+      "archive_bytes": 21464848,
+      "archive_sha256": "fd6a6851f21c955ec56e451d8b135f983911cb7b92c0af2c5f1d1af44d6c361b",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "bicycle/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9976,
+      "frame_annotations_member": "bicycle/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "book": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/book_000.zip",
+      "archive_bytes": 86868326,
+      "archive_sha256": "07e3af28971a118a655838c97f39d7491cf1b24b4699c0b535194d3b7348a4eb",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "book/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10067,
+      "frame_annotations_member": "book/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "bottle": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/bottle_000.zip",
+      "archive_bytes": 29786330,
+      "archive_sha256": "706386501901405a31ee731ce6bf28121cb689c2a04d40bb5d3dd46cc0e172d4",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "bottle/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9869,
+      "frame_annotations_member": "bottle/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "bowl": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/bowl_000.zip",
+      "archive_bytes": 26269917,
+      "archive_sha256": "cc981587624972d6da660a78a09d7f9aa86b2726de59d67dda8176b9a4d9a130",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "bowl/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10098,
+      "frame_annotations_member": "bowl/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "broccoli": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/broccoli_000.zip",
+      "archive_bytes": 16944588,
+      "archive_sha256": "5eb6b9adff088386acf72be1652724772cc8054cea45c7962290cdfe59f1ac7b",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "broccoli/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10046,
+      "frame_annotations_member": "broccoli/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "cake": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/cake_000.zip",
+      "archive_bytes": 16489859,
+      "archive_sha256": "0765c29ac375c5d3accf1556db4d1f56aac490ffa265e095a24aff1e7cef2354",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "cake/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9992,
+      "frame_annotations_member": "cake/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "car": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/car_000.zip",
+      "archive_bytes": 19765401,
+      "archive_sha256": "96bc0a3d3a5e2b2f954ba0032cbb5b4e8196d6a97f10bfc12d198eb5384b7866",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "car/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9786,
+      "frame_annotations_member": "car/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "carrot": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/carrot_000.zip",
+      "archive_bytes": 36605751,
+      "archive_sha256": "0ddcd9d274a930a332e7e50693a915cc1530eafbe150c584920113f376254a6d",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "carrot/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10016,
+      "frame_annotations_member": "carrot/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "cellphone": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/cellphone_000.zip",
+      "archive_bytes": 41157556,
+      "archive_sha256": "ad8b5ae40a074c95d0bf856a1258f7bd59f61c031eb25ed2329d5c1ae0b39839",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "cellphone/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9919,
+      "frame_annotations_member": "cellphone/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "chair": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/chair_000.zip",
+      "archive_bytes": 54518220,
+      "archive_sha256": "78f09f2c92cce85af3f71b8c7a79dbc14142641648133bb60b927e3279666b79",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "chair/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9980,
+      "frame_annotations_member": "chair/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "couch": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/couch_000.zip",
+      "archive_bytes": 25989233,
+      "archive_sha256": "2117632c69b726be5f0bb4aa2ca742edeb1bbb60a47ae3b40e8f957895a34a61",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "couch/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9802,
+      "frame_annotations_member": "couch/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "cup": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/cup_000.zip",
+      "archive_bytes": 20916361,
+      "archive_sha256": "34635a7bb25ed1207fa2f8c2b195d420a9111c4c41a874f8d9e06f2be355d6a1",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "cup/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9962,
+      "frame_annotations_member": "cup/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "donut": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/donut_000.zip",
+      "archive_bytes": 9273382,
+      "archive_sha256": "9919f1dfffbdd7daf9265e0c404e99c6549be6e8e8b044ee9c9c09008de1be56",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "donut/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9895,
+      "frame_annotations_member": "donut/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "frisbee": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/frisbee_000.zip",
+      "archive_bytes": 5724146,
+      "archive_sha256": "44710fcf238866f63f0a93aeb1002914f10d2cd5ed0c544ba7b17bafe1f43b81",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "frisbee/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10045,
+      "frame_annotations_member": "frisbee/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "hairdryer": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/hairdryer_000.zip",
+      "archive_bytes": 32202534,
+      "archive_sha256": "b1df3ea69cce1d40114b7110c8fbac64210d6052cb43c7f1b71a748cd7d5fd67",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "hairdryer/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10076,
+      "frame_annotations_member": "hairdryer/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "handbag": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/handbag_000.zip",
+      "archive_bytes": 25010174,
+      "archive_sha256": "c73ca805ebc4f9b9ac1c58cce28ba1a74db0aae49e5b5b836e7d9495998a7515",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "handbag/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10068,
+      "frame_annotations_member": "handbag/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "hotdog": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/hotdog_000.zip",
+      "archive_bytes": 4239351,
+      "archive_sha256": "9394a2dd8518759c93aafb6b88c3f046f8f8d32b66802d1ee635fa27417d1741",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "hotdog/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9609,
+      "frame_annotations_member": "hotdog/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "hydrant": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/hydrant_000.zip",
+      "archive_bytes": 26220786,
+      "archive_sha256": "69ba94147f0fdbdce65205bbc88d901c96d885b14a71ee4edd5b6784e4e04d3e",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "hydrant/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10090,
+      "frame_annotations_member": "hydrant/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "keyboard": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/keyboard_000.zip",
+      "archive_bytes": 40277106,
+      "archive_sha256": "753a878e9a27b01278b725704bf4373b654a196e8f76cda63e73516d6bddc5e4",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "keyboard/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9992,
+      "frame_annotations_member": "keyboard/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "kite": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/kite_000.zip",
+      "archive_bytes": 9281206,
+      "archive_sha256": "0546590f412e95ef47b95de0337a630d6ae2b1cd8db75e6dd49bbd4bbf82ab8a",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "kite/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10054,
+      "frame_annotations_member": "kite/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "laptop": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/laptop_000.zip",
+      "archive_bytes": 35823693,
+      "archive_sha256": "3fe90826af68543691ee61249d473e90bbd6a69528bb50bc8758e6624ed9fe2d",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "laptop/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10055,
+      "frame_annotations_member": "laptop/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "microwave": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/microwave_000.zip",
+      "archive_bytes": 5101385,
+      "archive_sha256": "880566a323ade54c89920c036c121edfc9123d45f0132c15fa4b813d6824f98b",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "microwave/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9384,
+      "frame_annotations_member": "microwave/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "motorcycle": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/motorcycle_000.zip",
+      "archive_bytes": 23166038,
+      "archive_sha256": "5aea9f41c26e4efa1c700d6df421313da953a8431e52db9591548da200942818",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "motorcycle/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9846,
+      "frame_annotations_member": "motorcycle/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "mouse": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/mouse_000.zip",
+      "archive_bytes": 45202741,
+      "archive_sha256": "97facce64e3230ab2c8cf44174861c5e2c208ff7edf0da016fb4b1bd86facf0b",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "mouse/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9866,
+      "frame_annotations_member": "mouse/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "orange": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/orange_000.zip",
+      "archive_bytes": 30750936,
+      "archive_sha256": "81865aa2b96fdacfddcb1803d28ef415cf68b2ca1c302306b60e22c5edf900cd",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "orange/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9319,
+      "frame_annotations_member": "orange/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "parkingmeter": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/parkingmeter_000.zip",
+      "archive_bytes": 2107133,
+      "archive_sha256": "97b8eaeb8591fd7baf2c1da28b7cdab8b90dae0d086437ab32daee4599f963bd",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "parkingmeter/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 41,
+      "candidate_frame_count": 8269,
+      "frame_annotations_member": "parkingmeter/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "pizza": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/pizza_000.zip",
+      "archive_bytes": 7014577,
+      "archive_sha256": "e390fc1d66f51ba2ef5854b018fce8225f17a62b2a0e7bb107f1d5d5da451d84",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "pizza/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10047,
+      "frame_annotations_member": "pizza/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "plant": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/plant_000.zip",
+      "archive_bytes": 47045601,
+      "archive_sha256": "e1c080a4495e5c45f03fcce8854afd66af65691a8f82fa54ab97588a7a47f0f4",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "plant/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10006,
+      "frame_annotations_member": "plant/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "remote": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/remote_000.zip",
+      "archive_bytes": 54037535,
+      "archive_sha256": "0ee246fdab7b66879061411459a595509641be5fb2524b9ddba4bca840f060c9",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "remote/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10024,
+      "frame_annotations_member": "remote/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "sandwich": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/sandwich_000.zip",
+      "archive_bytes": 13284702,
+      "archive_sha256": "a927fd38cb560472d9c51f7b37f6026e7cdca067f4ea7680c8f2758d108669f2",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "sandwich/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9945,
+      "frame_annotations_member": "sandwich/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "skateboard": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/skateboard_000.zip",
+      "archive_bytes": 6147917,
+      "archive_sha256": "8a7e49443cfd4fc681eaa3ab15f01ab0ddb0c164ddec4d74b88ba60bce3388bd",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "skateboard/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9999,
+      "frame_annotations_member": "skateboard/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "stopsign": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/stopsign_000.zip",
+      "archive_bytes": 22450821,
+      "archive_sha256": "648c961d06fc4b2e0ff2add6fc2362e848fb11b030a0ea35d68cb56b3ecc7892",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "stopsign/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9988,
+      "frame_annotations_member": "stopsign/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "suitcase": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/suitcase_000.zip",
+      "archive_bytes": 26545940,
+      "archive_sha256": "3e4d31bf46ff1458600a8a598855b959dbdc29dc91ccc5879996ced6973c330c",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "suitcase/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10060,
+      "frame_annotations_member": "suitcase/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "teddybear": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/teddybear_000.zip",
+      "archive_bytes": 47978935,
+      "archive_sha256": "cbfd5a3ab998f806d6f22ac8e80d150b320828cdc6db003d97a4f68760710241",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "teddybear/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10043,
+      "frame_annotations_member": "teddybear/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "toaster": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/toaster_000.zip",
+      "archive_bytes": 17036828,
+      "archive_sha256": "d71e31da3a529e90e35f86da1b9f66d8eba16a8d2f61a1d010ad76bc133cce18",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "toaster/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9926,
+      "frame_annotations_member": "toaster/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "toilet": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/toilet_000.zip",
+      "archive_bytes": 38502214,
+      "archive_sha256": "a5bfb5931bd48fb53d601725eef01659a179e7f4d3eb737a698136fab29e3f0c",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "toilet/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9973,
+      "frame_annotations_member": "toilet/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "toybus": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/toybus_000.zip",
+      "archive_bytes": 9015538,
+      "archive_sha256": "0766e0ff140f45cb2d8dbb57055a450e2b13df293fad37411f2e70dbee6c1f47",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "toybus/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10056,
+      "frame_annotations_member": "toybus/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "toyplane": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/toyplane_000.zip",
+      "archive_bytes": 13737196,
+      "archive_sha256": "e10ca08294c97a0cdd4d207fddd0dcfcab1519cdfcc8165d70e82d0c86146fc9",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "toyplane/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9889,
+      "frame_annotations_member": "toyplane/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "toytrain": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/toytrain_000.zip",
+      "archive_bytes": 13195529,
+      "archive_sha256": "cb378346d5278782e3f7474eec7b33f7365a1aa8526aac224b1ab7edbb0a5696",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "toytrain/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9934,
+      "frame_annotations_member": "toytrain/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "toytruck": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/toytruck_000.zip",
+      "archive_bytes": 25847133,
+      "archive_sha256": "6cf8e62d485799f55ce69cd2427143278032ef23d5b6d603dca6cc48ae53f1ea",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "toytruck/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9848,
+      "frame_annotations_member": "toytruck/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "tv": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/tv_000.zip",
+      "archive_bytes": 949477,
+      "archive_sha256": "5f2d01ebc0c492ee610a15e405868f80797d961c65ec2a904da3aa16d443ab60",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "tv/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 20,
+      "candidate_frame_count": 3990,
+      "frame_annotations_member": "tv/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "umbrella": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/umbrella_000.zip",
+      "archive_bytes": 33659086,
+      "archive_sha256": "4df9b16ad08c9fb7fddb31daafee2305fe4a94d75337d5155bc5e2485624577d",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "umbrella/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9620,
+      "frame_annotations_member": "umbrella/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "vase": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/vase_000.zip",
+      "archive_bytes": 39534219,
+      "archive_sha256": "cd281faa97d4b72daef86a0b5c56bb1d6625d2f6a139495e36fe7d234dd18724",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "vase/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 10003,
+      "frame_annotations_member": "vase/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    },
+    "wineglass": {
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/wineglass_000.zip",
+      "archive_bytes": 29686148,
+      "archive_sha256": "b24bdf597f63561f36ec41ddb4cc3cb0977ec1a459d41a5f0213f01b151fa849",
+      "all_metadata_member_crc_verified": true,
+      "set_list_member_order": [
+        "wineglass/set_lists/set_lists_fewview_train.json"
+      ],
+      "selection_scope": "fewview_train/test only; empty list means no eligible test trajectory",
+      "selected_sequence_count": 50,
+      "candidate_frame_count": 9802,
+      "frame_annotations_member": "wineglass/frame_annotations.jgz",
+      "geometry_annotations_preprocessed": false
+    }
+  },
+  "source_selection": {
+    "split": "fewview_train lists / test key",
+    "quality_strictly_greater_than": 0.5,
+    "max_sequences_per_category": 50,
+    "seed": 42
+  },
+  "original_fast3r_scene_selection_equivalence": "unverified; author processed manifest absent",
+  "rgb_depth_mask_and_camera_npz_ready": false,
+  "formal_pose_metrics_available": false,
+  "full_selection_report_sha256": "761002ebadd557bcead3e8119517bd33fd75cb29b355b9929345938782f1d6ce"
+}

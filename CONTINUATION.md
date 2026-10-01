@@ -116,10 +116,54 @@ Notebook分析单元通过宿主Jupyter执行，再用apply_patch保存真实输
    改变random.sample的候选集。否则保留规定scene的全部可用帧。
 5. 每个完整report核验ID集合、per-scene/PnP失败计数/aggregate，Notebook分析单元执行，
    保存真实输出并更新文档，测试后提交推送myfork/local-demo。不得覆盖旧结果。
-6. 然后推进CO3D规定41未见类别选择、预算与公开权重适配，以及资源允许的附录实验。
+6. 然后推进CO3D41类物体中未见测试轨迹的选择、预算与公开权重适配，以及资源允许的附录实验。
    独立训练消融仍需要独立权重或训练资源，未做实验不打勾。
 
 ## 额度恢复机制与边界
+
+### 05:51公开来源续接检查点（2026-10-02）
+
+- `89b1974`已推送：1756场景265447帧准备/独立核验已完成，不重复。
+- 宿主约49GiB空闲、GPU约10900MiB空闲；原archive/prepare服务已正常退出。
+  这只是本轮快照，每次仍须宿主只读检查。
+- 新`fast3r-re10k-missing-candidates.service`06:03:58启动，
+  日志`results/re10k_missing_candidates_stream.log`，
+  最终审计`results/re10k_missing_candidates_full_source.json`。
+  固定公开205,763,619,478bytes tar.gz来源，HTTP 206真实8MiB前缀探测通过。
+  不存205GB归档，仅在`data/RealEstate10K_missing_candidate`暂存76缺失ID的官方timestamp PNG；
+  总保存<=16GiB、单图<=8MiB、留1GiB，PNG不转JPEG/不覆盖旧数据。
+  源镜像卡仅CC-BY-4.0、没有解码/裁剪详情；整包SHA/GT候选/图片几何均须核验。
+  完成报告出现也不自动标full ready、不直接启动formal pose。没有进程重启/源SHA结果前勿称补齐。
+  同进程Range故障重试可恢复压缩偏移；重启需从gzip开头重读并核对已存RGB。
+- 新`fast3r-co3d-test-metadata.service`06:05:01启动，
+  日志`results/co3d_test_metadata.log`，最终`results/co3d_test_selection_manifest.json`。
+  只下载51类_000元数据ZIP（每包<=128MiB，固定CO3D官方revision/SHA/CRC），不下载RGB/depth。
+  `data/co3d_test_metadata/selected_seqs_test_reconstructed.json`由公开DUSt3R选择推导，
+  与作者processed清单等价性仍未确认；类别/序列/候选数量以实际完整报告为准，不猜为41或2050。
+  公开fewview_train的test键、quality>0.5、最多50序列、seed42+类别索引，记录set-list顺序。
+  首次进程退出1：官方fewview_train JSON解压最大已观测50,989,373bytes，超过初版32MiB读取上限。
+  第二次安全复用时确认book_000.zip为86,868,326bytes，超过初版64MiB ZIP上限。
+  50个元数据ZIP保留，宿主可用内存约24GiB；ZIP/JSON成员上限调整为128MiB，
+  加入解码清单/并发写入的额外空间预算后再安全重跑当前流程；不会放开无界读取。
+  同时补充“没有fewview_train时明确空集合”的兼容检查；ZIP/SHA校验复用，不删数据或终止其他进程。
+- 元数据服务最终已正常退出0，51类ZIP共1,315,929,722bytes全部官方SHA/CRC通过。
+  当前公开默认规则真实得到51非空类别、2511序列、498757候选帧，**不是论文41类**。
+  独立`verify_co3d_test_selection.py`再次核验所有ZIP SHA、参考哈希、quality、稳定选序列和帧顺序。
+  小结果`results/co3d_test_selection_summary_20261002.json`（约35KB）及
+  `results/co3d_test_selection_verified_20261002.json`可提交；约6.34MB全帧索引报告留本地、git忽略。
+  下次不重启元数据服务；优先查PoseDiffusion/DUSt3R规定41类列表与Fast3R原选择关系，
+  在51→41有证据前不下载这一默认集合的全部图像/深度、不称规定benchmark已准备完成。
+- 已纠正“41未见类别”为“41类物体中的未见轨迹”；配置100 @是长度100的随机重采样包装，
+  不是全序列集合。不要凭配置100或初版元数据选择宣称CO3D全量论文benchmark完成。
+- 新流式HTTP/安全tar/重试/前缀不完整/存储保护及CO3D选择测试通过，共73项离线测试。
+  合成测试不是Table1测评。真实8MiB探测仅见1个场景，未见任何缺失ID，不推导全部不可用。
+
+下一次先查RE10K服务/日志；CO3D元数据已结束并独立核验，不重复启动。健康无变化安静。
+RE10K全流扫描结束才验证来源LFS SHA及76集合、全部官方timestamps、图像/GT几何；
+PNG原文件先保留独立候选。必要时添加格式明确的输入适配并重新验证，不把PNG改后缀冒充JPEG。
+CO3D元数据报告完成后核验逐类选序列与官方文件/参考哈希，计算必要RGB/depth/mask成员预算，
+研究Range逐成员提取，不落盘全5.5TB，不用single-sequence挑战划分替换。
+所有新增小结果/Notebook真实输出验证后归档；仍未做全量Table1或训练消融。
 
 Codex当前聊天heartbeat `fast3r` 已创建并读回核验ACTIVE，每30分钟接续。
 本地机器须开机、应用保持运行；额度不足时定时任务也可能不能执行。

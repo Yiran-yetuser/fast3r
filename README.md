@@ -113,6 +113,22 @@ For **Table 3 median distances x100**, local Accuracy/Completion are **3.3035 / 
 
 ### Next paper experiments (reconstruction runs complete; paper reproduction incomplete)
 
+New Table 1 data-source work uses a bounded HTTP Range/gzip reader to stage only
+the 76 missing RE10K IDs as original PNGs in a separate candidate directory.
+A real 8 MiB prefix probe succeeded, but it does **not** establish missing-ID
+coverage or image/GT crop equivalence. Full-source auditing runs independently
+of Codex; it never stores the entire 205 GB archive or overwrites prepared JPEGs.
+CO3D metadata-only preparation pins official ZIP SHA/CRC and the public DUSt3R
+selection source; original Fast3R split equivalence and RGB/depth readiness are
+still unverified. The paper describes unseen trajectories from 41 categories,
+not 41 unseen categories. All 73 offline tests pass; none is a pose score.
+
+Official CO3D metadata preparation and independent SHA/selection checks are now
+complete: 51 metadata ZIPs (1,315,929,722 bytes), yielding **51 categories / 2,511
+sequences / 498,757 candidate frames** under the pinned default public rule.
+This is **not** the paper's 41-category selection. Only compact count/SHA reports
+are committed; RGB/depth and the exact paper subset still require verification.
+
 The next-stage [protocol audit](PROTOCOL_AUDIT.md) verifies that local weight/config hashes match current public HF revision `a2c770b768ceb3a53c36c4f7a3619db0413dc3a1`; the original download revision and mapping to individual paper experiments remain unknown. It records corresponding-pixel RoMa registration versus the paper's ICP wording and the confidence-loss sign discrepancy without claiming either causes the metric gap. The notebook saves this audit and live, read-only pose-data preflight output.
 
 [`scripts/check_pose_data.py`](scripts/check_pose_data.py) fails on missing prescribed scenes, malformed GT or corrupt images. The RE10K split has **1,832 unique IDs**, not 1,800. A portable single-GPU HF pose entry with fixed draws/resume is implemented and one real smoke was verified; neither is a full Table1 benchmark. After storage expansion, official camera metadata and the test-only RGB archive are present. Safe chunk CRC/RGB/GT preparation and independent byte/inventory verification completed for 1,756 scenes / 265,447 frames, but 76 prescribed IDs remain missing and are never silently dropped. The CO3D prescribed split/provenance and full RE10K data still require verification. All 58 offline tests pass; these are not paper scores.

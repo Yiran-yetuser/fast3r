@@ -1,5 +1,8 @@
 logs
 
+# Large frame-index inventory stays local; commit compact SHA/count summaries.
+results/co3d_test_selection_manifest.json
+
 notebooks/figures/
 notebooks/output/
 

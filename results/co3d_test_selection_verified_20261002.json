@@ -1,0 +1,13 @@
+{
+  "status": "metadata_sha_and_independent_selection_verified_not_rgb_ready",
+  "selection_report_sha256": "761002ebadd557bcead3e8119517bd33fd75cb29b355b9929345938782f1d6ce",
+  "official_metadata_archive_count": 51,
+  "metadata_archive_bytes": 1315929722,
+  "nonempty_category_count": 51,
+  "selected_sequence_count": 2511,
+  "candidate_frame_count": 498757,
+  "empty_categories": [],
+  "original_fast3r_split_equivalence_verified": false,
+  "rgb_depth_and_pose_npz_ready": false,
+  "formal_pose_metrics_available": false
+}

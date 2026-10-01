@@ -51,7 +51,8 @@ DPT chunk2、混合精度；各项均保留，不为了接近论文数值而悄�
 官方 pose 配置使用 `Co3d_Multiview`，不是重建用的 Spann3R CO3D loader。
 配置要求 processed root 中的 `selected_seqs_test.json`，RGB、相机 NPZ、深度和 mask，
 评测尺寸 `(512,384)`。当前该目录和清单不存在，不能用任意几条 CO3D 视频冒充全量。
-论文 §4.2 指明41个未见物体类别；本机尚无可据以核验这些类别/序列的原始选择清单。
+论文 §4.2 指明41类物体中的未见轨迹（unseen trajectories），不是41个未见类别；
+本机尚无可据以核验这些类别/序列的作者原始processed选择清单。
 
 代码另有一项需明确的采样风险：`_generate_combinations` 生成很多组合，
 但 `_fetch_views_for_pool` 总是读取 `self.combinations[0]` 再加随机 jitter，
@@ -156,3 +157,34 @@ CRC核验后的index含7286个ID，但规定1832仅覆盖1756，缺76；
 另一公开HF test index同样缺76；两个匿名YouTube探测遇429/登录错误，不能推导76全部永久缺失。
 未使用账号、cookies或绕过限制。公开205GB test.tar.gz候选需要先审计来源/条款与
 有界流式读取可行性，不落盘整包，也不假称缺失集合可覆盖。仍可研究公开来源，暂不要求用户动作。
+
+## 7. 公开候选来源的有界读取（2026-10-02）
+
+DavidYan2001镜像固定revision的模型卡仅标CC-BY-4.0，没有详细解码/裁剪来源说明。
+实际HTTP返回206和精确Content-Range；2MiB格式探测首个PNG解码为640×360，
+随后真实8MiB流式探测见`results/re10k_missing_prefix_probe_20261002.json`，
+仅观察1个场景，尚未观察到76缺失ID中的任何一个。前缀SHA不是完整205GB来源SHA。
+`stream_re10k_missing_candidates.py`只将缺失ID匹配官方timestamp的PNG保存至独立候选目录，
+保留PNG原始字节，不覆盖1756场景已有JPEG；单图8MiB、总保存16GiB、磁盘留1GiB。
+重试精确HTTP偏移，检查ETag/Range；gzip完整遍历后才检查整包LFS SHA。
+完整CRC/SHA及timestamp集合通过也不自动证明图片/GT裁剪等价，候选不会自动提升为正式数据。
+进程重启需从gzip开头重读网络，核对已存PNG后跳过写入，不声称能从gzip任意偏移恢复解码。
+
+CO3D官方`co3d/links.json`（README的旧路径不是当前真实文件路径）给出51类元数据ZIP。
+实际apple_000.zip为31,587,519bytes，CRC及官方SHA匹配；含sequence/frame annotations、
+fewview/manyview set lists和LICENSE，不是RGB/深度包。元数据准备仅请求各类_000.zip，
+book_000.zip实际86,868,326bytes，单包/JSON上限据此调整为128MiB，
+仍先核算保留元数据ZIP及解码清单的保守预算，固定CO3D revision `eb51d7583c56ff23dc918d9deafee50f4d8178c3`。
+按固定DUSt3R revision `4c24a6ebf04809f2cfe59915e51779c8984aaa40`重建公开选择：
+fewview_train清单的test键、quality严格>0.5、每类最多50序列、seed42+category index。
+记录ZIP内set-list顺序；原作者os.listdir顺序/processed清单未提供，不能称作者划分已等价复现。
+某类别没有fewview_train或没有合格test轨迹时保留为空，不用challenge单序列子集替代。
+公开eval配置的`100 @ Co3d_Multiview(...)`是ResizedDataset长度100，
+不是自动完整遍历全部序列；正式入口需要明确记录序列集合与实际采样，不能从“100”猜全量。
+两个后台任务仅准备/审计数据，没有新增Table1位姿分数。
+
+元数据准备最终正常退出0：51类官方ZIP共1,315,929,722bytes，独立再次核验SHA/参考哈希及
+质量过滤/种子选序列/帧顺序。公开默认规则得到51非空类别、2511序列、498757候选帧，
+与论文41类不同，不能未经证据删除10类或把51类当论文全量。该差异是需要继续解决的协议前提，
+不是模型测评失败，也不是所有数据下载完成。小汇总与独立核验见
+`results/co3d_test_selection_summary_20261002.json`、`results/co3d_test_selection_verified_20261002.json`。

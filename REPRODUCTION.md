@@ -153,4 +153,13 @@ Notebook末尾已经添加独立可运行的“论文逐项核对”单元，包
 - [`results/7scenes_paired_seed42_stride20.json`](results/7scenes_paired_seed42_stride20.json)：官方全部18条测试轨迹、850视角，完整同次前向双分支结果；Table3 median与Table5 mean分开分析。数据深度由固定SimpleRecon depth-to-RGB投影注册，采样保留原始编号。Notebook保存真实结果表与逐轨迹科学图，不覆盖历史NRGBD/DTU报告。
 - 科学图：[`results/figures/`](results/figures/)。
 
+2026-10-02新增§4.2/Table1来源审计：8MiB公开RE10K Range/gzip前缀探测通过，
+后台仅暂存76个缺失ID的原PNG候选（最多16GiB、不覆盖已有JPEG），完整来源SHA及几何等价仍待核验。
+CO3D仅准备官方元数据ZIP，固定SHA/CRC和公开DUSt3R选择版本，不下载RGB/depth大包。
+两个数据任务的服务名、日志与恢复边界见`CONTINUATION.md`；73项离线测试通过，
+Notebook记录真实源探测，不冒充新增正式位姿成绩或整篇完成。
+CO3D官方51类元数据ZIP/SHA/CRC及独立选择核验现已完成，但公开默认结果为51类、
+2511序列、498757候选帧，不是论文41类。后续先查明类别协议，不任意删类凑数，
+也不将元数据就绪冒充图像/深度或Table1成绩就绪。
+
 Neural RGB-D官方9个序列已解压。`bash scripts/queue_nrgbd_reproduction.sh` 会先检查实际目录中的全部RGB/深度帧、非空文件与位姿数量；检查通过即跳过下载和解压，即使ZIP或manifest不存在。只有数据不完整时才恢复下载/解压；已有完整ZIP则复用，无需重下。可运行 `python scripts/check_nrgbd_data.py` 单独检查（这是文件布局/数量检查，不是重新解码PNG或CRC校验）。可选PID参数仅用于数据不完整时等待已有下载进程。后续评测入口支持 `python scripts/fast3r_hf_dtu_eval.py --dataset nrgbd --device cuda --output-json results/nrgbd_seed42_stride40.json`。默认stride40；Table 3比较时将native距离乘100。完整实验状态、限制与余下前提请查阅 [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md)。
