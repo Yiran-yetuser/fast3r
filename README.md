@@ -26,6 +26,8 @@ CO3D §4.2/Table1类别审计：已找到固定PoseDiffusion协议的41类seen�
 
 目录审计的banana成员数量阈值错误已诊断并安全恢复：保留旧检查点，核验复用apple/backpack，使用新v2结果路径。88项离线测试通过；[恢复证据](results/co3d_storage_recovery_20261002.json)不是正式位姿成绩。
 
+最新v3恢复：已完成41类/235个官方ZIP的[尾部大小预检](results/co3d_zip_footer_preflight_20261002.json)，按每包实测目录大小安全读取，复用8类旧目录记录并通过bowl原失败点。95项测试通过；全41类空间预算仍在后台，不是图像或正式测评就绪。当前恢复路径见CONTINUATION。
+
 ```bash
 # clone project
 git clone https://github.com/facebookresearch/fast3r

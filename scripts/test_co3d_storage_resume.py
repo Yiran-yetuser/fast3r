@@ -3,7 +3,7 @@ import copy
 import hashlib
 import unittest
 
-from plan_co3d_seen41_storage import V1_CODE_SHA, expected_paths, validate_saved
+from plan_co3d_seen41_storage import V1_CODE_SHA, V2_CODE_SHA, expected_paths, validate_saved, validate_preflight
 
 
 class StorageJournalTests(unittest.TestCase):
@@ -54,6 +54,32 @@ class StorageJournalTests(unittest.TestCase):
             if change=='bounds':altered['archives'][0]['ranges'][0]['end']=1001
             if change=='official':altered['archives'][0]['expected_full_archive_sha256']='other'
             with self.assertRaises(ValueError):self.check(altered,*rest)
+
+    def test_known_v2_and_fresh_footer_identity(self):
+        saved,selected,urls,checksums,fingerprint=self.fixture()
+        saved['fingerprint']=dict(fingerprint,**V2_CODE_SHA)
+        saved['archives'][0]['zip_member_count']=3
+        fingerprint['footer_preflight_sha256']='newfooter'
+        footer={urls[0]:{'archive_bytes':1000,'etag':'etag','member_count':3}}
+        validate_saved(saved,'apple',selected,urls,checksums,fingerprint,legacy='v2',footers=footer)
+        for key,value in [('etag','changed'),('member_count',4),('archive_bytes',1001)]:
+            altered=copy.deepcopy(footer);altered[urls[0]][key]=value
+            with self.assertRaises(ValueError):
+                validate_saved(saved,'apple',selected,urls,checksums,fingerprint,legacy='v2',footers=altered)
+
+    def test_preflight_aggregates_identity_and_bounds(self):
+        record={'url':'https://example.invalid/a.zip','member_count':3,'central_directory_bytes':100,
+                'footer_transport_bytes':100,'etag':'etag','central_directory_offset':900,'archive_bytes':1100}
+        result={'status':'seen41_all_zip_footer_size_preflight_not_directory_or_rgb_ready',
+                'protocol_sha256':'p','links_sha256':'l','category_count':41,'archive_count':1,
+                'maximum_member_count':3,'maximum_central_directory_bytes':100,'footer_transport_bytes':100,
+                'archives':[record]}
+        validate_preflight(result,'p','l',[record['url']])
+        for key in ('maximum_member_count','maximum_central_directory_bytes','footer_transport_bytes'):
+            bad=copy.deepcopy(result);bad[key]+=1
+            with self.assertRaises(ValueError):validate_preflight(bad,'p','l',[record['url']])
+        bad=copy.deepcopy(result);bad['archives'][0]['central_directory_offset']=1100
+        with self.assertRaises(ValueError):validate_preflight(bad,'p','l',[record['url']])
 
 
 if __name__=='__main__':unittest.main()

@@ -13,11 +13,13 @@ import urllib.request
 from pathlib import Path
 
 from prepare_re10k_rgb_from_archive import save_identical, sha
-from probe_co3d_zip_ranges import HttpRangeFile, inventory
+from probe_co3d_zip_ranges import HttpRangeFile, inventory, MAX_INDEX_BYTES, MAX_MEMBERS
 
 RESERVE=1024**3
 V1_CODE_SHA={'planner_sha256':'706c7d82cbd7d04f215e790c4b96e33e824a90d8deeedbcdfbefe513901f7eab',
              'range_reader_sha256':'a7a6f3776ee44d3827c338c6315736a8c3c286f4d422e065685de9104981c5e8'}
+V2_CODE_SHA={'planner_sha256':'50d3f842ea073d58f213365d9c611f05577fe3f65d4252f6e59bbd4375cddd78',
+             'range_reader_sha256':'0920cd30c91b880132014a2d1cd98e63989b515f1c6a32884a420f8b6a8fb371'}
 
 
 def expected_paths(category,selected):
@@ -26,10 +28,34 @@ def expected_paths(category,selected):
             for kind,suffix in [('images','.jpg'),('depths','.jpg.geometric.png'),('masks','.png')]}
 
 
-def validate_saved(saved,category,selected,urls,checksums,fingerprint,legacy=False):
-    """Only audited v1 code can migrate; inputs, paths hash and all sums must match."""
+def validate_preflight(preflight,protocol_sha,links_sha,urls):
+    records=preflight['archives']
+    if (preflight['status']!='seen41_all_zip_footer_size_preflight_not_directory_or_rgb_ready'
+            or preflight['protocol_sha256']!=protocol_sha or preflight['links_sha256']!=links_sha
+            or preflight['category_count']!=41 or preflight['archive_count']!=len(urls)
+            or len(set(urls))!=len(urls) or [r['url'] for r in records]!=urls
+            or preflight['maximum_member_count']!=max(r['member_count'] for r in records)
+            or preflight['maximum_central_directory_bytes']!=max(r['central_directory_bytes'] for r in records)
+            or preflight['footer_transport_bytes']!=sum(r['footer_transport_bytes'] for r in records)
+            or preflight['maximum_central_directory_bytes']+65557+128>MAX_INDEX_BYTES
+            or preflight['maximum_member_count']>MAX_MEMBERS):
+        raise ValueError('Footer preflight mismatch or outside hard directory budget')
+    for record in records:
+        if (not record['etag'] or not 0<record['footer_transport_bytes']<=65557
+                or not 0<record['member_count']<=MAX_MEMBERS or record['central_directory_bytes']<=0
+                or not 0<=record['central_directory_offset']<record['archive_bytes']
+                or record['central_directory_offset']+record['central_directory_bytes']>record['archive_bytes']):
+            raise ValueError('Invalid footer identity/transport/bounds')
+    return {r['url']:r for r in records}
+
+
+def validate_saved(saved,category,selected,urls,checksums,fingerprint,legacy=False,footers=None):
+    """Only audited v1/v2 can migrate; inputs, paths, sums and fresh identity match."""
     expected=dict(fingerprint)
-    if legacy:expected.update(V1_CODE_SHA)
+    if legacy:
+        if legacy not in (True,'v1','v2'):raise ValueError('Unapproved migration version')
+        expected.pop('footer_preflight_sha256',None)
+        expected.update(V2_CODE_SHA if legacy=='v2' else V1_CODE_SHA)
     if saved['fingerprint']!=expected or saved['category']!=category:
         raise ValueError('Existing budget journal belongs to different inputs/code; preserved')
     required=expected_paths(category,selected)
@@ -44,10 +70,15 @@ def validate_saved(saved,category,selected,urls,checksums,fingerprint,legacy=Fal
     for record in records:
         if record['expected_full_archive_sha256']!=checksums[Path(record['url']).name]:
             raise ValueError('Official ZIP checksum reference changed')
-        if (record['index_transport_bytes']>32*1024**2 or not record['etag']
+        if (record['index_transport_bytes']>(32*1024**2 if legacy else MAX_INDEX_BYTES) or not record['etag']
                 or sum(r['end']-r['start']+1 for r in record['ranges'])!=record['index_transport_bytes']
                 or any(not 0<=r['start']<=r['end']<record['archive_bytes'] for r in record['ranges'])):
             raise ValueError('Invalid saved Range bounds')
+        if footers is not None:
+            footer=footers[record['url']]
+            if (record['archive_bytes']!=footer['archive_bytes'] or record['etag']!=footer['etag']
+                    or record['zip_member_count']!=footer['member_count']):
+                raise ValueError('Saved ZIP identity/count differs from new footer preflight')
     for kind in ('images','depths','masks'):
         if (saved['matched_member_counts'][kind]!=count
                 or sum(r['matched_member_counts'][kind] for r in records)!=count
@@ -60,10 +91,12 @@ def validate_saved(saved,category,selected,urls,checksums,fingerprint,legacy=Fal
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--import-verified-v1',action='store_true',
-                        help='Read-only validate pinned v1 completed categories into a NEW v2 journal')
+                        help='Read-only validate pinned v1 completed categories into a NEW v3 journal')
+    parser.add_argument('--import-verified-v2',action='store_true',
+                        help='Prefer pinned v2 completed categories; all old journals stay unchanged')
     args=parser.parse_args()
     root=Path('data/co3d_test_metadata')
-    journal=Path('results/co3d_seen41_storage_v2_progress')
+    journal=Path('results/co3d_seen41_storage_v3_progress')
     journal.mkdir(parents=True,exist_ok=True)
     with (journal/'.lock').open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
@@ -77,29 +110,39 @@ def main():
             if sha(root/'references'/filename)!=parent[key]:raise ValueError('Archive reference changed')
         links=json.loads((root/'references/links.json').read_text())['full']
         checksums=json.loads((root/'references/co3d_sha256.json').read_text())['full']
+        footer_path=Path('results/co3d_zip_footer_preflight_20261002.json')
+        preflight=json.loads(footer_path.read_text())
+        urls=[u for c in protocol['seen_categories'] for u in links[c][1:]]
+        footers=validate_preflight(preflight,sha(protocol_path),parent['links_sha256'],urls)
         fingerprint={'candidate_manifest_sha256':sha(manifest),'protocol_sha256':sha(protocol_path),
                      'links_sha256':parent['links_sha256'],'checksums_sha256':parent['checksums_sha256'],
-                     'planner_sha256':sha(Path(__file__)),'range_reader_sha256':sha(Path('scripts/probe_co3d_zip_ranges.py'))}
+                     'planner_sha256':sha(Path(__file__)),'range_reader_sha256':sha(Path('scripts/probe_co3d_zip_ranges.py')),
+                     'footer_preflight_sha256':sha(footer_path)}
         summaries=[]
         for category in protocol['seen_categories']:
             path=journal/(category+'.json')
             if path.exists():
                 saved=json.loads(path.read_text())
-                validate_saved(saved,category,selected[category],links[category][1:],checksums,fingerprint)
+                validate_saved(saved,category,selected[category],links[category][1:],checksums,fingerprint,footers=footers)
                 summaries.append(saved)
                 print(f'REUSE INDEX {category}',flush=True)
                 continue
             if shutil.disk_usage(journal).free<RESERVE+1024**2:raise RuntimeError('Preserve 1GiB reserve')
             legacy_path=Path('results/co3d_seen41_storage_progress')/(category+'.json')
-            if args.import_verified_v1 and legacy_path.exists():
+            legacy_version='v1'
+            v2_path=Path('results/co3d_seen41_storage_v2_progress')/(category+'.json')
+            if args.import_verified_v2 and v2_path.exists():
+                legacy_path,legacy_version=v2_path,'v2'
+            if ((legacy_version=='v2' and args.import_verified_v2) or args.import_verified_v1) and legacy_path.exists():
                 saved=json.loads(legacy_path.read_text())
-                validate_saved(saved,category,selected[category],links[category][1:],checksums,fingerprint,legacy=True)
-                saved['imported_v1_journal_sha256']=sha(legacy_path)
-                saved['imported_v1_fingerprint']=saved['fingerprint']
+                validate_saved(saved,category,selected[category],links[category][1:],checksums,fingerprint,
+                               legacy=legacy_version,footers=footers)
+                saved['imported_prior_journal']={'version':legacy_version,'path':str(legacy_path),
+                                               'sha256':sha(legacy_path),'fingerprint':saved['fingerprint']}
                 saved['fingerprint']=fingerprint
                 save_identical(path,saved)
                 summaries.append(saved)
-                print(f'VALIDATED V1 IMPORT {category}; no network replay, original preserved',flush=True)
+                print(f'VALIDATED {legacy_version} IMPORT {category}; fresh footer matches, no directory replay, original preserved',flush=True)
                 continue
             matched=set()
             records=[]
@@ -107,8 +150,12 @@ def main():
                 with urllib.request.urlopen(urllib.request.Request(url,method='HEAD'),timeout=45) as response:
                     total=int(response.headers['Content-Length'])
                 if not 0<total<128*1024**3:raise ValueError('Unexpected archive size')
-                reader=HttpRangeFile(url,total)
+                footer=footers[url]
+                if total!=footer['archive_bytes']:raise ValueError('Archive size changed after footer preflight')
+                reader=HttpRangeFile(url,total,budget=footer['central_directory_bytes']+65557+128)
                 record=inventory(reader,category,{s:set(f) for s,f in selected[category].items()},matched)
+                if record['zip_member_count']!=footer['member_count'] or reader.etag!=footer['etag']:
+                    raise ValueError('Directory identity/count changed after footer preflight')
                 record.update(url=url,archive_bytes=total,expected_full_archive_sha256=checksums[Path(url).name],
                               index_transport_bytes=reader.bytes_read,etag=reader.etag,ranges=reader.ranges)
                 records.append(record)
@@ -144,7 +191,7 @@ def main():
                 'original_fast3r_split_equivalence_verified':False,
                 'note':'Complete candidate-name coverage only; no RGB extraction, sparse sampling change or benchmark promotion'}
         if any(v!=protocol['candidate_frame_count'] for v in count.values()):raise ValueError('Aggregate frame count mismatch')
-        save_identical('results/co3d_seen41_storage_budget_v2_20261002.json',result)
+        save_identical('results/co3d_seen41_storage_budget_v3_20261002.json',result)
         print('ALL 41 DIRECTORY BUDGETS COMPLETE',flush=True)
 
 

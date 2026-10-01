@@ -123,7 +123,37 @@ Notebook分析单元通过宿主Jupyter执行，再用apply_patch保存真实输
 
 ### 06:21续接归档：CO3D41类有来源候选与后台空间审计
 
-#### 06:51续接修复（当前恢复入口，旧阶段记录保留）
+#### 07:21续接：全ZIP尾部预检与v3恢复（当前恢复入口）
+
+`3d5dd0f`已推送，旧banana恢复分析不要重复归档。v2目录预算服务06:59:12退出1：
+bowl_001.zip中央目录37,498,281bytes超过32MiB字节预算。此次先只读预检全部41类、
+235个数据ZIP尾部，每包最多65557bytes，合计15,405,895bytes；实际最大目录37,498,281bytes，
+最大300491成员。`results/co3d_zip_footer_preflight_20261002.json`完整记录每包大小/计数/ETag。
+这是footer层面的全部来源预检，不是完整中央目录/成员路径/图像CRC准备完毕。
+
+v3仍保留400000成员上限；目录硬上限64MiB，每包实际读取预算更严格：
+footer中的目录大小+65557+128，身份/大小/计数变化拒绝继续；Range/ETag/路径检查不撤销。
+预检逐包与汇总、官方链接/协议SHA已核验，95项离线测试通过。
+07:29:59恢复同名`fast3r-co3d-seen41-storage.service`，MainPID29975，已确认running。
+apple/backpack/banana/baseballbat/baseballglove/bench/bicycle/bottle共8类的v2记录，
+通过固定已审计v2代码SHA、输入/路径SHA、逐包统计及新footer身份复核后导入v3，
+不重读其中央目录，v1/v2历史均保留。bowl已通过原失败点且完成10098组目录路径核验。
+
+当前queue仍是`scripts/queue_co3d_seen41_storage.sh`，显式开启v1/v2受控导入。
+当前断点`results/co3d_seen41_storage_v3_progress/`；当前最终
+`results/co3d_seen41_storage_budget_v3_20261002.json`，不要再等旧v1/v2最终文件。
+日志继续追加`results/co3d_seen41_storage.log`。同版本安全重试仍先确认服务已结束，
+使用`systemctl --user`检查；确认退出后`systemctl --user reset-failed`，再`systemd-run --user`
+运行同一个queue；已完成v3也必须输入/代码/路径/统计/新footer身份一致。
+小记录`results/co3d_storage_footer_recovery_20261002.json`和Notebook保存恢复时快照，
+尚未完成全41类成员预算、图片CRC/解码/相机转换或正式位姿评测。
+
+下一次先核实两个宿主服务及v3结果；健康未完成时安静。v3完整结束后核验41类集合、
+2011轨迹/399204组每种成员路径、逐类/全部大小汇总及fingerprint，执行新增分析并归档。
+再研究固定采样候选不变的稀疏存储和相机GT预处理，不将已有8类/bowl目录当图像就绪。
+RE10K完整来源扫描仍正常，未确认76补齐。恢复/读取不占GPU、不删除数据、留1GiB。
+
+#### 06:51续接修复（历史恢复入口，旧阶段记录保留）
 
 `ec3097a`已推送，41类候选及apple探测不要重复归档。目录预算服务06:40:13退出1：
 官方banana_001.zip实际229525成员，超过初版200000上限。只读核验中央目录

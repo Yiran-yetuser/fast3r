@@ -172,4 +172,9 @@ CO3D官方51类元数据ZIP/SHA/CRC及独立选择核验现已完成，但公开
 两个已完成类别经核验迁入新v2断点，不覆盖v1历史或重复网络读取。新恢复分析保存真实输出，
 88项离线测试通过；它不是新的正式测评结果。当前v2恢复入口见CONTINUATION。
 
+07:21续接完成全部41类/235个官方ZIP尾部大小预检（只传15.41MB），查明bowl目录超过32MiB。
+已改为按每包实测目录预算读取，并在64MiB硬上限内恢复v3；原成员/路径/Range保护保留。
+8类已完成目录检查点核验复用，bowl已通过原位置。95项测试通过，新的Notebook分析保存真实输出。
+当前请使用CONTINUATION的v3路径；尾部预检不等于图像/CRC/相机GT或正式Table1成绩就绪。
+
 Neural RGB-D官方9个序列已解压。`bash scripts/queue_nrgbd_reproduction.sh` 会先检查实际目录中的全部RGB/深度帧、非空文件与位姿数量；检查通过即跳过下载和解压，即使ZIP或manifest不存在。只有数据不完整时才恢复下载/解压；已有完整ZIP则复用，无需重下。可运行 `python scripts/check_nrgbd_data.py` 单独检查（这是文件布局/数量检查，不是重新解码PNG或CRC校验）。可选PID参数仅用于数据不完整时等待已有下载进程。后续评测入口支持 `python scripts/fast3r_hf_dtu_eval.py --dataset nrgbd --device cuda --output-json results/nrgbd_seed42_stride40.json`。默认stride40；Table 3比较时将native距离乘100。完整实验状态、限制与余下前提请查阅 [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md)。

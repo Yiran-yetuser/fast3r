@@ -222,3 +222,13 @@ apple官方6个图像ZIP真实HTTP Range目录探测完成：传输83,941,069byt
 新v2检查点显式核验固定v1代码SHA、输入SHA、路径SHA和逐包/逐类汇总后导入apple/backpack，
 不覆盖旧数据、不重读已完成两类网络。banana恢复后通过原位置；最终41类预算仍未生成。
 恢复证据`results/co3d_storage_recovery_20261002.json`与v2输出路径见CONTINUATION。
+
+07:21续接发现v2在bowl目录触发字节预算。全41类235个官方数据ZIP的EOCD/ZIP64尾部预检
+通过：每包<=65557bytes、合计15405895bytes，最大目录37498281bytes、最大300491成员。
+footer解析检查单磁盘、记录完整/范围、目录偏移；没有读取图像或声称大ZIP全SHA通过。
+固定候选和源URL顺序、所有逐包/全部sum/max均独立核验。结果见`results/co3d_zip_footer_preflight_20261002.json`。
+目录v3硬上限64MiB/400000成员，逐包预算仅实际目录大小+65685bytes；
+重读/复用均对照新footer的源大小/ETag/成员数。新v3指纹记录footer报告SHA。
+8类v2旧记录通过批准的固定代码SHA、输入/路径SHA及汇总校验迁入，不宽泛接受代码更改。
+v1/v2历史不覆盖，失败bowl重新读目录并完成。`results/co3d_storage_footer_recovery_20261002.json`
+仍是恢复快照，不是全41类中央目录预算或RGB/GT就绪证明，更不是正式测评结果。

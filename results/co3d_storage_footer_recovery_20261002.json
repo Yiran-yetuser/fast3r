@@ -1,0 +1,91 @@
+{
+  "status": "all_footer_preflight_complete_and_bounded_v3_resume_verified_not_full_budget",
+  "paper_mapping": "Fast3R section 4.2 / Table 1 CO3D data budget only",
+  "snapshot_time_utc": "2026-10-01T23:31:55.253367+00:00",
+  "failure_exit_time_local": "2026-10-02T06:59:12+08:00",
+  "failure": "ZIP directory read exceeds budget",
+  "failed_archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/bowl_001.zip",
+  "observed_bowl_directory_bytes": 37498281,
+  "old_index_byte_limit": 33554432,
+  "footer_preflight_report_sha256": "dcbf28d16d071ae60c0dffb470bfc0ce903321f0a0329369464c6e08338c5da2",
+  "footer_archive_count": 235,
+  "footer_category_count": 41,
+  "footer_transport_bytes": 15405895,
+  "maximum_member_count": 300491,
+  "maximum_central_directory_bytes": 37498281,
+  "new_hard_index_byte_limit": 67108864,
+  "unchanged_member_count_limit": 400000,
+  "actual_per_zip_budget_rule": "observed central_directory_bytes + 65557 + 128, below hard ceiling",
+  "resume_time_local": "2026-10-02T07:29:59+08:00",
+  "resumed_main_pid_snapshot": 29975,
+  "active_running_verified": true,
+  "reused_v2_completed_categories": {
+    "apple": {
+      "prior_journal_sha256": "8a46605f4a27447a4931d7ebed3a49fdf2edacda4f2909dc3ec7439639f1e2fb",
+      "v3_journal_sha256": "68e408d02de79a89a7f335f4baf1cf275e7b271f8c976d5bd1142b2aba3779bb",
+      "expected_frame_count": 9563,
+      "no_central_directory_replay": true
+    },
+    "backpack": {
+      "prior_journal_sha256": "ee27a412b0b859e777d6087262710b55b6bae6196a383d3f98e342181d6ad5cd",
+      "v3_journal_sha256": "a427f625a4a5b25d376b400ffe56cea1cb6a4b83812ac982ef7ad7fe4c4cd5d1",
+      "expected_frame_count": 10055,
+      "no_central_directory_replay": true
+    },
+    "banana": {
+      "prior_journal_sha256": "1e14c10178bde3af99ff18dd348de3dba46b23302849261dd2317f704a265e63",
+      "v3_journal_sha256": "31566a3e13d6bf933cf498c18afd99ef8d44a5a39f1d4ff45536c758be25d811",
+      "expected_frame_count": 10042,
+      "no_central_directory_replay": true
+    },
+    "baseballbat": {
+      "prior_journal_sha256": "98b3ef7a694c028f6d775376c6f71df0bc369c0f0131c05fe08bc37981a38128",
+      "v3_journal_sha256": "0eecc8c7d1d93bdbfbca12133b8266b36772b5c210b9e36809c1115bb92d27ed",
+      "expected_frame_count": 9991,
+      "no_central_directory_replay": true
+    },
+    "baseballglove": {
+      "prior_journal_sha256": "0214cd1ae066ec760a8b38d00f46fd3172cb8d7d5f892813aa5f962f9afd5464",
+      "v3_journal_sha256": "00a165e4e2ca5c96c11318b1b937a1cdf7075839bc34ecc56b7fb894726ec040",
+      "expected_frame_count": 10048,
+      "no_central_directory_replay": true
+    },
+    "bench": {
+      "prior_journal_sha256": "835ca7590c2aef686a0e967c6c84f2d2db8e8711ab98c18f085d25116f791b2e",
+      "v3_journal_sha256": "3a2dacc719c21956d9c826b8803d91ef6b787ce639cdcc0e38f62409eb822859",
+      "expected_frame_count": 9876,
+      "no_central_directory_replay": true
+    },
+    "bicycle": {
+      "prior_journal_sha256": "7712f27aaf9a3ac83378b6e86a6a845abfaff84d0f1e1dfa1a42e01565a9baf5",
+      "v3_journal_sha256": "504ad8be08fb8c812d9c9f75ee38bcac6ba517108e65afc81953b98e842aabed",
+      "expected_frame_count": 9976,
+      "no_central_directory_replay": true
+    },
+    "bottle": {
+      "prior_journal_sha256": "b291e61fdbe18007a8d4ab61d27fa9b3e3e1c88e426c89f2dc87510df7094bb5",
+      "v3_journal_sha256": "6a8efc18bf98f055444afdc449785fdc8a320beea88e20f3c0a2a6f14a23bcac",
+      "expected_frame_count": 9869,
+      "no_central_directory_replay": true
+    }
+  },
+  "prior_v1_v2_journals_preserved": true,
+  "bowl_now_complete_directory_only": true,
+  "bowl_journal_sha256": "29b0b6aa007f11c8f2847e70644fafb016d244164a8094e9954a98c103b13fcf",
+  "bowl_matched_member_counts": {
+    "images": 10098,
+    "depths": 10098,
+    "masks": 10098
+  },
+  "bowl_advertised_uncompressed_bytes": {
+    "images": 274072844,
+    "depths": 1794623077,
+    "masks": 85758028
+  },
+  "new_progress_directory": "results/co3d_seen41_storage_v3_progress",
+  "new_final_report": "results/co3d_seen41_storage_budget_v3_20261002.json",
+  "full_41_member_inventory_and_storage_budget_complete": false,
+  "member_crc_verified": false,
+  "full_archive_sha_verified": false,
+  "formal_pose_metrics_available": false
+}

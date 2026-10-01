@@ -15,9 +15,9 @@ from pathlib import Path, PurePosixPath
 
 from prepare_re10k_rgb_from_archive import save_identical, sha
 
-MAX_INDEX_BYTES=32*1024**2
-# Official banana_001 has 229525 records / 29035659 directory bytes.
-# Keep the 32MiB transport bound; this is NOT an unbounded safety bypass.
+# Hard ceilings; v3 planner additionally uses each audited footer's actual
+# directory size + <=65KiB ZIP tail overhead as its stricter per-request budget.
+MAX_INDEX_BYTES=64*1024**2
 MAX_MEMBERS=400000
 
 
