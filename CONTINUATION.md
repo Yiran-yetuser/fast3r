@@ -121,6 +121,38 @@ Notebook分析单元通过宿主Jupyter执行，再用apply_patch保存真实输
 
 ## 额度恢复机制与边界
 
+### 06:21续接归档：CO3D41类有来源候选与后台空间审计
+
+- `6d7bdf1`的51类元数据/独立核验及RE10K扫描启动已归档，不重复。
+- 06:35宿主约46GiB空闲；`fast3r-re10k-missing-candidates.service`仍active/running，
+  MainPID24596、日志压缩字节持续增长，尚无完整来源报告。健康时不重启、不宣称76补齐。
+- PoseDiffusion固定revision `b138198e2891a0f1a1c3435614b9490adb7fd4d6` 的seen名单为41类，
+  配置seen/10views。新`results/co3d_seen41_protocol_20261002.json`记录源SHA与类别映射的推断边界。
+  仅过滤原51类候选：2011轨迹/399204候选帧；原seed+51类别索引/帧順序保持。
+  完整manifest `data/co3d_test_metadata/selected_seqs_test_seen41_candidate.json` 已保存且哈希核验。
+  仍未证明Fast3R作者逐轨迹processed清单/100@采样范围等价，不能称正式benchmark准备完毕。
+- apple真实6个ZIP目录Range探测完成：83,941,069bytes网络目录，9563组RGB/depth/mask，
+  广告目录标示总量6,073,570,411bytes。小报告`results/co3d_apple_range_probe_20261002.json`，
+  不下载图像、不验证成员CRC/大包SHA；旧报告不覆盖。
+- 新后台`fast3r-co3d-seen41-storage.service` 于06:35:46启动，MainPID27694，已确认running。
+  queue：`scripts/queue_co3d_seen41_storage.sh`；日志`results/co3d_seen41_storage.log`。
+  逐类断点：`results/co3d_seen41_storage_progress/`（git忽略）；最终
+  `results/co3d_seen41_storage_budget_20261002.json`。只读41类大ZIP中央目录，精确校验完整候选
+  image/depth/mask路径集合及跨ZIP无重复；每ZIP最多32MiB目录、类别报告落盘前保留1GiB。
+  没有RGB下载、训练或GPU任务；不能把预算报告当正式成绩。
+  已结束且失败时先查日志。安全重试同一版本会复用完整类别JSON、失败类别重新读目录：
+  `systemctl --user reset-failed fast3r-co3d-seen41-storage.service`，然后
+  `systemd-run --user --unit=fast3r-co3d-seen41-storage --property=WorkingDirectory=/home/yyz/fast3r /bin/bash /home/yyz/fast3r/scripts/queue_co3d_seen41_storage.sh`。
+  数据/代码fingerprint改变时拒绝旧断点，不覆盖或删除，另起显式版本输出再验证。
+- 新Notebook `paper-co3d41`已真实执行并保存输出。新增类别AST/过滤及Range/路径/跨包重复
+  合成测试通过；全套84项，合成测试不是位姿成绩。
+
+下一次优先查两个服务；健康无变化安静。全41类预算完成后核对各类/399204×3成员与汇总，
+更新Notebook实际结果并提交推送。预算若超过磁盘空间，继续研究协议明确的固定抽帧稀疏存储，
+保留完整候选manifest和采样签名；不能自行缩减轨迹或换100@范围凑出full成绩。
+然后推进原frame_annotations相机转换/裁剪与HF CO3D入口。RE10K全源扫描完成后独立核验SHA、
+76集合/GT候选/图片几何，未通过不自动提升正式full-ready。不要重复元数据下载或旧NRGBD/7Scenes实验。
+
 ### 05:51公开来源续接检查点（2026-10-02）
 
 - `89b1974`已推送：1756场景265447帧准备/独立核验已完成，不重复。

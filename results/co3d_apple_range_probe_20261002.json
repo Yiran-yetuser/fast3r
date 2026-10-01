@@ -1,0 +1,310 @@
+{
+  "status": "one_category_central_directory_range_probe_not_rgb_ready",
+  "category": "apple",
+  "paper_mapping": "section 4.2 / Table 1 data budget feasibility only",
+  "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+  "selected_sequence_count": 50,
+  "expected_candidate_frame_count": 9563,
+  "matched_member_counts": {
+    "images": 9563,
+    "depths": 9563,
+    "masks": 9563
+  },
+  "counts_match_candidate_frames": true,
+  "advertised_selected_uncompressed_bytes": 6073570411,
+  "index_transport_bytes": 83941069,
+  "archives": [
+    {
+      "zip_member_count": 158062,
+      "matched_member_counts": {
+        "images": 2344,
+        "depths": 2344,
+        "masks": 2344
+      },
+      "matched_compressed_bytes": {
+        "images": 95785018,
+        "depths": 720727675,
+        "masks": 14083687
+      },
+      "matched_uncompressed_bytes": {
+        "images": 97991460,
+        "depths": 720749975,
+        "masks": 15805896
+      },
+      "matched_member_paths_sha256": "0b98f8909f2d767e02c4165149940fec3528616e67538366aee81661179e105c",
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_001.zip",
+      "archive_bytes": 20026860986,
+      "expected_full_archive_sha256": "c931669f652aecf3c458e135ef57976739728b26d9e251d256be8ea765a1b591",
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false,
+      "index_transport_bytes": 19795292,
+      "etag": "\"12da8b25cfed41505ff3d810da12ed18-2388\"",
+      "ranges": [
+        {
+          "start": 20026860964,
+          "end": 20026860985,
+          "sha256": "8f6b678f250c4374051de5de8f5a66226ede90ce81d18b800d06425bdb56bf9a"
+        },
+        {
+          "start": 20026860944,
+          "end": 20026860963,
+          "sha256": "cd8e225c1dc7dc41ea9f17b0a0927ad6c5fe7b023f3d303473a4ff6999bfa25d"
+        },
+        {
+          "start": 20026860888,
+          "end": 20026860943,
+          "sha256": "fe53b7f6343f6d7e6c637df3ca252b268ac449fc4a99b383c32a7b30b589ab48"
+        },
+        {
+          "start": 20007065694,
+          "end": 20026860887,
+          "sha256": "9a785df0420fb902b2ff0e4acb047055c3a25b057083a49aebe5d5ad31caf775"
+        }
+      ]
+    },
+    {
+      "zip_member_count": 90855,
+      "matched_member_counts": {
+        "images": 1604,
+        "depths": 1604,
+        "masks": 1604
+      },
+      "matched_compressed_bytes": {
+        "images": 145443555,
+        "depths": 1234625281,
+        "masks": 26518509
+      },
+      "matched_uncompressed_bytes": {
+        "images": 148668465,
+        "depths": 1234906686,
+        "masks": 29242239
+      },
+      "matched_member_paths_sha256": "9e8226a1978b4dc828773acfbd1ce694efdfa49bf69beaedd3bbe68d41b0f70b",
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_002.zip",
+      "archive_bytes": 19955188676,
+      "expected_full_archive_sha256": "20c18264d148c995abdbec9f937516ff284f8af400bccd7cf7c1a6efb6faa02e",
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false,
+      "index_transport_bytes": 11579576,
+      "etag": "\"05da474b1218f498adca152c46e6c29f-2379\"",
+      "ranges": [
+        {
+          "start": 19955188654,
+          "end": 19955188675,
+          "sha256": "319ce1e635ee219ddbac1e14eb0ab305353e6969b9bae9f5e77cbc51cd8f768d"
+        },
+        {
+          "start": 19955188634,
+          "end": 19955188653,
+          "sha256": "7f3db80463daeebb9aee6fafcebcaa305aa3d89c0a92a60c45227da6d09a1189"
+        },
+        {
+          "start": 19955188578,
+          "end": 19955188633,
+          "sha256": "9d9667215a5d7e213a5f0bb32c256f5a5b342a6c763d892a975669a236c1d6d2"
+        },
+        {
+          "start": 19943609100,
+          "end": 19955188577,
+          "sha256": "531143af0e7e459446254724069426b5e40f3b66b76f34ce3ddc7ac06a7e3c0e"
+        }
+      ]
+    },
+    {
+      "zip_member_count": 92565,
+      "matched_member_counts": {
+        "images": 1380,
+        "depths": 1380,
+        "masks": 1380
+      },
+      "matched_compressed_bytes": {
+        "images": 105119760,
+        "depths": 1069071124,
+        "masks": 24578704
+      },
+      "matched_uncompressed_bytes": {
+        "images": 108284814,
+        "depths": 1069443623,
+        "masks": 27037987
+      },
+      "matched_member_paths_sha256": "e2970bab371bc4bebf84a7569102b76bf83eeb41de56a007b1a26165bbe173b9",
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_003.zip",
+      "archive_bytes": 19878651566,
+      "expected_full_archive_sha256": "c143239a7ec67b5d7ca34d102e83de3496333689f20202a6d414406e3784afea",
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false,
+      "index_transport_bytes": 11790111,
+      "etag": "\"24f9b1beea70871e3eb6cd88af2bf8cd-2370\"",
+      "ranges": [
+        {
+          "start": 19878651544,
+          "end": 19878651565,
+          "sha256": "f17bda0c83062113bb68f4c772f6877e00fe38c16bcc679a962bf773ec035037"
+        },
+        {
+          "start": 19878651524,
+          "end": 19878651543,
+          "sha256": "e0e0762cb7d4f14a7b3a86b3e4fc43bf9b35c6002e6725336ca265515b0d2fc6"
+        },
+        {
+          "start": 19878651468,
+          "end": 19878651523,
+          "sha256": "d1a87e1c3dffd4895a37ed213b4e8203f27d783682c1154186c5408f40e71953"
+        },
+        {
+          "start": 19866861455,
+          "end": 19878651467,
+          "sha256": "253a9add5db2b791f8ffb774fec1def8b0643f020f21c7f6987ed796164c0dae"
+        }
+      ]
+    },
+    {
+      "zip_member_count": 89898,
+      "matched_member_counts": {
+        "images": 1501,
+        "depths": 1501,
+        "masks": 1501
+      },
+      "matched_compressed_bytes": {
+        "images": 128802718,
+        "depths": 855667544,
+        "masks": 19335132
+      },
+      "matched_uncompressed_bytes": {
+        "images": 131382943,
+        "depths": 856011803,
+        "masks": 21336877
+      },
+      "matched_member_paths_sha256": "81e2bd047a1ba657f99aefedf13df7d7fd481b8c4e60451cc321c61b8a42a486",
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_004.zip",
+      "archive_bytes": 19903301499,
+      "expected_full_archive_sha256": "661119fdf69e8e2c0fd8bf09f098c7665a90c213d30a1022fb28d6e72cebc3a8",
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false,
+      "index_transport_bytes": 11566881,
+      "etag": "\"9c300ca132642f0a49e96118199c70e9-2373\"",
+      "ranges": [
+        {
+          "start": 19903301477,
+          "end": 19903301498,
+          "sha256": "302ad3543896bbff857a684f077c6c3b936bae057306c71d4fefeb5b466e723d"
+        },
+        {
+          "start": 19903301457,
+          "end": 19903301476,
+          "sha256": "0367a96bb81f41844a88eccc3d187e2ab5ae9b4eb1970e2b326443f271a3f708"
+        },
+        {
+          "start": 19903301401,
+          "end": 19903301456,
+          "sha256": "e58fd5bbc0ef5d11b0ab61caf676b09026f9265d96f449a1c4fbb9e4e87afda6"
+        },
+        {
+          "start": 19891734618,
+          "end": 19903301400,
+          "sha256": "9a04efc41720a9dfd5ec728673f78882b82e48d12ff745261ac4bc031d81440e"
+        }
+      ]
+    },
+    {
+      "zip_member_count": 126890,
+      "matched_member_counts": {
+        "images": 1531,
+        "depths": 1531,
+        "masks": 1531
+      },
+      "matched_compressed_bytes": {
+        "images": 91818443,
+        "depths": 863754186,
+        "masks": 29754899
+      },
+      "matched_uncompressed_bytes": {
+        "images": 94887865,
+        "depths": 864106561,
+        "masks": 31659087
+      },
+      "matched_member_paths_sha256": "54b872653f25e511c94ed8bf532ac9d8dffb755b79c2fa7519305e70f50fa84f",
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_005.zip",
+      "archive_bytes": 20076168921,
+      "expected_full_archive_sha256": "56fbf730da2493f24a5c49c196b3623c1ad13a1deed7651938e411935ba066db",
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false,
+      "index_transport_bytes": 16284453,
+      "etag": "\"0628f5eca91ec77df4aa45dac379dc82-2394\"",
+      "ranges": [
+        {
+          "start": 20076168899,
+          "end": 20076168920,
+          "sha256": "3711c69427b496dc420f18c8489fccdb147ab58c7f150d5711118b77d7e83963"
+        },
+        {
+          "start": 20076168879,
+          "end": 20076168898,
+          "sha256": "c724bbcd7f352aaaefcc58385fe55279322aad049b0e66971d598dbad374128b"
+        },
+        {
+          "start": 20076168823,
+          "end": 20076168878,
+          "sha256": "f86a0c05cc49eab0a8828db6d104640600cb7a956a058abc8f56318a1cd55309"
+        },
+        {
+          "start": 20059884468,
+          "end": 20076168822,
+          "sha256": "f75eaa318feef7536f6e11aea85bd2e5a31ac289a0c704e6122d9fb513cfea76"
+        }
+      ]
+    },
+    {
+      "zip_member_count": 100235,
+      "matched_member_counts": {
+        "images": 1203,
+        "depths": 1203,
+        "masks": 1203
+      },
+      "matched_compressed_bytes": {
+        "images": 64125787,
+        "depths": 538439657,
+        "masks": 16341806
+      },
+      "matched_uncompressed_bytes": {
+        "images": 65814256,
+        "depths": 538727088,
+        "masks": 17512786
+      },
+      "matched_member_paths_sha256": "9948fd3bf92cf1cecb04c254bbd05eecdf4bda100342ee63ff74f69b839f5c08",
+      "url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+      "archive_bytes": 17002099010,
+      "expected_full_archive_sha256": "109a8c2e99984d98de1bbf38b87d4382d6d2b5003c1ae0ecf1285a1b20b26754",
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false,
+      "index_transport_bytes": 12924756,
+      "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+      "ranges": [
+        {
+          "start": 17002098988,
+          "end": 17002099009,
+          "sha256": "b30f1cb1beb474d62d8a8d855637d1dcd4eddf2bf96a3dbbec6aed53996b1699"
+        },
+        {
+          "start": 17002098968,
+          "end": 17002098987,
+          "sha256": "a989130b9ca3f65422656085aa9f385ee58d764fc19d66dca99d3eae5de8b777"
+        },
+        {
+          "start": 17002098912,
+          "end": 17002098967,
+          "sha256": "36b1b660c478fee40b2d194c126be8cf03ba0ce65914ca415f37502d86c25011"
+        },
+        {
+          "start": 16989174254,
+          "end": 17002098911,
+          "sha256": "08b1cb4d0fd182b2c2a562ef66865984aa361b967a58086aa202d36bf095c2c2"
+        }
+      ]
+    }
+  ],
+  "formal_pose_metrics_available": false,
+  "all_41_category_inventory_complete": false,
+  "member_crc_verified": false,
+  "note": "Names/sizes only; cross-archive duplicates, frame annotations, CRC, decoding and full scope remain unverified"
+}

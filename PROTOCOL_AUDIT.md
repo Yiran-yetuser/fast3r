@@ -188,3 +188,29 @@ fewview_train清单的test键、quality严格>0.5、每类最多50序列、seed4
 与论文41类不同，不能未经证据删除10类或把51类当论文全量。该差异是需要继续解决的协议前提，
 不是模型测评失败，也不是所有数据下载完成。小汇总与独立核验见
 `results/co3d_test_selection_summary_20261002.json`、`results/co3d_test_selection_verified_20261002.json`。
+
+### 06:21续接：41类来源与ZIP Range预算
+
+[PoseDiffusion官方数据类](https://github.com/facebookresearch/PoseDiffusion/blob/b138198e2891a0f1a1c3435614b9490adb7fd4d6/pose_diffusion/datasets/co3d_v2.py#L398)
+明确列出41个`TRAINING_CATEGORIES`与10个`TEST_CATEGORIES`；
+[固定评测配置](https://github.com/facebookresearch/PoseDiffusion/blob/b138198e2891a0f1a1c3435614b9490adb7fd4d6/cfgs/default_test.yaml)
+使用`category: seen`与`num_frames: 10`。这与Fast3R §4.2描述的“41类物体中的未见轨迹”相符，
+但把这份名单对应到Fast3R是基于所引评测协议的推断，并非作者processed清单确认。
+`audit_co3d_41_categories.py`固定源revision和源码/配置SHA，只AST解析字面量，不执行下载的代码。
+
+排除的10类是ball、book、couch、frisbee、hotdog、kite、remote、sandwich、skateboard、suitcase。
+在已独立验证的51类候选上仅过滤类别、不改变种子索引/序列/帧顺序，真实得到41类、2011条轨迹、
+399204候选帧。parkingmeter为41条、tv为20条，其余39类各50条，不凭41×50猜为2050。
+`results/co3d_seen41_protocol_20261002.json`记录证据、各类数量及manifest SHA；
+完整候选仍留`data/co3d_test_metadata/selected_seqs_test_seen41_candidate.json`，不冒充作者划分。
+
+apple官方6个图像ZIP真实HTTP Range目录探测完成：传输83,941,069bytes目录，
+目录标示9563组RGB/depth/mask、合计6,073,570,411bytes（不是已下载图像量）。
+固定精确206/Content-Range/ETag并限制每包目录读取32MiB；ZIP64由标准zipfile解析，
+禁止路径穿越、重复名称、链接和加密成员。这里只核实目录名称/标示长度，未读取成员或验证其CRC，
+也未完成大ZIP全SHA；探测的计数相同本身不证明跨ZIP无重复。
+
+因此另启动`fast3r-co3d-seen41-storage.service`，逐类精确核对所有候选成员路径、跨ZIP无重复，
+记录每类目录预算后再汇总全41类；`results/co3d_seen41_storage_progress/`保存断点。
+它不下载RGB，不运行GPU，不改变帧采样；未知的Fast3R原始清单、100@评测范围、相机裁剪转换、
+正式采样/指标口径仍须继续审计。全量预算未出前不外推apple结果成其他40类的真实预算。

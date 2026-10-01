@@ -22,6 +22,8 @@ Official implementation of **Fast3R: Towards 3D Reconstruction of 1000+ Images i
 
 本地复现进度（2026-10-02）：已完成DTU22场景、NRGBD9场景、7-Scenes全部18测试轨迹的公开权重评测，尚未匹配论文数值或完成整篇实验。RealEstate10K规定1832个相机记录已齐备、55.60GB候选RGB归档已下载；已核验1756场景/265447帧的RGB、官方GT与完整候选集合，仍缺76场景，继续研究补齐来源。新单卡HF位姿入口支持固定采样和断点恢复，正式Table1指标尚未运行。[逐项论文对应](PAPER_REPRODUCTION.md)、[Notebook](fast3r_reproduction.ipynb)、[下一步检查点](CONTINUATION.md)。
 
+CO3D §4.2/Table1类别审计：已找到固定PoseDiffusion协议的41类seen名单，生成2011轨迹/399204候选帧的有来源候选，尚未确认Fast3R作者逐轨迹清单等价。apple真实ZIP Range目录探测通过；41类目录空间预算正在后台计算，不下载整个大ZIP、不冒充图像或正式成绩就绪。Notebook保存真实分析输出。
+
 ```bash
 # clone project
 git clone https://github.com/facebookresearch/fast3r

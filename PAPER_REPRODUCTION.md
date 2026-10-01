@@ -163,6 +163,27 @@ Notebook新增数据准备与真实smoke分析，完整续接顺序见[`CONTINUA
 确定性后台下载与Codex额度独立，额度可用后的定时触发从检查点继续；不购买额度、不兑换重置权益。
 CO3D规定测试选择、RE10K正式指标与独立训练实验仍未完成。
 
+### 步骤8：CO3D41类协议来源与空间可行性（2026-10-02 06:21续接）
+
+对应§4.2/Table1的数据前提，不是新的位姿成绩。固定PoseDiffusion官方代码revision
+`b138198e2891a0f1a1c3435614b9490adb7fd4d6`的41类`TRAINING_CATEGORIES`与seen/10-view配置
+给出有来源的类别映射；它与论文“41类中的未见轨迹”相符，但仍是协议推断，未取得Fast3R作者processed清单确认。
+新`audit_co3d_41_categories.py`只AST读取源常量、固定源码/配置SHA，不执行远程代码。
+在上一已核验51类候选上过滤10个PoseDiffusion unseen类别，保留原seed+类别索引/帧顺序，
+实际得到41类、2011轨迹、399204候选帧；不是41×50猜出的2050，也不是全部RGB准备完成。
+
+apple官方6个图像ZIP完成真实有界Range目录探测：83,941,069bytes目录传输，
+9563组RGB/depth/mask，目录标示大小共6,073,570,411bytes。大ZIP不落盘、图像成员未下载，
+未验证成员CRC/图像解码/大ZIP SHA。它验证“可以只读中央目录”的可行性，不代表全41类预算。
+`fast3r-co3d-seen41-storage.service`06:35:46真实启动、确认running，
+逐类校验完整候选成员路径集合及跨ZIP无重复，保存小JSON断点，最终输出
+`results/co3d_seen41_storage_budget_20261002.json`。服务不使用GPU或修改采样划分。
+
+Notebook `paper-co3d41`已真实执行，保存来源、计数、apple探测及限制；84项离线测试通过。
+下一步先核验全41类预算，再设计候选清单不变的存储与相机预处理；
+Fast3R原始100@范围、逐轨迹/帧选择、权重和GT几何仍需审计，未产生正式Table1 RRA/RTA/mAA。
+RE10K76缺失候选的完整来源扫描仍健康运行，尚未完成全SHA和集合/几何核验，不重复启动。
+
 ### 后续推进顺序与真实边界
 
 2026-10-02继续§4.2/Table1数据可行性：新增精确HTTP Range/gzip流式镜像审计，
