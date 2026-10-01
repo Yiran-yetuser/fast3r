@@ -172,6 +172,14 @@ class RGBDownloadTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             rgb_download.check_source(response)
 
+    def test_truncated_resume_response_preserves_existing_bytes(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder)/'partial.zip'
+            path.write_bytes(b'original prefix')
+            with self.assertRaises(ValueError):
+                rgb_download.consume_prefix(io.BytesIO(b'original'), 15, path)
+            self.assertEqual(path.read_bytes(), b'original prefix')
+
 
 class RGBProbeTests(unittest.TestCase):
     def test_first_chunk_crc_checked(self):

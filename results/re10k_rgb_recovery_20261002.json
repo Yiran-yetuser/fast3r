@@ -1,0 +1,23 @@
+{
+  "status": "recovery_started_not_download_complete",
+  "paper_mapping": "section 4.2 / Table 1 data preparation only",
+  "failure_time": "2026-10-02T03:25:41+08:00",
+  "failure": "HTTP response ended before expected archive length",
+  "root_cause_limit": "Premature EOF observed; underlying server/network cause not established",
+  "preserved_bytes": 54818855664,
+  "expected_bytes": 55604889849,
+  "missing_bytes": 786034185,
+  "source_identity_rechecked": {
+    "content_length": 55604889849,
+    "last_modified": "Tue, 20 Feb 2024 23:31:38 GMT"
+  },
+  "restart_time": "2026-10-02T03:52:39+08:00",
+  "service": "fast3r-re10k-rgb-archive.service",
+  "restart_main_pid": 20847,
+  "recovery_method": "re-transfer and compare existing prefix before appending; no Range support",
+  "log": "results/re10k_rgb_archive.log",
+  "archive": "data/re10k_test_only.zip.part",
+  "offline_tests_passed": 48,
+  "full_scene_coverage_verified": false,
+  "formal_pose_metrics_available": false
+}

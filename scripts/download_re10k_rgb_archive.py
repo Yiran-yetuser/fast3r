@@ -35,12 +35,19 @@ def space(root, additional=0):
 
 def consume_prefix(response, count, local):
     """Verify skipped bytes against existing prefix (server cannot seek)."""
+    total = count
+    last_log = time.monotonic()
     with local.open('rb') as stream:
         while count:
             block = response.read(min(1024**2, count))
             if not block or block != stream.read(len(block)):
                 raise ValueError('Resume prefix differs/truncated; keep existing data')
             count -= len(block)
+            if time.monotonic()-last_log > 60:
+                print(f'Resume prefix verified {total-count}/{total} bytes; '
+                      'existing archive preserved', flush=True)
+                last_log = time.monotonic()
+    print(f'Resume prefix verification complete: {total} bytes', flush=True)
 
 
 def main():
