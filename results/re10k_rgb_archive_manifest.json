@@ -1,0 +1,17 @@
+{
+  "status": "archive_downloaded_not_data_prepared",
+  "source_url": "http://schadenfreude.csail.mit.edu:8000/re10k_test_only.zip",
+  "source_link": "https://github.com/dcharatan/pixelsplat#acquiring-datasets",
+  "archive_bytes": 55604889849,
+  "last_modified": "Tue, 20 Feb 2024 23:31:38 GMT",
+  "archive_sha256": "ce351771c966fb25ef41efc561a313ef40607c9aa8ea904ed8d582b361408097",
+  "zip_entry_count": 546,
+  "test_index_members": [
+    "re10k/test/index.json"
+  ],
+  "archive_path": "/home/yyz/fast3r/data/re10k_test_only.zip.part",
+  "rgb_gt_equivalence_verified": false,
+  "full_scene_coverage_verified": false,
+  "crc_verified": false,
+  "note": "ZIP directory read; individual CRC and camera audit still required"
+}

@@ -1,0 +1,46 @@
+{
+  "status": "alternative_source_feasibility_pending",
+  "missing_scene_count": 76,
+  "formal_pose_metrics_available": false,
+  "checked_sources": [
+    {
+      "repository": "Hualingchu/RealEstate10K_test",
+      "revision": "fc860a2364f266a72e8313c84c80da282c31fbfd",
+      "index_path": "test/index.json",
+      "index_scene_count": 7286,
+      "missing_ids_recovered": 0
+    },
+    {
+      "repository": "DavidYan2001/RealEstate10K",
+      "revision": "ea8d2427de59817b2f66f17b26276339841eb142",
+      "file": "dataset/test.tar.gz",
+      "bytes": 205763619478,
+      "lfs_sha256": "f6055cd8ea1ccce642482ca623f98c21af1c449210760d23d78a43b09e546523",
+      "prescribed_coverage_verified": false,
+      "next_check": "Read provenance/terms and test bounded sequential tar.gz selection; do not store the entire archive or assume GT equivalence"
+    },
+    {
+      "repository": "mutou0308/RE10K",
+      "revision": "85f1c43d30031e1cf9764eb30f40daa3ec72f6ae",
+      "observed_files": "train_*.zip and .gitattributes only",
+      "test_coverage_verified": false
+    },
+    {
+      "repository": "Kunho/RealEstate10K-videos",
+      "revision": "c91eca90533a1977dd5638661aadc4d55f318cd1",
+      "gated": true,
+      "observed_scope": "train source videos",
+      "note": "No login, contact sharing, terms acceptance or gated content download performed"
+    }
+  ],
+  "anonymous_youtube_metadata_probe": {
+    "tool_version": "yt-dlp 2026.8.19 isolated in /tmp, no project dependency change",
+    "downloaded_video_bytes": 0,
+    "used_cookies_or_account": false,
+    "observations": {
+      "4orPwfzuELY": "HTTP 429 warning and unavailable error",
+      "5uP-le4wTaM": "HTTP 429 warning and sign-in-required error"
+    },
+    "limit": "Only two source URLs checked; no JS runtime configured. These errors do not prove all 76 scenes are permanently unavailable. No restriction bypass attempted."
+  }
+}

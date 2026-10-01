@@ -20,7 +20,7 @@ Official implementation of **Fast3R: Towards 3D Reconstruction of 1000+ Images i
 
 ## Installation
 
-本地复现进度（2026-10-02）：已完成DTU22场景、NRGBD9场景、7-Scenes全部18测试轨迹的公开权重评测，尚未匹配论文数值或完成整篇实验。扩容后已准备RealEstate10K规定1832个相机记录，正在下载作者test-only RGB归档；新单卡HF位姿入口支持固定采样和断点恢复。正式Table1位姿指标尚未运行。[逐项论文对应](PAPER_REPRODUCTION.md)、[Notebook](fast3r_reproduction.ipynb)、[下一步检查点](CONTINUATION.md)。
+本地复现进度（2026-10-02）：已完成DTU22场景、NRGBD9场景、7-Scenes全部18测试轨迹的公开权重评测，尚未匹配论文数值或完成整篇实验。RealEstate10K规定1832个相机记录已齐备、55.60GB候选RGB归档已下载；已核验1756场景/265447帧的RGB、官方GT与完整候选集合，仍缺76场景，继续研究补齐来源。新单卡HF位姿入口支持固定采样和断点恢复，正式Table1指标尚未运行。[逐项论文对应](PAPER_REPRODUCTION.md)、[Notebook](fast3r_reproduction.ipynb)、[下一步检查点](CONTINUATION.md)。
 
 ```bash
 # clone project
@@ -115,7 +115,7 @@ For **Table 3 median distances x100**, local Accuracy/Completion are **3.3035 / 
 
 The next-stage [protocol audit](PROTOCOL_AUDIT.md) verifies that local weight/config hashes match current public HF revision `a2c770b768ceb3a53c36c4f7a3619db0413dc3a1`; the original download revision and mapping to individual paper experiments remain unknown. It records corresponding-pixel RoMa registration versus the paper's ICP wording and the confidence-loss sign discrepancy without claiming either causes the metric gap. The notebook saves this audit and live, read-only pose-data preflight output.
 
-[`scripts/check_pose_data.py`](scripts/check_pose_data.py) fails on missing prescribed scenes, malformed GT or corrupt images; ten synthetic offline tests passed. The RE10K split file contains **1,832 unique IDs**, not 1,800 inferred from its filename. No CO3D/RE10K pose benchmark has run: prescribed data are absent, the legacy pose entry still needs path/HF adaptation, and an approved larger writable data directory or existing dataset path is needed for preparation. Dataset storage sizing and original selection provenance remain to be verified; the CO3D challenge's small single-sequence subset is not a replacement for this benchmark.
+[`scripts/check_pose_data.py`](scripts/check_pose_data.py) fails on missing prescribed scenes, malformed GT or corrupt images. The RE10K split has **1,832 unique IDs**, not 1,800. A portable single-GPU HF pose entry with fixed draws/resume is implemented and one real smoke was verified; neither is a full Table1 benchmark. After storage expansion, official camera metadata and the test-only RGB archive are present. Safe chunk CRC/RGB/GT preparation and independent byte/inventory verification completed for 1,756 scenes / 265,447 frames, but 76 prescribed IDs remain missing and are never silently dropped. The CO3D prescribed split/provenance and full RE10K data still require verification. All 58 offline tests pass; these are not paper scores.
 
 Paired NRGBD local/global evaluation used `--head both` to share one forward pass. The 7-Scenes preparation pipeline reads official TestSplit archives via HTTP Range, checks sequence CRC/SHA256, registers depth using pinned SimpleRecon calibration, and stores only the original stride-20 selected frames. The loader preserves original frame numbering and refuses incompatible sparse-storage protocols. GPU evaluation queues behind NRGBD and free-memory checks; disk usage retains a 1GiB reserve. Eight offline preparation tests and a real 50-view heads-sequence dry-run passed. Full result JSONs must be validated before reporting scores; these pipelines do not constitute complete-paper reproduction. See [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md) and the notebook for status and remaining training/data requirements.
 

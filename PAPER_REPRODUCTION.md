@@ -11,7 +11,7 @@
 | §3.1；§3.3；Figure 2 | 多张图是否一次输出 global/local 点图与置信度？ | Notebook 的推理与模块 hook；`config.json` | 推理验证已执行 |
 | §3.2，Eq. (1)–(3) | 归一化点图回归、置信度加权损失 | `results/loss_checks.json` | 数值/梯度检查通过；尚未重新训练 |
 | §3.4；§4.1；Table 2 | 视角数增加时耗时与显存如何变化？ | `results/dtu_paper_experiments.json` 的 performance | 本机适配实验；单卡不覆盖论文 A100/多卡设置 |
-| §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | 单卡HF位姿入口；RE10K1832相机记录清单 | RE10K元数据齐备、RGB归档下载中；尚无正式位姿指标 |
+| §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | 单卡HF位姿入口；RE10K1832相机记录及265447帧核验 | RGB/GT已核验1756/1832场景，缺76，尚无正式位姿指标 |
 | §4.3；Table 3 | 7-Scenes / NRGBD 重建 | `results/nrgbd_seed42_stride40.json`；`results/7scenes_paired_seed42_stride20.json` | NRGBD完整9场景、7-Scenes全部18测试轨迹已运行核验；未对齐论文数值 |
 | §4.3；Table 4 | DTU 完整 22 场景重建 | `demo_outputs/paper_eval/dtu_all.json` | 已运行；论文数值尚未对齐 |
 | §5.1；Figure 5 | 测试视角数对重建质量的影响 | 新脚本 3/5/10/20 视角 | 本地均匀采样适配实验 |
@@ -164,6 +164,20 @@ Notebook新增数据准备与真实smoke分析，完整续接顺序见[`CONTINUA
 CO3D规定测试选择、RE10K正式指标与独立训练实验仍未完成。
 
 ### 后续推进顺序与真实边界
+
+2026-10-02 05:10:00，恢复下载正常结束0，55,604,889,849bytes完整归档及SHA已记录。
+进一步目录/index核验发现：7286个镜像ID只覆盖规定1832中的1756，缺76个，
+详见`results/re10k_rgb_index_audit.json`。缺失集合保留，不产生1756交集的“全量”成绩。
+58项离线测试通过，宿主`fast3r-re10k-rgb-prepare.service`已逐块验证CRC、安全tensor、
+官方全部timestamp/camera与RGB解码，并保存covered clip的全部候选帧，不改变采样范围。
+真实原图存在640×338，不一律640×360；保留实际尺寸和编码字节，按原入口实际宽高换算K，
+记录尺寸差异，不能根据首chunk固定尺寸推测全数据。05:36:54服务正常结束0，
+1756场景共265447帧完成准备；独立检查全部已保存RGB字节/SHA、原官方GT SHA与候选集合通过。
+1753场景360×640、2场景338×640、1场景272×640（H×W），最大camera绝对差9.51156e-7。
+见`results/re10k_rgb_prepared_manifest.json`与`results/re10k_rgb_verification_20261002.json`。
+这是已覆盖部分的数据就绪，不是完整1832数据或位姿成绩。
+另一个公开HF test索引同样缺76；两个原URL匿名探测遇429/登录错误，不作为永久缺失证明。
+其他公开归档的有界流式选择/完整GT可行性仍待核实；不盲目下载205GB归档，不静默换测试划分。
 
 2026-10-02 03:25:41，RE10K候选RGB归档HTTP响应在54,818,855,664bytes提前结束，
 服务退出1；预期55,604,889,849bytes，未生成完整归档清单，不能继续正式位姿评测。

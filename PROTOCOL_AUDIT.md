@@ -136,3 +136,23 @@ pixelSplat作者test-only镜像55,604,889,849bytes已启动预算约束的后台
 失败identity fallback保留但单独计数；不将默认identity伪装为成功PnP。
 恢复时校验协议/输入哈希，并从存储的pred/GT位姿重新计算指标。
 正式全量RGB预检查当前仍失败，没有新增Table1成绩。
+
+## 6. RGB归档完成与实际覆盖审计（2026-10-02 05:36）
+
+完整test-only ZIP长度55,604,889,849bytes、SHA256
+`ce351771c966fb25ef41efc561a313ef40607c9aa8ea904ed8d582b361408097`。
+CRC核验后的index含7286个ID，但规定1832仅覆盖1756，缺76；
+缺失ID及官方URL完整保留在`results/re10k_rgb_index_audit.json`，不改测试集合。
+逐块safe weights-only+CRC/SHA读取，1756场景265447帧的mirror camera与官方TXT匹配，
+全部官方时间戳/候选帧保存；原图尺寸不是一律360×640：1753场景360×640、
+2场景338×640、1场景272×640（H×W）。原位姿loader按实际图像宽高缩放normalized K，
+保留图像实际尺寸，不用拉伸/补边“修复”数据，也不将相机数字匹配当作裁剪协议等价证明。
+首次固定尺寸假设检查停下后，旧inventory与原图保留，v2记录实际尺寸；
+服务05:36:54正常退出0，独立核验所有已保存RGB长度/SHA、官方GT SHA和候选集合通过。
+见`results/re10k_rgb_prepared_manifest.json`及`results/re10k_rgb_verification_20261002.json`。
+58项离线测试通过，不是位姿成绩。当前有可用的covered数据，但全量仍不ready。
+
+其他来源证据见`results/re10k_missing_source_audit_20261002.json`。
+另一公开HF test index同样缺76；两个匿名YouTube探测遇429/登录错误，不能推导76全部永久缺失。
+未使用账号、cookies或绕过限制。公开205GB test.tar.gz候选需要先审计来源/条款与
+有界流式读取可行性，不落盘整包，也不假称缺失集合可覆盖。仍可研究公开来源，暂不要求用户动作。

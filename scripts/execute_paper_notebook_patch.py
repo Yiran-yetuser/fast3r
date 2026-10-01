@@ -5,6 +5,7 @@ The caller applies the patch; this script never rewrites the source notebook.
 Plots are exported by the notebook itself into results/figures.
 """
 import difflib
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -15,11 +16,17 @@ from nbclient import NotebookClient
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--cell-id', action='append', help='Execute selected report cell IDs only')
+    args = parser.parse_args()
     path = Path('fast3r_reproduction.ipynb')
     original = path.read_text(encoding='utf-8')
     notebook = nbformat.reads(original, as_version=4)
     indices = [i for i, cell in enumerate(notebook.cells)
-               if cell.cell_type == 'code' and cell.id.startswith('paper-')]
+               if cell.cell_type == 'code' and cell.id.startswith('paper-')
+               and (not args.cell_id or cell.id in args.cell_id)]
+    if not indices or (args.cell_id and set(args.cell_id) != {notebook.cells[i].id for i in indices}):
+        raise ValueError('Requested cell ID must identify an existing paper analysis code cell')
     report = nbformat.v4.new_notebook(cells=[notebook.cells[i] for i in indices])
     manager = KernelManager(kernel_name='python3')
     manager.kernel_spec.argv[0] = sys.executable

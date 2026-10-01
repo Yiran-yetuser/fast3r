@@ -52,6 +52,39 @@ Notebook分析单元通过宿主Jupyter执行，再用apply_patch保存真实输
 
 ## 下一次接续顺序
 
+### 05:21归档完成与覆盖核验检查点（2026-10-02）
+
+- 下载服务05:10:00正常结束0，归档55,604,889,849bytes、SHA256
+  `ce351771c966fb25ef41efc561a313ef40607c9aa8ea904ed8d582b361408097`。
+  下载及03:52前缀恢复阶段已完成，不再重启下载。
+- `results/re10k_rgb_index_audit.json`：镜像7286个ID中规定清单覆盖1756/1832、
+  缺76个，完整缺失ID和官方YouTube URL已记录。不能用1756交集冒充正式Table1。
+- `scripts/prepare_re10k_rgb_from_archive.py`逐块safe weights-only读取、CRC/SHA、
+  官方全部timestamp与camera核验、JPEG解码；保留每个covered clip全部官方候选帧。
+  原图存在640×338等尺寸，不能强制改成640×360。位姿入口按实际宽高换算归一化K。
+  尺寸差异记录在逐scene inventory，原图不拉伸/补边，裁剪协议等价性仍不声称成立。
+  首次固定尺寸检查安全停止；现恢复版本保留旧33份inventory及JPEG，另写v2清单。
+- 宿主服务`fast3r-re10k-rgb-prepare.service`已恢复，MainPID22629；
+  日志`results/re10k_rgb_prepare.log`，结果`results/re10k_rgb_prepared_manifest.json`。
+  05:36:54服务正常结束0，1756个covered场景共265447帧全部GT/CRC/解码通过。
+  独立`verify_re10k_rgb_prepared.py`又校验全部265447个已保存RGB长度/SHA、
+  原官方GT文件SHA、逐scene inventory与原候选集合，记录
+  `results/re10k_rgb_verification_20261002.json`，不能重复启动已结束的准备阶段。
+  1753场景为360×640、2场景338×640、1场景272×640（H×W）；
+  最大镜像/GT camera绝对差9.51156e-7。58项测试通过，Notebook真实输出已归档。
+  结果仍是covered_prepared_split_incomplete，76缺失未补齐，不允许启动正式全量评测。
+  若失败先诊断，恢复命令同下载方式，仅替换unit为fast3r-re10k-rgb-prepare、
+  shell为scripts/queue_re10k_rgb_prepare.sh；原RGB、旧inventory和历史报告不得删除。
+  当前无后台下载/准备/评测，下一步优先继续76缺失来源与CO3D可行性，而非重复报告。
+- 缺失来源初查见`results/re10k_missing_source_audit_20261002.json`：另一个HF test
+  chunk镜像同样缺76；两个匿名YouTube元数据探测均遇HTTP429，其中一个要求登录，
+  不据此认定全部76视频永久不可用，不读取cookies或绕过限制。
+  另发现公开`DavidYan2001/RealEstate10K`固定revision
+  `ea8d2427de59817b2f66f17b26276339841eb142`的`dataset/test.tar.gz`
+  为205,763,619,478bytes。下一步先读来源/使用条款、研究有界流式tar选择与coverage；
+  不盲目落盘整个205GB，不把尚未验证的文件当作能补齐76个ID。
+  这些可行性工作仍可推进，暂不因镜像缺76/准备排队而要求用户额外存储或删除监控。
+
 ### 03:52下载恢复检查点（2026-10-02）
 
 首次服务于03:25:41退出1：HTTP响应提前结束，保留54,818,855,664bytes，
