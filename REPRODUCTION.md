@@ -118,7 +118,7 @@ python scripts/fast3r_hf_dtu_eval.py \
 
 ## 逐项论文实验与新结果
 
-最新完成阶段：NRGBD9场景同次前向配对JSON核验通过，local指标与历史评测逐项完全相等。Table5的mean距离×100：aligned local为9.7108/3.1292、global为9.2594/3.1789；local改善Completion/normal consistency，但未改善Accuracy，不宣称全面复现论文结论。7-Scenes全部7类场景、18条TestSplit轨迹、850个stride20视角已准备，清单为 `results/7scenes_data_manifest.json`；GPU全量评测仍排队，不提前报告成绩。
+最新完成阶段：7-Scenes全部7类场景、18条TestSplit轨迹、850个stride20视角的同次前向local/global评测已正常结束（2026-10-01 12:44:47，Asia/Shanghai）。`python scripts/validate_7scenes_report.py`核验完整集合、视角/seed、全部有限aggregate与配对标记。Table3逐轨迹median平均×100为3.3035/3.1058，论文参考1.58/0.93，误差高109.08%/233.95%；Table5 mean×100为local6.3613/7.0516、global6.9567/6.3510。local降低Accuracy但未改善Completion，不能宣称达到论文成绩或全面local优势。NRGBD配对结果与历史JSON保留不变。
 
 后续执行入口（2026-10-01）：`--head both` 在同一次预测上报告local/global配对指标；NRGBD输出 `results/nrgbd_paired_seed42_stride40.json`。`bash scripts/queue_7scenes_reproduction.sh` 准备官方7-Scenes TestSplit的stride20采样帧、注册深度，等待NRGBD消融结束及GPU空闲后输出 `results/7scenes_paired_seed42_stride20.json`。只有完整结果产生并通过Notebook校验才报告成绩。空间节省仅改变存储方式，不改变该stride的实际输入/GT；不能用该稀疏目录训练或评测其他stride。
 
@@ -129,6 +129,7 @@ Notebook末尾已经添加独立可运行的“论文逐项核对”单元，包
 - [`results/loss_checks.json`](results/loss_checks.json)：合成点图归一化、扰动和有限梯度检查。
 - [`results/checkpoint_manifest.json`](results/checkpoint_manifest.json)：实际配置与权重的SHA256；原始下载revision未记录。
 - [`results/nrgbd_seed42_stride40.json`](results/nrgbd_seed42_stride40.json)：Neural RGB-D完整9场景、278视角，seed42/stride40/chunk2；Table 3口径（逐场景median平均×100）Accuracy/Completion为4.0165/1.2001，论文参考3.40/1.01，尚未匹配。Notebook已核验场景、aggregate并保存真实分析输出；公开权重与论文具体权重对应关系仍未验证。
+- [`results/7scenes_paired_seed42_stride20.json`](results/7scenes_paired_seed42_stride20.json)：官方全部18条测试轨迹、850视角，完整同次前向双分支结果；Table3 median与Table5 mean分开分析。数据深度由固定SimpleRecon depth-to-RGB投影注册，采样保留原始编号。Notebook保存真实结果表与逐轨迹科学图，不覆盖历史NRGBD/DTU报告。
 - 科学图：[`results/figures/`](results/figures/)。
 
 Neural RGB-D官方9个序列已解压。`bash scripts/queue_nrgbd_reproduction.sh` 会先检查实际目录中的全部RGB/深度帧、非空文件与位姿数量；检查通过即跳过下载和解压，即使ZIP或manifest不存在。只有数据不完整时才恢复下载/解压；已有完整ZIP则复用，无需重下。可运行 `python scripts/check_nrgbd_data.py` 单独检查（这是文件布局/数量检查，不是重新解码PNG或CRC校验）。可选PID参数仅用于数据不完整时等待已有下载进程。后续评测入口支持 `python scripts/fast3r_hf_dtu_eval.py --dataset nrgbd --device cuda --output-json results/nrgbd_seed42_stride40.json`。默认stride40；Table 3比较时将native距离乘100。完整实验状态、限制与余下前提请查阅 [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md)。

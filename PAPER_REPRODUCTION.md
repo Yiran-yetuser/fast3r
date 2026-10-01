@@ -4,7 +4,7 @@
 
 ## 完成标准
 
-当前完成了公开权重的推理链路、DTU 22 场景和 Neural RGB-D 9 场景指标运行；整篇论文复现尚未完成。运行结束只说明实验产生了结果，还需要核对指标、采样协议、模型版本与论文数值的差距。以下区分实测、代码核对、缺数据与缺训练算力。
+当前完成了公开权重的推理链路、DTU 22 场景、Neural RGB-D 9 场景和7-Scenes全部18条测试轨迹指标运行；整篇论文复现尚未完成。运行结束只说明实验产生了结果，还需要核对指标、采样协议、模型版本与论文数值的差距。以下区分实测、代码核对、缺数据与缺训练算力。
 
 | 论文位置 | 要验证的问题 | 本项目证据 | 状态 |
 | --- | --- | --- | --- |
@@ -12,13 +12,13 @@
 | §3.2，Eq. (1)–(3) | 归一化点图回归、置信度加权损失 | `results/loss_checks.json` | 数值/梯度检查通过；尚未重新训练 |
 | §3.4；§4.1；Table 2 | 视角数增加时耗时与显存如何变化？ | `results/dtu_paper_experiments.json` 的 performance | 本机适配实验；单卡不覆盖论文 A100/多卡设置 |
 | §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | 官方 pose 配置与脚本 | 缺对应测试集；PnP Demo 不能代替这些指标 |
-| §4.3；Table 3 | 7-Scenes / NRGBD 重建 | `results/nrgbd_seed42_stride40.json`；NRGBD完整9场景；7-Scenes完整18测试轨迹已准备 | NRGBD已运行，未对齐论文数值；7-Scenes全量评测等待显存 |
+| §4.3；Table 3 | 7-Scenes / NRGBD 重建 | `results/nrgbd_seed42_stride40.json`；`results/7scenes_paired_seed42_stride20.json` | NRGBD完整9场景、7-Scenes全部18测试轨迹已运行核验；未对齐论文数值 |
 | §4.3；Table 4 | DTU 完整 22 场景重建 | `demo_outputs/paper_eval/dtu_all.json` | 已运行；论文数值尚未对齐 |
 | §5.1；Figure 5 | 测试视角数对重建质量的影响 | 新脚本 3/5/10/20 视角 | 本地均匀采样适配实验 |
 | §5.1；Figures 6–7 | 不同训练视角数的模型比较 | 官方训练配置 | 缺各组训练权重；未执行 |
 | §5.2；附录 A/B | 模型规模和训练数据量的影响 | 官方 model/data scaling 配置 | 缺各组训练权重；未执行 |
 | §5.3；Figure 8 | 移除训练位置插值后的性能 | 代码中的 image-index embedding | 已核对机制；缺独立训练模型 |
-| §5.4；Table 5 | 使用 aligned local 或 global 点图的差别 | 10 视角同次预测、双分支指标；新增跨数据集 `--head both` | DTU与NRGBD配对已完成；7-Scenes排队 |
+| §5.4；Table 5 | 使用 aligned local 或 global 点图的差别 | DTU10视角；NRGBD/7-Scenes全量同次预测、双分支指标 | 三个数据集配对已完成；local优势并非所有距离指标均成立 |
 | 附录 C/D/E/F | Gaussian splatting、BA、深度 benchmark 与可视化 | 已有点云；官方 robustmvd 接口 | 点云可视化部分完成；其余未执行 |
 
 ## 步骤 1：纠正比较口径
@@ -79,10 +79,10 @@ Notebook 末尾的“论文逐项核对”单元独立读取结果，验证 22 �
 
 ## 剩余工作的确切前提
 
-### 步骤 5：NRGBD配对已完成，7-Scenes全量数据已准备
+### 步骤 5：NRGBD配对与7-Scenes全量配对评测已完成
 
 - §5.4/Table 5：`scripts/fast3r_hf_dtu_eval.py --head both` 保证两种metric使用同一次前向、同一输入与GT。NRGBD后台服务 `fast3r-nrgbd-paired.service` 已正常退出（退出码0），独立输出 `results/nrgbd_paired_seed42_stride40.json`，不覆盖Table 3历史报告。9场景唯一集合、有限逐场景指标及全部aggregate_by_head核验通过；所有local指标与历史seed42/stride40运行逐项完全相等。局部/全局选择不省略head计算，不作为加速证据。配对runner的CPU mock测试通过。
-- §4.3/Table 3、§5.4/Table 5：`scripts/queue_7scenes_reproduction.sh` 先准备官方7-Scenes全部TestSplit，再排队执行stride20的local/global评测；服务 `fast3r-7scenes-reproduction.service`，日志 `results/7scenes_pipeline.log`。全量JSON生成前不填写成绩。
+- §4.3/Table 3、§5.4/Table 5：`scripts/queue_7scenes_reproduction.sh` 准备官方7-Scenes全部TestSplit后执行stride20的local/global评测；2026-10-01 12:44:47（Asia/Shanghai）日志记录 `PIPELINE COMPLETE`，宿主服务正常退出（退出码0），无残留评测进程。完整结果为 `results/7scenes_paired_seed42_stride20.json`。
 - 7-Scenes磁盘适配：通过官方HTTP Range只获取测试序列ZIP，逐序列CRC/SHA256核验。仅保存原始stride20选中帧，不改变对应输入/GT点集；原始帧总数、实际帧编号写入逐序列inventory。加载器拒绝其他stride和训练随机采样，避免把稀疏目录误认为连续完整视频。重跑复用已完整准备的序列，不覆盖其他数据；删除的只是脚本自身创建的临时ZIP。
 - 深度遵循[固定版本SimpleRecon预处理](https://github.com/nianticlabs/simplerecon/blob/477aa5b32aa1b93f53abc72828f86023b6e46ce7/data_scripts/7scenes_preprocessing.py)，执行depth-to-RGB投影和z-buffer，输出`.depth.proj.png`；该参考不是TSDF raycasting，不以原始depth直接代替。向量化版本与标量逐点实现在离线测试上逐像素一致，8项测试通过。参考SHA256为`ac8dee029c28f600fc0e72ac79f8be19b83b7edfe9a2cdc88381abe5afe4e808`。数据遵循[Microsoft官方许可](https://www.microsoft.com/en-us/research/project/rgb-d-dataset-7-scenes/)，不提交数据集到GitHub。
 - 本机空间由约8GiB降至2.4GiB，第一次准备在下载前因预算检查停止。后改成实际测试序列ZIP+1GiB预留，并在下载和预处理期间持续检查；若外部写入消耗空间则安全报错，不清理其他项目。Notebook新增完整结果的验证/分析单元；运行中仅显示pending。
@@ -96,11 +96,27 @@ NRGBD Table 5口径（9场景mean距离平均×100，越低越好）：
 
 当前公开权重/本地协议下，aligned local降低Completion且提高normal consistency，但Accuracy更高，未完整复现论文local两项距离都更好的结论。Table 5与Table 3使用不同统计口径，不能混比mean和median；checkpoint对应关系及协议差异未核实，不据此断言论文结论错误。[逐场景差值图](results/figures/nrgbd_paired_heads.png)来自实际配对结果。
 
-7-Scenes清单 [`results/7scenes_data_manifest.json`](results/7scenes_data_manifest.json) 为`prepared`：覆盖7类场景、官方18条TestSplit轨迹、850个stride20视角。每条轨迹帧编号与原始帧总数匹配，测试序列CRC/SHA256记录齐全，全量集合与保存的官方TestSplit一致。850组文件全部解码检查通过：RGB为480×640×3，注册深度为480×640 uint16，位姿为有限4×4矩阵。首条chess测试轨迹dry-run为50视角，有效深度比例约0.799。数据已准备不等于评测已完成；GPU全量评测仍排队。
+7-Scenes清单 [`results/7scenes_data_manifest.json`](results/7scenes_data_manifest.json) 为`prepared`：覆盖7类场景、官方18条TestSplit轨迹、原始17,000帧与850个stride20视角。每条轨迹帧编号与原始帧总数匹配，测试序列CRC/SHA256记录齐全，全量集合与保存的官方TestSplit一致。准备阶段850组文件全部解码检查通过：RGB为480×640×3，注册深度为480×640 uint16，位姿为有限4×4矩阵。首条chess测试轨迹dry-run为50视角，有效深度比例约0.799。
+
+新增只读校验入口 `python scripts/validate_7scenes_report.py`：完整报告的唯一轨迹集合与prepared清单及保存的TestSplit严格一致，每条轨迹视角数/稳定seed匹配；每个head的8项aggregate均等于18条轨迹有限指标的算术平均，所有`paired_same_forward`为真，兼容的`aggregate_mean`明确属于local。同时复核NRGBD local与历史报告逐项相等，不覆盖历史JSON。
+
+| 7-Scenes Table 3（逐轨迹median平均×100） | 本地公开权重 | 论文参考 | 相对误差增加 |
+| --- | ---: | ---: | ---: |
+| Accuracy median | 3.3035 | 1.58 | 109.08% |
+| Completion median | 3.1058 | 0.93 | 233.95% |
+
+| 7-Scenes Table 5（逐轨迹mean平均×100） | 本地Accuracy mean | 本地Completion mean | 论文Accuracy参考 | 论文Completion参考 |
+| --- | ---: | ---: | ---: | ---: |
+| aligned local | 6.3613 | 7.0516 | 2.84 | 1.37 |
+| global | 6.9567 | 6.3510 | 4.81 | 1.64 |
+
+当前7-Scenes配对设置下local降低Accuracy且改善汇总normal consistency，但Completion更高，不能宣称local全面优于global。Table 3数值与论文差距明显；完成完整测试划分不等于匹配论文结果。协议为公开HF权重、512×512加载器输出、seed42、stride20、16-mixed、DPT chunk2、alignment percentile85、metric percentile0。公开权重对应关系、原始revision、深度/裁剪/对齐协议差异仍需审计；未通过单变量实验定位差距原因，也未通过调参选择最好结果。[逐轨迹双分支差值图](results/figures/7scenes_paired_heads.png)来自真实结果。
+
+逐轨迹检查发现：local的Accuracy在12/18条轨迹更低，Completion在14/18条更低，但`office/seq-06`的Completion mean×100为local56.1612、global29.5266，较大的反向差值影响了完整18轨迹平均。这只是定位值得核查的轨迹，不是证明根因；保留该轨迹参与全部汇总，不剔除难例或改用有利的子集成绩。
 
 ### 后续推进顺序与真实边界
 
-1. 完成以上数据准备/评测，核验全部轨迹集合与每项aggregate，执行Notebook分析并逐步提交GitHub。
+1. 已完成三个重建数据集的公开权重运行、NRGBD/7-Scenes完整配对集合与aggregate核验；保存Notebook真实分析并逐步提交GitHub，不视为整篇论文完成。
 2. 对已有DTU与NRGBD结果做协议审计，区分权重来源、随机seed、DPT chunk和数据掩码；不能调参至偶然接近参考值便宣称原协议复现。
 3. §4.2/Table 1与Figure 4：准备CO3Dv2/RealEstate10K规定测试划分，修复官方脚本的作者绝对路径与checkpoint加载适配，报告真实RRA/RTA/mAA。缺GT或子集实验不会冒充全量benchmark。
 4. §4.1/Table 2及附录C/D/E：需要合适的DUSt3R基线、Gaussian splatting/BA代码和规定测试数据，再执行本机可支持实验。不能用低分辨率/少视角结果冒充原A100多卡实验。
@@ -112,4 +128,4 @@ NRGBD Table 5口径（9场景mean距离平均×100，越低越好）：
 
 论文 §4 的完整训练使用 128 张 A100-80GB、174K steps；当前单张约 12 GiB 显卡不能完成同规格训练。训练视角、模型规模、数据规模和无位置插值消融需要对应独立模型。Table 2 的 1000–1500 视角实验也超出当前硬件的原始设置。需要这些数据与权重/算力后，才能逐项将未完成状态改成真实实验完成。
 
-简历可以表述为“基于官方公开权重复现多视图重建流程，完成 DTU 22 场景与 Neural RGB-D 9 场景评测，开展视角数与点图头消融并分析论文指标差距”；目前不能写“完整复现所有论文实验并达到论文指标”。
+简历可以表述为“基于官方公开权重复现多视图重建流程，完成DTU 22场景、Neural RGB-D 9场景与7-Scenes全部18测试轨迹评测，开展视角数与点图头消融并分析论文指标差距”；目前不能写“完整复现所有论文实验并达到论文指标”。
