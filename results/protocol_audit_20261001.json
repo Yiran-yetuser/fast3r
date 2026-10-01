@@ -1,0 +1,69 @@
+{
+  "checked_at_utc": "2026-10-01T05:07:25Z",
+  "paper": "https://arxiv.org/html/2501.13928v2",
+  "source_commit_before_audit": "1e3b59f",
+  "checkpoint": {
+    "repository": "jedyang97/Fast3R_ViT_Large_512",
+    "current_remote_revision": "a2c770b768ceb3a53c36c4f7a3619db0413dc3a1",
+    "metadata_url": "https://huggingface.co/api/models/jedyang97/Fast3R_ViT_Large_512?blobs=true",
+    "local_weight_sha256": "1357d42e74539ba03510ea1986c7464a7facf17157779e2b7ebd6284e79e0427",
+    "remote_lfs_weight_sha256": "1357d42e74539ba03510ea1986c7464a7facf17157779e2b7ebd6284e79e0427",
+    "weight_size_bytes": 2590286416,
+    "local_config_sha256": "88edc53ba652ad835b86af27d980a46808d722b4d8f9d0d4360d05c789ada92b",
+    "remote_config_sha256": "88edc53ba652ad835b86af27d980a46808d722b4d8f9d0d4360d05c789ada92b",
+    "config_size_bytes": 941,
+    "original_download_revision": null,
+    "paper_experiment_checkpoint_mapping": "unverified"
+  },
+  "released_code_observations": {
+    "local_to_global_alignment": "Same-pixel correspondence registration with scaling via roma.rigid_points_registration; not iterative nearest-neighbor ICP",
+    "prediction_to_gt_alignment": "Weighted same-pixel correspondence registration with scaling via roma.rigid_points_registration",
+    "local_alignment_mask": "GT valid_mask intersected with global-head confidence percentile (fallback to valid_mask if fewer than three points)",
+    "loss_confidence_term": "regression * confidence - alpha * log(confidence)",
+    "paper_eq3_confidence_term_printed": "regression * confidence + alpha * log(confidence)",
+    "integer_resolution_512": [512, 512],
+    "co3d_sampling": "Loader constructs combinations but _fetch_views_for_pool always selects self.combinations[0] then adds jitter; do not silently change the benchmark protocol"
+  },
+  "pose_data_preflight": {
+    "co3d_processed_root": "data/co3d_50_seqs_per_category_subset_processed",
+    "co3d_status": "incomplete",
+    "co3d_missing": "selected_seqs_test.json and processed data",
+    "co3d_prescribed_test_storage_bytes": null,
+    "re10k_video_root": "data/RealEstate10K/videos/test",
+    "re10k_metadata_root": "data/RealEstate10K/test",
+    "re10k_split_file": "scripts/re10k_test_1800.txt",
+    "re10k_split_sha256": "6d55e2006523c2388f40f3d6a2a6bb2ef062790edb5dde9a10c1bf90f18c4796",
+    "re10k_expected_unique_scenes": 1832,
+    "re10k_ready_scenes": 0,
+    "re10k_status": "incomplete",
+    "original_pose_script": "Author-specific absolute data/checkpoint/root paths, default two GPU workers, silently skips missing scenes/frames; no full benchmark launched",
+    "official_re10k_metadata_archive_size_mb": 720,
+    "official_re10k_metadata_includes_rgb": false,
+    "official_co3d_full_archives_tb": 5.5,
+    "official_co3d_single_sequence_subset_gb": 8.9,
+    "co3d_single_sequence_subset_is_prescribed_fast3r_benchmark": false
+  },
+  "resource_snapshot": {
+    "project_filesystem_free_bytes": 2550480896,
+    "required_download_reserve_bytes": 1073741824,
+    "mounted_external_dataset_storage_found": false,
+    "unmounted_ntfs_partitions_are_not_authorized_targets": true,
+    "prescribed_pose_dataset_minimum_storage_bytes": null,
+    "large_download_started": false
+  },
+  "unknowns": [
+    "Exact paper checkpoint per experiment and independent training-ablation checkpoints",
+    "Exact selected CO3D sequences/categories and original sampled frame identities",
+    "RealEstate10K prescribed RGB frame inventory and current video availability",
+    "Full prescribed pose-data and temporary preprocessing storage budget",
+    "Causal explanation of observed reconstruction metric gaps"
+  ],
+  "sources": [
+    "https://huggingface.co/jedyang97/Fast3R_ViT_Large_512",
+    "https://github.com/facebookresearch/fast3r#datasets",
+    "https://github.com/facebookresearch/co3d#download-the-dataset",
+    "https://raw.githubusercontent.com/naver/dust3r/main/datasets_preprocess/preprocess_co3d.py",
+    "https://google.github.io/realestate10k/download.html"
+  ],
+  "status": "audit_completed_not_complete_paper_reproduction"
+}

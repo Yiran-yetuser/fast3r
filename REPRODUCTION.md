@@ -114,9 +114,13 @@ python scripts/fast3r_hf_dtu_eval.py \
 
 > **Fast3R 多视图 3D 重建复现（PyTorch / CUDA）**：基于官方 ViT-L/512 checkpoint，搭建从视频抽帧、图像归一化、多视图一次前向到 fast-PnP 相机估计的端到端推理流程；实现置信度热力图、相机轨迹和 RGB 点云可视化，并导出 `.ply` / `.npz` 复现产物。通过 forward hook 检查 patch embedding、encoder、decoder、global/local head 的输出形状与数值有效性，记录不同视角规模下的耗时和显存。
 
-面试时可以说“完成公开权重推理、DTU 全量评测及推理消融”。应同时说明：Table 4 的 median 数值尚未对齐，其他数据集与重新训练实验未完成。见 Notebook 末尾与论文逐项对应表。
+面试时可以说“完成公开权重推理、DTU 22场景、Neural RGB-D 9场景和7-Scenes全部18测试轨迹评测及推理消融”。应同时说明：论文指标尚未匹配，CO3D/RE10K位姿评测与重新训练实验未完成。见 Notebook 末尾与论文逐项对应表。
 
 ## 逐项论文实验与新结果
+
+最新新增步骤6（§3.2、§4.2–4.3、§5.4）：[`PROTOCOL_AUDIT.md`](PROTOCOL_AUDIT.md)与[`results/protocol_audit_20261001.json`](results/protocol_audit_20261001.json)核实本地权重/配置匹配当前HF公开revision，但未证明各论文实验的checkpoint映射。记录RoMa对应点注册/ICP文字与置信度项符号差异，不武断归因。Notebook新增独立审计分析单元并保存真实输出。
+
+`python scripts/check_pose_data.py`只读检查规定测试清单及RGB/相机GT，10项合成测试通过；缺失或损坏返回incomplete，CLI退出码2。当前CO3D清单缺失，RealEstate10K规定1,832个唯一视频ID的目标目录均未准备。数据完整性不等于论文协议一致，预检查不计作Table 1指标。项目盘约2.38GiB空闲且须预留1GiB；后续数据阶段需要更大可写目录或已有规定数据路径。未下载不匹配的替代子集，未改动未挂载分区。
 
 最新完成阶段：7-Scenes全部7类场景、18条TestSplit轨迹、850个stride20视角的同次前向local/global评测已正常结束（2026-10-01 12:44:47，Asia/Shanghai）。`python scripts/validate_7scenes_report.py`核验完整集合、视角/seed、全部有限aggregate与配对标记。Table3逐轨迹median平均×100为3.3035/3.1058，论文参考1.58/0.93，误差高109.08%/233.95%；Table5 mean×100为local6.3613/7.0516、global6.9567/6.3510。local降低Accuracy但未改善Completion，不能宣称达到论文成绩或全面local优势。NRGBD配对结果与历史JSON保留不变。
 

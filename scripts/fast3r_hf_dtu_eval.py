@@ -94,7 +94,7 @@ def parse_args() -> argparse.Namespace:
         "--resolution",
         type=int,
         default=512,
-        help="Long-side image resolution used by the official DTU configuration.",
+        help="Integer loader resolution (512 selects 512x512, not a long-side-only resize).",
     )
     parser.add_argument(
         "--alignment-confidence-percentile",
