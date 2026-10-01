@@ -24,6 +24,8 @@ Official implementation of **Fast3R: Towards 3D Reconstruction of 1000+ Images i
 
 CO3D §4.2/Table1类别审计：已找到固定PoseDiffusion协议的41类seen名单，生成2011轨迹/399204候选帧的有来源候选，尚未确认Fast3R作者逐轨迹清单等价。apple真实ZIP Range目录探测通过；41类目录空间预算正在后台计算，不下载整个大ZIP、不冒充图像或正式成绩就绪。Notebook保存真实分析输出。
 
+目录审计的banana成员数量阈值错误已诊断并安全恢复：保留旧检查点，核验复用apple/backpack，使用新v2结果路径。88项离线测试通过；[恢复证据](results/co3d_storage_recovery_20261002.json)不是正式位姿成绩。
+
 ```bash
 # clone project
 git clone https://github.com/facebookresearch/fast3r

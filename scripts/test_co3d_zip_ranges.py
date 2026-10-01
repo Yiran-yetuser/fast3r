@@ -3,6 +3,7 @@ import io
 import re
 import unittest
 import zipfile
+from unittest.mock import patch
 
 from probe_co3d_zip_ranges import HttpRangeFile, inventory
 from plan_co3d_seen41_storage import expected_paths
@@ -69,6 +70,11 @@ class ZipRangesTests(unittest.TestCase):
         inventory(self.reader(raw),'apple',{'s':{1}},matched)
         self.assertEqual(matched,paths)
         with self.assertRaises(ValueError):inventory(self.reader(raw),'apple',{'s':{1}},matched)
+
+    def test_member_limit_is_still_enforced(self):
+        raw=self.archive(sorted(expected_paths('apple',{'s':[1]})))
+        with patch('probe_co3d_zip_ranges.MAX_MEMBERS',2):
+            with self.assertRaises(ValueError):inventory(self.reader(raw),'apple',{'s':{1}})
 
 
 if __name__=='__main__':unittest.main()

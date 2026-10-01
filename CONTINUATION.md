@@ -123,6 +123,28 @@ Notebook分析单元通过宿主Jupyter执行，再用apply_patch保存真实输
 
 ### 06:21续接归档：CO3D41类有来源候选与后台空间审计
 
+#### 06:51续接修复（当前恢复入口，旧阶段记录保留）
+
+`ec3097a`已推送，41类候选及apple探测不要重复归档。目录预算服务06:40:13退出1：
+官方banana_001.zip实际229525成员，超过初版200000上限。只读核验中央目录
+29,035,659bytes < 32MiB，进程峰值RSS683928KiB，宿主约24GiB可用内存；
+这是目录成员保护阈值偏小，不是已证实的数据损坏、GPU故障或正式测评失败。
+成员上限有界提高至400000，32MiB目录字节上限及206/ETag/路径/重复/链接检查不变。
+
+06:54:25安全恢复同名`fast3r-co3d-seen41-storage.service`，MainPID28538，确认active/running，
+banana已越过原失败位置。新的断点目录是`results/co3d_seen41_storage_v2_progress/`，
+最终报告改为`results/co3d_seen41_storage_budget_v2_20261002.json`，不要等待旧文件名。
+通过`--import-verified-v1`只导入已核验apple/backpack：固定v1代码SHA、输入fingerprint、
+完整期望路径SHA、各ZIP URL/官方checksum、Range字节和所有逐类汇总，禁止宽泛忽略代码变化。
+v1目录/报告保持原样，v2记录v1文件SHA与旧fingerprint；未重放两类网络索引。
+失败类别重新读取目录，绝不静默跳过。日志仍追加`results/co3d_seen41_storage.log`。
+同版本重试命令仍用下面的queue脚本；它已显式带v1导入选项，后续直接核验复用v2。
+
+小记录`results/co3d_storage_recovery_20261002.json`是恢复时快照，不是最终41类完成。
+88项离线测试通过；Notebook新的恢复分析单元保存真实输出、旧单元不覆盖。
+RE10K完整来源扫描仍健康，缺失76/全SHA/图像几何尚待检查。磁盘约46GiB空闲仅为快照。
+下一次先查服务和v2最终报告；没有新完成/失败时安静，不重启健康服务。
+
 - `6d7bdf1`的51类元数据/独立核验及RE10K扫描启动已归档，不重复。
 - 06:35宿主约46GiB空闲；`fast3r-re10k-missing-candidates.service`仍active/running，
   MainPID24596、日志压缩字节持续增长，尚无完整来源报告。健康时不重启、不宣称76补齐。

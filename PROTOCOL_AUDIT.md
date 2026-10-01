@@ -214,3 +214,11 @@ apple官方6个图像ZIP真实HTTP Range目录探测完成：传输83,941,069byt
 记录每类目录预算后再汇总全41类；`results/co3d_seen41_storage_progress/`保存断点。
 它不下载RGB，不运行GPU，不改变帧采样；未知的Fast3R原始清单、100@评测范围、相机裁剪转换、
 正式采样/指标口径仍须继续审计。全量预算未出前不外推apple结果成其他40类的真实预算。
+
+06:51续接诊断了目录预算服务的实际停止：banana_001.zip有229525个成员，超过初版200000。
+独立只读Range解析得到29,035,659bytes目录、峰值RSS683928KiB；宿主约24GiB可用内存。
+成员上限调整至400000，仍保持32MiB字节/精确Range/ETag及路径等安全上限。
+不从这个错误断言ZIP数据损坏；不改模型、样本、类别或GPU流程。
+新v2检查点显式核验固定v1代码SHA、输入SHA、路径SHA和逐包/逐类汇总后导入apple/backpack，
+不覆盖旧数据、不重读已完成两类网络。banana恢复后通过原位置；最终41类预算仍未生成。
+恢复证据`results/co3d_storage_recovery_20261002.json`与v2输出路径见CONTINUATION。

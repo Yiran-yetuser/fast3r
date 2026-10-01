@@ -1,0 +1,52 @@
+{
+  "status": "bounded_directory_limit_failure_diagnosed_and_service_resumed_not_complete",
+  "paper_mapping": "Fast3R section 4.2 / Table 1 CO3D data budget only",
+  "failed_service": "fast3r-co3d-seen41-storage.service",
+  "exit_time_local": "2026-10-02T06:40:13+08:00",
+  "exit_status": 1,
+  "failure": "ZIP member count exceeds budget",
+  "diagnostic_zip_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/banana_001.zip",
+  "observed_zip_bytes": 20087954472,
+  "observed_zip_member_count": 229525,
+  "diagnostic_index_transport_bytes": 29035659,
+  "diagnostic_peak_rss_kib": 683928,
+  "host_available_memory_gib_snapshot": 24,
+  "old_member_limit": 200000,
+  "new_member_limit": 400000,
+  "index_read_byte_limit_unchanged": 33554432,
+  "resume_time_local": "2026-10-02T06:54:25+08:00",
+  "resumed_main_pid_snapshot": 28538,
+  "active_running_verified": true,
+  "reused_completed_categories": {
+    "apple": {
+      "v1_journal_sha256": "c05f0de73d57fae7768c2810b2f1abd71380ebae3eee9a9f5808814328666c85",
+      "v2_journal_sha256": "8a46605f4a27447a4931d7ebed3a49fdf2edacda4f2909dc3ec7439639f1e2fb",
+      "expected_frame_count": 9563,
+      "matched_uncompressed_bytes": {
+        "images": 647029803,
+        "depths": 5283945736,
+        "masks": 142594872
+      },
+      "no_network_replay": true
+    },
+    "backpack": {
+      "v1_journal_sha256": "340620b4301330efabd6534c9374e6985979f10d19eb15476aa0f252c56aa22b",
+      "v2_journal_sha256": "ee27a412b0b859e777d6087262710b55b6bae6196a383d3f98e342181d6ad5cd",
+      "expected_frame_count": 10055,
+      "matched_uncompressed_bytes": {
+        "images": 855231328,
+        "depths": 6477043750,
+        "masks": 512436861
+      },
+      "no_network_replay": true
+    }
+  },
+  "v1_journals_preserved": true,
+  "new_progress_directory": "results/co3d_seen41_storage_v2_progress",
+  "new_final_report": "results/co3d_seen41_storage_budget_v2_20261002.json",
+  "member_crc_verified": false,
+  "full_archive_sha_verified": false,
+  "full_41_budget_complete": false,
+  "formal_pose_metrics_available": false,
+  "note": "Read-only directory guard was too small; no evidence of image corruption. Range/ETag/path/member protections retained; not a model evaluation or GPU failure."
+}

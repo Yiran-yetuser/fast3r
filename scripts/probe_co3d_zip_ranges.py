@@ -16,7 +16,9 @@ from pathlib import Path, PurePosixPath
 from prepare_re10k_rgb_from_archive import save_identical, sha
 
 MAX_INDEX_BYTES=32*1024**2
-MAX_MEMBERS=200000
+# Official banana_001 has 229525 records / 29035659 directory bytes.
+# Keep the 32MiB transport bound; this is NOT an unbounded safety bypass.
+MAX_MEMBERS=400000
 
 
 class HttpRangeFile(io.RawIOBase):

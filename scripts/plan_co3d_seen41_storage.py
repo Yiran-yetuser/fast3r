@@ -4,6 +4,7 @@
 Full archive SHA, image CRC/decode and exact Fast3R scene/sampling equivalence
 remain unverified. No sparse frame draw is silently chosen by this planner.
 """
+import argparse
 import fcntl
 import hashlib
 import json
@@ -15,6 +16,8 @@ from prepare_re10k_rgb_from_archive import save_identical, sha
 from probe_co3d_zip_ranges import HttpRangeFile, inventory
 
 RESERVE=1024**3
+V1_CODE_SHA={'planner_sha256':'706c7d82cbd7d04f215e790c4b96e33e824a90d8deeedbcdfbefe513901f7eab',
+             'range_reader_sha256':'a7a6f3776ee44d3827c338c6315736a8c3c286f4d422e065685de9104981c5e8'}
 
 
 def expected_paths(category,selected):
@@ -23,9 +26,44 @@ def expected_paths(category,selected):
             for kind,suffix in [('images','.jpg'),('depths','.jpg.geometric.png'),('masks','.png')]}
 
 
+def validate_saved(saved,category,selected,urls,checksums,fingerprint,legacy=False):
+    """Only audited v1 code can migrate; inputs, paths hash and all sums must match."""
+    expected=dict(fingerprint)
+    if legacy:expected.update(V1_CODE_SHA)
+    if saved['fingerprint']!=expected or saved['category']!=category:
+        raise ValueError('Existing budget journal belongs to different inputs/code; preserved')
+    required=expected_paths(category,selected)
+    count=sum(map(len,selected.values()))
+    if (saved['status']!='complete_category_name_and_size_inventory_not_data_ready'
+            or saved['expected_frame_count']!=count or saved['cross_archive_duplicate_count']!=0
+            or saved['expected_paths_sha256']!=hashlib.sha256('\n'.join(sorted(required)).encode()).hexdigest()
+            or saved['full_archive_sha_verified'] or saved['member_crc_verified']):
+        raise ValueError('Invalid completed category journal')
+    records=saved['archives']
+    if [r['url'] for r in records]!=urls:raise ValueError('Archive list/order changed')
+    for record in records:
+        if record['expected_full_archive_sha256']!=checksums[Path(record['url']).name]:
+            raise ValueError('Official ZIP checksum reference changed')
+        if (record['index_transport_bytes']>32*1024**2 or not record['etag']
+                or sum(r['end']-r['start']+1 for r in record['ranges'])!=record['index_transport_bytes']
+                or any(not 0<=r['start']<=r['end']<record['archive_bytes'] for r in record['ranges'])):
+            raise ValueError('Invalid saved Range bounds')
+    for kind in ('images','depths','masks'):
+        if (saved['matched_member_counts'][kind]!=count
+                or sum(r['matched_member_counts'][kind] for r in records)!=count
+                or sum(r['matched_uncompressed_bytes'][kind] for r in records)!=saved['matched_uncompressed_bytes'][kind]):
+            raise ValueError('Category aggregate differs from its archive records')
+    if sum(r['index_transport_bytes'] for r in records)!=saved['index_transport_bytes']:
+        raise ValueError('Category transport sum differs')
+
+
 def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--import-verified-v1',action='store_true',
+                        help='Read-only validate pinned v1 completed categories into a NEW v2 journal')
+    args=parser.parse_args()
     root=Path('data/co3d_test_metadata')
-    journal=Path('results/co3d_seen41_storage_progress')
+    journal=Path('results/co3d_seen41_storage_v2_progress')
     journal.mkdir(parents=True,exist_ok=True)
     with (journal/'.lock').open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
@@ -47,12 +85,22 @@ def main():
             path=journal/(category+'.json')
             if path.exists():
                 saved=json.loads(path.read_text())
-                if saved['fingerprint']!=fingerprint or saved['category']!=category:
-                    raise ValueError('Existing budget journal belongs to different inputs/code; preserved')
+                validate_saved(saved,category,selected[category],links[category][1:],checksums,fingerprint)
                 summaries.append(saved)
                 print(f'REUSE INDEX {category}',flush=True)
                 continue
             if shutil.disk_usage(journal).free<RESERVE+1024**2:raise RuntimeError('Preserve 1GiB reserve')
+            legacy_path=Path('results/co3d_seen41_storage_progress')/(category+'.json')
+            if args.import_verified_v1 and legacy_path.exists():
+                saved=json.loads(legacy_path.read_text())
+                validate_saved(saved,category,selected[category],links[category][1:],checksums,fingerprint,legacy=True)
+                saved['imported_v1_journal_sha256']=sha(legacy_path)
+                saved['imported_v1_fingerprint']=saved['fingerprint']
+                saved['fingerprint']=fingerprint
+                save_identical(path,saved)
+                summaries.append(saved)
+                print(f'VALIDATED V1 IMPORT {category}; no network replay, original preserved',flush=True)
+                continue
             matched=set()
             records=[]
             for url in links[category][1:]:
@@ -96,7 +144,7 @@ def main():
                 'original_fast3r_split_equivalence_verified':False,
                 'note':'Complete candidate-name coverage only; no RGB extraction, sparse sampling change or benchmark promotion'}
         if any(v!=protocol['candidate_frame_count'] for v in count.values()):raise ValueError('Aggregate frame count mismatch')
-        save_identical('results/co3d_seen41_storage_budget_20261002.json',result)
+        save_identical('results/co3d_seen41_storage_budget_v2_20261002.json',result)
         print('ALL 41 DIRECTORY BUDGETS COMPLETE',flush=True)
 
 
