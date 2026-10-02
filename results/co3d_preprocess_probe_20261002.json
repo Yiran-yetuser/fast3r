@@ -1,0 +1,721 @@
+{
+  "status": "ten_real_frames_range_crc_decode_and_reference_preprocess_verified_not_benchmark_ready",
+  "paper_mapping": "section 4.2 / Table 1 CO3D processed data wiring only",
+  "category": "apple",
+  "sequence": "608_95658_192033",
+  "frame_count": 10,
+  "frame_numbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+  "all_candidate_frame_pool_unchanged": true,
+  "sampling_scope": "first ten candidate frames from first apple trajectory, explicit wiring probe only",
+  "fingerprint": {
+    "probe_sha256": "016ceda231125bcfd57eec0f17882e28a4210b4268b45745b608f59d715a01ca",
+    "cache_sha256": "e1715c903c586e9676d200c1fa67bffeda0eccc27c2941f86c0f55fc4ba2d828",
+    "preprocessor_sha256": "ef637270c45ce7489b9163576439bbf94841355687f2c7d7e9a3667125354d74",
+    "cropping_reference_sha256": "d27dcede9d06f3d3484f19de1768748bbe9950cb5134e4e5732c25d1ae5a18c9",
+    "geometry_reference_sha256": "b4f0bb6a03db2f1c2ce2fd35eaa4955f4a30512ad09a3aa45771b88336c8b697",
+    "local_cropping_sha256": "c3ea4d47bf060d42c996ae21ce8d3d7d5d4906af9ecd045b227e81aa00d7b3ad"
+  },
+  "runtime": {
+    "numpy": "1.26.4",
+    "opencv": "4.11.0",
+    "pillow": "11.3.0",
+    "torch": "2.7.1+cu128"
+  },
+  "records": [
+    {
+      "image_path": "apple/608_95658_192033/images/frame000001.jpg",
+      "annotation_frame_number": 1,
+      "raw_members": [
+        {
+          "sha256": "847fcc9feb52743900d317b6f835738ff9db1eb9df6d859c5b88e4e90f278eb6",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 61865,
+          "path": "apple/608_95658_192033/images/frame000001.jpg",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 63199
+        },
+        {
+          "sha256": "9342541ab16d02ca23c8b73eb454692e8c41d70b80e55babd89f0890fc603635",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 696020,
+          "path": "apple/608_95658_192033/depths/frame000001.jpg.geometric.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 695928
+        },
+        {
+          "sha256": "ec26b7ec98cad67fba888ba325b442f72d607d8c1e78a316ad78447876ee0a45",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 8888,
+          "path": "apple/608_95658_192033/masks/frame000001.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 10098
+        }
+      ],
+      "raw_size_hw": [
+        1011,
+        1036
+      ],
+      "principal_crop_bbox": [
+        0,
+        1,
+        1036,
+        1011
+      ],
+      "requested_resize_wh": [
+        512,
+        499
+      ],
+      "processed_size_hw": [
+        499,
+        512
+      ],
+      "raw_depth_min": 0.0,
+      "raw_depth_max": 250.625,
+      "raw_depth_positive_fraction": 0.6126756260287417,
+      "masked_processed_depth_positive_fraction": 0.03850278682364729,
+      "adapted_processed_file_sha256": {
+        "apple/608_95658_192033/images/frame000001.jpg": "f7a02faa6fa48dda2101bb1b0e635a8b263c140da2598b59e90e4ef83bd4ae00",
+        "apple/608_95658_192033/depths/frame000001.jpg.geometric.png": "dc037aa0659dfa7a18391552e6c0a9c2a475cd8e0fd649946bbbc9bfaba06482",
+        "apple/608_95658_192033/masks/frame000001.png": "bcc9ec2d040504ff3cdb1edd5d248a34f9f0fc26b18a1f2940bef91b0db0836a"
+      },
+      "camera_pose_dtype": "float32",
+      "maximum_depth": 250.625,
+      "reference_image_depth_mask_bytes_equal": true,
+      "reference_npz_arrays_equal": true
+    },
+    {
+      "image_path": "apple/608_95658_192033/images/frame000002.jpg",
+      "annotation_frame_number": 2,
+      "raw_members": [
+        {
+          "sha256": "4070ec6e84a476f5adfb42f255292498d0be1682294efbd445b377928ca8b089",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 61825,
+          "path": "apple/608_95658_192033/images/frame000002.jpg",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 63140
+        },
+        {
+          "sha256": "e1989224c69ee6e0f31fa42991f2fc23e841d3d18b9192398e72044715eadfb1",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 693317,
+          "path": "apple/608_95658_192033/depths/frame000002.jpg.geometric.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 693232
+        },
+        {
+          "sha256": "4d8a88a27ea7e013b54f5bb4c132929b6c66c0add5214dd476246df7dd0db0fa",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 8919,
+          "path": "apple/608_95658_192033/masks/frame000002.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 10159
+        }
+      ],
+      "raw_size_hw": [
+        1011,
+        1036
+      ],
+      "principal_crop_bbox": [
+        0,
+        1,
+        1036,
+        1011
+      ],
+      "requested_resize_wh": [
+        512,
+        499
+      ],
+      "processed_size_hw": [
+        499,
+        512
+      ],
+      "raw_depth_min": 0.0,
+      "raw_depth_max": 317.75,
+      "raw_depth_positive_fraction": 0.6112960141150052,
+      "masked_processed_depth_positive_fraction": 0.038322739228456915,
+      "adapted_processed_file_sha256": {
+        "apple/608_95658_192033/images/frame000002.jpg": "782a02aeb84fd66bd92feaa7de06f42f6a894bf2718121dd073daa1d56fe7f5e",
+        "apple/608_95658_192033/depths/frame000002.jpg.geometric.png": "fad3815ace0705a501ef4bd71003e94586cc9cdc27dd7d4e960e21ac494d4036",
+        "apple/608_95658_192033/masks/frame000002.png": "a630fa4e898485a441e579984b8bddf71f818240e466e4f797677a86642705b0"
+      },
+      "camera_pose_dtype": "float32",
+      "maximum_depth": 295.75,
+      "reference_image_depth_mask_bytes_equal": true,
+      "reference_npz_arrays_equal": true
+    },
+    {
+      "image_path": "apple/608_95658_192033/images/frame000003.jpg",
+      "annotation_frame_number": 3,
+      "raw_members": [
+        {
+          "sha256": "9d70505a139413b92a673b427199544ecd43a50354bfe0ee016a138641007102",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 61364,
+          "path": "apple/608_95658_192033/images/frame000003.jpg",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 62664
+        },
+        {
+          "sha256": "aa61217b2ce892dca6e95e197b0e9508cc5e12ac60a4cf660f4936be7bf32078",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 695416,
+          "path": "apple/608_95658_192033/depths/frame000003.jpg.geometric.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 695334
+        },
+        {
+          "sha256": "6d14185c2e4f7af07615c801491f0579fc5e1a5914ac9ac514df6e4247b3af57",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 9121,
+          "path": "apple/608_95658_192033/masks/frame000003.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 10337
+        }
+      ],
+      "raw_size_hw": [
+        1011,
+        1036
+      ],
+      "principal_crop_bbox": [
+        0,
+        1,
+        1036,
+        1011
+      ],
+      "requested_resize_wh": [
+        512,
+        499
+      ],
+      "processed_size_hw": [
+        499,
+        512
+      ],
+      "raw_depth_min": 0.0,
+      "raw_depth_max": 417.5,
+      "raw_depth_positive_fraction": 0.6132284255429656,
+      "masked_processed_depth_positive_fraction": 0.03867109218436874,
+      "adapted_processed_file_sha256": {
+        "apple/608_95658_192033/images/frame000003.jpg": "200215bf15f4aa99002dbc20cf0fe2b6d93c75f0862033b8616c3fbe87bedbe6",
+        "apple/608_95658_192033/depths/frame000003.jpg.geometric.png": "f5c3c3b2b4a38bea3a9afe6ad0cd8a939ef91a921c7a3b6a79f0843488618ff8",
+        "apple/608_95658_192033/masks/frame000003.png": "490506b0bf5fe6acca472aeb2960351f6b0ec49990cdfb919a38bc0344d9f3c4"
+      },
+      "camera_pose_dtype": "float32",
+      "maximum_depth": 417.5,
+      "reference_image_depth_mask_bytes_equal": true,
+      "reference_npz_arrays_equal": true
+    },
+    {
+      "image_path": "apple/608_95658_192033/images/frame000004.jpg",
+      "annotation_frame_number": 4,
+      "raw_members": [
+        {
+          "sha256": "8317d6dcc63ebdc85790178ff3ad5894f7fe5c25769ab92e57646163d358ebfe",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 61215,
+          "path": "apple/608_95658_192033/images/frame000004.jpg",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 62509
+        },
+        {
+          "sha256": "37aab96028804d36a712afe436126b63b6ee4b855e952f3f767eb147e1cca9eb",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 680745,
+          "path": "apple/608_95658_192033/depths/frame000004.jpg.geometric.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 680625
+        },
+        {
+          "sha256": "4fd2d64aefd9a153d9e5156c22a39aa2efd527521782ed80cd9c638f1a502814",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 9157,
+          "path": "apple/608_95658_192033/masks/frame000004.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 10433
+        }
+      ],
+      "raw_size_hw": [
+        1011,
+        1036
+      ],
+      "principal_crop_bbox": [
+        0,
+        1,
+        1036,
+        1011
+      ],
+      "requested_resize_wh": [
+        512,
+        499
+      ],
+      "processed_size_hw": [
+        499,
+        512
+      ],
+      "raw_depth_min": 0.0,
+      "raw_depth_max": 351.0,
+      "raw_depth_positive_fraction": 0.5986341364679644,
+      "masked_processed_depth_positive_fraction": 0.03855366983967936,
+      "adapted_processed_file_sha256": {
+        "apple/608_95658_192033/images/frame000004.jpg": "fc4be26b6cf27b5e8ab040adbbc565d327f62cb0cbb8b744a0302aede840e229",
+        "apple/608_95658_192033/depths/frame000004.jpg.geometric.png": "d8b3f9acce4548686bc64eddc395baa2478c4ffcc4af4cd0e5aec47191547aff",
+        "apple/608_95658_192033/masks/frame000004.png": "68861cca1745f6c252e855b0f5d89877005729634dd50478e2bb69c1ec182ffa"
+      },
+      "camera_pose_dtype": "float32",
+      "maximum_depth": 350.25,
+      "reference_image_depth_mask_bytes_equal": true,
+      "reference_npz_arrays_equal": true
+    },
+    {
+      "image_path": "apple/608_95658_192033/images/frame000005.jpg",
+      "annotation_frame_number": 5,
+      "raw_members": [
+        {
+          "sha256": "3d3891ad88ac2845f502f335b6be471a66d24f2841685cd4ddbcd41db01b9b51",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 63142,
+          "path": "apple/608_95658_192033/images/frame000005.jpg",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 64312
+        },
+        {
+          "sha256": "103e0150e07171d06894f1d798ce8444709b256bfb79b16f83e037dea02775e1",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 682258,
+          "path": "apple/608_95658_192033/depths/frame000005.jpg.geometric.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 682143
+        },
+        {
+          "sha256": "c610eb1a1bbf7f0491e5621ec4388906b6caf3082222baefc270c9dc49187d71",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 9119,
+          "path": "apple/608_95658_192033/masks/frame000005.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 10326
+        }
+      ],
+      "raw_size_hw": [
+        1011,
+        1036
+      ],
+      "principal_crop_bbox": [
+        0,
+        1,
+        1036,
+        1011
+      ],
+      "requested_resize_wh": [
+        512,
+        499
+      ],
+      "processed_size_hw": [
+        499,
+        512
+      ],
+      "raw_depth_min": 0.0,
+      "raw_depth_max": 442.0,
+      "raw_depth_positive_fraction": 0.6032035638860564,
+      "masked_processed_depth_positive_fraction": 0.03828359844689379,
+      "adapted_processed_file_sha256": {
+        "apple/608_95658_192033/images/frame000005.jpg": "661bc96bcdbab7293158accb5b6aea7644ef1ae4bb8c305bbad188e7b813fac8",
+        "apple/608_95658_192033/depths/frame000005.jpg.geometric.png": "26549d8974ba842b6159333a2bae01bd1261354da386128fd9498d2e45c1ae59",
+        "apple/608_95658_192033/masks/frame000005.png": "2e65a0e5d7c77fd299182cd0083309da7cd69c55ffc3026feecec9381dbe2756"
+      },
+      "camera_pose_dtype": "float32",
+      "maximum_depth": 442.0,
+      "reference_image_depth_mask_bytes_equal": true,
+      "reference_npz_arrays_equal": true
+    },
+    {
+      "image_path": "apple/608_95658_192033/images/frame000011.jpg",
+      "annotation_frame_number": 11,
+      "raw_members": [
+        {
+          "sha256": "29219fd0645c8dc2318a92380be0f0d69d391db77dac10fb7c2e608f3dd19780",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 60034,
+          "path": "apple/608_95658_192033/images/frame000011.jpg",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 61341
+        },
+        {
+          "sha256": "dd694ea10cf69c463bbb56544b1ac42f8c4e746f38504b4e707ba8812b6ea929",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 728810,
+          "path": "apple/608_95658_192033/depths/frame000011.jpg.geometric.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 728938
+        },
+        {
+          "sha256": "5d6595e35dcc8114e5e5857b6d83b93bf1db0862fdac23bb3b55bfa2e67203bc",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 9440,
+          "path": "apple/608_95658_192033/masks/frame000011.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 10642
+        }
+      ],
+      "raw_size_hw": [
+        1011,
+        1036
+      ],
+      "principal_crop_bbox": [
+        0,
+        0,
+        1036,
+        1010
+      ],
+      "requested_resize_wh": [
+        512,
+        499
+      ],
+      "processed_size_hw": [
+        499,
+        512
+      ],
+      "raw_depth_min": 0.0,
+      "raw_depth_max": 551.5,
+      "raw_depth_positive_fraction": 0.6662446677283472,
+      "masked_processed_depth_positive_fraction": 0.04074163952905811,
+      "adapted_processed_file_sha256": {
+        "apple/608_95658_192033/images/frame000011.jpg": "6dd08ade576429ead46a3c5fbf02da1bc0c91aa8ef7fb3caa60fb3abfc5fd368",
+        "apple/608_95658_192033/depths/frame000011.jpg.geometric.png": "cfc9795f8c1eeccf06872da6f34afb08884fc20186eb0458e4d0b370d8db124e",
+        "apple/608_95658_192033/masks/frame000011.png": "17afd96ae3322183443287f6faa40306b661a97e3df564a7128903d2b5e79f90"
+      },
+      "camera_pose_dtype": "float32",
+      "maximum_depth": 497.0,
+      "reference_image_depth_mask_bytes_equal": true,
+      "reference_npz_arrays_equal": true
+    },
+    {
+      "image_path": "apple/608_95658_192033/images/frame000012.jpg",
+      "annotation_frame_number": 12,
+      "raw_members": [
+        {
+          "sha256": "df23d1b242316ae3ff4f3236d5401884d2a5c34c215618a28010982fc58a11cc",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 59890,
+          "path": "apple/608_95658_192033/images/frame000012.jpg",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 61212
+        },
+        {
+          "sha256": "220c7b3dbb16dfb715e08e9e3bd55a3881b61331d03416ba8f41dc6133074d00",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 720594,
+          "path": "apple/608_95658_192033/depths/frame000012.jpg.geometric.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 720580
+        },
+        {
+          "sha256": "d3c25efd2f8b94402724f2d5c31ce7db31408b2725ca5e461f8734063ee23954",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 9236,
+          "path": "apple/608_95658_192033/masks/frame000012.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 10429
+        }
+      ],
+      "raw_size_hw": [
+        1011,
+        1036
+      ],
+      "principal_crop_bbox": [
+        0,
+        1,
+        1036,
+        1011
+      ],
+      "requested_resize_wh": [
+        512,
+        499
+      ],
+      "processed_size_hw": [
+        499,
+        512
+      ],
+      "raw_depth_min": 0.0,
+      "raw_depth_max": 738.0,
+      "raw_depth_positive_fraction": 0.661903425256541,
+      "masked_processed_depth_positive_fraction": 0.041015625,
+      "adapted_processed_file_sha256": {
+        "apple/608_95658_192033/images/frame000012.jpg": "f739348d0038bb7c5a22c3fd83a80e241a9b37a4ad02f30c93266ffa89c8d64b",
+        "apple/608_95658_192033/depths/frame000012.jpg.geometric.png": "391714bdcc0889e50d0e936145a1fd29e5fcd6948660fa65831521acfda8ac6f",
+        "apple/608_95658_192033/masks/frame000012.png": "10058060a0821ac68648c55118e3e5da6c0412dc903a02583519bdc10ad8e2f3"
+      },
+      "camera_pose_dtype": "float32",
+      "maximum_depth": 432.25,
+      "reference_image_depth_mask_bytes_equal": true,
+      "reference_npz_arrays_equal": true
+    },
+    {
+      "image_path": "apple/608_95658_192033/images/frame000013.jpg",
+      "annotation_frame_number": 13,
+      "raw_members": [
+        {
+          "sha256": "4a1de1167baed2a7e72cba2c1c3a35b04929f6fbfb282683401a7a66efb26720",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 58476,
+          "path": "apple/608_95658_192033/images/frame000013.jpg",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 59715
+        },
+        {
+          "sha256": "1b5e4f471f9c1ff03f8be7c8a28b29c26bdcf4f5421d59338abb0dc7158e7a26",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 716555,
+          "path": "apple/608_95658_192033/depths/frame000013.jpg.geometric.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 716525
+        },
+        {
+          "sha256": "740644f586d8783c3deeb4a290eba69a84699fbcdd973530c4a258523a563b31",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 9384,
+          "path": "apple/608_95658_192033/masks/frame000013.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 10577
+        }
+      ],
+      "raw_size_hw": [
+        1011,
+        1036
+      ],
+      "principal_crop_bbox": [
+        0,
+        0,
+        1036,
+        1010
+      ],
+      "requested_resize_wh": [
+        512,
+        499
+      ],
+      "processed_size_hw": [
+        499,
+        512
+      ],
+      "raw_depth_min": 0.0,
+      "raw_depth_max": 442.5,
+      "raw_depth_positive_fraction": 0.6589761656527235,
+      "masked_processed_depth_positive_fraction": 0.04095691382765531,
+      "adapted_processed_file_sha256": {
+        "apple/608_95658_192033/images/frame000013.jpg": "587f4393f1700dcbd75cf6f4655047d3c0f96f30ee0ded4fb7711863a8e86f19",
+        "apple/608_95658_192033/depths/frame000013.jpg.geometric.png": "088b7ff0237a49b2a0f7ed560944d08473e3c561401ac2c0578c97ccfb3cedee",
+        "apple/608_95658_192033/masks/frame000013.png": "15253c7329fa0a3741ecaa16ef247994205b9cb8323b893b44bad9a828aa62bd"
+      },
+      "camera_pose_dtype": "float32",
+      "maximum_depth": 433.5,
+      "reference_image_depth_mask_bytes_equal": true,
+      "reference_npz_arrays_equal": true
+    },
+    {
+      "image_path": "apple/608_95658_192033/images/frame000014.jpg",
+      "annotation_frame_number": 14,
+      "raw_members": [
+        {
+          "sha256": "e8b3c7a4db0eddcb9e57d3e7a71b169b1d2f36ef33d41f74ad4ab813e4be3f1b",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 59332,
+          "path": "apple/608_95658_192033/images/frame000014.jpg",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 60690
+        },
+        {
+          "sha256": "21224cbfe57f22cbd692f39f1b86735ed2eb66385f43db3fcc4d4a43514e6e71",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 706722,
+          "path": "apple/608_95658_192033/depths/frame000014.jpg.geometric.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 706604
+        },
+        {
+          "sha256": "248f8eb53de6c66a58b55c1fe21beb2ca21b15d1914a9e69e9a12bb68e0bb741",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 9673,
+          "path": "apple/608_95658_192033/masks/frame000014.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 10871
+        }
+      ],
+      "raw_size_hw": [
+        1011,
+        1036
+      ],
+      "principal_crop_bbox": [
+        0,
+        1,
+        1036,
+        1011
+      ],
+      "requested_resize_wh": [
+        512,
+        499
+      ],
+      "processed_size_hw": [
+        499,
+        512
+      ],
+      "raw_depth_min": 0.0,
+      "raw_depth_max": 396.75,
+      "raw_depth_positive_fraction": 0.649819170590684,
+      "masked_processed_depth_positive_fraction": 0.041426603206412824,
+      "adapted_processed_file_sha256": {
+        "apple/608_95658_192033/images/frame000014.jpg": "d923e7ed46e6c1b0680527c10dfc04d8e6696306dd0c64ec905eec682f6ebc6c",
+        "apple/608_95658_192033/depths/frame000014.jpg.geometric.png": "d13b8101ff8ad21efcb10fa5e15107030ebfd4de60649dec967086cdaa65594d",
+        "apple/608_95658_192033/masks/frame000014.png": "4f6260636e8c7288003a64f47dec925b68bd9a7f64443a2961bcb5bd8598d1bb"
+      },
+      "camera_pose_dtype": "float32",
+      "maximum_depth": 342.0,
+      "reference_image_depth_mask_bytes_equal": true,
+      "reference_npz_arrays_equal": true
+    },
+    {
+      "image_path": "apple/608_95658_192033/images/frame000015.jpg",
+      "annotation_frame_number": 15,
+      "raw_members": [
+        {
+          "sha256": "27dfc64f7855768c28bc2f3baf4dbba16de4a81d04ebeafa53e8be1a6a685611",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 60038,
+          "path": "apple/608_95658_192033/images/frame000015.jpg",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 61334
+        },
+        {
+          "sha256": "8f9e8bb18c4d6cc28c02af7ac4e4eb96439bff20736384ad0fc479726ca7cb31",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 694073,
+          "path": "apple/608_95658_192033/depths/frame000015.jpg.geometric.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 693976
+        },
+        {
+          "sha256": "8bc74425a788ff1a348466867aa137a6ee0af2ad19fe1858e14bbadc476c28ed",
+          "member_crc_verified": true,
+          "full_archive_sha_verified": false,
+          "transport_bytes": 9329,
+          "path": "apple/608_95658_192033/masks/frame000015.png",
+          "archive_url": "https://dl.fbaipublicfiles.com/co3dv2_231130/apple_006.zip",
+          "etag": "\"c7b08fbd2924d86076212d12775d5e76-2027\"",
+          "bytes": 10552
+        }
+      ],
+      "raw_size_hw": [
+        1011,
+        1036
+      ],
+      "principal_crop_bbox": [
+        0,
+        0,
+        1036,
+        1010
+      ],
+      "requested_resize_wh": [
+        512,
+        499
+      ],
+      "processed_size_hw": [
+        499,
+        512
+      ],
+      "raw_depth_min": 0.0,
+      "raw_depth_max": 491.75,
+      "raw_depth_positive_fraction": 0.6380327975283465,
+      "masked_processed_depth_positive_fraction": 0.04068684243486974,
+      "adapted_processed_file_sha256": {
+        "apple/608_95658_192033/images/frame000015.jpg": "267352badbdda8673c2e77c1887ff391a723006254e7c2a030a30335d486b51c",
+        "apple/608_95658_192033/depths/frame000015.jpg.geometric.png": "3a82eb8ce9bcf6e61006e8af6e8a0293e6b66bb60b1c930560c17631b8434295",
+        "apple/608_95658_192033/masks/frame000015.png": "332ed1e1b6d852b373eb1a1d0e65d8e1a56dd4434483efba7f0daaa2c72eeead"
+      },
+      "camera_pose_dtype": "float32",
+      "maximum_depth": 491.75,
+      "reference_image_depth_mask_bytes_equal": true,
+      "reference_npz_arrays_equal": true
+    }
+  ],
+  "source_zip_full_sha_verified": false,
+  "formal_pose_metrics_available": false,
+  "full_candidate_data_ready": false,
+  "paper_selection_and_sampling_equivalence_verified": false,
+  "network_bytes_first_successful_probe": 91655026,
+  "source_zip_index_reuse_supported": true,
+  "limits": {
+    "raw_member_bytes": 33554432,
+    "cache_bytes": 2147483648,
+    "reserve_bytes": 1073741824,
+    "decode_pixels": 16777216
+  },
+  "note": "Member CRC + partial source identity is not full ZIP SHA. Ten frames do not validate all 399204. Reference run uses the same NumPy/PIL/OpenCV runtime; NPZ arrays compared, not ZIP timestamp bytes."
+}

@@ -22,14 +22,16 @@ Official implementation of **Fast3R: Towards 3D Reconstruction of 1000+ Images i
 
 本地复现进度（2026-10-02）：已完成DTU22场景、NRGBD9场景、7-Scenes全部18测试轨迹的公开权重评测，尚未匹配论文数值或完成整篇实验。RealEstate10K规定1832个相机记录已齐备、55.60GB候选RGB归档已下载；已核验1756场景/265447帧的RGB、官方GT与完整候选集合，仍缺76场景，继续研究补齐来源。新单卡HF位姿入口支持固定采样和断点恢复，正式Table1指标尚未运行。[逐项论文对应](PAPER_REPRODUCTION.md)、[Notebook](fast3r_reproduction.ipynb)、[下一步检查点](CONTINUATION.md)。
 
-CO3D §4.2/Table1类别审计：已找到固定PoseDiffusion协议的41类seen名单，生成2011轨迹/399204候选帧的有来源候选，尚未确认Fast3R作者逐轨迹清单等价。apple真实ZIP Range目录探测通过；41类目录空间预算正在后台计算，不下载整个大ZIP、不冒充图像或正式成绩就绪。Notebook保存真实分析输出。
+CO3D §4.2/Table1类别审计：已找到固定PoseDiffusion协议的41类seen名单，生成2011轨迹/399204候选帧的有来源候选，尚未确认Fast3R作者逐轨迹清单等价。41类完整目录预算已结束；按需数据接线继续，不下载整个大ZIP、不冒充全量图像或正式成绩就绪。Notebook保存真实分析输出。
 
 目录审计的banana成员数量阈值错误已诊断并安全恢复：保留旧检查点，核验复用apple/backpack，使用新v2结果路径。88项离线测试通过；[恢复证据](results/co3d_storage_recovery_20261002.json)不是正式位姿成绩。
 
 07:21历史恢复阶段：已完成41类/235个官方ZIP的[尾部大小预检](results/co3d_zip_footer_preflight_20261002.json)，按每包实测目录大小安全读取，复用8类旧目录记录并通过bowl原失败点。当时95项测试通过、目录预算仍在后台；最新完成状态见下一条。
 
-08:21最新阶段：CO3D完整[目录预算与独立核验](results/co3d_storage_budget_verified_20261002.json)已完成，41类/2011轨迹/399204组每种成员，原始大小297.20GB。全部候选[相机metadata核验](results/co3d_camera_metadata_audit_v2_20261002.json)完成，保留编号差异与car大坐标风险；名义源采样追踪不作为论文成绩。图像/深度/crop、float32稳定性和正式Table1指标仍待完成，按需存储设计继续。Notebook保存真实分析输出。
-111项离线测试通过，16个paper分析单元均已保存真实输出；未重跑旧GPU评测。
+08:21已归档：CO3D完整[目录预算与独立核验](results/co3d_storage_budget_verified_20261002.json)已完成，41类/2011轨迹/399204组每种成员，原始大小297.20GB。全部候选[相机metadata核验](results/co3d_camera_metadata_audit_v2_20261002.json)完成，保留编号差异与car大坐标风险；名义源采样追踪不作为论文成绩。
+
+09:51最新阶段：全候选[GT精度诊断](results/co3d_pose_precision_20261002.json)已记录单精度风险，不宣称整体稳定。十帧真实CO3D [Range/CRC/参考预处理接线](results/co3d_preprocess_probe_20261002.json)与[独立loader核验](results/co3d_preprocess_probe_verified_20261002.json)通过，重跑缓存网络0bytes；未改变原候选池。这不是100@采样或全量Table1成绩。128项离线测试通过，Notebook保存真实输出；衍生预处理代码[许可与来源](NOTICES_CO3D_PREPROCESSING.md)另列。
+历史检查点为111项离线测试、16个paper分析单元；最新检查点为128项测试、18个paper分析单元，未重跑旧GPU评测。
 
 ```bash
 # clone project
@@ -140,7 +142,7 @@ are committed; RGB/depth and the exact paper subset still require verification.
 
 The next-stage [protocol audit](PROTOCOL_AUDIT.md) verifies that local weight/config hashes match current public HF revision `a2c770b768ceb3a53c36c4f7a3619db0413dc3a1`; the original download revision and mapping to individual paper experiments remain unknown. It records corresponding-pixel RoMa registration versus the paper's ICP wording and the confidence-loss sign discrepancy without claiming either causes the metric gap. The notebook saves this audit and live, read-only pose-data preflight output.
 
-[`scripts/check_pose_data.py`](scripts/check_pose_data.py) fails on missing prescribed scenes, malformed GT or corrupt images. The RE10K split has **1,832 unique IDs**, not 1,800. A portable single-GPU HF pose entry with fixed draws/resume is implemented and one real smoke was verified; neither is a full Table1 benchmark. After storage expansion, official camera metadata and the test-only RGB archive are present. Safe chunk CRC/RGB/GT preparation and independent byte/inventory verification completed for 1,756 scenes / 265,447 frames, but 76 prescribed IDs remain missing and are never silently dropped. The CO3D prescribed split/provenance and full RE10K data still require verification. All 58 offline tests pass; these are not paper scores.
+[`scripts/check_pose_data.py`](scripts/check_pose_data.py) fails on missing prescribed scenes, malformed GT or corrupt images. The RE10K split has **1,832 unique IDs**, not 1,800. A portable single-GPU HF pose entry with fixed draws/resume is implemented and one real smoke was verified; neither is a full Table1 benchmark. After storage expansion, official camera metadata and the test-only RGB archive are present. Safe chunk CRC/RGB/GT preparation and independent byte/inventory verification completed for 1,756 scenes / 265,447 frames, but 76 prescribed IDs remain missing and are never silently dropped. The CO3D prescribed split/provenance and full RE10K data still require verification. All 128 offline tests pass; these are not paper scores.
 
 Paired NRGBD local/global evaluation used `--head both` to share one forward pass. The 7-Scenes preparation pipeline reads official TestSplit archives via HTTP Range, checks sequence CRC/SHA256, registers depth using pinned SimpleRecon calibration, and stores only the original stride-20 selected frames. The loader preserves original frame numbering and refuses incompatible sparse-storage protocols. GPU evaluation queues behind NRGBD and free-memory checks; disk usage retains a 1GiB reserve. Eight offline preparation tests and a real 50-view heads-sequence dry-run passed. Full result JSONs must be validated before reporting scores; these pipelines do not constitute complete-paper reproduction. See [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md) and the notebook for status and remaining training/data requirements.
 

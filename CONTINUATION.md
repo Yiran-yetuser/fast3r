@@ -157,7 +157,7 @@ CO3D下一步：先审计源大坐标在官方float32相对位姿指标中的稳
 当前图像成员CRC/解码、camera NPZ/crop等价性、正式RRA/RTA/mAA均未完成。
 111项离线测试通过，Notebook的16个paper分析单元全部已有真实输出；新增单元只读新JSON，未重跑旧GPU实验。
 
-#### 09:21续接：完整候选GT单精度诊断（最新恢复入口）
+#### 09:21续接：完整候选GT单精度诊断（已归档）
 
 `58abff5`已推送，旧目录/相机metadata不重复运行。本轮新脚本
 `scripts/audit_co3d_pose_precision.py`在CPU读取固定metadata并比较float32/float64：
@@ -187,6 +187,47 @@ RGB/depth/mask→固定DUSt3R crop/depth/K/float32 NPZ接线，再接源候选�
 保留完整候选池，记录有效mask/depth导致补采和scene retry的实际draws；不把918名义帧当真实ready。
 大ZIP全SHA尚不能由成员CRC代替，作者processed清单与100@采样身份仍未确认，明确协议适配。
 RE10K全来源扫描完成后先核验SHA/76集合/timestamps/图像几何，再考虑正式1832-ID入口。
+
+#### 09:51续接：十帧真实Range/预处理接线完成（最新恢复入口）
+
+`1009cc4`已推送，GT精度诊断不重复。新`co3d_range_cache.py`固定原候选manifest、官方links、
+235包footer大小/ETag，按需解析并缓存整类的原候选成员索引；不存整ZIP。
+中央目录精确Range经inventory验证，内存重放提取ZipInfo不再次网络读取。
+逐成员核对local header/ZIP64尺寸/名称、压缩边界、有界inflate与CRC，SHA后独占写缓存。
+单成员32MiB、raw/index总缓存2GiB、写入前至少留1GiB；不自动删旧数据或驱逐已有缓存。
+缓存身份/代码变化拒绝复用，已有成员重读长度/SHA；没有完整大ZIP SHA证明。
+
+`scripts/probe_co3d_preprocess.py`明确只取apple/608_95658_192033的前十个原候选帧：
+1,2,3,4,5,11,12,13,14,15。30个RGB/depth/mask成员全部CRC/解码通过，原始保存7738425bytes。
+首次Range传输91655026bytes包含apple完整中央目录；缓存后再次完整复核网络0bytes，未重做下载。
+缓存约25MiB，独立probe目录约5.2MiB（原始reference fixture为hard links，du按遍历可能重复计数）。
+只执行固定DUSt3R已审阅的函数定义，不执行远程代码顶层；相同NumPy/PIL/OpenCV运行环境中，
+适配输出与原prepare_sequences实际输出十帧JPEG/PNG字节完全相同，NPZ逐数组相同。
+原始深度为uint16的float16位模式，先reinterpret再float32，不能当整数/65535读取。
+crop主点、半像素K变换、NEAREST深度/掩码、max-depth量化和float32 w2c求逆顺序均保留。
+结果`results/co3d_preprocess_probe_20261002.json`；固定参考源码SHA与运行库版本在report中。
+预处理衍生代码许可说明见`NOTICES_CO3D_PREPROCESSING.md`，不提交数据或参考副本。
+
+独立`scripts/verify_co3d_preprocess_probe.py`核验raw长度/SHA、processed/reference字节与NPZ数组，
+再调用真实Co3d_Multiview._load_view_data。原202帧pool未变，只加载已准备的十帧，不造稀疏split。
+十帧均有效，mask后正深度覆盖0.05223–0.05686；这是GT覆盖比例，不是模型accuracy。
+第一次检查错误假定只输出512×384；本批近方形图像按公开base逻辑可随机交换方向，
+现在保留512×384或384×512并记录(H,W)，不拉伸图像或改GT；补充离线回归测试。
+独立结果`results/co3d_preprocess_probe_verified_20261002.json`。尚未运行_get_views补采/scene retries，
+未调用模型/全量RRA/RTA/mAA，不能将此probe标为100@或全2011数据ready。
+128项离线测试通过，Notebook18个paper分析单元有真实输出，旧输出不覆盖。
+两个probe/verification命令都已正常退出，无新增后台CO3D任务；只归档新阶段。
+
+宿主10:08快照：RE10K扫描仍active/running，PID24596，153997066625/205763619478压缩字节，
+未生成完整来源报告；空间49315729408bytes可用，GPU约10904MiB空闲。每次接续重新核实。
+不要重启健康扫描，不再重复十帧probe通知/提交。必要时本地复核用以上verifier；probe复用网络0。
+
+下一步：将原完整2011/399204候选池与按需Range/参考一致预处理接到严格的lazy loader，
+缺下载/CRC/相机文件不能被原loader catch-all误当GT无效而跳过；真实零有效深度按公开规则记录。
+固定采样seed、100@映射与候选顺序，记录每次加载、重复补采和scene retry；只称协议适配，
+作者原processed清单/100@draws与HF权重对应关系未确认。先真实单样本接线，再考虑规模化。
+2GiB缓存是当前探测的保护上限，不证明所有真实采样都能放下；达到边界时先预算，不能自动清数据。
+RE10K全流结束后先核验来源SHA/76缺失集合/timestamps/图像几何，再推进1832-ID评测。
 
 #### 07:21续接：全ZIP尾部预检与v3恢复（历史恢复入口）
 

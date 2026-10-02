@@ -1,0 +1,160 @@
+{
+  "status": "ten_saved_frames_independently_verified_and_released_loader_readable_not_benchmark_ready",
+  "paper_mapping": "section 4.2 / Table 1 processed data wiring prerequisites",
+  "probe_report_sha256": "2cfa492dacb7a765426b4465fa8b1e7782bac0ecab6b8a9d689a20dba2fd8197",
+  "verifier_sha256": "8bf46df8240586d5e933f30247d210586c8545ac7698f2feed00491fbf1865f7",
+  "loader_sha256": "d307fd6e75b97f47a2efeefcd4ef5fd6f4fce44536b0d3824fa43928539e02f0",
+  "base_loader_sha256": "e3aa91f3722ce54b022bc65b282adc642e20d676640fd0c60eacc3b290e46a62",
+  "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+  "category": "apple",
+  "sequence": "608_95658_192033",
+  "original_candidate_pool_length": 202,
+  "prepared_probe_frame_count": 10,
+  "rows": [
+    {
+      "frame_number": 1,
+      "original_pool_index": 0,
+      "loader_depth_positive_fraction": 0.0527496337890625,
+      "image_size_wh": [
+        384,
+        512
+      ],
+      "depth_shape_hw": [
+        512,
+        384
+      ],
+      "camera_pose_dtype": "float32"
+    },
+    {
+      "frame_number": 2,
+      "original_pool_index": 1,
+      "loader_depth_positive_fraction": 0.052500406901041664,
+      "image_size_wh": [
+        384,
+        512
+      ],
+      "depth_shape_hw": [
+        512,
+        384
+      ],
+      "camera_pose_dtype": "float32"
+    },
+    {
+      "frame_number": 3,
+      "original_pool_index": 2,
+      "loader_depth_positive_fraction": 0.0529632568359375,
+      "image_size_wh": [
+        384,
+        512
+      ],
+      "depth_shape_hw": [
+        512,
+        384
+      ],
+      "camera_pose_dtype": "float32"
+    },
+    {
+      "frame_number": 4,
+      "original_pool_index": 3,
+      "loader_depth_positive_fraction": 0.052754720052083336,
+      "image_size_wh": [
+        384,
+        512
+      ],
+      "depth_shape_hw": [
+        512,
+        384
+      ],
+      "camera_pose_dtype": "float32"
+    },
+    {
+      "frame_number": 5,
+      "original_pool_index": 4,
+      "loader_depth_positive_fraction": 0.052225748697916664,
+      "image_size_wh": [
+        384,
+        512
+      ],
+      "depth_shape_hw": [
+        512,
+        384
+      ],
+      "camera_pose_dtype": "float32"
+    },
+    {
+      "frame_number": 11,
+      "original_pool_index": 5,
+      "loader_depth_positive_fraction": 0.052942911783854164,
+      "image_size_wh": [
+        512,
+        384
+      ],
+      "depth_shape_hw": [
+        384,
+        512
+      ],
+      "camera_pose_dtype": "float32"
+    },
+    {
+      "frame_number": 12,
+      "original_pool_index": 6,
+      "loader_depth_positive_fraction": 0.0562896728515625,
+      "image_size_wh": [
+        384,
+        512
+      ],
+      "depth_shape_hw": [
+        512,
+        384
+      ],
+      "camera_pose_dtype": "float32"
+    },
+    {
+      "frame_number": 13,
+      "original_pool_index": 7,
+      "loader_depth_positive_fraction": 0.056203206380208336,
+      "image_size_wh": [
+        384,
+        512
+      ],
+      "depth_shape_hw": [
+        512,
+        384
+      ],
+      "camera_pose_dtype": "float32"
+    },
+    {
+      "frame_number": 14,
+      "original_pool_index": 8,
+      "loader_depth_positive_fraction": 0.056859334309895836,
+      "image_size_wh": [
+        384,
+        512
+      ],
+      "depth_shape_hw": [
+        512,
+        384
+      ],
+      "camera_pose_dtype": "float32"
+    },
+    {
+      "frame_number": 15,
+      "original_pool_index": 9,
+      "loader_depth_positive_fraction": 0.0528717041015625,
+      "image_size_wh": [
+        512,
+        384
+      ],
+      "depth_shape_hw": [
+        384,
+        512
+      ],
+      "camera_pose_dtype": "float32"
+    }
+  ],
+  "all_loader_probe_views_valid": true,
+  "full_candidate_data_ready": false,
+  "actual_sampling_and_retries_verified": false,
+  "formal_pose_metrics_available": false,
+  "note": "Only _load_view_data exercised with original full scene pool. Released near-square/portrait resolution behavior preserved. No _get_views/100@ evaluation, no inference, no new sparse sampling manifest."
+}

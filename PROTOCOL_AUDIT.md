@@ -274,3 +274,23 @@ float32舍入与消减可能不同；大坐标逆的尺度残差小不代表小�
 保留全部源数据与pair计数，报告按类别sum/max和201条风险轨迹总数（仅列前20条）。
 这个全候选诊断不等于原100@实际draws，也不证明CUDA/TF32或预测位姿稳定；
 下一步真实输入评测仍须保留公开metric与显式诊断，不能用这些角差冒充模型RRA/RTA/mAA。
+
+### 09:51续接：按需成员与十帧参考预处理比较
+
+新Range缓存核对原候选路径、固定footer大小/ETag与精确206范围；从已读中央目录的内存重放
+提取成员信息，然后验证local header/ZIP64/压缩边界、有界inflate、CRC和原字节SHA。
+成员CRC及ETag不是完整大ZIP的SHA，所有报告保持该标志false；没有改动测试候选manifest。
+单成员32MiB，raw/index缓存总计2GiB，写入保留至少1GiB，不自动删除历史数据。
+
+`probe_co3d_preprocess.py`只用apple/608_95658_192033前十个原候选帧，
+三个原始成员×十帧全部解码；与固定DUSt3R原prepare_sequences在同一运行库上的真实输出比较，
+JPEG/PNG bytes和NPZ arrays一致。NPZ ZIP时间戳不纳入数组等价性；不会靠NPZ二进制相同猜数值一致。
+FP16原始depth位模式与processed UINT16/max-depth编码严格区分；相机仍先float32 w2c再inverse。
+主点crop后resize的K使用Colmap/OpenCV半像素转换，不以单纯fx/cx乘scale替代。
+[固定cropping参考](https://github.com/naver/dust3r/blob/4c24a6ebf04809f2cfe59915e51779c8984aaa40/dust3r/datasets/utils/cropping.py)。
+原始参考副本只放data、保留来源许可，不提交数据集；衍生函数许可见NOTICES_CO3D_PREPROCESSING.md。
+
+独立检查raw/processed哈希与数组后，只执行公开_load_view_data，原202帧候选pool保持不变。
+near-square输入可按rng输出512×384或384×512，保留实际朝向，不将初次尺寸断言错误解释成数据损坏。
+十帧有效GT深度比例约5.22%–5.69%，不是网络深度/位姿准确率。
+尚未验证_get_views的真实补采/重试、全量crop或100@作者draws，未产生Table1正式分数。
