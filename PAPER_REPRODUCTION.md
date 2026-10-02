@@ -388,3 +388,39 @@ invalidate/scene-tracker/补采RNG的断点与重放。RE10K仍缺76/1832场景�
 宿主诊断退出0，无新后台GPU任务；下次不要重复本次前向，只读复核命令：
 PYTHONPATH=.:scripts python scripts/diagnose_co3d_pose_focal.py --verify-only
 现有heartbeat保留以接续，不声称整篇复现完成。
+
+### 新检查点：aligned-local焦距与采样边界恢复（§4.2/Table 1前提）
+
+固定draw0的一次公开HF前向中，新增发布代码local→global相似变换后的首视图焦距分支。
+使用alignment percentile0，无GT valid_mask（所有预测像素可参与）；同方向的global
+PnP点/掩码/seed不变。这个掩码条件不同于有GT有效深度的评测，仍是诊断，不替换正式协议。
+
+| 分支 | focal(px) | RRA@30 | RTA@30 | mAA@30 | PnP失败 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 发布方向/global焦距 | 27.9829 | 0% | 13.3333% | 0% | 0/10 |
+| 发布方向/aligned-local焦距 | 24.9949 | 0% | 31.1111% | 0% | 0/10 |
+| raw方向/global焦距 | 553.6604 | 2.2222% | 11.1111% | 0% | 0/10 |
+| raw方向/aligned-local焦距 | 498.6280 | 6.6667% | 11.1111% | 0.6452% | 0/10 |
+
+发布方向RTA改善但RRA/mAA仍0；raw替代分支不能据此升级为论文方法或选优成绩。
+两组global基线与历史结果逐项相同，原报告保留；保存poses重新计算全部45pairs通过。
+新独立结果results/co3d_aligned_focal_diagnostic_20261002.json，无新全量Table 1成绩。
+
+新增scripts/co3d_sampling_state.py：仅单worker完整请求边界，JSON保存Python补采RNG、
+dataset PCG64 RNG、invalidate、invalid_scene_tracker及游标，绑定原候选池、组合、wrapper
+映射和调用者协议；发生身份/结构变化时恢复报错，结构检查通过前不修改当前状态。
+合成100请求在第37请求后保存恢复，余63请求及最终状态逐项相同，保留1个无效场景、
+23个无效帧标记；results/co3d_sampling_resume_synthetic_20261002.json记录边界state与哈希。
+这是合成无效深度fixture验证，未读真实RGB/深度、未运行模型，不是实际连续100@评测。
+不保存网络/GPU RNG或多worker状态；下一阶段runner还需结果+state一致提交及失败事务恢复。
+
+159项离线测试通过，Notebook新增真实分析输出，原24个分析单元不变。未删除数据、未覆盖
+历史报告。已退出本次GPU诊断，无新后台数据任务。只读复核：
+PYTHONPATH=.:scripts python scripts/diagnose_co3d_pose_aligned_focal.py --verify-only
+PYTHONPATH=.:scripts python scripts/verify_co3d_sampling_resume.py --verify-only
+
+接续：把边界state接入真实100@单worker加载/评测runner，绑定实际wrapper映射与code/data，
+隔离加载器补采RNG和网络seed；先测试中断事务/错误不跳过，再运行有界数据准备与评测。
+原LazyPreparer processed预算512MiB仍须重新核算，不能静默扩大或删除缓存规避预算。
+作者规定划分与权重对应未确认；RE10K仍1756/1832、缺76，已完成205GB扫描不重复。
+独立训练、全量位姿等仍未完成，现有heartbeat保留；不称整篇论文复现成功。
