@@ -1,0 +1,205 @@
+{
+  "status": "new_v3_request4_failure_reproduced_offline_service_stopped",
+  "paper_mapping": "section 4.2 / Table 1 input preparation only",
+  "completed_request_count": 3,
+  "request_zero_based": 3,
+  "base_index": 12089587,
+  "failure": {
+    "image_path": "stopsign/249_26596_53531/images/frame000045.jpg",
+    "raw_depth_shape": [
+      940,
+      532
+    ],
+    "annotation_size_hw": [
+      940,
+      532
+    ],
+    "image_size_wh": [
+      532,
+      940
+    ],
+    "mask_shape": [
+      940,
+      532
+    ],
+    "mask_finite": true,
+    "mask_min": 0.0,
+    "mask_max": 0.8627451062202454,
+    "depth_nan_count": 0,
+    "depth_positive_inf_count": 0,
+    "depth_negative_count": 4,
+    "depth_finite_max": 62304.0,
+    "negative_positions_bits_values": [
+      {
+        "position_yx": [
+          95,
+          287
+        ],
+        "uint16_bits": 61453,
+        "value": -8296.0
+      },
+      {
+        "position_yx": [
+          463,
+          486
+        ],
+        "uint16_bits": 59458,
+        "value": -2180.0
+      },
+      {
+        "position_yx": [
+          464,
+          486
+        ],
+        "uint16_bits": 58854,
+        "value": -1510.0
+      },
+      {
+        "position_yx": [
+          482,
+          356
+        ],
+        "uint16_bits": 60686,
+        "value": -5176.0
+      }
+    ],
+    "scale_adjustment": 1.0,
+    "raw_members": {
+      "images": {
+        "sha256": "9b6781995db7d08a5d79e4567ce967cf1345e88697a02745e16a4f7b899ed1f0",
+        "bytes": 58607,
+        "cached_crc_verified": true
+      },
+      "depths": {
+        "sha256": "5fd437916975c6408cda9db3219ab93c889f974ed348646e74e24444253caf1f",
+        "bytes": 424502,
+        "cached_crc_verified": true
+      },
+      "masks": {
+        "sha256": "53c745ce12c9c4b47956b98160a3c674a62c83434b2818eb725a2a318907cb43",
+        "bytes": 13268,
+        "cached_crc_verified": true
+      }
+    }
+  },
+  "load_trace": [
+    {
+      "category": "stopsign",
+      "scene": "599_92267_182752",
+      "pool_index": 40,
+      "frame_number": 81,
+      "request": 3,
+      "status": "zero_masked_depth_after_crop"
+    },
+    {
+      "category": "stopsign",
+      "scene": "599_92267_182752",
+      "pool_index": 21,
+      "frame_number": 42,
+      "request": 3,
+      "status": "zero_masked_depth_after_crop"
+    },
+    {
+      "category": "stopsign",
+      "scene": "599_92267_182752",
+      "pool_index": 18,
+      "frame_number": 34,
+      "request": 3,
+      "status": "zero_masked_depth_after_crop"
+    },
+    {
+      "category": "stopsign",
+      "scene": "599_92267_182752",
+      "pool_index": 46,
+      "frame_number": 92,
+      "request": 3,
+      "status": "zero_masked_depth_after_crop"
+    },
+    {
+      "category": "stopsign",
+      "scene": "599_92267_182752",
+      "pool_index": 9,
+      "frame_number": 15,
+      "request": 3,
+      "status": "zero_masked_depth_after_crop"
+    },
+    {
+      "category": "stopsign",
+      "scene": "599_92267_182752",
+      "pool_index": 26,
+      "frame_number": 52,
+      "request": 3,
+      "status": "zero_masked_depth_after_crop"
+    },
+    {
+      "category": "stopsign",
+      "scene": "599_92267_182752",
+      "pool_index": 41,
+      "frame_number": 82,
+      "request": 3,
+      "status": "zero_masked_depth_after_crop"
+    },
+    {
+      "category": "stopsign",
+      "scene": "599_92267_182752",
+      "pool_index": 2,
+      "frame_number": 3,
+      "request": 3,
+      "status": "zero_masked_depth_after_crop"
+    },
+    {
+      "category": "stopsign",
+      "scene": "249_26596_53531",
+      "pool_index": 40,
+      "frame_number": 81,
+      "request": 3,
+      "status": "valid",
+      "image_size_wh": [
+        384,
+        512
+      ],
+      "positive_depth_fraction": 0.082916259765625
+    },
+    {
+      "category": "stopsign",
+      "scene": "249_26596_53531",
+      "pool_index": 28,
+      "frame_number": 54,
+      "request": 3,
+      "status": "zero_masked_depth_after_crop"
+    },
+    {
+      "category": "stopsign",
+      "scene": "249_26596_53531",
+      "pool_index": 24,
+      "frame_number": 45,
+      "request": 3,
+      "status": "hard_error",
+      "error_type": "ValueError"
+    }
+  ],
+  "pool_attempts": [
+    {
+      "category": "stopsign",
+      "scene": "599_92267_182752",
+      "candidate_pool_length": 202
+    },
+    {
+      "category": "stopsign",
+      "scene": "249_26596_53531",
+      "candidate_pool_length": 201
+    }
+  ],
+  "error_type": "ValueError",
+  "error_text": "Negative depth outside verified positive-Inf path",
+  "source_sha256": {
+    "diagnostic": "cac709106e19b4280e566de39cfa88222b6abf426e939c20a641ed9cdfb59732",
+    "v3_preparer": "196d933ed695ffafe23243a2658e0566e31a662adcbef6373b0d237d1d50ca78"
+  },
+  "network_bytes": 0,
+  "model_forward_count": 0,
+  "old_journals_preserved": true,
+  "failed_request_committed": false,
+  "formal_pose_metrics_available": false,
+  "full_paper_completed": false
+}

@@ -652,3 +652,44 @@ RE10K仍缺规定76个RGB场景，不重复205GB来源扫描；独立权重/训�
 下一次先核实负值的float16位模式/位置和固定参考真实输出，再考虑独立v3版本；
 必须保留v1/v2事务与成果，证明后续原加载器处理/补采语义、重放前缀，不能反复重启同一失败v2。
 当前不需要用户账户/预算或清理数据，安全诊断尚可继续，heartbeat保持。
+
+### §4.2/Table 1：signed-Inf参考验证与v3恢复（2026-10-02）
+
+frame42负值位模式64512/62917/62940对应−Inf/−23632/−24000；900个正Inf、无NaN。
+真实参考处理不修补这些值，仍保存全零uint16深度和+Inf maximum_depth；
+RGB/depth/mask字节、NPZ数组/dtype与独立v3完全一致，原/严格加载器均返回None并invalidate。
+证据results/co3d_negative_reference_diagnostic_20261002.json（仅诊断）、
+results/co3d_signed_inf_reference_v3_verified_20261002.json（实际v3文件/原加载器验证）。
+v3只允许负原始值出现在processed最大值+Inf且参考量化全零的路径；
+NaN、有限最大值的负深度、形状/IO/CRC异常仍硬失败，原数据不改、不删帧/换scene。
+v1/v2代码、事务和结果冻结；v3独立root/identity从头重放前三请求，
+网络输入tensor/GT/trace/共享after-state除新identity逐项等于v1，modalities/NPZ相同。
+证据results/co3d_v3_prefix3_migration_verified_20261002.json。176项离线测试通过。
+独立用户服务fast3r-co3d-continuous-prepare-v3.service已从第4请求恢复输入准备，
+日志results/co3d_continuous_prepare_v3.log；启动状态不是实时完成保证，后续须宿主核实。
+本轮仍没有Table 1正式位姿分数；100@候选请求不等于2011轨迹全量，作者划分等价未证实。
+Notebook仅追加此阶段真实证据分析；旧实验/权重/结果不覆盖，RE10K缺76及训练仍未完成。
+
+当前恢复入口：scripts/prepare_co3d_continuous_v3.py；事务
+results/co3d_continuous_prepare_v3_20261002/；processed data/co3d_lazy_v3_processed。
+旧v1/v2失败服务不要重启；不编辑已经绑定的v3代码/证据。下载仍raw2GiB、processed512MiB，
+至少1GiB预留、无清理/扩预算；本轮宿主可用36,049,698,816bytes为时间点快照。
+先检查systemctl --user show fast3r-co3d-continuous-prepare-v3.service、宿主进程与日志。
+健康运行不重复启动；失败先诊断并保留未提交请求，不能静默跳过新异常。
+只读恢复校验：PYTHONPATH=.:scripts python scripts/prepare_co3d_continuous_v3.py --verify-only
+迁移复核：PYTHONPATH=.:scripts python scripts/verify_co3d_v3_migration.py
+仅确认已退出且原因可安全恢复后：
+systemd-run --user --unit=fast3r-co3d-continuous-prepare-v3 --property=WorkingDirectory=/home/yyz/fast3r --property=StandardOutput=append:/home/yyz/fast3r/results/co3d_continuous_prepare_v3.log --property=StandardError=append:/home/yyz/fast3r/results/co3d_continuous_prepare_v3.log /bin/bash /home/yyz/fast3r/scripts/queue_co3d_continuous_prepare_v3.sh
+后续：核验第4请求真实补采trace；100请求完整后独立全前缀重放，才接GPU评测。
+保持heartbeat；现不需要用户提供许可/预算，不重复已归档证明或旧205GB扫描。
+
+**最新宿主状态覆盖v3启动快照**：fast3r-co3d-continuous-prepare-v3.service已failed/退出1、
+MainPID0，完整事务仍3/100。第4请求现已走过8个零深度候选，按原_get_views规则转到
+stopsign/249_26596_53531（不是人工换scene，不等于验证首场景202帧全部无效）。
+新轨迹frame81有效、frame54零深度、frame45触发finite-negative守卫；无NaN/正Inf，
+4个有限负值−8296/−2180/−1510/−5176，raw finite max62304；尺寸940×532与GT一致。
+缓存CRC/SHA通过，离线边界重放网络0/模型0；未提交失败请求。
+证据results/co3d_v3_request4_failure_20261002.json。signed-Inf证明不能推广到有限最大值，
+未放宽v3。下一次先执行frame45固定参考真实处理并对比NPZ/量化值/原loader，
+重点确认负值uint16转换及background/crop后有效深度；不先补零、删值、跳帧或启动同一v3。
+需要新适配时必须版本化并证明完整前缀/真实第4请求采样等价。heartbeat保持，无用户动作要求。

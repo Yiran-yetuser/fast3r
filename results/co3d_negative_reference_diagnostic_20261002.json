@@ -1,0 +1,91 @@
+{
+  "status": "real_negative_frame_reference_diagnostic_verified_not_live_change",
+  "paper_mapping": "section 4.2 / Table 1 CO3D input preparation only",
+  "member": "stopsign/599_92267_182752/images/frame000042.jpg",
+  "v2_fingerprint": {
+    "protocol_version": "reference_positive_inf_v2",
+    "lazy_code_sha256": "77405f5c25be6f0ca6aabbee093c8f6bdd65cfe2c9a620c80761645dfb1cd149",
+    "frozen_v1_sha256": "3bb37f497eee7186f99618fa67b8015b1350b2603f7cd2b1708b412eebb01250",
+    "candidate_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+    "cache": {
+      "candidate_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+      "footer_sha256": "dcbf28d16d071ae60c0dffb470bfc0ce903321f0a0329369464c6e08338c5da2",
+      "cache_code_sha256": "e1715c903c586e9676d200c1fa67bffeda0eccc27c2941f86c0f55fc4ba2d828",
+      "range_code_sha256": "f9af69036d93c1aeddcb6b1962a5d7eba9d6db3ed80da0ac2b7b6ba9a820adcc"
+    },
+    "preprocessor_sha256": "ef637270c45ce7489b9163576439bbf94841355687f2c7d7e9a3667125354d74",
+    "local_cropping_sha256": "c3ea4d47bf060d42c996ae21ce8d3d7d5d4906af9ecd045b227e81aa00d7b3ad",
+    "runtime": {
+      "numpy": "1.26.4",
+      "opencv": "4.11.0",
+      "pillow": "11.3.0"
+    }
+  },
+  "verification_code_sha256": "ba3ad306f73ec772eefd136f1712aac8acedf80818ad00474c7c3d5088eaf710",
+  "processed_modality_sha256": {
+    "image": "403c805faa1bc21a4a5a19bf967c9ec828580898f5710b35d6bc7f458a5e899e",
+    "depth": "3a46496dd41c9f9f53f19511cbf56f4ba58401d9c8806d49d37a7ed2dbf9b126",
+    "mask": "443613c95a44d564eff5159554afcf4de11dcc266da22944c3551f2696ec36bc"
+  },
+  "image_depth_mask_bytes_equal": true,
+  "npz_arrays_and_dtypes_equal": true,
+  "maximum_depth_preserved": "positive_infinity",
+  "original_loader_returns_none_and_invalidates": true,
+  "strict_loader_returns_none_and_invalidates": true,
+  "prepared_record": {
+    "raw_negative_values": [
+      {
+        "position_yx": [
+          510,
+          80
+        ],
+        "uint16_bits": 64512,
+        "value": "negative_infinity"
+      },
+      {
+        "position_yx": [
+          552,
+          961
+        ],
+        "uint16_bits": 62917,
+        "value": -23632.0
+      },
+      {
+        "position_yx": [
+          552,
+          962
+        ],
+        "uint16_bits": 62940,
+        "value": -24000.0
+      }
+    ],
+    "raw_positive_inf_count": 900,
+    "raw_nan_count": 0,
+    "stats": {
+      "raw_size_hw": [
+        1906,
+        1072
+      ],
+      "processed_size_hw": [
+        682,
+        384
+      ],
+      "raw_depth_max": "positive_infinity",
+      "zero_maximum_depth": false,
+      "positive_inf_reference_quantization": true
+    },
+    "processed_sha256": {
+      "stopsign/599_92267_182752/images/frame000042.jpg": "403c805faa1bc21a4a5a19bf967c9ec828580898f5710b35d6bc7f458a5e899e",
+      "stopsign/599_92267_182752/depths/frame000042.jpg.geometric.png": "3a46496dd41c9f9f53f19511cbf56f4ba58401d9c8806d49d37a7ed2dbf9b126",
+      "stopsign/599_92267_182752/masks/frame000042.png": "443613c95a44d564eff5159554afcf4de11dcc266da22944c3551f2696ec36bc",
+      "stopsign/599_92267_182752/images/frame000042.npz": "7dcdd01d49c526dc3415a815f33aea1a1457cc5ad44ca3d9d3d294ece9b42c52"
+    }
+  },
+  "network_bytes": 0,
+  "model_forward_count": 0,
+  "live_preprocessing_changed": false,
+  "continuous_sampling_resumed": false,
+  "prior_prefix_v2_equivalence_verified": false,
+  "formal_pose_metrics_available": false,
+  "full_paper_completed": false
+}
