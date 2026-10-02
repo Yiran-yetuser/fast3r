@@ -1,0 +1,20 @@
+{
+  "status": "actual_continuous_prefix_readonly_replay_verified_not_pose_scores",
+  "verified_request_count": 3,
+  "expected_request_count": 100,
+  "initial_sha256": "1915716c4cf9689d9ee13f07b0111c2a0541a64c256d34867d5c5a8f3c971ce8",
+  "final_state_sha256": "0154b66e7c22e322a42746e8d4084b47500aec5aaca313a96ffc4cd00dd2aaa7",
+  "request_sha256": {
+    "request_000.json": "c08693cf68e257860fd57e413f04c7acece23c7c2fbc4b3e73acfd95edeaf5ca",
+    "request_001.json": "493f6a4efd52880bcbe65ac5a5a2c180e5e0187fc79b0f77d4d436640627a27b",
+    "request_002.json": "07320a7ec708ac44f7961c380e29af389ff39bf9e89ee81733214d1d7edbeec1"
+  },
+  "input_tensors_GT_rng_and_shared_state_exact_equal": true,
+  "network_bytes": 0,
+  "verifier_sha256": "48504dcdacecdb5dbfac01e1703e5950560f6e37f90b0fb5da5bb98936877b36",
+  "model_forward_count": 0,
+  "all_100_requests_prepared": false,
+  "author_split_equivalence_verified": false,
+  "formal_pose_metrics_available": false,
+  "full_paper_completed": false
+}

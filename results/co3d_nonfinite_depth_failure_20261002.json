@@ -1,0 +1,82 @@
+{
+  "status": "real_request4_nonfinite_depth_diagnosed_service_stopped",
+  "request_zero_based": 3,
+  "base_index": 12089587,
+  "member": "stopsign/599_92267_182752/images/frame000081.jpg",
+  "source_sha256": {
+    "diagnostic": "60cf7306a1ea59246d127f125ed66e841aa9cd73cf87f6416806e4116c48d985",
+    "lazy_loader": "3bb37f497eee7186f99618fa67b8015b1350b2603f7cd2b1708b412eebb01250",
+    "reference_preprocessor": "ef637270c45ce7489b9163576439bbf94841355687f2c7d7e9a3667125354d74"
+  },
+  "raw_member_identity": {
+    "images": {
+      "sha256": "8f227c71d4fd9a608866af97a7f735423842632ae86dc9eb96c9021fd270a8ff",
+      "bytes": 172911,
+      "member_crc_verified": true
+    },
+    "depths": {
+      "sha256": "512fb958d4b74f80eed67fc16988f734f84f1f0b9b2b57264dacc502ba154bf1",
+      "bytes": 1070259,
+      "member_crc_verified": true
+    },
+    "masks": {
+      "sha256": "59f44c30585d5fe50a25f93047d150712cdf5d3c8fe6d4661f2163f13b51b7cc",
+      "bytes": 63946,
+      "member_crc_verified": true
+    }
+  },
+  "raw_depth_size_hw": [
+    1906,
+    1072
+  ],
+  "annotation_size_hw": [
+    1906,
+    1072
+  ],
+  "scale_adjustment": 1.0,
+  "mask_shape": [
+    1906,
+    1072
+  ],
+  "mask_finite": true,
+  "raw_depth_positive_inf_count": 5,
+  "raw_depth_nan_count": 0,
+  "raw_nonfinite_positions": [
+    [
+      109,
+      368
+    ],
+    [
+      109,
+      369
+    ],
+    [
+      109,
+      370
+    ],
+    [
+      111,
+      368
+    ],
+    [
+      162,
+      264
+    ]
+  ],
+  "after_reference_crop_resize_maximum": "positive_infinity",
+  "reference_uint16_shape": [
+    682,
+    384
+  ],
+  "reference_uint16_all_zero": true,
+  "reference_loader_effective_depth_finite": true,
+  "reference_loader_effective_depth_all_zero": true,
+  "numpy_version": "1.26.4",
+  "completed_request_count": 3,
+  "network_bytes": 0,
+  "live_preprocessing_changed": false,
+  "retry_started": false,
+  "formal_pose_metrics_available": false,
+  "full_paper_completed": false,
+  "next_step": "Versioned preprocessing must preserve reference uint16/NPZ semantics and explicitly trace zero-depth retry. Validate original-loader equality and prior committed inputs before resuming; do not replace Inf with zero silently."
+}

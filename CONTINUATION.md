@@ -575,3 +575,31 @@ systemd-run --user --unit=fast3r-co3d-continuous-prepare --property=WorkingDirec
 评测runner，隔离网络seed与采样RNG，逐项结果+恢复事务不能丢失失败场景。
 100@是100请求，不是全部2011轨迹；当前仍是候选划分的明确适配，不能冒充Table 1正式成绩。
 RE10K缺76及独立权重/训练等未完成；不重复旧205GB扫描，现有heartbeat继续接续。
+
+### 当前失败检查点：第4请求正Inf深度（§4.2/Table 1前提）
+
+宿主user service fast3r-co3d-continuous-prepare.service已failed/退出1、MainPID0，
+不是仍下载/排队。完整事务3/100（bicycle、motorcycle、cup），未提交第4请求；
+三请求的真实input tensor/GT/RNG、shared after-state全部只读重放一致，网络0bytes。
+证据results/co3d_continuous_prefix3_verified_20261002.json；前三请求和原raw数据保留。
+
+第4请求base12089587，stopsign/599_92267_182752/images/frame000081.jpg触发
+process_frame_allow_zero原始有限性守卫。5个float16正Inf（bits31744），无NaN/负值；
+RGB/深度/掩码及annotation尺寸1906×1072一致、scale_adjustment1、掩码有限正常。
+三个raw成员保存的CRC/SHA均核验通过，不将这认作已证明的下载损坏，不盲目重下载。
+按既有参考裁剪/resize后maximum仍Inf，故当前守卫拒绝，并非GPU/额度/空间不足。
+
+只读诊断scripts/diagnose_co3d_nonfinite_depth.py在内存中绕过有限性拒绝来观察算术，
+不修改live预处理/loader、raw文件或事务。参考depth/max*65535→uint16在本NumPy1.26.4下
+全零，原loader的np.nan_to_num(maximum)乘此量化深度也全零。该算术结果说明原加载器
+可能按已有全零深度无效帧规则补采，不支持把Inf像素手动补零或静默删帧/换scene。
+尚未完成完整参考预处理输出文件+原loader+真实连续补采的端到端等价验证。
+小证据results/co3d_nonfinite_depth_failure_20261002.json，显式retry_started=false；
+目前保持失败服务停止，未实施语义修复或重试。164项离线测试通过，Notebook保存真实输出。
+
+下一步：做独立版本化处理，保留参考量化/NPZ语义（Inf审计用字符串，不伪装成有限深度），
+验证全零帧经原loader返回None并记invalidate，连续补采状态/前三个历史input完全等价。
+证明安全明确后才迁移新协议/输出目录并从正确边界恢复，不能直接改已绑定旧runner导致
+恢复身份不一致，不能覆盖旧历史。当前不需要用户提供账户或预算；并未穷尽安全修复，
+heartbeat保留，下一次推进上述等价验证，不重复通知相同失败或重跑旧前向。
+整篇未完成，无新位姿成绩；下一次不要用旧active/PID30700快照判断服务还在运行。
