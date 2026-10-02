@@ -453,3 +453,30 @@ PYTHONPATH=.:scripts python scripts/diagnose_co3d_pose_orientation.py --verify-o
 11:25宿主RE10K扫描仍active/running、PID24596，202714404873/205763619478压缩字节，
 未有完整来源JSON；不要重启健康扫描。下一次优先检查全源报告和SHA/76集合/geometry，
 再继续CO3D受控诊断与连续100@状态设计。原报告不得覆盖，不跳过失败scene。
+
+### 11:51续接：RE10K补缺来源扫描完成，未补齐（§4.2/Table 1前提）
+
+fast3r-re10k-missing-candidates.service已正常退出0/inactive/dead，无剩余扫描进程。
+固定公开revision ea8d2427de59817b2f66f17b26276339841eb142的test.tar.gz完整流式读取
+205,763,619,478压缩字节，scanner检查gzip尾部/CRC且SHA256与已审计LFS值一致：
+f6055cd8ea1ccce642482ca623f98c21af1c449210760d23d78a43b09e546523。
+整包未落盘，数据和历史结果未删除；完成证据见results/re10k_missing_source_completion_20261002.json。
+
+按固定tar路径/PNG命名协议识别4137个源场景，76缺失ID均未观测，暂存0帧、补齐0场景。
+未对被忽略的tar路径做完整额外路径审计；结论只限此已核对路径协议，不称所有来源永久不可用。
+完整报告results/re10k_missing_candidates_full_source.json与独立一致性/GT核验
+results/re10k_missing_full_source_verified_20261002.json已归档。独立脚本复核原规定split、
+76缺失集合、官方GT SHA及14163条camera记录；网络0bytes，未再次下载/独立重hash205GB。
+不要把scanner全流SHA证据和独立重新读完整archive混为一谈。
+
+现有准备仍1756/1832场景、265447帧，不能以交集冒充Table 1正式成绩；没有新增图片几何或
+位姿指标。148项离线测试通过，Notebook新增真实源扫描分析单元、原22个分析单元未改。
+该来源扫描已结束，不重复启动/扫描此205GB源；后续继续公开补缺来源和CO3D受控诊断。
+
+最新恢复入口：fc829c3已推送，旧CO3D方向诊断和本次RE10K扫描不要重复执行。
+只读核验命令：PYTHONPATH=.:scripts python scripts/verify_re10k_missing_full_source.py
+scan service已结束，不再使用旧active/PID24596快照判断排队；目前没有本项目新后台数据任务。
+下次继续CO3D预测坐标/global-vs-local focal/PnP受控诊断与连续100@共享状态设计，
+并审查其他公开RE10K RGB补缺可行性；不登录、不读cookies、不接受账户条款或付费。
+缺76仍不足以认定所有安全替代已穷尽，不删除现有heartbeat；不要反复通知同一零补缺结论。
+需要作者划分/独立训练权重或预算的实验保持未完成，整篇尚未完成。

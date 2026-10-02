@@ -344,3 +344,22 @@ mAA仍0，因此不支持仅取消转置就解决此样本低分，也不证明�
 已重新verify-only核验保存poses和45pair误差，无推理重跑。145项离线测试通过；Notebook
 新增1个真实分析单元、原21个未改。下一步继续预测坐标/首视图global-vs-local focal与PnP
 受控接线诊断，保留所有基线；连续100@共享状态及作者划分/权重对应仍未完成。
+
+### 11:51续接：RE10K补缺来源扫描完成，未补齐（§4.2/Table 1前提）
+
+fast3r-re10k-missing-candidates.service已正常退出0/inactive/dead，无剩余扫描进程。
+固定公开revision ea8d2427de59817b2f66f17b26276339841eb142的test.tar.gz完整流式读取
+205,763,619,478压缩字节，scanner检查gzip尾部/CRC且SHA256与已审计LFS值一致：
+f6055cd8ea1ccce642482ca623f98c21af1c449210760d23d78a43b09e546523。
+整包未落盘，数据和历史结果未删除；完成证据见results/re10k_missing_source_completion_20261002.json。
+
+按固定tar路径/PNG命名协议识别4137个源场景，76缺失ID均未观测，暂存0帧、补齐0场景。
+未对被忽略的tar路径做完整额外路径审计；结论只限此已核对路径协议，不称所有来源永久不可用。
+完整报告results/re10k_missing_candidates_full_source.json与独立一致性/GT核验
+results/re10k_missing_full_source_verified_20261002.json已归档。独立脚本复核原规定split、
+76缺失集合、官方GT SHA及14163条camera记录；网络0bytes，未再次下载/独立重hash205GB。
+不要把scanner全流SHA证据和独立重新读完整archive混为一谈。
+
+现有准备仍1756/1832场景、265447帧，不能以交集冒充Table 1正式成绩；没有新增图片几何或
+位姿指标。148项离线测试通过，Notebook新增真实源扫描分析单元、原22个分析单元未改。
+该来源扫描已结束，不重复启动/扫描此205GB源；后续继续公开补缺来源和CO3D受控诊断。

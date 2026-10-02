@@ -1,0 +1,19 @@
+{
+  "snapshot_time": "2026-10-02T11:56:07.114232+08:00",
+  "service": "fast3r-re10k-missing-candidates.service",
+  "properties": {
+    "MainPID": "0",
+    "ExecMainStatus": "0",
+    "ActiveState": "inactive",
+    "SubState": "dead"
+  },
+  "full_source_report_sha256": "2b8548c5f8b9b3a910c2b98e93d0cc8f6ac2104cecdd289e87e66d3bd2b7cda7",
+  "report_modified_time": "2026-10-02T11:29:35.807235+08:00",
+  "log_path": "results/re10k_missing_candidates_stream.log",
+  "free_disk_bytes": 42627280896,
+  "GPU_free_memory_MiB": 10902,
+  "completed": true,
+  "data_ready": false,
+  "dataset_or_history_deleted": false,
+  "notes": "Historical read-only host snapshot; no restart, full archive not stored. No source images recovered."
+}
