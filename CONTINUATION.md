@@ -731,3 +731,39 @@ request3 base12089587：原_get_views经首轨迹8个零深度候选后重试到
 按原补采规则返回10视图/7个不同frame；不是人工替换场景，不等于审计首轨迹全部202帧。
 后台继续后续准备，此4请求证据是不可变快照，不是100已完成或最新实时数量。
 下一次从v4宿主服务/日志/事务数量接续，不重放或重复归档这份4请求快照。
+
+### 2026-10-03：CO3D候选100请求全前缀核验完成，启动独立位姿评测
+
+- v4准备服务已正常退出0；完整提交100/100请求。服务日志
+  `results/co3d_continuous_prepare_v4.log`；逐请求事务位于
+  `results/co3d_continuous_prepare_v4_20261002/`，处理数据位于
+  `data/co3d_lazy_v4_processed/`，原始Range缓存仍受2GiB上限约束。
+- 使用 `scripts/verify_co3d_continuous_v4_prefix.py --output
+  results/co3d_v4_prefix_full_20261003.json` 对全100请求逐项只读重放。
+  成功证据确认输入tensor、相机GT、RNG、load trace、pool attempts和共享状态完全一致；
+  network_bytes=0、model_forward_count=0。此结果验证输入准备与断点链，不是位姿成绩。
+- 新增候选评测入口 `scripts/fast3r_hf_co3d_100_pose_eval.py` 和队列脚本
+  `scripts/queue_co3d_pose_100_eval.sh`。策略按100个已固定请求顺序逐个重放并再核对
+  RGB输入/GT/共享状态；仅`img`与`true_shape`送入Fast3R，GT不用于网络、焦距或PnP。
+  每个请求使用独立seed `42 + request_index`，保留10视角中的重复项、45对全部相对位姿，
+  PnP失败的identity fallback保留并计数；输出请求级指标平均及4500 pair pooled口径。
+  这100请求仅是候选100@适配，不是作者CO3D测试划分，不能标作正式Table 1。
+- 新评测service `fast3r-co3d-pose-100-eval.service` 于本检查点启动，日志
+  `results/co3d_pose_100_eval_v1.log`，逐请求checkpoint在
+  `results/co3d_pose_100_seed42_progress_v1/`，最终文件预定
+  `results/co3d_pose_100_seed42_adaptation_v1.json`。启动时MainPID60744、active/running；
+  queue脚本等候至少10240MiB空闲GPU，再双重检查，磁盘约32GiB可用。以上均为启动快照，
+  下一次必须重新查询服务/GPU/空间。评测独立续跑；错误时保留已保存请求，不跳过失败。
+- 当最终候选报告生成后，用其真实汇总更新Notebook、PAPER_REPRODUCTION.md和
+  PROTOCOL_AUDIT.md，运行Notebook分析单元并逐步提交/推送小型代码和报告。
+  RE10K仍缺76个规定RGB场景；公开checkpoint与论文权重映射、CO3D author split等价、
+  独立训练消融/完整训练仍未完成。候选分数不升级为全量Table 1成绩。
+
+**评测启动纠正记录（同日）**：评测v1 dry-run发现初始化采样state漏设Python seed，服务在模型加载/前向前退出1；保留日志 `results/co3d_pose_100_eval_v1.log` 与v1空progress目录。将准备state核对前显式恢复初始seed，使用独立v2 progress/output身份，不复用v1检查点；修复后dry-run再次核验100请求，network0、forward0。评测v2服务现为active/running，启动PID61381，追加日志 `results/co3d_pose_100_eval_v2.log`，新progress `results/co3d_pose_100_seed42_progress_v2/`，最终输出 `results/co3d_pose_100_seed42_adaptation_v2.json`。本次资源快照磁盘32GiB、GPU空闲约10810MiB；启动服务会重新等待并双检10240MiB阈值。v1失败未使用GPU、未写pose结果、100条输入数据和v1/v4历史文件均保留。
+
+### 候选位姿评测v2焦距边界诊断与v3续跑（2026-10-03）
+
+- v2按固定输入完成3/100请求后，在request 3因参考焦距估计为0触发入口前置保护而退出1；保留日志`results/co3d_pose_100_eval_v2.log`与v2断点，不把3条升格成正式结果。
+- 固定request 3在真实模型前向后的诊断记录：`results/co3d_candidate_request003_focal_diagnostic_20261003.json`。模型预测点图/置信度有限，confidence p10=1.0，但发布版估计焦距为0。公开`fast_pnp`接受0焦距并捕获OpenCV求解错误、返回None；原协议随后使用显式identity fallback。因此v3只移除过严的`focal<=0`门槛：0沿公开PnP路径处理并计为PnP失败回退；负值或非有限焦距、非有限点图/置信度仍硬失败。不以GT焦距替换、不修正焦距，不静默丢弃请求。
+- 新版`fast3r_hf_co3d_100_pose_eval.py`使用独立v3进度目录和最终文件，禁止混合v2状态；`--dry-run`全前缀核验通过（100请求、网络0、模型前向0），`git diff --check`通过。
+- `fast3r-co3d-pose-100-eval.service`已于2026-10-03 05:26启动，当前检查时active/running，MainPID 64413；GPU空闲10817MiB，项目盘余量34211807232bytes。实时状态需每次续接重新查询。日志为`results/co3d_pose_100_eval_v3.log`，progress为`results/co3d_pose_100_seed42_progress_v3/`，最终文件`results/co3d_pose_100_seed42_adaptation_v3.json`。后台先校验完整输入前缀，再至少等待10240MiB可用显存。进程正运行；此100请求仍是候选协议适配，作者split等价未经证明，不得称为正式Table 1或完整论文成绩。
