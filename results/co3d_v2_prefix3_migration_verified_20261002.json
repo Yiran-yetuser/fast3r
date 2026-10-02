@@ -1,0 +1,23 @@
+{
+  "status": "v2_first_three_real_requests_equal_frozen_v1",
+  "paper_mapping": "section 4.2 / Table 1 input preparation only",
+  "verified_request_count": 3,
+  "old_journal_preserved": true,
+  "input_tensors_GT_rng_trace_and_shared_state_equal": true,
+  "modality_bytes_and_npz_arrays_equal": true,
+  "v2_initial_sha256": "cf6a7bf471eb490a4d0d70cd2f6a92255ed79e915521a3895157b263828bdf93",
+  "v2_request_sha256": {
+    "request_000.json": "59d8604851087656bcdddbfb7443c7c4ec3019c741448b7ca7bf9c285c18c12c",
+    "request_001.json": "444ceb0aba74cdaab0812c52a48f9e729149d279e452dedfc2226eab74914e86",
+    "request_002.json": "bd12d7e9a56a68c58079e2ab6c56cb742946b573d2202a94d2c9ccbd865d289f"
+  },
+  "verification_code_sha256": "a73f2630041413c90f1ffcc056b5a1720d4e35d8e927ebdb9b1a729c8817c8e7",
+  "runner_sha256": "ede7cb6ed35683d85a08d2838c3dbfe2faa62516e5cc9a1734940d7fbd8cb661",
+  "inf_proof_sha256": "34053158cbf5369dca7753bdf554f0f647006084dee7d30aeab2602a7d7ced05",
+  "network_bytes_this_verifier": 0,
+  "model_forward_count": 0,
+  "all_100_requests_prepared": false,
+  "formal_pose_metrics_available": false,
+  "author_split_equivalence_verified": false,
+  "full_paper_completed": false
+}

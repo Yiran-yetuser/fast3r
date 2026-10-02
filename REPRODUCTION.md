@@ -354,3 +354,52 @@ RGB/深度/掩码及annotation尺寸1906×1072一致、scale_adjustment1、掩�
 恢复身份不一致，不能覆盖旧历史。当前不需要用户提供账户或预算；并未穷尽安全修复，
 heartbeat保留，下一次推进上述等价验证，不重复通知相同失败或重跑旧前向。
 整篇未完成，无新位姿成绩；下一次不要用旧active/PID30700快照判断服务还在运行。
+
+### CO3D正Inf参考等价与v2安全恢复（§4.2/Table 1，2026-10-02）
+
+新增真实失败帧验证：RGB/量化深度/掩码与固定参考prepare_sequences输出逐字节一致，
+NPZ数组及dtype一致，maximum_depth仍为正Inf；审计JSON用positive_infinity字符串。
+没有先把Inf像素补零，没有删帧/改候选池。参考量化在本运行时得到全零uint16，
+原Co3d_Multiview加载参考文件确实返回None并设invalidate；严格加载v2文件行为相同。
+离线证明禁止HttpRangeFile/RecordedRanges网络构造，实际网络0、模型前向0。
+证据results/co3d_inf_reference_v2_offline_verified_20261002.json。
+同轮早期输出results/co3d_inf_reference_v2_verified_20261002.json保留为历史试验记录；
+正式恢复绑定使用上述offline版本及其代码SHA，不依赖早期输出。
+
+独立scripts/co3d_lazy_dataset_v2.py、data/co3d_lazy_v2_processed与v2事务目录，
+原v1处理器/事务/数据/失败日志保持不变；NaN/负深度/IO/CRC异常仍硬失败。
+从头重放前三请求（仅准备，没有网络前向）后，input tensor SHA、GT、rng标记、
+load_trace、pool_attempts、全部共享after-state除新协议identity之外逐项等于v1；
+原raw成员身份相同，RGB/深度/掩码字节及NPZ数组/dtype一致。
+证据results/co3d_v2_prefix3_migration_verified_20261002.json；verify-only也通过3/100。
+恢复不是把旧状态identity改名，而是新协议独立重放后写新事务。
+
+已启动宿主用户级fast3r-co3d-continuous-prepare-v2.service，从第4请求继续。
+日志results/co3d_continuous_prepare_v2.log，事务results/co3d_continuous_prepare_v2_20261002/，
+启动前空间36,053,286,912bytes。raw2GiB、processed512MiB、至少1GiB预留不变；
+后台只准备数据，不占GPU、不运行模型，不保证100请求已完成。
+旧fast3r-co3d-continuous-prepare.service仍failed且MainPID0，不重启旧流程。
+恢复前必须重新核实宿主服务/进程/空间；健康运行不重复启动，不使用本段启动快照当当前状态。
+
+只读恢复检查：PYTHONPATH=.:scripts python scripts/prepare_co3d_continuous_v2.py --verify-only
+迁移证明复核：PYTHONPATH=.:scripts python scripts/verify_co3d_v2_migration.py
+实际Inf证明复核：PYTHONPATH=.:scripts python scripts/verify_co3d_inf_reference_v2.py
+恢复命令（仅已退出且安全可恢复时）：
+systemd-run --user --unit=fast3r-co3d-continuous-prepare-v2 --property=WorkingDirectory=/home/yyz/fast3r --property=StandardOutput=append:/home/yyz/fast3r/results/co3d_continuous_prepare_v2.log --property=StandardError=append:/home/yyz/fast3r/results/co3d_continuous_prepare_v2.log /bin/bash /home/yyz/fast3r/scripts/queue_co3d_continuous_prepare_v2.sh
+
+本轮173项离线unittest通过（包含导入fixture测试），Notebook追加分析单元并宿主执行。
+下一步检查第4请求真实补采trace及100请求完整事务；完成后独立全前缀重放，再接GPU评测。
+当前只证明单失败帧参考等价和三请求迁移，不提前声称后续全部帧/请求等价。
+CO3D作者划分/公开权重与论文协议等价仍未最终确认；100@不是2011轨迹全量。
+RE10K仍缺规定76个RGB场景，不重复205GB来源扫描；独立权重/训练实验未完成。
+保持heartbeat续接。整篇未完成，本轮没有新增Table 1正式指标。
+
+**本轮最新状态覆盖上述启动快照**：v2服务已failed/退出1、MainPID0；仍是3/100完整事务。
+离线恢复第三请求after-state并重放第4请求，trace明确frame81为zero_masked_depth_after_crop，
+接着frame42为hard_error。新帧有900个正Inf、3个负深度、无NaN；RGB/深度/mask及GT尺寸
+仍1906×1072一致、scale1，mask有限[0,0.996078]，缓存成员CRC/SHA通过。
+证据results/co3d_v2_request4_failure_20261002.json，禁止网络构造、网络0、前向0。
+这次失败由负深度守卫触发；正Inf等价证明不能自动推广到负值，未放宽守卫或跳过frame42。
+下一次先核实负值的float16位模式/位置和固定参考真实输出，再考虑独立v3版本；
+必须保留v1/v2事务与成果，证明后续原加载器处理/补采语义、重放前缀，不能反复重启同一失败v2。
+当前不需要用户账户/预算或清理数据，安全诊断尚可继续，heartbeat保持。

@@ -184,3 +184,5 @@ results/*_progress/
 # Continuous preparation journals are local recovery state, not small reports.
 results/co3d_continuous_prepare_20261002/
 results/co3d_continuous_prepare.lock
+results/co3d_continuous_prepare_v2_20261002/
+results/co3d_continuous_prepare_v2.lock

@@ -1,0 +1,88 @@
+{
+  "status": "new_v2_request4_failure_reproduced_offline_service_stopped",
+  "paper_mapping": "section 4.2 / Table 1 input preparation only",
+  "completed_request_count": 3,
+  "request_zero_based": 3,
+  "base_index": 12089587,
+  "failure": {
+    "image_path": "stopsign/599_92267_182752/images/frame000042.jpg",
+    "raw_depth_shape": [
+      1906,
+      1072
+    ],
+    "annotation_size_hw": [
+      1906,
+      1072
+    ],
+    "image_size_wh": [
+      1072,
+      1906
+    ],
+    "mask_shape": [
+      1906,
+      1072
+    ],
+    "mask_finite": true,
+    "mask_min": 0.0,
+    "mask_max": 0.9960784316062927,
+    "depth_nan_count": 0,
+    "depth_positive_inf_count": 900,
+    "depth_negative_count": 3,
+    "scale_adjustment": 1.0,
+    "raw_members": {
+      "images": {
+        "sha256": "41fb89ca7dbd3af915fc61eb2edd8d1697174dffdd5cc18091d16a2f23e5d956",
+        "bytes": 269203,
+        "cached_crc_verified": true
+      },
+      "depths": {
+        "sha256": "7a08206d22966628eb28009d33020f35c0a5369aa67a4dc244f69a6832db3b18",
+        "bytes": 1638664,
+        "cached_crc_verified": true
+      },
+      "masks": {
+        "sha256": "a9835d87940fc20cfd4ae880f88597249eb947ccd781bae0e93d87e94fe39e82",
+        "bytes": 23565,
+        "cached_crc_verified": true
+      }
+    }
+  },
+  "load_trace": [
+    {
+      "category": "stopsign",
+      "scene": "599_92267_182752",
+      "pool_index": 40,
+      "frame_number": 81,
+      "request": 3,
+      "status": "zero_masked_depth_after_crop"
+    },
+    {
+      "category": "stopsign",
+      "scene": "599_92267_182752",
+      "pool_index": 21,
+      "frame_number": 42,
+      "request": 3,
+      "status": "hard_error",
+      "error_type": "ValueError"
+    }
+  ],
+  "pool_attempts": [
+    {
+      "category": "stopsign",
+      "scene": "599_92267_182752",
+      "candidate_pool_length": 202
+    }
+  ],
+  "error_type": "ValueError",
+  "error_text": "Malformed depth/mask/geometry; never sample past errors",
+  "source_sha256": {
+    "diagnostic": "469498a3222430d7cda2c88c2a4aeb51a1137453c5b3bfe7ac8d5b098839cab1",
+    "v2_preparer": "77405f5c25be6f0ca6aabbee093c8f6bdd65cfe2c9a620c80761645dfb1cd149"
+  },
+  "network_bytes": 0,
+  "model_forward_count": 0,
+  "old_journals_preserved": true,
+  "failed_request_committed": false,
+  "formal_pose_metrics_available": false,
+  "full_paper_completed": false
+}
