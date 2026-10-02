@@ -1,6 +1,6 @@
 # Fast3R：逐项复现与论文对应表
 
-核对版本：[arXiv v2，2025-03-19](https://arxiv.org/html/2501.13928v2)。本记录更新于 2026-10-02。
+核对版本：[arXiv v2，2025-03-19](https://arxiv.org/html/2501.13928v2)。本记录更新于 2026-10-03。
 
 ## 完成标准
 
@@ -11,7 +11,7 @@
 | §3.1；§3.3；Figure 2 | 多张图是否一次输出 global/local 点图与置信度？ | Notebook 的推理与模块 hook；`config.json` | 推理验证已执行 |
 | §3.2，Eq. (1)–(3) | 归一化点图回归、置信度加权损失 | `results/loss_checks.json` | 数值/梯度检查通过；尚未重新训练 |
 | §3.4；§4.1；Table 2 | 视角数增加时耗时与显存如何变化？ | `results/dtu_paper_experiments.json` 的 performance | 本机适配实验；单卡不覆盖论文 A100/多卡设置 |
-| §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | 单卡HF位姿入口；RE10K1832相机记录及265447帧核验 | RGB/GT已核验1756/1832场景，缺76，尚无正式位姿指标 |
+| §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | CO3D候选100请求/4500pair已运行核验；RE10K1832相机记录及265447帧核验 | CO3D候选mAA@30=23.8007%，划分/权重等价未确认；RE10K1756/1832，缺76；正式Table1未完成 |
 | §4.3；Table 3 | 7-Scenes / NRGBD 重建 | `results/nrgbd_seed42_stride40.json`；`results/7scenes_paired_seed42_stride20.json` | NRGBD完整9场景、7-Scenes全部18测试轨迹已运行核验；未对齐论文数值 |
 | §4.3；Table 4 | DTU 完整 22 场景重建 | `demo_outputs/paper_eval/dtu_all.json` | 已运行；论文数值尚未对齐 |
 | §5.1；Figure 5 | 测试视角数对重建质量的影响 | 新脚本 3/5/10/20 视角 | 本地均匀采样适配实验 |
@@ -585,3 +585,49 @@ request3 base12089587：原_get_views经首轨迹8个零深度候选后重试到
 按原补采规则返回10视图/7个不同frame；不是人工替换场景，不等于审计首轨迹全部202帧。
 后台继续后续准备，此4请求证据是不可变快照，不是100已完成或最新实时数量。
 下一次从v4宿主服务/日志/事务数量接续，不重放或重复归档这份4请求快照。
+
+### CO3D候选100请求位姿评测与完整核验（§4.2 / Table 1，2026-10-03）
+
+候选输入v4的100/100事务全部完成并通过全前缀只读重放，输入tensor、GT、RNG、
+补采trace及共享状态一致。GPU评测v3于05:32:52正常退出0，全部100请求/1000输入视角、
+4500个相机对已保存；独立核验逐条连接prepared事务、RGB tensor哈希、GT及checkpoint，
+从保存的c2w重新计算全部pair误差、逐请求指标和两个汇总口径，均通过。
+完整本地报告为`results/co3d_pose_100_seed42_adaptation_v3.json`；
+可提交的小摘要为[`results/co3d_pose_100_seed42_verified_summary_20261003.json`](results/co3d_pose_100_seed42_verified_summary_20261003.json)。
+全前缀证据为`results/co3d_v4_prefix_full_20261003.json`。
+
+| 指标（百分比，越高越好） | 候选100请求实测 | 论文Table 1 Fast3R参考 |
+| --- | ---: | ---: |
+| RRA@5 | 28.0444 | 90.2 |
+| RRA@15 | 31.2889 | 96.2 |
+| RTA@5 | 21.9778 | 68.2 |
+| RTA@15 | 28.5778 | 81.6 |
+| mAA@30 | 23.8007 | 75.0 |
+
+论文参考来自[arXiv v2 Table 1](https://arxiv.org/html/2501.13928v2#S4.SS2)，
+只是参照；作者划分和该公开checkpoint对应论文哪组训练权重仍未确认，
+不能把候选适配成绩作为正式Table 1复现。额外RRA@30/RTA@30为35.2889%/35.7111%。
+聚合先对每请求45pair计算，再平均100请求；全4500pair池化结果在浮点舍入范围内一致。
+
+实际返回99条轨迹、38类物体、884个唯一RGB帧；64请求有重复视角，共160个重复相机对。
+每请求10个返回视角都保留，重复零基线pair沿用发布版指标处理，未删除以提高成绩。
+8请求的发布版首视图global焦距估计为0，80/1000视角PnP失败，均以显式identity回退保留。
+v2在第4请求因过严的零焦距门槛停下，原3条结果/日志保留；v3按公开`fast_pnp`处理0焦距，
+非有限/负焦距和非有限预测仍硬失败。未用GT焦距替换或丢弃低分请求。
+候选结果明显低于论文参考，但现有证据不能把全部差距归因于单一因素。
+
+本机入口仅给网络`img/true_shape`，预测global点图→发布版首视图焦距估计→
+`conf>1`的RANSAC-PnP（100迭代、固定逐视角OpenCV seed）→c2w→全部相对相机对。
+GT/深度/mask/K参与已核验的数据准备，未输入网络或预测焦距/PnP。
+论文§4.2描述随机焦距猜测和top15%置信度，而发布版当前入口使用上述估计器与`conf>1`；
+此差异需要受控实验，尚未证明是误差根因。采用16-mixed、DPT chunk2、
+每请求模型seed42+index并独立恢复采样RNG，均记录为本机适配。
+
+Notebook新增分析单元读取小摘要、核对完整报告哈希及逐请求重算证据，保存真实对照表、
+失败统计和科学图`results/figures/co3d_candidate100_pose.png`。旧实验输出保留。
+只读核验命令：`PYTHONPATH=.:scripts python scripts/verify_co3d_candidate_pose_report.py`。
+
+下一步按协议审计顺序核对作者CO3D processed split/100@身份、公开权重实验对应关系，
+并设计固定输入下发布入口与论文PnP描述的单变量诊断。RE10K仍缺76个规定场景；
+已归档205GB来源扫描不重复执行。完整训练、独立训练消融、附录BA/splatting/depth
+仍未完成，不因这一候选成绩而勾选整篇完成。

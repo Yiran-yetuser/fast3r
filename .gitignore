@@ -3,6 +3,10 @@ logs
 # Large frame-index inventory stays local; commit compact SHA/count summaries.
 results/co3d_test_selection_manifest.json
 
+# Full candidate pose matrices and transaction checkpoints stay local.
+results/co3d_pose_100_seed42_adaptation_v*.json
+results/co3d_pose_100_seed42_progress_v*/
+
 notebooks/figures/
 notebooks/output/
 

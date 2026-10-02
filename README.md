@@ -547,3 +547,21 @@ request3 base12089587：原_get_views经首轨迹8个零深度候选后重试到
 按原补采规则返回10视图/7个不同frame；不是人工替换场景，不等于审计首轨迹全部202帧。
 后台继续后续准备，此4请求证据是不可变快照，不是100已完成或最新实时数量。
 下一次从v4宿主服务/日志/事务数量接续，不重放或重复归档这份4请求快照。
+
+### CO3D candidate 100-request pose evaluation completed (2026-10-03)
+
+The verified continuous preparation and GPU evaluation completed all 100 requests / 4,500 camera pairs.
+The [compact verified summary](results/co3d_pose_100_seed42_verified_summary_20261003.json) reports
+RRA@15 **31.2889%**, RTA@15 **28.5778%**, and mAA@30 **23.8007%**.
+Eight zero-focal requests caused 80/1,000 PnP view failures; all identity fallbacks remain included.
+The actual inputs cover 99 trajectories / 38 categories / 884 unique returned RGB frames;
+64 requests contain repeated views, retaining all 160 duplicate camera pairs.
+An independent read-only audit recomputed every pair error, request metric, and aggregate from saved poses,
+and checked the preparation input/GT hashes, bound code/weights, checkpoints and fallback accounting.
+Run `PYTHONPATH=.:scripts python scripts/verify_co3d_candidate_pose_report.py` to reverify locally.
+
+The notebook saves new executed analysis cells and a [scientific figure](results/figures/co3d_candidate100_pose.png).
+Author processed-split equivalence and public-checkpoint mapping to paper experiments remain unverified,
+so these are candidate adaptation scores; the full Table 1 reproduction and full-paper training/ablations
+remain incomplete. Paper references, protocol differences and next steps are recorded in
+[PAPER_REPRODUCTION.md](PAPER_REPRODUCTION.md) and [PROTOCOL_AUDIT.md](PROTOCOL_AUDIT.md).

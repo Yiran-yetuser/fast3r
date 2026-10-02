@@ -588,3 +588,24 @@ request3 base12089587：原_get_views经首轨迹8个零深度候选后重试到
 按原补采规则返回10视图/7个不同frame；不是人工替换场景，不等于审计首轨迹全部202帧。
 后台继续后续准备，此4请求证据是不可变快照，不是100已完成或最新实时数量。
 下一次从v4宿主服务/日志/事务数量接续，不重放或重复归档这份4请求快照。
+
+## CO3D候选100请求评测的当前协议结论（2026-10-03）
+
+v4输入准备100事务与全前缀重放已完成，v3评测服务正常退出0。独立只读核验覆盖全部
+100请求/4500pair，输入哈希/GT/prepared身份匹配，保存poses的pair误差与全部指标重算一致。
+小型结果见`results/co3d_pose_100_seed42_verified_summary_20261003.json`：
+RRA@15=31.2889%、RTA@15=28.5778%、mAA@30=23.8007%；8个零焦距请求、
+80/1000视角PnP失败identity回退全部计入。99条轨迹/38类/884唯一返回RGB，
+64请求重复视角及160重复相机对全部保留。
+
+本机公开HF路径为first-view global焦距估计（confidence p10）、conf>1的PnP、
+发布版方向校正、顺序OpenCV固定seed、16-mixed和chunk2。论文§4.2描述随机焦距猜测、
+top15%置信度及多线程PnP；这些有依据的差异并不证明全部误差根因。
+参考[Table1](https://arxiv.org/html/2501.13928v2#S4.SS2) Fast3R mAA30=75.0%仅作参照，
+author processed split、100@采样身份与公开checkpoint实验映射尚未确认。
+
+v2零焦距前置拒绝已诊断为比公开fast_pnp更严格；v3让零值沿公开PnP失败回退处理，
+非有限/负焦距仍硬失败，未借用GT焦距，v2断点及日志保留。
+核验器`scripts/verify_co3d_candidate_pose_report.py`不加载模型或访问网络，
+校验完整结果和逐请求文件同一性、所有原绑定源码/权重哈希、真实输入GT、
+fallback identity、pair误差、逐请求平均和池化汇总。正式Table1、整篇训练/消融仍未完成。

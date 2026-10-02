@@ -767,3 +767,34 @@ request3 base12089587：原_get_views经首轨迹8个零深度候选后重试到
 - 固定request 3在真实模型前向后的诊断记录：`results/co3d_candidate_request003_focal_diagnostic_20261003.json`。模型预测点图/置信度有限，confidence p10=1.0，但发布版估计焦距为0。公开`fast_pnp`接受0焦距并捕获OpenCV求解错误、返回None；原协议随后使用显式identity fallback。因此v3只移除过严的`focal<=0`门槛：0沿公开PnP路径处理并计为PnP失败回退；负值或非有限焦距、非有限点图/置信度仍硬失败。不以GT焦距替换、不修正焦距，不静默丢弃请求。
 - 新版`fast3r_hf_co3d_100_pose_eval.py`使用独立v3进度目录和最终文件，禁止混合v2状态；`--dry-run`全前缀核验通过（100请求、网络0、模型前向0），`git diff --check`通过。
 - `fast3r-co3d-pose-100-eval.service`已于2026-10-03 05:26启动，当前检查时active/running，MainPID 64413；GPU空闲10817MiB，项目盘余量34211807232bytes。实时状态需每次续接重新查询。日志为`results/co3d_pose_100_eval_v3.log`，progress为`results/co3d_pose_100_seed42_progress_v3/`，最终文件`results/co3d_pose_100_seed42_adaptation_v3.json`。后台先校验完整输入前缀，再至少等待10240MiB可用显存。进程正运行；此100请求仍是候选协议适配，作者split等价未经证明，不得称为正式Table 1或完整论文成绩。
+
+### 当前恢复入口：CO3D候选100请求评测完成并独立核验（2026-10-03）
+
+宿主fast3r-co3d-pose-100-eval.service于05:32:52正常退出0、inactive/dead、MainPID0；
+全部100请求/4500pair已完成，无须重启v4准备或v3评测。完整结果
+results/co3d_pose_100_seed42_adaptation_v3.json的SHA256为
+e52f2101a05475dcac4b3a784a27dc7c5e0f10a4e8f35683a62601671c90036d。
+新独立核验脚本scripts/verify_co3d_candidate_pose_report.py逐项连接GT/输入、
+prepared/eval事务和完整报告，重算全部pair误差、metrics/aggregate，所有identity回退保留。
+小摘要results/co3d_pose_100_seed42_verified_summary_20261003.json记录实测：
+RRA15=31.2889%、RTA15=28.5778%、mAA30=23.8007%，8零焦距请求/80PnP失败视角。
+实际99轨迹/38类/884唯一返回RGB，64重复请求/160重复pair；此100@候选适配
+不等于2011轨迹全量，作者split和论文checkpoint映射仍未证实，正式Table1未完成。
+本轮宿主磁盘约32GiB；GPU当前有其他占用，后续GPU实验仍要重新检查10240MiB阈值。
+
+Notebook新增paper-co3d-candidate100-pose单元及真实执行输出；文档主表已更新，
+旧GPU报告/Notebook输出保留。完整大JSON和progress目录仅留本地，
+提交小摘要、全前缀proof、焦距诊断小JSON、代码及科学图。
+只读复核：PYTHONPATH=.:scripts python scripts/verify_co3d_candidate_pose_report.py
+
+下一步优先核对公开作者processed split/100@身份与checkpoint实验映射，
+再设计同一固定输入下发布版与论文PnP描述的受控诊断（随机焦距猜测、top15% confidence）。
+不得以改变协议后更高分覆盖基线，不用GT焦距凑分。
+RE10K仍1756/1832、缺76；已完整扫描的205GB来源不再重跑。
+后续安全推进附录评测可行性；缺独立权重/128A100训练资源的训练实验不打勾。
+任务仍有可推进的协议工作，heartbeat保持；无新增用户账户/预算要求。
+
+本轮附加核验：6项内存损坏注入（正式成绩误标、缺请求、aggregate、RGB哈希、
+非identity失败回退、重复pair）全部被独立核验器拒绝；没有修改原报告。
+Notebook原91单元逐项等于提交前历史版本，新2单元含宿主Jupyter真实执行输出，
+无error；科学图已渲染检查，git diff --check通过。

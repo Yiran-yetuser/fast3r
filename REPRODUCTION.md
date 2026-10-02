@@ -4,7 +4,7 @@
 
 ## 复现范围
 
-本分支完成了公开权重的端到端推理、DTU 22 场景评测，并继续开展视角数与 local/global 点图消融。整篇论文尚未复现完成，逐项状态与实验条件见 [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md)。推理链路为：
+本分支完成了公开权重的端到端推理、DTU22场景、NRGBD9场景、7-Scenes18条测试轨迹重建，以及视角数/local-global适配实验。CO3D候选100请求位姿评测也已完成并逐项核验，但正式Table1划分和权重对应尚未确认。整篇论文尚未复现完成，逐项状态与实验条件见 [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md)。推理链路为：
 
 ```text
 示例视频 → 抽帧 → 图片归一化 → Fast3R 一次多视图前向
@@ -456,3 +456,17 @@ request3 base12089587：原_get_views经首轨迹8个零深度候选后重试到
 按原补采规则返回10视图/7个不同frame；不是人工替换场景，不等于审计首轨迹全部202帧。
 后台继续后续准备，此4请求证据是不可变快照，不是100已完成或最新实时数量。
 下一次从v4宿主服务/日志/事务数量接续，不重放或重复归档这份4请求快照。
+
+## CO3D候选100请求位姿结果（2026-10-03，§4.2 / Table1适配）
+
+完整100请求/4500pair评测和独立重算已完成；RRA@15为31.2889%、RTA@15为28.5778%、
+mAA@30为23.8007%。8请求零焦距导致80视角PnP失败，identity回退均计入结果。
+实际99轨迹/38类、64请求含重复视角；原候选池、补采语义及所有pair保留。
+划分及checkpoint与论文实验的对应未确认，不能作为正式Table1或整篇完成证明。
+
+可提交小摘要：`results/co3d_pose_100_seed42_verified_summary_20261003.json`，
+本地完整poses报告：`results/co3d_pose_100_seed42_adaptation_v3.json`。
+Notebook新增真实分析输出与`results/figures/co3d_candidate100_pose.png`。
+重新核验仅需CPU：`PYTHONPATH=.:scripts python scripts/verify_co3d_candidate_pose_report.py`。
+已结束的输入准备、评测与205GB RE10K来源扫描无需重启；
+完整论文状态和后续前提见`PAPER_REPRODUCTION.md`及`CONTINUATION.md`。
