@@ -1,6 +1,7 @@
 # CO3D preprocessing attribution
 
 The `process_frame` preprocessing adapter in `scripts/probe_co3d_preprocess.py`
+and `process_frame_allow_zero` in `scripts/co3d_lazy_dataset.py`
 is derived from Naver's DUSt3R CO3D preprocessing implementation:
 
 - Copyright (C) 2024-present Naver Corporation. All rights reserved.
@@ -10,7 +11,14 @@ is derived from Naver's DUSt3R CO3D preprocessing implementation:
 
 The derived preprocessing code retains those terms. The adapter adds bounded
 image checks, fail-closed validation and separate saved-byte/array comparison;
-it does not claim to be the author's original benchmark selection.
+it does not claim to be the author's original benchmark selection. The lazy
+adapter preserves zero maximum depth as zero quantized depth without division
+warnings, so the released loader can explicitly invalidate zero-depth views.
+
+The strict lazy loader uses the pinned local Fast3R loader method, removing
+only its exception-swallowing handler through a guarded AST adaptation.
+The source method's original Meta copyright and repository license remain
+applicable; the original source file is not changed.
 
 Pinned cropping and geometry definitions are downloaded locally for reference
 execution with their original copyright/license notices retained. They and

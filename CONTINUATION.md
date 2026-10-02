@@ -188,7 +188,7 @@ RGB/depth/mask→固定DUSt3R crop/depth/K/float32 NPZ接线，再接源候选�
 大ZIP全SHA尚不能由成员CRC代替，作者processed清单与100@采样身份仍未确认，明确协议适配。
 RE10K全来源扫描完成后先核验SHA/76集合/timestamps/图像几何，再考虑正式1832-ID入口。
 
-#### 09:51续接：十帧真实Range/预处理接线完成（最新恢复入口）
+#### 09:51续接：十帧真实Range/预处理接线完成（已归档）
 
 `1009cc4`已推送，GT精度诊断不重复。新`co3d_range_cache.py`固定原候选manifest、官方links、
 235包footer大小/ETag，按需解析并缓存整类的原候选成员索引；不存整ZIP。
@@ -228,6 +228,44 @@ crop主点、半像素K变换、NEAREST深度/掩码、max-depth量化和float32
 作者原processed清单/100@draws与HF权重对应关系未确认。先真实单样本接线，再考虑规模化。
 2GiB缓存是当前探测的保护上限，不证明所有真实采样都能放下；达到边界时先预算，不能自动清数据。
 RE10K全流结束后先核验来源SHA/76缺失集合/timestamps/图像几何，再推进1832-ID评测。
+
+#### 10:21续接：严格lazy loader与一个真实映射样本（最新恢复入口）
+
+`3de46a0`已推送，apple十帧接线不重复。新增`co3d_lazy_dataset.py`保留
+41类/2011轨迹/399204帧的原候选pool与顺序；processed另存`data/co3d_lazy_processed`，
+不生成替代稀疏split，raw/index仍2GiB、processed512MiB上限，每次写保留1GiB，无自动驱逐。
+固定本地loader SHA+AST形状，只移除_load_view_data的catch-all，采样组合、jitter、补采、
+scene retry、base归一化/3D反投影/landscape transpose直接继承公开方法。
+下载/CRC/解码/相机失败立即抛出；裁剪后真正零有效深度仍None并显式trace，
+原始全零深度保留max0/quantized0而非损坏报错；合成回归验证零深度补采和场景重试。
+
+`probe_co3d_lazy_sample.py --wrapper-index 0`实际执行100@epoch0第一个映射样本，
+base_index=12303633，bicycle/374_41967_84033原133帧pool不变。
+顺序144,42,41,151,20,28,52,144,10,1，共10views/9unique，保留重复144。
+实际10次读取均有效、1次pool尝试，无真实补采/scene retry；不是整个100@已执行。
+组合seed42、dataset seed777、epoch0、Python补采seed42+base_index为声明适配，非作者draws。
+base.__getitem__的全部返回值与原Co3d_Multiview独立读取精确相同：img tensor、K/pose、
+pts3d、valid_mask、true_shape、rng等。未调用模型。独立`verify_co3d_lazy_sample.py`在独立
+fixture执行固定DUSt3R原prepare_sequences，9帧JPEG/PNG字节及NPZ数组一致；核验27个raw成员，
+9unique原字节4541640bytes。有效GT比例0.13252–0.47588，不是预测准确率。
+
+首次报告保存因NumPy int64 idx不能JSON化失败，非数据失败；转native int，补回归，使用新v2路径。
+6040bytes未完整文件保留于`results/co3d_lazy_serialization_progress/partial_draw0_20261002.json`。
+成功`results/co3d_lazy_draw0_v2_20261002.json`、独立核验`results/co3d_lazy_draw0_verified_20261002.json`
+和`results/co3d_lazy_serialization_recovery_20261002.json`；成功缓存重试与独立核验网络0bytes。
+首轮已下载目录/成员但总传输未完整归档，不把0当初次下载流量。138项离线测试通过，
+Notebook新增真实样本分析，旧输出未覆盖。两个前台命令均已结束，无新CO3D服务。
+RE10K扫描仍健康；接续重新核实服务/空间/GPU，不重启扫描。
+10:37宿主归档前快照：服务active/running、PID24596，173227966215/205763619478压缩字节，
+尚无完整来源JSON。分区可用49282215936bytes、GPU10913MiB空闲；raw缓存约48MiB、
+新processed及独立reference各约2.1MiB。Notebook19个paper代码单元已执行且原18个完全未改。
+
+下一步：将已核验draw接入公开HF+原focal/PnP/相对位姿metric的单样本smoke，GT只评分，
+不输入网络/PnP。记录45pairs（含重复视图的零基线）、PnP失败fallback，明确协议适配，非Table1。
+再预算/断点化更多100@draws：每进程重置invalidate/scene tracker和per-request Python seed
+适合单样本复核，但不等于原连续100@共享状态；规模化前须保存/重放状态、追踪真实重试。
+缓存限额不是完整实际采样容量证明。不要重复apple/bicycle阶段通知/提交。
+RE10K全流结束后核验完整SHA/76集合/timestamps/几何，再推进1832-ID入口。
 
 #### 07:21续接：全ZIP尾部预检与v3恢复（历史恢复入口）
 

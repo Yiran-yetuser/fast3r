@@ -238,6 +238,16 @@ apple一条轨迹的前十个原候选帧完成30个RGB/depth/mask成员的有�
 Notebook数学说明和真实报告均已保存，128项离线测试通过，18个paper分析单元有实际输出。
 下一步实现严格按需加载并记录_get_views真实有效性/补采/scene retries；尚无Table1全量模型成绩。
 
+### 10:21续接：一个真实100@映射样本与严格按需加载
+
+完整候选池lazy adapter已接到公开_get_views和base.__getitem__，只移除文件异常吞掉逻辑，
+不改jitter、重复视图、真实零深度失效/补采/scene retry。138项离线测试包含合成零深度重试。
+实际只执行epoch0 wrapper index0：bicycle轨迹10views/9unique，原133帧pool保持。
+10次读取均有效，无真实补采/换场景；完整返回值与原loader精确相等。独立固定参考预处理
+核验9帧JPEG/PNG字节和NPZ数组一致。这是单样本接线，不是全部100@或正式Table1。
+首次NumPy int64 JSON保存失败已安全修复，保留未完整文件，新v2报告及Notebook保存真实输出。
+下一步HF位姿单样本smoke；连续100@共享失效状态/补采RNG还需断点设计，作者采样/权重身份未确认。
+
 2026-10-02继续§4.2/Table1数据可行性：新增精确HTTP Range/gzip流式镜像审计，
 真实8MiB前缀核验通过，但只见1个场景，未确认补齐76。后台仅保留缺失场景候选PNG，
 不覆盖已有JPEG、不将未完整来源SHA/裁剪验证的候选当正式数据。

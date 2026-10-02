@@ -1,0 +1,20 @@
+{
+  "status": "numpy_index_serialization_failure_safely_recovered",
+  "paper_mapping": "section 4.2 / Table 1 data wiring only, not pose metrics",
+  "failure": "TypeError: Object of type int64 is not JSON serializable",
+  "cause": "ResizedDataset maps with NumPy int64; base view idx tuple retained that scalar",
+  "partial_report_preserved_local": "results/co3d_lazy_serialization_progress/partial_draw0_20261002.json",
+  "partial_report_bytes": 6040,
+  "partial_report_sha256": "3574000705baa6e5524488243a2c039ec940a78d7285b361c8281aecb75536d5",
+  "fix": "Convert idx tuple elements to native Python int before JSON; use fresh v2 report path",
+  "regression": "test_numpy_base_index_serializes_as_native_int",
+  "data_deleted_or_overwritten": false,
+  "original_loader_changed": false,
+  "prepared_cache_reused": true,
+  "successful_retry_network_bytes": 0,
+  "successful_report": "results/co3d_lazy_draw0_v2_20261002.json",
+  "successful_report_sha256": "5425c830c8047a966427f6db649f343bf37e06196f9ff72a075d11338d1d3a66",
+  "independent_reference_report": "results/co3d_lazy_draw0_verified_20261002.json",
+  "independent_reference_report_sha256": "7641c3217a4ff4924e83e8af694b32a3b6954a727de0e95107567fc79a82dcbb",
+  "formal_pose_metrics_available": false
+}

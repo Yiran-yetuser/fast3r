@@ -294,3 +294,18 @@ FP16原始depth位模式与processed UINT16/max-depth编码严格区分；相机
 near-square输入可按rng输出512×384或384×512，保留实际朝向，不将初次尺寸断言错误解释成数据损坏。
 十帧有效GT深度比例约5.22%–5.69%，不是网络深度/位姿准确率。
 尚未验证_get_views的真实补采/重试、全量crop或100@作者draws，未产生Table1正式分数。
+
+### 10:21续接：严格lazy adapter与一个真实mapped draw
+
+固定loader SHA+AST后，仅从本地_load_view_data移除except Exception -> None；原文件未改。
+_get_views/_fetch_views_for_pool/base.__getitem__继承不变，IO/CRC/解码异常直抛，
+裁剪后真正零深度仍None并标记invalidate；raw全零深度保留max0/quantized0，非有限/负值报错。
+零深度补采与scene retry只做合成测试，不假冒真实数据实验。
+完整41/2011/399204池保持，100@epoch0 mapping[0]=12303633，bicycle原133帧pool
+得到144,42,41,151,20,28,52,144,10,1。重复144保留，全部有效，无实际补采/换场景。
+完整输出（含tensor/pts3d/valid_mask/rng）与原loader精确相同；独立固定预处理9unique帧
+JPEG/PNG bytes、NPZ arrays一致，GT覆盖13.25%–47.59%，没有网络位姿分数。
+组合seed42、dataset seed777、epoch0、per-request Python seed42+base_index为声明适配。
+单样本状态不证明作者draw身份，也不证明连续100@跨样本invalidate/scene tracker等价。
+首次NumPy idx序列化失败保留未完整文件，用v2报告安全恢复；缓存重试0bytes不是首次下载流量。
+没有完整ZIP SHA证明，独立fixture从未替换原候选manifest。
