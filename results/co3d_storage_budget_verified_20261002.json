@@ -1,0 +1,490 @@
+{
+  "status": "all_candidate_directory_journals_independently_verified_not_data_ready",
+  "paper_mapping": "section 4.2 / Table 1 data storage feasibility only",
+  "budget_report_sha256": "e3ec5445315197bcfd254b8ce6c4d6dbfc59d6ac28681091117d269955b6bc00",
+  "verifier_sha256": "84b90ecc2e80b36d92a571b10596ca4de327ee0fe7aa65bbdbaff4dbdc422f28",
+  "fingerprint": {
+    "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+    "protocol_sha256": "c6decfdcd5d960cbedb20930fde32a329a8e6ff3d0d2431953b77a5f62fb6c07",
+    "links_sha256": "3ed4997dc39ac01a20eb97eef03bc15fe49cd9895b8e1b0cad8aa4f7de9ccf97",
+    "checksums_sha256": "09de118b3c0b58fa3f878cf7e529c6f0e2ab9055ba6fcb87922e99380067a9c8",
+    "planner_sha256": "4b26eed87a387541eef73f6fcff5887ce1c54ef6e90f3c151341d8d7e42dce1f",
+    "range_reader_sha256": "f9af69036d93c1aeddcb6b1962a5d7eba9d6db3ed80da0ac2b7b6ba9a820adcc",
+    "footer_preflight_sha256": "dcbf28d16d071ae60c0dffb470bfc0ce903321f0a0329369464c6e08338c5da2"
+  },
+  "category_count": 41,
+  "data_archive_count": 235,
+  "selected_sequence_count": 2011,
+  "candidate_frame_count": 399204,
+  "matched_member_counts": {
+    "images": 399204,
+    "depths": 399204,
+    "masks": 399204
+  },
+  "advertised_uncompressed_bytes_by_kind": {
+    "images": 36297726723,
+    "depths": 246352518781,
+    "masks": 14547386670
+  },
+  "advertised_total_uncompressed_bytes": 297197632174,
+  "recorded_index_transport_bytes_including_reused_journals": 2832716261,
+  "categories": [
+    {
+      "category": "apple",
+      "sequence_count": 50,
+      "candidate_frame_count": 9563,
+      "journal_sha256": "68e408d02de79a89a7f335f4baf1cf275e7b271f8c976d5bd1142b2aba3779bb",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 647029803,
+        "depths": 5283945736,
+        "masks": 142594872
+      }
+    },
+    {
+      "category": "backpack",
+      "sequence_count": 50,
+      "candidate_frame_count": 10055,
+      "journal_sha256": "a427f625a4a5b25d376b400ffe56cea1cb6a4b83812ac982ef7ad7fe4c4cd5d1",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 855231328,
+        "depths": 6477043750,
+        "masks": 512436861
+      }
+    },
+    {
+      "category": "banana",
+      "sequence_count": 50,
+      "candidate_frame_count": 10042,
+      "journal_sha256": "31566a3e13d6bf933cf498c18afd99ef8d44a5a39f1d4ff45536c758be25d811",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 560063000,
+        "depths": 3902733641,
+        "masks": 171071353
+      }
+    },
+    {
+      "category": "baseballbat",
+      "sequence_count": 50,
+      "candidate_frame_count": 9991,
+      "journal_sha256": "0eecc8c7d1d93bdbfbca12133b8266b36772b5c210b9e36809c1115bb92d27ed",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 974121909,
+        "depths": 5900139199,
+        "masks": 302409061
+      }
+    },
+    {
+      "category": "baseballglove",
+      "sequence_count": 50,
+      "candidate_frame_count": 10048,
+      "journal_sha256": "00a165e4e2ca5c96c11318b1b937a1cdf7075839bc34ecc56b7fb894726ec040",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 1028451381,
+        "depths": 6983179913,
+        "masks": 438417483
+      }
+    },
+    {
+      "category": "bench",
+      "sequence_count": 50,
+      "candidate_frame_count": 9876,
+      "journal_sha256": "3a2dacc719c21956d9c826b8803d91ef6b787ce639cdcc0e38f62409eb822859",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 1246462050,
+        "depths": 6914639131,
+        "masks": 574938901
+      }
+    },
+    {
+      "category": "bicycle",
+      "sequence_count": 50,
+      "candidate_frame_count": 9976,
+      "journal_sha256": "504ad8be08fb8c812d9c9f75ee38bcac6ba517108e65afc81953b98e842aabed",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 1256592385,
+        "depths": 6431212293,
+        "masks": 788332312
+      }
+    },
+    {
+      "category": "bottle",
+      "sequence_count": 50,
+      "candidate_frame_count": 9869,
+      "journal_sha256": "6a8efc18bf98f055444afdc449785fdc8a320beea88e20f3c0a2a6f14a23bcac",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 710202126,
+        "depths": 5588038238,
+        "masks": 181570017
+      }
+    },
+    {
+      "category": "bowl",
+      "sequence_count": 50,
+      "candidate_frame_count": 10098,
+      "journal_sha256": "29b0b6aa007f11c8f2847e70644fafb016d244164a8094e9954a98c103b13fcf",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 274072844,
+        "depths": 1794623077,
+        "masks": 85758028
+      }
+    },
+    {
+      "category": "broccoli",
+      "sequence_count": 50,
+      "candidate_frame_count": 10046,
+      "journal_sha256": "94c0cbd0dcccf37ce9678611b3ce345a4217f0df62b87d02b1e12f05af1e0d09",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 785320266,
+        "depths": 5445602099,
+        "masks": 277985038
+      }
+    },
+    {
+      "category": "cake",
+      "sequence_count": 50,
+      "candidate_frame_count": 9992,
+      "journal_sha256": "55230997462d97b0d16afe7faf2f110fdd8e489ef9f7b6c1f9b025cf453f5873",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 759077331,
+        "depths": 5608315750,
+        "masks": 299455995
+      }
+    },
+    {
+      "category": "car",
+      "sequence_count": 50,
+      "candidate_frame_count": 9786,
+      "journal_sha256": "41400d9961ed5284d9e5f46a3cb9eae42232f5fe4c7a4baef5aa5c7bad2d1da7",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 1362484980,
+        "depths": 7426079192,
+        "masks": 495146101
+      }
+    },
+    {
+      "category": "carrot",
+      "sequence_count": 50,
+      "candidate_frame_count": 10016,
+      "journal_sha256": "7532013bd85cfc0c225db9b040428d216ab01acace777a00e4c8f45e413e9617",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 1061390860,
+        "depths": 7138296457,
+        "masks": 154551366
+      }
+    },
+    {
+      "category": "cellphone",
+      "sequence_count": 50,
+      "candidate_frame_count": 9919,
+      "journal_sha256": "5e8dcaa235b9e5326e05ac4a0c0561cfe8b2bbba4e46f23f3afc0ce25ef8265e",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 855911006,
+        "depths": 5063434593,
+        "masks": 194367425
+      }
+    },
+    {
+      "category": "chair",
+      "sequence_count": 50,
+      "candidate_frame_count": 9980,
+      "journal_sha256": "dc01464c8b19800479dbface026cd32487e281e1b9efe27e6937c4d1b2421b43",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 760843140,
+        "depths": 5829502051,
+        "masks": 713546075
+      }
+    },
+    {
+      "category": "cup",
+      "sequence_count": 50,
+      "candidate_frame_count": 9962,
+      "journal_sha256": "327a719584ff14cd29f2c146d1fabb6922c912e7e46fe8f62002cf0463ae487d",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 847120199,
+        "depths": 6233146441,
+        "masks": 185232885
+      }
+    },
+    {
+      "category": "donut",
+      "sequence_count": 50,
+      "candidate_frame_count": 9895,
+      "journal_sha256": "c1ddedddbb3d41d0cd9c9293d75aeba1c2dbd964201db956c7484ecb1b8ebe9a",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 754366935,
+        "depths": 5698650394,
+        "masks": 185953395
+      }
+    },
+    {
+      "category": "hairdryer",
+      "sequence_count": 50,
+      "candidate_frame_count": 10076,
+      "journal_sha256": "212f675a4572b9295db3ce239d1a41fdc7b2660d0b59219c39999654b4c76ac1",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 833553624,
+        "depths": 5974986668,
+        "masks": 378128713
+      }
+    },
+    {
+      "category": "handbag",
+      "sequence_count": 50,
+      "candidate_frame_count": 10068,
+      "journal_sha256": "fbf3e0c34cb74574248a5bb3c7cc5a2656e5c3e35e860c2c633e2871fde2cdce",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 576566877,
+        "depths": 4585193760,
+        "masks": 411662708
+      }
+    },
+    {
+      "category": "hydrant",
+      "sequence_count": 50,
+      "candidate_frame_count": 10090,
+      "journal_sha256": "3122eb60605838e344f3df0c2b76303deedd3e3cde9a90aa5fd6cee8a1e2e574",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 2261669707,
+        "depths": 8607749677,
+        "masks": 435191187
+      }
+    },
+    {
+      "category": "keyboard",
+      "sequence_count": 50,
+      "candidate_frame_count": 9992,
+      "journal_sha256": "54283f65919f4f37d7fa480d355b557f26b424bd5acd5cc0d033c9a160506d5e",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 763196958,
+        "depths": 5771269620,
+        "masks": 295176768
+      }
+    },
+    {
+      "category": "laptop",
+      "sequence_count": 50,
+      "candidate_frame_count": 10055,
+      "journal_sha256": "5bb1532136f4f643ceef8bac552b2ff466246ab2f99d01ed73502fc6abcd2dfa",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 883535818,
+        "depths": 7013278489,
+        "masks": 429393091
+      }
+    },
+    {
+      "category": "microwave",
+      "sequence_count": 50,
+      "candidate_frame_count": 9384,
+      "journal_sha256": "f44da641fa1c01bff778a5c8e259f11ba6804ec41c31940b2f5d790251411228",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 682004510,
+        "depths": 5574676693,
+        "masks": 432336436
+      }
+    },
+    {
+      "category": "motorcycle",
+      "sequence_count": 50,
+      "candidate_frame_count": 9846,
+      "journal_sha256": "c675104cdc900406641e3ad51d41d54edd31748ace520666f5bb89bb7c124da1",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 1087651642,
+        "depths": 6359858390,
+        "masks": 781155049
+      }
+    },
+    {
+      "category": "mouse",
+      "sequence_count": 50,
+      "candidate_frame_count": 9866,
+      "journal_sha256": "17c75fe0aac7722240160ceaa34950df973617d46b7db0b79ee1b56243446565",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 804806341,
+        "depths": 6104314992,
+        "masks": 175106559
+      }
+    },
+    {
+      "category": "orange",
+      "sequence_count": 50,
+      "candidate_frame_count": 9319,
+      "journal_sha256": "1646c0694d33592646dbf4e61472fed1a67a57183702e90d54a6603bb602953b",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 709012899,
+        "depths": 5843274431,
+        "masks": 106636239
+      }
+    },
+    {
+      "category": "parkingmeter",
+      "sequence_count": 41,
+      "candidate_frame_count": 8269,
+      "journal_sha256": "bedc3d79a6c5a0f0e1eac5e90fcdc0800716df2218332a387c608654ec0eaafb",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 1319230522,
+        "depths": 7366695219,
+        "masks": 329846198
+      }
+    },
+    {
+      "category": "pizza",
+      "sequence_count": 50,
+      "candidate_frame_count": 10047,
+      "journal_sha256": "c3ac1edce929a3039da876653c2be4d016bb98a2580fec528379296b60c2b196",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 801630837,
+        "depths": 5607383674,
+        "masks": 295739901
+      }
+    },
+    {
+      "category": "plant",
+      "sequence_count": 50,
+      "candidate_frame_count": 10006,
+      "journal_sha256": "e616c1db6501543111dcb3e99700fb5e2cc511479aa2c1689f38b409e32ff6ea",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 1099642972,
+        "depths": 6661976368,
+        "masks": 549818022
+      }
+    },
+    {
+      "category": "stopsign",
+      "sequence_count": 50,
+      "candidate_frame_count": 9988,
+      "journal_sha256": "3b87ca9050cff55708e3264e8014500694db124c2612665ddde34eb25b028bcf",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 1443945427,
+        "depths": 7763265725,
+        "masks": 261444880
+      }
+    },
+    {
+      "category": "teddybear",
+      "sequence_count": 50,
+      "candidate_frame_count": 10043,
+      "journal_sha256": "1a65036675dfac821fc996a1e43a2ac619824540bab1dbe08a44e6c08b8f5ea8",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 738390212,
+        "depths": 5716980724,
+        "masks": 469514233
+      }
+    },
+    {
+      "category": "toaster",
+      "sequence_count": 50,
+      "candidate_frame_count": 9926,
+      "journal_sha256": "b52d61daad4eb5582992abeba2ee6cb846ea9ece96cd2361b6e6796f50f1951d",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 891449201,
+        "depths": 7384023270,
+        "masks": 422542493
+      }
+    },
+    {
+      "category": "toilet",
+      "sequence_count": 50,
+      "candidate_frame_count": 9973,
+      "journal_sha256": "3f4846ca7f3f98803aec8be05cbad46d0726a6cd195e114fde32745a18c98781",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 763424085,
+        "depths": 7842324060,
+        "masks": 666284741
+      }
+    },
+    {
+      "category": "toybus",
+      "sequence_count": 50,
+      "candidate_frame_count": 10056,
+      "journal_sha256": "092eb459ffb497a096aaad18830a1c085c778d4d3e768a37b3cac91ed2d27950",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 582385031,
+        "depths": 5179689711,
+        "masks": 247375875
+      }
+    },
+    {
+      "category": "toyplane",
+      "sequence_count": 50,
+      "candidate_frame_count": 9889,
+      "journal_sha256": "3d782688aeeac08598d50edf6a78da52fa82eb7bbe65755ad9f2be3c0314f7c9",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 733769085,
+        "depths": 5573400129,
+        "masks": 410981643
+      }
+    },
+    {
+      "category": "toytrain",
+      "sequence_count": 50,
+      "candidate_frame_count": 9934,
+      "journal_sha256": "9eb1f3f1d20ec1402b8eee7c07c6f0d4045bb06e2310d32ab21fa832ea7c7591",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 796597882,
+        "depths": 4685975668,
+        "masks": 272228472
+      }
+    },
+    {
+      "category": "toytruck",
+      "sequence_count": 50,
+      "candidate_frame_count": 9848,
+      "journal_sha256": "8bffb58887a5db049832d5115d04cfd263bafcdb4b4d6598217f8d898982c393",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 897472906,
+        "depths": 6437395214,
+        "masks": 303017181
+      }
+    },
+    {
+      "category": "tv",
+      "sequence_count": 20,
+      "candidate_frame_count": 3990,
+      "journal_sha256": "4e86b4c2281d0d80d2f1a1dd84207b6c337ca4af5b1824876f7a8dba88640877",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 223972033,
+        "depths": 1943287924,
+        "masks": 147249373
+      }
+    },
+    {
+      "category": "umbrella",
+      "sequence_count": 50,
+      "candidate_frame_count": 9620,
+      "journal_sha256": "c6f8093951b3da8d06c2be191b1f34b8488db31568647896401a589a33b66b64",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 866738454,
+        "depths": 6172806419,
+        "masks": 416108969
+      }
+    },
+    {
+      "category": "vase",
+      "sequence_count": 50,
+      "candidate_frame_count": 10003,
+      "journal_sha256": "d2665997035f365921ce491771e112815ffa8ae047761c89bf75974d3696fa8e",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 901485416,
+        "depths": 7209767922,
+        "masks": 335819469
+      }
+    },
+    {
+      "category": "wineglass",
+      "sequence_count": 50,
+      "candidate_frame_count": 9802,
+      "journal_sha256": "0041bedadce05dfcef87d152304a9d59c5914c11e8079a7b0507c891f2e89aaf",
+      "advertised_uncompressed_bytes_by_kind": {
+        "images": 896852741,
+        "depths": 7254362079,
+        "masks": 270861302
+      }
+    }
+  ],
+  "member_crc_verified": false,
+  "full_archive_sha_verified": false,
+  "rgb_depth_mask_and_camera_npz_ready": false,
+  "formal_pose_metrics_available": false,
+  "original_fast3r_split_equivalence_verified": false,
+  "note": "Offline journal verification, not remote directory reread or new image transfer"
+}

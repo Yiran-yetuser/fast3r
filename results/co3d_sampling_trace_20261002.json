@@ -1,0 +1,3065 @@
+{
+  "status": "released_sampling_all_valid_trace_not_real_views_or_pose_metrics",
+  "paper_mapping": "section 4.2 / Table 1 sampling and sparse-cache feasibility audit",
+  "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+  "audit_script_sha256": "e83a124c2c8686f28bee9a1681d6cff971ebb1c019916a6bfb7d11ce0dbb915c",
+  "source_sha256": {
+    "fast3r/dust3r/datasets/co3d_multiview.py": "d307fd6e75b97f47a2efeefcd4ef5fd6f4fce44536b0d3824fa43928539e02f0",
+    "fast3r/dust3r/datasets/base/easy_dataset.py": "6d83a11fcc794a2a4564b3898129685c6ffc20528fe6ed91f49a1dedc5937149",
+    "fast3r/dust3r/datasets/base/base_stereo_view_dataset.py": "e3aa91f3722ce54b022bc65b282adc642e20d676640fd0c60eacc3b290e46a62"
+  },
+  "candidate_category_count": 41,
+  "candidate_sequence_count": 2011,
+  "python_combination_seed": 42,
+  "dataset_seed": 777,
+  "resized_epoch": 0,
+  "num_views": 10,
+  "generated_combination_count": 10000,
+  "combination_actually_used": [
+    0,
+    2,
+    42,
+    24,
+    17,
+    9,
+    44,
+    21,
+    25,
+    36
+  ],
+  "base_dataset_length": 20110000,
+  "wrapper_length": 100,
+  "nominal_100_wrapper": {
+    "nominal_sample_count": 100,
+    "nominal_distinct_trajectory_count": 99,
+    "nominal_distinct_category_count": 38,
+    "nominal_distinct_frame_count": 918,
+    "samples_with_duplicate_views": 58,
+    "min_distinct_frames_in_a_sample": 7
+  },
+  "nominal_100_rows": [
+    {
+      "base_index": 12303633,
+      "category": "bicycle",
+      "scene": "374_41967_84033",
+      "pool_indices": [
+        38,
+        21,
+        20,
+        41,
+        11,
+        15,
+        27,
+        38,
+        5,
+        0
+      ],
+      "frame_numbers": [
+        144,
+        42,
+        41,
+        151,
+        20,
+        28,
+        52,
+        144,
+        10,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 4292638,
+      "category": "motorcycle",
+      "scene": "413_56524_109301",
+      "pool_indices": [
+        37,
+        24,
+        25,
+        44,
+        13,
+        16,
+        26,
+        40,
+        4,
+        4
+      ],
+      "frame_numbers": [
+        73,
+        45,
+        51,
+        85,
+        24,
+        32,
+        52,
+        81,
+        5,
+        5
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 3857896,
+      "category": "cup",
+      "scene": "400_51462_101232",
+      "pool_indices": [
+        37,
+        27,
+        21,
+        41,
+        6,
+        16,
+        24,
+        38,
+        3,
+        0
+      ],
+      "frame_numbers": [
+        103,
+        83,
+        42,
+        112,
+        12,
+        32,
+        75,
+        104,
+        4,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 12089587,
+      "category": "stopsign",
+      "scene": "599_92267_182752",
+      "pool_indices": [
+        40,
+        21,
+        18,
+        46,
+        9,
+        21,
+        26,
+        41,
+        2,
+        2
+      ],
+      "frame_numbers": [
+        81,
+        42,
+        34,
+        92,
+        15,
+        42,
+        52,
+        82,
+        3,
+        3
+      ],
+      "distinct_frame_count": 8
+    },
+    {
+      "base_index": 11486653,
+      "category": "toytruck",
+      "scene": "375_42437_85125",
+      "pool_indices": [
+        34,
+        21,
+        25,
+        48,
+        10,
+        21,
+        23,
+        41,
+        5,
+        0
+      ],
+      "frame_numbers": [
+        65,
+        42,
+        51,
+        94,
+        21,
+        42,
+        44,
+        82,
+        11,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 9667830,
+      "category": "hydrant",
+      "scene": "427_59914_115791",
+      "pool_indices": [
+        34,
+        23,
+        24,
+        41,
+        7,
+        21,
+        22,
+        41,
+        3,
+        0
+      ],
+      "frame_numbers": [
+        65,
+        44,
+        45,
+        82,
+        13,
+        42,
+        43,
+        82,
+        4,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 7722191,
+      "category": "wineglass",
+      "scene": "606_95085_191490",
+      "pool_indices": [
+        33,
+        26,
+        20,
+        40,
+        10,
+        18,
+        26,
+        45,
+        1,
+        4
+      ],
+      "frame_numbers": [
+        64,
+        52,
+        41,
+        81,
+        21,
+        34,
+        52,
+        91,
+        2,
+        5
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 11509881,
+      "category": "handbag",
+      "scene": "404_53452_104225",
+      "pool_indices": [
+        39,
+        27,
+        22,
+        43,
+        11,
+        14,
+        27,
+        39,
+        6,
+        3
+      ],
+      "frame_numbers": [
+        76,
+        53,
+        43,
+        85,
+        22,
+        25,
+        53,
+        76,
+        12,
+        4
+      ],
+      "distinct_frame_count": 8
+    },
+    {
+      "base_index": 19829401,
+      "category": "handbag",
+      "scene": "405_54112_105498",
+      "pool_indices": [
+        35,
+        27,
+        25,
+        47,
+        11,
+        20,
+        28,
+        46,
+        4,
+        0
+      ],
+      "frame_numbers": [
+        71,
+        53,
+        51,
+        93,
+        22,
+        41,
+        54,
+        92,
+        5,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 19277284,
+      "category": "tv",
+      "scene": "397_50106_98543",
+      "pool_indices": [
+        33,
+        25,
+        23,
+        48,
+        10,
+        15,
+        25,
+        42,
+        6,
+        0
+      ],
+      "frame_numbers": [
+        64,
+        51,
+        44,
+        94,
+        21,
+        31,
+        51,
+        83,
+        12,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 6301742,
+      "category": "orange",
+      "scene": "339_34997_62372",
+      "pool_indices": [
+        35,
+        21,
+        21,
+        40,
+        8,
+        21,
+        25,
+        39,
+        5,
+        0
+      ],
+      "frame_numbers": [
+        71,
+        42,
+        42,
+        81,
+        14,
+        42,
+        51,
+        75,
+        11,
+        1
+      ],
+      "distinct_frame_count": 8
+    },
+    {
+      "base_index": 19131421,
+      "category": "cup",
+      "scene": "606_94873_190741",
+      "pool_indices": [
+        40,
+        28,
+        17,
+        43,
+        10,
+        16,
+        27,
+        45,
+        3,
+        0
+      ],
+      "frame_numbers": [
+        81,
+        54,
+        33,
+        84,
+        21,
+        32,
+        53,
+        91,
+        4,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 19406405,
+      "category": "bench",
+      "scene": "437_62362_122304",
+      "pool_indices": [
+        40,
+        26,
+        25,
+        41,
+        12,
+        16,
+        26,
+        42,
+        5,
+        0
+      ],
+      "frame_numbers": [
+        81,
+        52,
+        51,
+        82,
+        23,
+        32,
+        52,
+        83,
+        11,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 7201439,
+      "category": "apple",
+      "scene": "339_35032_62627",
+      "pool_indices": [
+        38,
+        22,
+        19,
+        46,
+        8,
+        16,
+        22,
+        43,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        76,
+        43,
+        35,
+        94,
+        14,
+        32,
+        43,
+        86,
+        1,
+        1
+      ],
+      "distinct_frame_count": 8
+    },
+    {
+      "base_index": 8260950,
+      "category": "toytrain",
+      "scene": "350_36706_68388",
+      "pool_indices": [
+        35,
+        24,
+        24,
+        42,
+        8,
+        21,
+        23,
+        39,
+        5,
+        0
+      ],
+      "frame_numbers": [
+        71,
+        45,
+        45,
+        83,
+        14,
+        42,
+        44,
+        75,
+        11,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 17701789,
+      "category": "hydrant",
+      "scene": "481_68715_133661",
+      "pool_indices": [
+        37,
+        27,
+        19,
+        44,
+        11,
+        16,
+        20,
+        40,
+        5,
+        0
+      ],
+      "frame_numbers": [
+        73,
+        53,
+        35,
+        85,
+        22,
+        32,
+        41,
+        81,
+        11,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 12192842,
+      "category": "banana",
+      "scene": "49_2833_7815",
+      "pool_indices": [
+        36,
+        29,
+        18,
+        40,
+        9,
+        16,
+        21,
+        44,
+        3,
+        3
+      ],
+      "frame_numbers": [
+        72,
+        55,
+        34,
+        81,
+        15,
+        32,
+        42,
+        85,
+        4,
+        4
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 10439565,
+      "category": "broccoli",
+      "scene": "350_36988_69456",
+      "pool_indices": [
+        34,
+        28,
+        19,
+        47,
+        9,
+        19,
+        25,
+        44,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        65,
+        54,
+        35,
+        93,
+        15,
+        35,
+        51,
+        85,
+        1,
+        1
+      ],
+      "distinct_frame_count": 8
+    },
+    {
+      "base_index": 11529102,
+      "category": "apple",
+      "scene": "463_65711_128779",
+      "pool_indices": [
+        36,
+        28,
+        19,
+        41,
+        13,
+        18,
+        25,
+        41,
+        5,
+        0
+      ],
+      "frame_numbers": [
+        72,
+        54,
+        35,
+        82,
+        24,
+        34,
+        51,
+        82,
+        11,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 8700591,
+      "category": "keyboard",
+      "scene": "457_64445_126978",
+      "pool_indices": [
+        36,
+        29,
+        20,
+        41,
+        8,
+        21,
+        24,
+        38,
+        4,
+        1
+      ],
+      "frame_numbers": [
+        84,
+        62,
+        46,
+        96,
+        16,
+        47,
+        50,
+        86,
+        5,
+        2
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 9700981,
+      "category": "vase",
+      "scene": "64_4376_11669",
+      "pool_indices": [
+        36,
+        28,
+        24,
+        44,
+        6,
+        19,
+        26,
+        38,
+        6,
+        3
+      ],
+      "frame_numbers": [
+        72,
+        54,
+        45,
+        85,
+        12,
+        35,
+        52,
+        74,
+        12,
+        4
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 2685396,
+      "category": "chair",
+      "scene": "579_85558_168937",
+      "pool_indices": [
+        34,
+        23,
+        20,
+        43,
+        10,
+        19,
+        23,
+        42,
+        2,
+        1
+      ],
+      "frame_numbers": [
+        65,
+        44,
+        41,
+        84,
+        21,
+        35,
+        44,
+        83,
+        3,
+        2
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 4570004,
+      "category": "keyboard",
+      "scene": "378_43970_87742",
+      "pool_indices": [
+        37,
+        27,
+        23,
+        42,
+        9,
+        15,
+        25,
+        43,
+        5,
+        3
+      ],
+      "frame_numbers": [
+        73,
+        53,
+        44,
+        83,
+        15,
+        31,
+        51,
+        84,
+        11,
+        4
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 18118044,
+      "category": "handbag",
+      "scene": "400_51485_101343",
+      "pool_indices": [
+        34,
+        27,
+        20,
+        47,
+        12,
+        17,
+        22,
+        45,
+        1,
+        3
+      ],
+      "frame_numbers": [
+        65,
+        53,
+        41,
+        93,
+        23,
+        33,
+        43,
+        91,
+        2,
+        4
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 3160429,
+      "category": "microwave",
+      "scene": "430_60620_117946",
+      "pool_indices": [
+        34,
+        24,
+        18,
+        41,
+        13,
+        17,
+        24,
+        43,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        65,
+        45,
+        34,
+        82,
+        24,
+        33,
+        45,
+        84,
+        1,
+        1
+      ],
+      "distinct_frame_count": 8
+    },
+    {
+      "base_index": 17888723,
+      "category": "hairdryer",
+      "scene": "563_81381_161301",
+      "pool_indices": [
+        38,
+        29,
+        17,
+        44,
+        8,
+        13,
+        20,
+        40,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        75,
+        56,
+        34,
+        86,
+        15,
+        25,
+        42,
+        82,
+        1,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 988971,
+      "category": "toaster",
+      "scene": "400_51381_100888",
+      "pool_indices": [
+        34,
+        25,
+        22,
+        44,
+        12,
+        15,
+        26,
+        41,
+        6,
+        1
+      ],
+      "frame_numbers": [
+        65,
+        51,
+        43,
+        85,
+        23,
+        31,
+        52,
+        82,
+        12,
+        2
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 12392119,
+      "category": "bicycle",
+      "scene": "517_74131_144491",
+      "pool_indices": [
+        34,
+        28,
+        17,
+        41,
+        10,
+        17,
+        28,
+        41,
+        5,
+        3
+      ],
+      "frame_numbers": [
+        65,
+        54,
+        33,
+        82,
+        21,
+        33,
+        54,
+        82,
+        11,
+        4
+      ],
+      "distinct_frame_count": 7
+    },
+    {
+      "base_index": 18223898,
+      "category": "baseballglove",
+      "scene": "217_22889_47203",
+      "pool_indices": [
+        34,
+        29,
+        18,
+        41,
+        6,
+        13,
+        22,
+        46,
+        0,
+        3
+      ],
+      "frame_numbers": [
+        65,
+        55,
+        34,
+        82,
+        12,
+        24,
+        43,
+        92,
+        1,
+        4
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 11554510,
+      "category": "parkingmeter",
+      "scene": "429_60366_116962",
+      "pool_indices": [
+        33,
+        28,
+        25,
+        44,
+        7,
+        20,
+        26,
+        38,
+        1,
+        4
+      ],
+      "frame_numbers": [
+        64,
+        54,
+        51,
+        85,
+        13,
+        41,
+        52,
+        74,
+        2,
+        5
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 4330467,
+      "category": "cup",
+      "scene": "31_1337_4060",
+      "pool_indices": [
+        34,
+        28,
+        24,
+        46,
+        7,
+        18,
+        23,
+        45,
+        3,
+        4
+      ],
+      "frame_numbers": [
+        65,
+        54,
+        45,
+        92,
+        13,
+        34,
+        44,
+        91,
+        4,
+        5
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 10456768,
+      "category": "toaster",
+      "scene": "396_49593_97742",
+      "pool_indices": [
+        32,
+        29,
+        21,
+        42,
+        12,
+        13,
+        22,
+        45,
+        6,
+        0
+      ],
+      "frame_numbers": [
+        63,
+        55,
+        42,
+        83,
+        23,
+        24,
+        43,
+        91,
+        12,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 13890675,
+      "category": "cellphone",
+      "scene": "563_81034_159302",
+      "pool_indices": [
+        36,
+        24,
+        24,
+        48,
+        7,
+        13,
+        25,
+        41,
+        5,
+        0
+      ],
+      "frame_numbers": [
+        72,
+        45,
+        45,
+        94,
+        13,
+        24,
+        51,
+        82,
+        11,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 6986140,
+      "category": "vase",
+      "scene": "270_28811_57817",
+      "pool_indices": [
+        32,
+        29,
+        19,
+        44,
+        7,
+        15,
+        28,
+        44,
+        0,
+        4
+      ],
+      "frame_numbers": [
+        63,
+        55,
+        35,
+        85,
+        13,
+        31,
+        54,
+        85,
+        1,
+        5
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 18288944,
+      "category": "handbag",
+      "scene": "404_53487_104284",
+      "pool_indices": [
+        35,
+        23,
+        21,
+        45,
+        11,
+        20,
+        23,
+        45,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        71,
+        44,
+        42,
+        91,
+        22,
+        41,
+        44,
+        91,
+        1,
+        1
+      ],
+      "distinct_frame_count": 7
+    },
+    {
+      "base_index": 9126874,
+      "category": "hydrant",
+      "scene": "429_60327_116727",
+      "pool_indices": [
+        39,
+        24,
+        21,
+        45,
+        8,
+        13,
+        25,
+        42,
+        2,
+        0
+      ],
+      "frame_numbers": [
+        75,
+        45,
+        42,
+        91,
+        14,
+        24,
+        51,
+        83,
+        3,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 1607402,
+      "category": "carrot",
+      "scene": "395_48997_96957",
+      "pool_indices": [
+        33,
+        24,
+        25,
+        41,
+        11,
+        21,
+        23,
+        40,
+        6,
+        0
+      ],
+      "frame_numbers": [
+        64,
+        45,
+        51,
+        82,
+        22,
+        42,
+        44,
+        81,
+        12,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 15601919,
+      "category": "car",
+      "scene": "519_74492_144714",
+      "pool_indices": [
+        36,
+        21,
+        24,
+        41,
+        5,
+        21,
+        28,
+        45,
+        2,
+        0
+      ],
+      "frame_numbers": [
+        72,
+        42,
+        45,
+        82,
+        11,
+        42,
+        54,
+        91,
+        3,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 16368391,
+      "category": "hairdryer",
+      "scene": "622_102136_205173",
+      "pool_indices": [
+        34,
+        26,
+        21,
+        42,
+        13,
+        18,
+        26,
+        39,
+        3,
+        0
+      ],
+      "frame_numbers": [
+        65,
+        52,
+        42,
+        83,
+        24,
+        34,
+        52,
+        75,
+        4,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 12100532,
+      "category": "bicycle",
+      "scene": "434_61663_121184",
+      "pool_indices": [
+        34,
+        27,
+        22,
+        45,
+        10,
+        20,
+        25,
+        39,
+        2,
+        0
+      ],
+      "frame_numbers": [
+        65,
+        53,
+        43,
+        91,
+        21,
+        41,
+        51,
+        75,
+        3,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 13604175,
+      "category": "toytrain",
+      "scene": "372_40891_81087",
+      "pool_indices": [
+        40,
+        29,
+        20,
+        46,
+        7,
+        15,
+        23,
+        45,
+        4,
+        2
+      ],
+      "frame_numbers": [
+        82,
+        55,
+        41,
+        93,
+        13,
+        31,
+        44,
+        92,
+        5,
+        3
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 1939640,
+      "category": "keyboard",
+      "scene": "608_95625_191930",
+      "pool_indices": [
+        35,
+        26,
+        24,
+        45,
+        11,
+        16,
+        23,
+        43,
+        2,
+        0
+      ],
+      "frame_numbers": [
+        71,
+        52,
+        45,
+        91,
+        22,
+        32,
+        44,
+        84,
+        3,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 4192757,
+      "category": "toytruck",
+      "scene": "377_43583_86818",
+      "pool_indices": [
+        33,
+        29,
+        21,
+        42,
+        5,
+        20,
+        21,
+        44,
+        3,
+        1
+      ],
+      "frame_numbers": [
+        67,
+        58,
+        45,
+        86,
+        11,
+        44,
+        45,
+        88,
+        4,
+        2
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 9855805,
+      "category": "umbrella",
+      "scene": "140_16059_30881",
+      "pool_indices": [
+        38,
+        28,
+        25,
+        45,
+        7,
+        16,
+        22,
+        46,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        74,
+        54,
+        51,
+        91,
+        13,
+        32,
+        43,
+        92,
+        1,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 401467,
+      "category": "orange",
+      "scene": "379_44665_89013",
+      "pool_indices": [
+        35,
+        29,
+        24,
+        46,
+        7,
+        17,
+        25,
+        41,
+        4,
+        1
+      ],
+      "frame_numbers": [
+        71,
+        55,
+        45,
+        92,
+        13,
+        33,
+        51,
+        82,
+        5,
+        2
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 4618364,
+      "category": "microwave",
+      "scene": "405_53949_105173",
+      "pool_indices": [
+        32,
+        26,
+        20,
+        44,
+        6,
+        20,
+        23,
+        39,
+        5,
+        0
+      ],
+      "frame_numbers": [
+        64,
+        53,
+        42,
+        86,
+        12,
+        42,
+        45,
+        76,
+        11,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 851875,
+      "category": "mouse",
+      "scene": "569_82654_163050",
+      "pool_indices": [
+        37,
+        23,
+        19,
+        45,
+        13,
+        20,
+        24,
+        46,
+        6,
+        0
+      ],
+      "frame_numbers": [
+        76,
+        47,
+        38,
+        94,
+        26,
+        44,
+        48,
+        95,
+        14,
+        2
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 1688500,
+      "category": "orange",
+      "scene": "43_2198_6583",
+      "pool_indices": [
+        38,
+        26,
+        19,
+        47,
+        13,
+        19,
+        27,
+        46,
+        5,
+        0
+      ],
+      "frame_numbers": [
+        74,
+        52,
+        35,
+        93,
+        24,
+        35,
+        53,
+        92,
+        11,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 9677983,
+      "category": "laptop",
+      "scene": "191_20594_36635",
+      "pool_indices": [
+        32,
+        29,
+        17,
+        45,
+        8,
+        15,
+        26,
+        46,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        63,
+        55,
+        33,
+        91,
+        14,
+        31,
+        52,
+        93,
+        1,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 11319110,
+      "category": "mouse",
+      "scene": "555_79810_155005",
+      "pool_indices": [
+        33,
+        22,
+        20,
+        40,
+        5,
+        16,
+        27,
+        43,
+        6,
+        0
+      ],
+      "frame_numbers": [
+        64,
+        43,
+        41,
+        81,
+        11,
+        32,
+        53,
+        84,
+        12,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 17059024,
+      "category": "toyplane",
+      "scene": "540_78916_152890",
+      "pool_indices": [
+        37,
+        23,
+        17,
+        43,
+        9,
+        16,
+        28,
+        39,
+        1,
+        0
+      ],
+      "frame_numbers": [
+        73,
+        44,
+        33,
+        84,
+        15,
+        32,
+        54,
+        75,
+        2,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 8981584,
+      "category": "broccoli",
+      "scene": "239_25246_51725",
+      "pool_indices": [
+        34,
+        29,
+        18,
+        41,
+        8,
+        21,
+        23,
+        45,
+        2,
+        0
+      ],
+      "frame_numbers": [
+        65,
+        55,
+        34,
+        82,
+        14,
+        42,
+        44,
+        91,
+        3,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 17426486,
+      "category": "motorcycle",
+      "scene": "533_77249_149841",
+      "pool_indices": [
+        36,
+        29,
+        21,
+        40,
+        11,
+        16,
+        23,
+        44,
+        0,
+        2
+      ],
+      "frame_numbers": [
+        72,
+        55,
+        42,
+        81,
+        22,
+        32,
+        44,
+        85,
+        1,
+        3
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 18373304,
+      "category": "donut",
+      "scene": "220_23219_48924",
+      "pool_indices": [
+        34,
+        29,
+        17,
+        48,
+        7,
+        13,
+        20,
+        43,
+        1,
+        0
+      ],
+      "frame_numbers": [
+        65,
+        55,
+        33,
+        94,
+        13,
+        24,
+        41,
+        84,
+        2,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 442860,
+      "category": "bowl",
+      "scene": "70_5765_13311",
+      "pool_indices": [
+        38,
+        28,
+        22,
+        45,
+        5,
+        16,
+        27,
+        44,
+        5,
+        0
+      ],
+      "frame_numbers": [
+        74,
+        54,
+        43,
+        91,
+        11,
+        32,
+        53,
+        85,
+        11,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 3774642,
+      "category": "wineglass",
+      "scene": "472_66760_131233",
+      "pool_indices": [
+        36,
+        29,
+        24,
+        43,
+        11,
+        20,
+        23,
+        41,
+        2,
+        0
+      ],
+      "frame_numbers": [
+        72,
+        55,
+        45,
+        84,
+        22,
+        41,
+        44,
+        82,
+        3,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 12141461,
+      "category": "laptop",
+      "scene": "256_27640_53496",
+      "pool_indices": [
+        37,
+        28,
+        23,
+        44,
+        5,
+        21,
+        28,
+        46,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        76,
+        54,
+        44,
+        88,
+        11,
+        42,
+        54,
+        95,
+        1,
+        1
+      ],
+      "distinct_frame_count": 8
+    },
+    {
+      "base_index": 16969303,
+      "category": "broccoli",
+      "scene": "472_66857_131603",
+      "pool_indices": [
+        40,
+        28,
+        24,
+        44,
+        13,
+        16,
+        24,
+        43,
+        2,
+        0
+      ],
+      "frame_numbers": [
+        81,
+        54,
+        45,
+        85,
+        24,
+        32,
+        45,
+        84,
+        3,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 16056623,
+      "category": "cup",
+      "scene": "620_101087_202544",
+      "pool_indices": [
+        40,
+        27,
+        19,
+        44,
+        12,
+        14,
+        25,
+        45,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        81,
+        53,
+        35,
+        85,
+        23,
+        25,
+        51,
+        91,
+        1,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 6601306,
+      "category": "mouse",
+      "scene": "353_37310_70169",
+      "pool_indices": [
+        40,
+        24,
+        25,
+        43,
+        13,
+        14,
+        26,
+        42,
+        1,
+        0
+      ],
+      "frame_numbers": [
+        81,
+        45,
+        51,
+        84,
+        24,
+        25,
+        52,
+        83,
+        2,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 17629339,
+      "category": "handbag",
+      "scene": "404_53760_104855",
+      "pool_indices": [
+        33,
+        21,
+        17,
+        48,
+        12,
+        19,
+        23,
+        40,
+        2,
+        0
+      ],
+      "frame_numbers": [
+        64,
+        42,
+        33,
+        94,
+        23,
+        35,
+        44,
+        81,
+        3,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 19984514,
+      "category": "mouse",
+      "scene": "523_75471_147347",
+      "pool_indices": [
+        38,
+        27,
+        17,
+        44,
+        7,
+        15,
+        23,
+        45,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        74,
+        53,
+        33,
+        85,
+        13,
+        31,
+        44,
+        91,
+        1,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 20054857,
+      "category": "motorcycle",
+      "scene": "365_39113_75737",
+      "pool_indices": [
+        32,
+        26,
+        25,
+        40,
+        6,
+        16,
+        25,
+        42,
+        0,
+        2
+      ],
+      "frame_numbers": [
+        111,
+        97,
+        96,
+        127,
+        57,
+        79,
+        96,
+        129,
+        47,
+        49
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 7297486,
+      "category": "toaster",
+      "scene": "534_77588_150691",
+      "pool_indices": [
+        32,
+        21,
+        23,
+        48,
+        12,
+        21,
+        20,
+        44,
+        4,
+        1
+      ],
+      "frame_numbers": [
+        63,
+        42,
+        44,
+        94,
+        23,
+        42,
+        41,
+        85,
+        5,
+        2
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 7292200,
+      "category": "bicycle",
+      "scene": "523_75325_146626",
+      "pool_indices": [
+        36,
+        27,
+        22,
+        43,
+        6,
+        18,
+        26,
+        39,
+        1,
+        2
+      ],
+      "frame_numbers": [
+        72,
+        53,
+        43,
+        84,
+        12,
+        34,
+        52,
+        75,
+        2,
+        3
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 3777048,
+      "category": "bottle",
+      "scene": "34_1444_4486",
+      "pool_indices": [
+        40,
+        29,
+        25,
+        46,
+        8,
+        20,
+        24,
+        44,
+        0,
+        3
+      ],
+      "frame_numbers": [
+        81,
+        58,
+        50,
+        91,
+        17,
+        41,
+        49,
+        89,
+        1,
+        4
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 16413171,
+      "category": "plant",
+      "scene": "482_69006_134210",
+      "pool_indices": [
+        32,
+        27,
+        19,
+        44,
+        9,
+        14,
+        23,
+        38,
+        2,
+        1
+      ],
+      "frame_numbers": [
+        63,
+        53,
+        35,
+        85,
+        15,
+        25,
+        44,
+        74,
+        3,
+        2
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 3963363,
+      "category": "toyplane",
+      "scene": "412_56280_108773",
+      "pool_indices": [
+        33,
+        24,
+        18,
+        42,
+        9,
+        18,
+        22,
+        42,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        64,
+        45,
+        34,
+        83,
+        15,
+        34,
+        43,
+        83,
+        1,
+        1
+      ],
+      "distinct_frame_count": 7
+    },
+    {
+      "base_index": 14676166,
+      "category": "umbrella",
+      "scene": "397_50309_98785",
+      "pool_indices": [
+        40,
+        24,
+        24,
+        46,
+        9,
+        18,
+        22,
+        41,
+        4,
+        4
+      ],
+      "frame_numbers": [
+        81,
+        45,
+        45,
+        92,
+        15,
+        34,
+        43,
+        82,
+        5,
+        5
+      ],
+      "distinct_frame_count": 8
+    },
+    {
+      "base_index": 5648682,
+      "category": "toytruck",
+      "scene": "392_47500_94473",
+      "pool_indices": [
+        33,
+        25,
+        23,
+        40,
+        11,
+        17,
+        26,
+        45,
+        5,
+        4
+      ],
+      "frame_numbers": [
+        64,
+        51,
+        44,
+        81,
+        22,
+        33,
+        52,
+        91,
+        11,
+        5
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 15714165,
+      "category": "baseballglove",
+      "scene": "436_62229_123006",
+      "pool_indices": [
+        33,
+        25,
+        19,
+        41,
+        10,
+        15,
+        22,
+        42,
+        3,
+        3
+      ],
+      "frame_numbers": [
+        64,
+        51,
+        35,
+        82,
+        21,
+        31,
+        43,
+        83,
+        4,
+        4
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 9825485,
+      "category": "toytrain",
+      "scene": "424_59157_115006",
+      "pool_indices": [
+        34,
+        27,
+        24,
+        43,
+        9,
+        16,
+        24,
+        40,
+        1,
+        0
+      ],
+      "frame_numbers": [
+        65,
+        53,
+        45,
+        84,
+        15,
+        32,
+        45,
+        81,
+        2,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 9939134,
+      "category": "cup",
+      "scene": "575_84342_166531",
+      "pool_indices": [
+        39,
+        24,
+        24,
+        45,
+        10,
+        19,
+        25,
+        43,
+        6,
+        1
+      ],
+      "frame_numbers": [
+        77,
+        46,
+        46,
+        93,
+        21,
+        35,
+        52,
+        86,
+        12,
+        2
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 13312333,
+      "category": "teddybear",
+      "scene": "442_63426_125385",
+      "pool_indices": [
+        37,
+        25,
+        18,
+        44,
+        7,
+        19,
+        25,
+        40,
+        6,
+        0
+      ],
+      "frame_numbers": [
+        73,
+        51,
+        34,
+        85,
+        13,
+        35,
+        51,
+        81,
+        12,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 2451432,
+      "category": "apple",
+      "scene": "624_103243_207323",
+      "pool_indices": [
+        37,
+        28,
+        20,
+        40,
+        13,
+        16,
+        28,
+        45,
+        0,
+        3
+      ],
+      "frame_numbers": [
+        73,
+        54,
+        41,
+        81,
+        24,
+        32,
+        54,
+        91,
+        1,
+        4
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 15041582,
+      "category": "parkingmeter",
+      "scene": "423_58893_113884",
+      "pool_indices": [
+        39,
+        22,
+        18,
+        42,
+        10,
+        17,
+        26,
+        42,
+        1,
+        0
+      ],
+      "frame_numbers": [
+        75,
+        43,
+        34,
+        83,
+        21,
+        33,
+        52,
+        83,
+        2,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 18049289,
+      "category": "car",
+      "scene": "433_61565_120466",
+      "pool_indices": [
+        35,
+        27,
+        22,
+        41,
+        9,
+        21,
+        20,
+        39,
+        5,
+        1
+      ],
+      "frame_numbers": [
+        71,
+        53,
+        43,
+        82,
+        15,
+        42,
+        41,
+        75,
+        11,
+        2
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 4510211,
+      "category": "toaster",
+      "scene": "374_42193_84442",
+      "pool_indices": [
+        36,
+        26,
+        21,
+        42,
+        11,
+        17,
+        22,
+        42,
+        2,
+        2
+      ],
+      "frame_numbers": [
+        72,
+        52,
+        42,
+        83,
+        22,
+        33,
+        43,
+        83,
+        3,
+        3
+      ],
+      "distinct_frame_count": 8
+    },
+    {
+      "base_index": 16459353,
+      "category": "parkingmeter",
+      "scene": "576_84890_167563",
+      "pool_indices": [
+        37,
+        21,
+        17,
+        45,
+        7,
+        15,
+        24,
+        46,
+        1,
+        4
+      ],
+      "frame_numbers": [
+        73,
+        42,
+        33,
+        91,
+        13,
+        31,
+        45,
+        92,
+        2,
+        5
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 476447,
+      "category": "tv",
+      "scene": "397_50319_98835",
+      "pool_indices": [
+        36,
+        27,
+        20,
+        46,
+        9,
+        13,
+        22,
+        44,
+        3,
+        2
+      ],
+      "frame_numbers": [
+        72,
+        53,
+        41,
+        92,
+        15,
+        24,
+        43,
+        85,
+        4,
+        3
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 1767217,
+      "category": "toaster",
+      "scene": "48_2737_8013",
+      "pool_indices": [
+        35,
+        29,
+        25,
+        44,
+        12,
+        21,
+        25,
+        38,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        71,
+        55,
+        51,
+        85,
+        23,
+        42,
+        51,
+        74,
+        1,
+        1
+      ],
+      "distinct_frame_count": 8
+    },
+    {
+      "base_index": 15754371,
+      "category": "baseballbat",
+      "scene": "622_102277_205424",
+      "pool_indices": [
+        37,
+        21,
+        23,
+        40,
+        8,
+        19,
+        27,
+        38,
+        6,
+        0
+      ],
+      "frame_numbers": [
+        73,
+        42,
+        44,
+        81,
+        14,
+        35,
+        53,
+        74,
+        12,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 17418695,
+      "category": "plant",
+      "scene": "353_37309_70163",
+      "pool_indices": [
+        39,
+        27,
+        18,
+        42,
+        8,
+        16,
+        24,
+        40,
+        1,
+        0
+      ],
+      "frame_numbers": [
+        75,
+        53,
+        34,
+        83,
+        14,
+        32,
+        45,
+        81,
+        2,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 9777802,
+      "category": "bicycle",
+      "scene": "434_61761_121910",
+      "pool_indices": [
+        38,
+        26,
+        22,
+        45,
+        10,
+        20,
+        25,
+        44,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        74,
+        52,
+        43,
+        91,
+        21,
+        41,
+        51,
+        85,
+        1,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 11636465,
+      "category": "donut",
+      "scene": "129_14950_29917",
+      "pool_indices": [
+        35,
+        29,
+        25,
+        41,
+        12,
+        13,
+        23,
+        44,
+        3,
+        0
+      ],
+      "frame_numbers": [
+        71,
+        55,
+        51,
+        82,
+        23,
+        24,
+        44,
+        85,
+        4,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 12293928,
+      "category": "cellphone",
+      "scene": "350_36962_69319",
+      "pool_indices": [
+        34,
+        27,
+        17,
+        46,
+        12,
+        16,
+        20,
+        46,
+        2,
+        4
+      ],
+      "frame_numbers": [
+        126,
+        111,
+        39,
+        150,
+        28,
+        38,
+        46,
+        150,
+        3,
+        11
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 3672601,
+      "category": "cake",
+      "scene": "432_61284_120596",
+      "pool_indices": [
+        37,
+        23,
+        20,
+        45,
+        12,
+        17,
+        21,
+        39,
+        6,
+        4
+      ],
+      "frame_numbers": [
+        73,
+        44,
+        41,
+        91,
+        23,
+        33,
+        42,
+        75,
+        12,
+        5
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 18200084,
+      "category": "cake",
+      "scene": "192_20700_39255",
+      "pool_indices": [
+        35,
+        26,
+        17,
+        48,
+        5,
+        13,
+        24,
+        46,
+        4,
+        1
+      ],
+      "frame_numbers": [
+        71,
+        52,
+        33,
+        94,
+        11,
+        24,
+        45,
+        92,
+        5,
+        2
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 19580275,
+      "category": "motorcycle",
+      "scene": "431_60979_118998",
+      "pool_indices": [
+        39,
+        23,
+        17,
+        44,
+        7,
+        15,
+        23,
+        39,
+        5,
+        0
+      ],
+      "frame_numbers": [
+        75,
+        44,
+        33,
+        85,
+        13,
+        31,
+        44,
+        75,
+        11,
+        1
+      ],
+      "distinct_frame_count": 8
+    },
+    {
+      "base_index": 17791234,
+      "category": "vase",
+      "scene": "64_4376_11669",
+      "pool_indices": [
+        40,
+        22,
+        17,
+        48,
+        9,
+        16,
+        23,
+        39,
+        1,
+        0
+      ],
+      "frame_numbers": [
+        81,
+        43,
+        33,
+        94,
+        15,
+        32,
+        44,
+        75,
+        2,
+        1
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 9008367,
+      "category": "laptop",
+      "scene": "385_45606_91221",
+      "pool_indices": [
+        32,
+        25,
+        19,
+        45,
+        9,
+        21,
+        20,
+        43,
+        6,
+        4
+      ],
+      "frame_numbers": [
+        63,
+        51,
+        35,
+        91,
+        15,
+        42,
+        41,
+        84,
+        12,
+        5
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 16499716,
+      "category": "stopsign",
+      "scene": "336_34829_63614",
+      "pool_indices": [
+        33,
+        28,
+        18,
+        47,
+        11,
+        19,
+        20,
+        44,
+        2,
+        4
+      ],
+      "frame_numbers": [
+        64,
+        54,
+        34,
+        93,
+        22,
+        35,
+        41,
+        85,
+        3,
+        5
+      ],
+      "distinct_frame_count": 10
+    },
+    {
+      "base_index": 15999082,
+      "category": "toaster",
+      "scene": "420_58269_112343",
+      "pool_indices": [
+        35,
+        26,
+        17,
+        44,
+        10,
+        17,
+        26,
+        40,
+        3,
+        3
+      ],
+      "frame_numbers": [
+        71,
+        52,
+        33,
+        85,
+        21,
+        33,
+        52,
+        81,
+        4,
+        4
+      ],
+      "distinct_frame_count": 7
+    },
+    {
+      "base_index": 15479507,
+      "category": "donut",
+      "scene": "370_40634_80705",
+      "pool_indices": [
+        40,
+        28,
+        23,
+        41,
+        13,
+        18,
+        28,
+        40,
+        6,
+        0
+      ],
+      "frame_numbers": [
+        81,
+        54,
+        44,
+        82,
+        24,
+        34,
+        54,
+        81,
+        12,
+        1
+      ],
+      "distinct_frame_count": 8
+    },
+    {
+      "base_index": 2556290,
+      "category": "bicycle",
+      "scene": "575_84553_167029",
+      "pool_indices": [
+        39,
+        23,
+        25,
+        41,
+        10,
+        13,
+        24,
+        39,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        75,
+        44,
+        51,
+        82,
+        21,
+        24,
+        45,
+        75,
+        1,
+        1
+      ],
+      "distinct_frame_count": 8
+    },
+    {
+      "base_index": 16720806,
+      "category": "pizza",
+      "scene": "400_51487_101347",
+      "pool_indices": [
+        33,
+        21,
+        24,
+        48,
+        12,
+        17,
+        21,
+        44,
+        4,
+        4
+      ],
+      "frame_numbers": [
+        64,
+        42,
+        45,
+        94,
+        23,
+        33,
+        42,
+        85,
+        5,
+        5
+      ],
+      "distinct_frame_count": 8
+    },
+    {
+      "base_index": 1239996,
+      "category": "mouse",
+      "scene": "457_64455_127041",
+      "pool_indices": [
+        37,
+        26,
+        25,
+        46,
+        6,
+        14,
+        26,
+        46,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        73,
+        52,
+        51,
+        92,
+        12,
+        25,
+        52,
+        92,
+        1,
+        1
+      ],
+      "distinct_frame_count": 7
+    },
+    {
+      "base_index": 3363505,
+      "category": "microwave",
+      "scene": "598_91729_182201",
+      "pool_indices": [
+        34,
+        27,
+        17,
+        42,
+        13,
+        17,
+        21,
+        43,
+        2,
+        3
+      ],
+      "frame_numbers": [
+        67,
+        55,
+        35,
+        85,
+        26,
+        35,
+        44,
+        86,
+        3,
+        4
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 15725921,
+      "category": "vase",
+      "scene": "555_80077_156135",
+      "pool_indices": [
+        40,
+        27,
+        20,
+        41,
+        9,
+        21,
+        28,
+        45,
+        0,
+        0
+      ],
+      "frame_numbers": [
+        81,
+        53,
+        41,
+        82,
+        15,
+        42,
+        54,
+        91,
+        1,
+        1
+      ],
+      "distinct_frame_count": 9
+    },
+    {
+      "base_index": 19555935,
+      "category": "hydrant",
+      "scene": "590_88779_174477",
+      "pool_indices": [
+        36,
+        26,
+        17,
+        46,
+        11,
+        19,
+        20,
+        46,
+        5,
+        2
+      ],
+      "frame_numbers": [
+        72,
+        52,
+        33,
+        92,
+        22,
+        35,
+        41,
+        92,
+        11,
+        3
+      ],
+      "distinct_frame_count": 9
+    }
+  ],
+  "nominal_all_sequence_adaptation": {
+    "nominal_sample_count": 2011,
+    "nominal_distinct_trajectory_count": 2011,
+    "nominal_distinct_category_count": 41,
+    "nominal_distinct_frame_count": 18588,
+    "samples_with_duplicate_views": 1149,
+    "min_distinct_frames_in_a_sample": 6
+  },
+  "nominal_all_sequence_manifest_sha256": "20669a15646bda6bf45a902491155e73abb7c42b35208d959914dd9e99ef2c14",
+  "all_valid_stub": true,
+  "actual_depth_validity_verified": false,
+  "realized_samples_verified": false,
+  "sparse_download_ready": false,
+  "formal_pose_metrics_available": false,
+  "paper_sampling_equivalence_verified": false,
+  "limitations": [
+    "Existing source uses combinations[0], not the mapped combination index",
+    "Jitter plus clamping can produce duplicate views even when all frames are valid",
+    "Real mask/depth validity can oversample valid views or retry another trajectory",
+    "100 @ is a length wrapper; it does not enumerate all 2011 trajectories",
+    "Seed42 combination construction and epoch0 are declared audit choices, not recovered paper draws",
+    "Nominal trace is not sufficient to certify image CRC, GT crops or a sparse-cache bound"
+  ]
+}

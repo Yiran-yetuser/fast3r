@@ -1,0 +1,50 @@
+{
+  "status": "raw_member_budget_does_not_fit_on_demand_storage_design_pending",
+  "paper_mapping": "section 4.2 / Table 1 storage feasibility only",
+  "snapshot_time_utc": "2026-10-02T00:40:02.525177+00:00",
+  "budget_report_sha256": "e3ec5445315197bcfd254b8ce6c4d6dbfc59d6ac28681091117d269955b6bc00",
+  "filesystem_free_bytes_snapshot": 49356107776,
+  "minimum_reserve_bytes": 1073741824,
+  "advertised_raw_bytes_by_kind": {
+    "images": 36297726723,
+    "depths": 246352518781,
+    "masks": 14547386670
+  },
+  "advertised_raw_total_bytes": 297197632174,
+  "full_raw_members_fit_with_reserve": false,
+  "sparse_download_ready": false,
+  "camera_audit_service": "fast3r-co3d-camera-audit.service",
+  "camera_audit_recovery_time_local": "2026-10-02T08:38:10+08:00",
+  "camera_audit_main_pid_snapshot": 33430,
+  "camera_progress_directory": "results/co3d_camera_metadata_v2_progress",
+  "camera_final_report": "results/co3d_camera_metadata_audit_v2_20261002.json",
+  "camera_audit_prior_journals_preserved": true,
+  "camera_metadata_initial_mapping_issue": {
+    "category": "apple",
+    "sequence": "110_13072_25709",
+    "annotation_frame_number": 18,
+    "image_filename": "frame000019.jpg",
+    "resolution": "use official set-list annotation ID and filename mapping; no GT mutation"
+  },
+  "car_inverse_diagnostic": {
+    "max_abs_inverse_residual": 16.0,
+    "max_component_scaled_inverse_residual": 2.778978908665267e-16,
+    "max_abs_source_translation": 8.296149380025549e+16,
+    "resolution": "scaled residual guard with absolute residual and large-coordinate risk retained; no GT normalization"
+  },
+  "prior_camera_journals_sha256": {
+    "apple.json": "4ff82e3017d5167959fd373d25e21a95a27de0fcad6755c94540b680dc10b688",
+    "backpack.json": "883c508ce2617ea006e976286231e49a5878da863bc94cd3f6978a73034f2b6b",
+    "banana.json": "014f6597d3493162c6bd6a5c2ef9ecf0a96ae4d595d201294f6fdf6b2d8e063e",
+    "baseballbat.json": "c8da57258dff855337c3120fff3444ab94d25a69159669caa9a94997a5ead9de",
+    "baseballglove.json": "bb60b8ce5edb1c39c723be2e65610733ead3aa524ca5b6e5865e197091c8d56d",
+    "bench.json": "744c6da73fabd21fd7d331537d61e2bbb0887444210117c4dbf09a923ec8b119",
+    "bicycle.json": "a980a140376da8502a5e36df382ab7130742ca6d04932addc4cdc43f66ab60db",
+    "bottle.json": "00dfd5743f73f7cfdbef60e0e06835137fb6e4784115eb52033d3b5ec9815025",
+    "bowl.json": "5273749a8be4bc3897f73b912a75b8a4587a54f67bf6dbeeb37e85f8c15f7cd4",
+    "broccoli.json": "a345fa4e45eb15b0f32072143cb6b1f1b85703a7d5d8cd355bf4a4712a047ee1",
+    "cake.json": "7eb27a602551a8d310b12080f15c1374b4d4d228a42604d206dee91dcfa97b17"
+  },
+  "formal_pose_metrics_available": false,
+  "float32_pose_metric_stability_verified": false
+}

@@ -232,3 +232,24 @@ footer解析检查单磁盘、记录完整/范围、目录偏移；没有读取�
 8类v2旧记录通过批准的固定代码SHA、输入/路径SHA及汇总校验迁入，不宽泛接受代码更改。
 v1/v2历史不覆盖，失败bowl重新读目录并完成。`results/co3d_storage_footer_recovery_20261002.json`
 仍是恢复快照，不是全41类中央目录预算或RGB/GT就绪证明，更不是正式测评结果。
+
+### 08:21续接：全目录、源采样方法与相机metadata
+
+完整v3目录报告与独立验证核对41类/2011轨迹/399204组每种路径和235包汇总。
+原始成员标示RGB36.30GB、depth246.35GB、mask14.55GB，共297.20GB（276.79GiB）；
+记录的2,832,716,261bytes目录传输含旧记录复用，不是本轮新增网络量。
+目录核验不包括图像CRC/解码、大ZIP SHA或作者processed划分等价性。
+
+`audit_co3d_sampling_trace.py`调用仓库组合生成、ResizedDataset.set_epoch和_get_views，
+仅替换_load_view_data为明确all-valid stub。组合seed42、dataset seed777、epoch0为审计选择。
+10000个组合使base长度20110000；实际仍读combinations[0]，不按mapped组合编号选帧。
+100@名义100次为99轨迹/38类/918唯一帧，58次重复；全部2011轨迹适配追踪为18588唯一帧、1149次重复。
+真实mask/depth无效、补采和scene重试未执行，不能直接当正式全量协议或稀疏下载ready证明。
+
+相机metadata审计核验完整399204个官方annotation、set-list到image path的关系与NDC相机转换。
+38869项filename编号不同于annotation编号，如apple/110_13072_25709的annotation18为frame000019.jpg；
+按官方对应关系连接，不修改GT。原depth.scale_adjustment=1、ndc_isotropic和有限R/T/K均通过。
+PyTorch3D row-vector转换为OpenCV w2c：前两列R与前两项T翻转，R转置；c2w为此矩阵的逆。
+car有12项原平移绝对值>1e6，最大8.296e16；绝对逆残差16、全数据最大component-scaled残差6.758e-16。
+新v2保存两种残差和大坐标计数，不做静默归一化/删场景；float32 metric稳定性仍待独立验证。
+完整metadata核验不是RGB/深度解码、processed crop等价或正式位姿分数，旧v1记录和日志保留。

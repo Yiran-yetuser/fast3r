@@ -123,7 +123,41 @@ Notebook分析单元通过宿主Jupyter执行，再用apply_patch保存真实输
 
 ### 06:21续接归档：CO3D41类有来源候选与后台空间审计
 
-#### 07:21续接：全ZIP尾部预检与v3恢复（当前恢复入口）
+#### 08:21续接：目录预算、采样与相机metadata完成（当前恢复入口）
+
+`731f389`已推送，旧footer/恢复快照不重复归档。宿主CO3D目录进程已结束，日志记录
+`ALL 41 DIRECTORY BUDGETS COMPLETE`；完整v3报告及新独立验证已生成。核对41类集合、
+2011轨迹、399204组每种成员的期望路径SHA、235包URL/ETag/长度/Range、所有大小汇总和指纹，
+8类迁移来源/旧值不变；没有重新传输远端目录。结果`results/co3d_storage_budget_verified_20261002.json`。
+原始成员标示297197632174bytes（276.79GiB）：RGB36297726723、depth246352518781、mask14547386670。
+当前宿主约46GiB空闲，原始全量落盘不适配；继续按需预处理设计，不清理旧数据或立刻要求再扩容。
+空间/相机恢复诊断快照`results/co3d_storage_feasibility_20261002.json`不作为当前实时进程状态。
+
+真实仓库采样方法以组合seed42、dataset seed777、epoch0和全有效stub名义追踪：
+100@的100次请求只涉及99轨迹/38类/918唯一帧，58次有重复视角；不是正式图片输入或论文draws确认。
+另一个全部2011轨迹适配追踪为18588唯一帧，1149次重复；不替换100@，不作正式全量成绩。
+`results/co3d_sampling_trace_20261002.json`保存100次trace与限制，全2011名义清单留data不提交。
+真实depth/mask无效会补采或换轨迹，名义清单不能直接当稀疏下载预算/ready状态。
+
+本轮相机metadata审计也完整结束，日志`ALL 41 CAMERA METADATA PREFLIGHTS COMPLETE`，进程不存在。
+结果`results/co3d_camera_metadata_audit_v2_20261002.json`覆盖41类/2011轨迹/399204候选annotation：
+官方ZIP SHA/CRC、set-list编号/路径、ndc_isotropic、depth.scale_adjustment=1、有限K/c2w与rotation核验通过。
+38869项filename编号与annotation编号不同，按官方set-list连接，不按名字猜GT；源数据不修改。
+car有12项平移绝对值>1e6，最大8.296149380025549e16；绝对inverse残差16，最大component-scaled残差
+6.758143057927225e-16。记录原值和风险，不做静默归一化/删轨迹，尚未证明float32指标稳定。
+首次错误的11类v1记录和历史日志保留；当前v2断点`results/co3d_camera_metadata_v2_progress/`。
+已结束的`fast3r-co3d-camera-audit.service`不重复启动；queue为`scripts/queue_co3d_camera_metadata.sh`。
+上次08:38:10恢复MainPID33430只是历史快照，当前无CO3D审计进程。
+
+下一次先检查RE10K来源扫描（仍健康，最终`results/re10k_missing_candidates_full_source.json`待生成），
+只在完整来源SHA/76集合/图片裁剪核验后升级数据状态，不重复启动或删原1756场景。
+CO3D下一步：先审计源大坐标在官方float32相对位姿指标中的稳定性；再设计源候选不变的按需Range
+缓存和DUSt3R crop/depth处理，按实际有效性跟踪补采/scene重试，不让稀疏目录改变候选池。
+没有作者processed清单/具体100@身份仍须标协议适配，不能用99轨迹或2011候选冒充已复现Table1。
+当前图像成员CRC/解码、camera NPZ/crop等价性、正式RRA/RTA/mAA均未完成。
+111项离线测试通过，Notebook的16个paper分析单元全部已有真实输出；新增单元只读新JSON，未重跑旧GPU实验。
+
+#### 07:21续接：全ZIP尾部预检与v3恢复（历史恢复入口）
 
 `3d5dd0f`已推送，旧banana恢复分析不要重复归档。v2目录预算服务06:59:12退出1：
 bowl_001.zip中央目录37,498,281bytes超过32MiB字节预算。此次先只读预检全部41类、

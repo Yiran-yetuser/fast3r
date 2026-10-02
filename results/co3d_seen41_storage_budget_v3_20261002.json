@@ -1,0 +1,978 @@
+{
+  "status": "seen41_directory_name_and_size_budget_complete_not_data_ready",
+  "paper_mapping": "section 4.2 / Table 1 CO3D candidate storage feasibility",
+  "fingerprint": {
+    "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+    "protocol_sha256": "c6decfdcd5d960cbedb20930fde32a329a8e6ff3d0d2431953b77a5f62fb6c07",
+    "links_sha256": "3ed4997dc39ac01a20eb97eef03bc15fe49cd9895b8e1b0cad8aa4f7de9ccf97",
+    "checksums_sha256": "09de118b3c0b58fa3f878cf7e529c6f0e2ab9055ba6fcb87922e99380067a9c8",
+    "planner_sha256": "4b26eed87a387541eef73f6fcff5887ce1c54ef6e90f3c151341d8d7e42dce1f",
+    "range_reader_sha256": "f9af69036d93c1aeddcb6b1962a5d7eba9d6db3ed80da0ac2b7b6ba9a820adcc",
+    "footer_preflight_sha256": "dcbf28d16d071ae60c0dffb470bfc0ce903321f0a0329369464c6e08338c5da2"
+  },
+  "category_count": 41,
+  "selected_sequence_count": 2011,
+  "candidate_frame_count": 399204,
+  "matched_member_counts": {
+    "images": 399204,
+    "depths": 399204,
+    "masks": 399204
+  },
+  "advertised_uncompressed_bytes_by_kind": {
+    "images": 36297726723,
+    "depths": 246352518781,
+    "masks": 14547386670
+  },
+  "advertised_total_uncompressed_bytes": 297197632174,
+  "index_transport_bytes": 2832716261,
+  "category_summaries": [
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "apple",
+      "expected_frame_count": 9563,
+      "matched_member_counts": {
+        "images": 9563,
+        "depths": 9563,
+        "masks": 9563
+      },
+      "matched_uncompressed_bytes": {
+        "images": 647029803,
+        "depths": 5283945736,
+        "masks": 142594872
+      },
+      "index_transport_bytes": 83941069,
+      "expected_paths_sha256": "d3f6471f3108ad3d3a3e5e435d1dc0584c88e1c34309a4f245d158e9c1b3e2cc",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false,
+      "imported_v1_journal_sha256": "c05f0de73d57fae7768c2810b2f1abd71380ebae3eee9a9f5808814328666c85",
+      "imported_v1_fingerprint": {
+        "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+        "protocol_sha256": "c6decfdcd5d960cbedb20930fde32a329a8e6ff3d0d2431953b77a5f62fb6c07",
+        "links_sha256": "3ed4997dc39ac01a20eb97eef03bc15fe49cd9895b8e1b0cad8aa4f7de9ccf97",
+        "checksums_sha256": "09de118b3c0b58fa3f878cf7e529c6f0e2ab9055ba6fcb87922e99380067a9c8",
+        "planner_sha256": "706c7d82cbd7d04f215e790c4b96e33e824a90d8deeedbcdfbefe513901f7eab",
+        "range_reader_sha256": "a7a6f3776ee44d3827c338c6315736a8c3c286f4d422e065685de9104981c5e8"
+      },
+      "imported_prior_journal": {
+        "version": "v2",
+        "path": "results/co3d_seen41_storage_v2_progress/apple.json",
+        "sha256": "8a46605f4a27447a4931d7ebed3a49fdf2edacda4f2909dc3ec7439639f1e2fb",
+        "fingerprint": {
+          "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+          "protocol_sha256": "c6decfdcd5d960cbedb20930fde32a329a8e6ff3d0d2431953b77a5f62fb6c07",
+          "links_sha256": "3ed4997dc39ac01a20eb97eef03bc15fe49cd9895b8e1b0cad8aa4f7de9ccf97",
+          "checksums_sha256": "09de118b3c0b58fa3f878cf7e529c6f0e2ab9055ba6fcb87922e99380067a9c8",
+          "planner_sha256": "50d3f842ea073d58f213365d9c611f05577fe3f65d4252f6e59bbd4375cddd78",
+          "range_reader_sha256": "0920cd30c91b880132014a2d1cd98e63989b515f1c6a32884a420f8b6a8fb371"
+        }
+      }
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "backpack",
+      "expected_frame_count": 10055,
+      "matched_member_counts": {
+        "images": 10055,
+        "depths": 10055,
+        "masks": 10055
+      },
+      "matched_uncompressed_bytes": {
+        "images": 855231328,
+        "depths": 6477043750,
+        "masks": 512436861
+      },
+      "index_transport_bytes": 140193995,
+      "expected_paths_sha256": "53fb1f59f67d77feb0787e50eb4027a34ca195ca49145b9e33f17bf24f909cd8",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false,
+      "imported_v1_journal_sha256": "340620b4301330efabd6534c9374e6985979f10d19eb15476aa0f252c56aa22b",
+      "imported_v1_fingerprint": {
+        "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+        "protocol_sha256": "c6decfdcd5d960cbedb20930fde32a329a8e6ff3d0d2431953b77a5f62fb6c07",
+        "links_sha256": "3ed4997dc39ac01a20eb97eef03bc15fe49cd9895b8e1b0cad8aa4f7de9ccf97",
+        "checksums_sha256": "09de118b3c0b58fa3f878cf7e529c6f0e2ab9055ba6fcb87922e99380067a9c8",
+        "planner_sha256": "706c7d82cbd7d04f215e790c4b96e33e824a90d8deeedbcdfbefe513901f7eab",
+        "range_reader_sha256": "a7a6f3776ee44d3827c338c6315736a8c3c286f4d422e065685de9104981c5e8"
+      },
+      "imported_prior_journal": {
+        "version": "v2",
+        "path": "results/co3d_seen41_storage_v2_progress/backpack.json",
+        "sha256": "ee27a412b0b859e777d6087262710b55b6bae6196a383d3f98e342181d6ad5cd",
+        "fingerprint": {
+          "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+          "protocol_sha256": "c6decfdcd5d960cbedb20930fde32a329a8e6ff3d0d2431953b77a5f62fb6c07",
+          "links_sha256": "3ed4997dc39ac01a20eb97eef03bc15fe49cd9895b8e1b0cad8aa4f7de9ccf97",
+          "checksums_sha256": "09de118b3c0b58fa3f878cf7e529c6f0e2ab9055ba6fcb87922e99380067a9c8",
+          "planner_sha256": "50d3f842ea073d58f213365d9c611f05577fe3f65d4252f6e59bbd4375cddd78",
+          "range_reader_sha256": "0920cd30c91b880132014a2d1cd98e63989b515f1c6a32884a420f8b6a8fb371"
+        }
+      }
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "banana",
+      "expected_frame_count": 10042,
+      "matched_member_counts": {
+        "images": 10042,
+        "depths": 10042,
+        "masks": 10042
+      },
+      "matched_uncompressed_bytes": {
+        "images": 560063000,
+        "depths": 3902733641,
+        "masks": 171071353
+      },
+      "index_transport_bytes": 63570597,
+      "expected_paths_sha256": "75e81c8dca8a6e073f451ec0f814ef27ddbff62aad952656d4fcebb124f97a5a",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false,
+      "imported_prior_journal": {
+        "version": "v2",
+        "path": "results/co3d_seen41_storage_v2_progress/banana.json",
+        "sha256": "1e14c10178bde3af99ff18dd348de3dba46b23302849261dd2317f704a265e63",
+        "fingerprint": {
+          "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+          "protocol_sha256": "c6decfdcd5d960cbedb20930fde32a329a8e6ff3d0d2431953b77a5f62fb6c07",
+          "links_sha256": "3ed4997dc39ac01a20eb97eef03bc15fe49cd9895b8e1b0cad8aa4f7de9ccf97",
+          "checksums_sha256": "09de118b3c0b58fa3f878cf7e529c6f0e2ab9055ba6fcb87922e99380067a9c8",
+          "planner_sha256": "50d3f842ea073d58f213365d9c611f05577fe3f65d4252f6e59bbd4375cddd78",
+          "range_reader_sha256": "0920cd30c91b880132014a2d1cd98e63989b515f1c6a32884a420f8b6a8fb371"
+        }
+      }
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "baseballbat",
+      "expected_frame_count": 9991,
+      "matched_member_counts": {
+        "images": 9991,
+        "depths": 9991,
+        "masks": 9991
+      },
+      "matched_uncompressed_bytes": {
+        "images": 974121909,
+        "depths": 5900139199,
+        "masks": 302409061
+      },
+      "index_transport_bytes": 13276650,
+      "expected_paths_sha256": "59aec4ec4e48a6ea017a1a80f3abfc10283616b6d012694b8073bb8028a71073",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false,
+      "imported_prior_journal": {
+        "version": "v2",
+        "path": "results/co3d_seen41_storage_v2_progress/baseballbat.json",
+        "sha256": "98b3ef7a694c028f6d775376c6f71df0bc369c0f0131c05fe08bc37981a38128",
+        "fingerprint": {
+          "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+          "protocol_sha256": "c6decfdcd5d960cbedb20930fde32a329a8e6ff3d0d2431953b77a5f62fb6c07",
+          "links_sha256": "3ed4997dc39ac01a20eb97eef03bc15fe49cd9895b8e1b0cad8aa4f7de9ccf97",
+          "checksums_sha256": "09de118b3c0b58fa3f878cf7e529c6f0e2ab9055ba6fcb87922e99380067a9c8",
+          "planner_sha256": "50d3f842ea073d58f213365d9c611f05577fe3f65d4252f6e59bbd4375cddd78",
+          "range_reader_sha256": "0920cd30c91b880132014a2d1cd98e63989b515f1c6a32884a420f8b6a8fb371"
+        }
+      }
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "baseballglove",
+      "expected_frame_count": 10048,
+      "matched_member_counts": {
+        "images": 10048,
+        "depths": 10048,
+        "masks": 10048
+      },
+      "matched_uncompressed_bytes": {
+        "images": 1028451381,
+        "depths": 6983179913,
+        "masks": 438417483
+      },
+      "index_transport_bytes": 13785013,
+      "expected_paths_sha256": "9ab26ea1844900ce0305ab1d73c6183d6c6ec2bb11b6fde4a35b21ddbabcde09",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false,
+      "imported_prior_journal": {
+        "version": "v2",
+        "path": "results/co3d_seen41_storage_v2_progress/baseballglove.json",
+        "sha256": "0214cd1ae066ec760a8b38d00f46fd3172cb8d7d5f892813aa5f962f9afd5464",
+        "fingerprint": {
+          "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+          "protocol_sha256": "c6decfdcd5d960cbedb20930fde32a329a8e6ff3d0d2431953b77a5f62fb6c07",
+          "links_sha256": "3ed4997dc39ac01a20eb97eef03bc15fe49cd9895b8e1b0cad8aa4f7de9ccf97",
+          "checksums_sha256": "09de118b3c0b58fa3f878cf7e529c6f0e2ab9055ba6fcb87922e99380067a9c8",
+          "planner_sha256": "50d3f842ea073d58f213365d9c611f05577fe3f65d4252f6e59bbd4375cddd78",
+          "range_reader_sha256": "0920cd30c91b880132014a2d1cd98e63989b515f1c6a32884a420f8b6a8fb371"
+        }
+      }
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "bench",
+      "expected_frame_count": 9876,
+      "matched_member_counts": {
+        "images": 9876,
+        "depths": 9876,
+        "masks": 9876
+      },
+      "matched_uncompressed_bytes": {
+        "images": 1246462050,
+        "depths": 6914639131,
+        "masks": 574938901
+      },
+      "index_transport_bytes": 78753625,
+      "expected_paths_sha256": "c8f969f48678e4cc8cf962403effb8cd1bf5513b2a26fd81f52b3e94b69b7c50",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false,
+      "imported_prior_journal": {
+        "version": "v2",
+        "path": "results/co3d_seen41_storage_v2_progress/bench.json",
+        "sha256": "835ca7590c2aef686a0e967c6c84f2d2db8e8711ab98c18f085d25116f791b2e",
+        "fingerprint": {
+          "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+          "protocol_sha256": "c6decfdcd5d960cbedb20930fde32a329a8e6ff3d0d2431953b77a5f62fb6c07",
+          "links_sha256": "3ed4997dc39ac01a20eb97eef03bc15fe49cd9895b8e1b0cad8aa4f7de9ccf97",
+          "checksums_sha256": "09de118b3c0b58fa3f878cf7e529c6f0e2ab9055ba6fcb87922e99380067a9c8",
+          "planner_sha256": "50d3f842ea073d58f213365d9c611f05577fe3f65d4252f6e59bbd4375cddd78",
+          "range_reader_sha256": "0920cd30c91b880132014a2d1cd98e63989b515f1c6a32884a420f8b6a8fb371"
+        }
+      }
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "bicycle",
+      "expected_frame_count": 9976,
+      "matched_member_counts": {
+        "images": 9976,
+        "depths": 9976,
+        "masks": 9976
+      },
+      "matched_uncompressed_bytes": {
+        "images": 1256592385,
+        "depths": 6431212293,
+        "masks": 788332312
+      },
+      "index_transport_bytes": 58219960,
+      "expected_paths_sha256": "1653004ca6ae16fc6331d90892af3aacb2759aca21abdfbda78d881c63adee31",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false,
+      "imported_prior_journal": {
+        "version": "v2",
+        "path": "results/co3d_seen41_storage_v2_progress/bicycle.json",
+        "sha256": "7712f27aaf9a3ac83378b6e86a6a845abfaff84d0f1e1dfa1a42e01565a9baf5",
+        "fingerprint": {
+          "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+          "protocol_sha256": "c6decfdcd5d960cbedb20930fde32a329a8e6ff3d0d2431953b77a5f62fb6c07",
+          "links_sha256": "3ed4997dc39ac01a20eb97eef03bc15fe49cd9895b8e1b0cad8aa4f7de9ccf97",
+          "checksums_sha256": "09de118b3c0b58fa3f878cf7e529c6f0e2ab9055ba6fcb87922e99380067a9c8",
+          "planner_sha256": "50d3f842ea073d58f213365d9c611f05577fe3f65d4252f6e59bbd4375cddd78",
+          "range_reader_sha256": "0920cd30c91b880132014a2d1cd98e63989b515f1c6a32884a420f8b6a8fb371"
+        }
+      }
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "bottle",
+      "expected_frame_count": 9869,
+      "matched_member_counts": {
+        "images": 9869,
+        "depths": 9869,
+        "masks": 9869
+      },
+      "matched_uncompressed_bytes": {
+        "images": 710202126,
+        "depths": 5588038238,
+        "masks": 181570017
+      },
+      "index_transport_bytes": 79971295,
+      "expected_paths_sha256": "045aaff0492a74d539c6767ff162b8b5952072749537e799fc43d9cc3f7200a3",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false,
+      "imported_prior_journal": {
+        "version": "v2",
+        "path": "results/co3d_seen41_storage_v2_progress/bottle.json",
+        "sha256": "b291e61fdbe18007a8d4ab61d27fa9b3e3e1c88e426c89f2dc87510df7094bb5",
+        "fingerprint": {
+          "candidate_manifest_sha256": "4446e6a05ef334ec6f927034eb639d66dd951c0b7a06fb9a91340548333e18a4",
+          "protocol_sha256": "c6decfdcd5d960cbedb20930fde32a329a8e6ff3d0d2431953b77a5f62fb6c07",
+          "links_sha256": "3ed4997dc39ac01a20eb97eef03bc15fe49cd9895b8e1b0cad8aa4f7de9ccf97",
+          "checksums_sha256": "09de118b3c0b58fa3f878cf7e529c6f0e2ab9055ba6fcb87922e99380067a9c8",
+          "planner_sha256": "50d3f842ea073d58f213365d9c611f05577fe3f65d4252f6e59bbd4375cddd78",
+          "range_reader_sha256": "0920cd30c91b880132014a2d1cd98e63989b515f1c6a32884a420f8b6a8fb371"
+        }
+      }
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "bowl",
+      "expected_frame_count": 10098,
+      "matched_member_counts": {
+        "images": 10098,
+        "depths": 10098,
+        "masks": 10098
+      },
+      "matched_uncompressed_bytes": {
+        "images": 274072844,
+        "depths": 1794623077,
+        "masks": 85758028
+      },
+      "index_transport_bytes": 68688335,
+      "expected_paths_sha256": "8c7a84f3e158ba309792b4aed6c18b2fc17ea625ee5a442aece541ac1edc7a74",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "broccoli",
+      "expected_frame_count": 10046,
+      "matched_member_counts": {
+        "images": 10046,
+        "depths": 10046,
+        "masks": 10046
+      },
+      "matched_uncompressed_bytes": {
+        "images": 785320266,
+        "depths": 5445602099,
+        "masks": 277985038
+      },
+      "index_transport_bytes": 45986300,
+      "expected_paths_sha256": "8ba96302f0b257c0b0c3dfbc75c440893116b2a88561d7293b4399e20db61756",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "cake",
+      "expected_frame_count": 9992,
+      "matched_member_counts": {
+        "images": 9992,
+        "depths": 9992,
+        "masks": 9992
+      },
+      "matched_uncompressed_bytes": {
+        "images": 759077331,
+        "depths": 5608315750,
+        "masks": 299455995
+      },
+      "index_transport_bytes": 43840832,
+      "expected_paths_sha256": "ef2147ec6aab88ab69043fda6edc37ea8c2bc80b69a74d9e51c0986142b7ab83",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "car",
+      "expected_frame_count": 9786,
+      "matched_member_counts": {
+        "images": 9786,
+        "depths": 9786,
+        "masks": 9786
+      },
+      "matched_uncompressed_bytes": {
+        "images": 1362484980,
+        "depths": 7426079192,
+        "masks": 495146101
+      },
+      "index_transport_bytes": 52155956,
+      "expected_paths_sha256": "7d0c9f788075eb12eb50fca18a5c6f8bf29f8f0c3f8169cd0ea5750be7ee8459",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "carrot",
+      "expected_frame_count": 10016,
+      "matched_member_counts": {
+        "images": 10016,
+        "depths": 10016,
+        "masks": 10016
+      },
+      "matched_uncompressed_bytes": {
+        "images": 1061390860,
+        "depths": 7138296457,
+        "masks": 154551366
+      },
+      "index_transport_bytes": 98748893,
+      "expected_paths_sha256": "5bc68f6c091f7df6af3c614ccee919606830e53c3b2c7c589e6c84d92014b92f",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "cellphone",
+      "expected_frame_count": 9919,
+      "matched_member_counts": {
+        "images": 9919,
+        "depths": 9919,
+        "masks": 9919
+      },
+      "matched_uncompressed_bytes": {
+        "images": 855911006,
+        "depths": 5063434593,
+        "masks": 194367425
+      },
+      "index_transport_bytes": 112561522,
+      "expected_paths_sha256": "decf0e33537a846c149d5d793ddc2de77c9a16891000cd610133183ca1c27c0a",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "chair",
+      "expected_frame_count": 9980,
+      "matched_member_counts": {
+        "images": 9980,
+        "depths": 9980,
+        "masks": 9980
+      },
+      "matched_uncompressed_bytes": {
+        "images": 760843140,
+        "depths": 5829502051,
+        "masks": 713546075
+      },
+      "index_transport_bytes": 145660562,
+      "expected_paths_sha256": "7c28b901b4c7bb8c8e50985d0824d493f3ef328cc8190880da0fae151d28849e",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "cup",
+      "expected_frame_count": 9962,
+      "matched_member_counts": {
+        "images": 9962,
+        "depths": 9962,
+        "masks": 9962
+      },
+      "matched_uncompressed_bytes": {
+        "images": 847120199,
+        "depths": 6233146441,
+        "masks": 185232885
+      },
+      "index_transport_bytes": 54807646,
+      "expected_paths_sha256": "641b8917e0da57053e7ae8c3698e7cc2c48ff193227367227533f3434ad907fd",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "donut",
+      "expected_frame_count": 9895,
+      "matched_member_counts": {
+        "images": 9895,
+        "depths": 9895,
+        "masks": 9895
+      },
+      "matched_uncompressed_bytes": {
+        "images": 754366935,
+        "depths": 5698650394,
+        "masks": 185953395
+      },
+      "index_transport_bytes": 24826901,
+      "expected_paths_sha256": "b6773a15ec2f6b7920e4b4f17634d0c9251c010704eea375e0e881699e8963e6",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "hairdryer",
+      "expected_frame_count": 10076,
+      "matched_member_counts": {
+        "images": 10076,
+        "depths": 10076,
+        "masks": 10076
+      },
+      "matched_uncompressed_bytes": {
+        "images": 833553624,
+        "depths": 5974986668,
+        "masks": 378128713
+      },
+      "index_transport_bytes": 87680573,
+      "expected_paths_sha256": "d353dce40ec47cd16ea4124447889c068a5866ce49c8c06e2a9b237c9adc9f15",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "handbag",
+      "expected_frame_count": 10068,
+      "matched_member_counts": {
+        "images": 10068,
+        "depths": 10068,
+        "masks": 10068
+      },
+      "matched_uncompressed_bytes": {
+        "images": 576566877,
+        "depths": 4585193760,
+        "masks": 411662708
+      },
+      "index_transport_bytes": 67836375,
+      "expected_paths_sha256": "d6fcd387959ab505a95a6c0f8f614b508a8898c9db490fe10527c56cc4913875",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "hydrant",
+      "expected_frame_count": 10090,
+      "matched_member_counts": {
+        "images": 10090,
+        "depths": 10090,
+        "masks": 10090
+      },
+      "matched_uncompressed_bytes": {
+        "images": 2261669707,
+        "depths": 8607749677,
+        "masks": 435191187
+      },
+      "index_transport_bytes": 71445958,
+      "expected_paths_sha256": "d0a74fa4f4edaf614e93479e4594a4cf8b1a91fde9354354af19007920a2cd54",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "keyboard",
+      "expected_frame_count": 9992,
+      "matched_member_counts": {
+        "images": 9992,
+        "depths": 9992,
+        "masks": 9992
+      },
+      "matched_uncompressed_bytes": {
+        "images": 763196958,
+        "depths": 5771269620,
+        "masks": 295176768
+      },
+      "index_transport_bytes": 109441824,
+      "expected_paths_sha256": "f60a22f862a4b8a1acc402a80006032f704b15cfea224e41541dbf30e1c9ac76",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "laptop",
+      "expected_frame_count": 10055,
+      "matched_member_counts": {
+        "images": 10055,
+        "depths": 10055,
+        "masks": 10055
+      },
+      "matched_uncompressed_bytes": {
+        "images": 883535818,
+        "depths": 7013278489,
+        "masks": 429393091
+      },
+      "index_transport_bytes": 96249609,
+      "expected_paths_sha256": "4806d206966574c80af1baa106fccc761f5c7f553785b613ea767af9a8995488",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "microwave",
+      "expected_frame_count": 9384,
+      "matched_member_counts": {
+        "images": 9384,
+        "depths": 9384,
+        "masks": 9384
+      },
+      "matched_uncompressed_bytes": {
+        "images": 682004510,
+        "depths": 5574676693,
+        "masks": 432336436
+      },
+      "index_transport_bytes": 13939290,
+      "expected_paths_sha256": "3cb6a562c4e5088ec8276e0083abbf2b047379df3ec1dcaa18dd104a96e016f3",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "motorcycle",
+      "expected_frame_count": 9846,
+      "matched_member_counts": {
+        "images": 9846,
+        "depths": 9846,
+        "masks": 9846
+      },
+      "matched_uncompressed_bytes": {
+        "images": 1087651642,
+        "depths": 6359858390,
+        "masks": 781155049
+      },
+      "index_transport_bytes": 64318893,
+      "expected_paths_sha256": "481aad0f80cec6bee3891abdfd21f4fc8bb437555d25e2dca73f8c8cff1a4027",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "mouse",
+      "expected_frame_count": 9866,
+      "matched_member_counts": {
+        "images": 9866,
+        "depths": 9866,
+        "masks": 9866
+      },
+      "matched_uncompressed_bytes": {
+        "images": 804806341,
+        "depths": 6104314992,
+        "masks": 175106559
+      },
+      "index_transport_bytes": 121132783,
+      "expected_paths_sha256": "a3386270c5469b211a8ab5811b28c691de6ed3769aa0fe75a2027499f74b37cf",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "orange",
+      "expected_frame_count": 9319,
+      "matched_member_counts": {
+        "images": 9319,
+        "depths": 9319,
+        "masks": 9319
+      },
+      "matched_uncompressed_bytes": {
+        "images": 709012899,
+        "depths": 5843274431,
+        "masks": 106636239
+      },
+      "index_transport_bytes": 81962848,
+      "expected_paths_sha256": "6c6bc8e0dbafb74a7dad6e58e08db2bdc36b9ea06afd0be901282a40c8b6d4dd",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "parkingmeter",
+      "expected_frame_count": 8269,
+      "matched_member_counts": {
+        "images": 8269,
+        "depths": 8269,
+        "masks": 8269
+      },
+      "matched_uncompressed_bytes": {
+        "images": 1319230522,
+        "depths": 7366695219,
+        "masks": 329846198
+      },
+      "index_transport_bytes": 5810021,
+      "expected_paths_sha256": "49498396201df8349fcb863fcb4d9e363506e68693e54c698a4c8877d3072652",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "pizza",
+      "expected_frame_count": 10047,
+      "matched_member_counts": {
+        "images": 10047,
+        "depths": 10047,
+        "masks": 10047
+      },
+      "matched_uncompressed_bytes": {
+        "images": 801630837,
+        "depths": 5607383674,
+        "masks": 295739901
+      },
+      "index_transport_bytes": 18598484,
+      "expected_paths_sha256": "9d07a0c0ef2b64c9ce7ef3531bd29801508ba190cb78a5bbc3800fed359d2b18",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "plant",
+      "expected_frame_count": 10006,
+      "matched_member_counts": {
+        "images": 10006,
+        "depths": 10006,
+        "masks": 10006
+      },
+      "matched_uncompressed_bytes": {
+        "images": 1099642972,
+        "depths": 6661976368,
+        "masks": 549818022
+      },
+      "index_transport_bytes": 125543147,
+      "expected_paths_sha256": "928800a524030e9a69de8e74dca9ba8f583550cc04bcf2e49c6de4ef5f02b135",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "stopsign",
+      "expected_frame_count": 9988,
+      "matched_member_counts": {
+        "images": 9988,
+        "depths": 9988,
+        "masks": 9988
+      },
+      "matched_uncompressed_bytes": {
+        "images": 1443945427,
+        "depths": 7763265725,
+        "masks": 261444880
+      },
+      "index_transport_bytes": 61507002,
+      "expected_paths_sha256": "f0209a9c0713053951bb9d4794eba1a2b692cfeb27509eeb10fccf2ea068ab64",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "teddybear",
+      "expected_frame_count": 10043,
+      "matched_member_counts": {
+        "images": 10043,
+        "depths": 10043,
+        "masks": 10043
+      },
+      "matched_uncompressed_bytes": {
+        "images": 738390212,
+        "depths": 5716980724,
+        "masks": 469514233
+      },
+      "index_transport_bytes": 130973396,
+      "expected_paths_sha256": "402c80d488893dc5be5eee504fc52d8385d07614f27490c4a381aa58844c016b",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "toaster",
+      "expected_frame_count": 9926,
+      "matched_member_counts": {
+        "images": 9926,
+        "depths": 9926,
+        "masks": 9926
+      },
+      "matched_uncompressed_bytes": {
+        "images": 891449201,
+        "depths": 7384023270,
+        "masks": 422542493
+      },
+      "index_transport_bytes": 46035863,
+      "expected_paths_sha256": "cfd8a4e7e90dd52807b55fb44239880b4f377bd99f1fba8d78afbc5fa968248d",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "toilet",
+      "expected_frame_count": 9973,
+      "matched_member_counts": {
+        "images": 9973,
+        "depths": 9973,
+        "masks": 9973
+      },
+      "matched_uncompressed_bytes": {
+        "images": 763424085,
+        "depths": 7842324060,
+        "masks": 666284741
+      },
+      "index_transport_bytes": 104652415,
+      "expected_paths_sha256": "d8a5f991f99269a494a2c3b1f8e9f633cb8d521fe8ab8f6a38a4de6057c9c2b4",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "toybus",
+      "expected_frame_count": 10056,
+      "matched_member_counts": {
+        "images": 10056,
+        "depths": 10056,
+        "masks": 10056
+      },
+      "matched_uncompressed_bytes": {
+        "images": 582385031,
+        "depths": 5179689711,
+        "masks": 247375875
+      },
+      "index_transport_bytes": 24261823,
+      "expected_paths_sha256": "1f9e27487a46fb4ab4fe0e31e1ac3c2331bf95bd14c01d09c41f1dc2a776f2a3",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "toyplane",
+      "expected_frame_count": 9889,
+      "matched_member_counts": {
+        "images": 9889,
+        "depths": 9889,
+        "masks": 9889
+      },
+      "matched_uncompressed_bytes": {
+        "images": 733769085,
+        "depths": 5573400129,
+        "masks": 410981643
+      },
+      "index_transport_bytes": 37136008,
+      "expected_paths_sha256": "4d57629e242f78e49c3019d1e98cde9b9ae76943a80bf727b7a36131edfff023",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "toytrain",
+      "expected_frame_count": 9934,
+      "matched_member_counts": {
+        "images": 9934,
+        "depths": 9934,
+        "masks": 9934
+      },
+      "matched_uncompressed_bytes": {
+        "images": 796597882,
+        "depths": 4685975668,
+        "masks": 272228472
+      },
+      "index_transport_bytes": 35664242,
+      "expected_paths_sha256": "1b6f6808423affdd4ee5d3aab0876f895b85ed965cf6e92d325fb71e4d4179df",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "toytruck",
+      "expected_frame_count": 9848,
+      "matched_member_counts": {
+        "images": 9848,
+        "depths": 9848,
+        "masks": 9848
+      },
+      "matched_uncompressed_bytes": {
+        "images": 897472906,
+        "depths": 6437395214,
+        "masks": 303017181
+      },
+      "index_transport_bytes": 70115964,
+      "expected_paths_sha256": "c68599c193d46c2e6f530fcdbc60c39b55a85eff2aa865fe7dfcb2d873ded545",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "tv",
+      "expected_frame_count": 3990,
+      "matched_member_counts": {
+        "images": 3990,
+        "depths": 3990,
+        "masks": 3990
+      },
+      "matched_uncompressed_bytes": {
+        "images": 223972033,
+        "depths": 1943287924,
+        "masks": 147249373
+      },
+      "index_transport_bytes": 2243147,
+      "expected_paths_sha256": "9d46d3446319b37a533336130c5ef54ce92a6f7359b0501407c3c8b17f16266a",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "umbrella",
+      "expected_frame_count": 9620,
+      "matched_member_counts": {
+        "images": 9620,
+        "depths": 9620,
+        "masks": 9620
+      },
+      "matched_uncompressed_bytes": {
+        "images": 866738454,
+        "depths": 6172806419,
+        "masks": 416108969
+      },
+      "index_transport_bytes": 91236015,
+      "expected_paths_sha256": "6dc438999b3dc2a22db2b5132e2245857af473e855042d642e3e481c6f47afd6",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "vase",
+      "expected_frame_count": 10003,
+      "matched_member_counts": {
+        "images": 10003,
+        "depths": 10003,
+        "masks": 10003
+      },
+      "matched_uncompressed_bytes": {
+        "images": 901485416,
+        "depths": 7209767922,
+        "masks": 335819469
+      },
+      "index_transport_bytes": 104960490,
+      "expected_paths_sha256": "71aeaf1b96a28059b4cb3381dbcd5f56413b8188b082dde8119a7deb851a336f",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    },
+    {
+      "status": "complete_category_name_and_size_inventory_not_data_ready",
+      "category": "wineglass",
+      "expected_frame_count": 9802,
+      "matched_member_counts": {
+        "images": 9802,
+        "depths": 9802,
+        "masks": 9802
+      },
+      "matched_uncompressed_bytes": {
+        "images": 896852741,
+        "depths": 7254362079,
+        "masks": 270861302
+      },
+      "index_transport_bytes": 80980940,
+      "expected_paths_sha256": "a845331b62998dd4bd09dbfb38604e85321f97a8e430c7bf82a7b70bf5e69f01",
+      "cross_archive_duplicate_count": 0,
+      "full_archive_sha_verified": false,
+      "member_crc_verified": false
+    }
+  ],
+  "full_archive_sha_verified": false,
+  "member_crc_verified": false,
+  "rgb_depth_mask_and_camera_npz_ready": false,
+  "formal_pose_metrics_available": false,
+  "original_fast3r_split_equivalence_verified": false,
+  "note": "Complete candidate-name coverage only; no RGB extraction, sparse sampling change or benchmark promotion"
+}

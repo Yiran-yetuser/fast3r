@@ -26,7 +26,10 @@ CO3D §4.2/Table1类别审计：已找到固定PoseDiffusion协议的41类seen�
 
 目录审计的banana成员数量阈值错误已诊断并安全恢复：保留旧检查点，核验复用apple/backpack，使用新v2结果路径。88项离线测试通过；[恢复证据](results/co3d_storage_recovery_20261002.json)不是正式位姿成绩。
 
-最新v3恢复：已完成41类/235个官方ZIP的[尾部大小预检](results/co3d_zip_footer_preflight_20261002.json)，按每包实测目录大小安全读取，复用8类旧目录记录并通过bowl原失败点。95项测试通过；全41类空间预算仍在后台，不是图像或正式测评就绪。当前恢复路径见CONTINUATION。
+07:21历史恢复阶段：已完成41类/235个官方ZIP的[尾部大小预检](results/co3d_zip_footer_preflight_20261002.json)，按每包实测目录大小安全读取，复用8类旧目录记录并通过bowl原失败点。当时95项测试通过、目录预算仍在后台；最新完成状态见下一条。
+
+08:21最新阶段：CO3D完整[目录预算与独立核验](results/co3d_storage_budget_verified_20261002.json)已完成，41类/2011轨迹/399204组每种成员，原始大小297.20GB。全部候选[相机metadata核验](results/co3d_camera_metadata_audit_v2_20261002.json)完成，保留编号差异与car大坐标风险；名义源采样追踪不作为论文成绩。图像/深度/crop、float32稳定性和正式Table1指标仍待完成，按需存储设计继续。Notebook保存真实分析输出。
+111项离线测试通过，16个paper分析单元均已保存真实输出；未重跑旧GPU评测。
 
 ```bash
 # clone project
