@@ -4,6 +4,26 @@
 [`results/protocol_audit_20261001.json`](results/protocol_audit_20261001.json)。
 这是代码、权重和数据前提的审计，不是新增训练或位姿测评成绩。
 
+## 最新作者协议证据与PnP诊断（2026-10-03）
+
+[作者#78回复](https://github.com/facebookresearch/fast3r/issues/78#issuecomment-2844393603)
+描述1000次DUSt3R式CO3D test采样、seed777、512×384，承认可能超过41类。
+与论文41类及发布配置100次有差异；先前推导41类仅保留为候选适配，不能升格作者划分。
+[作者#77回复](https://github.com/facebookresearch/fast3r/issues/77#issuecomment-2839864793)
+仅指向DUSt3R预处理，未给原selected JSON；HF模型卡仍未映射论文训练组别。
+四条回复身份、日期、正文SHA及配置SHA见`results/co3d_author_protocol_update_20261003.json`。
+有界检索不代表穷尽资料，也不证明权重非公开；后续重审51类/1000请求。
+
+3个固定probe的2×2诊断共享每次前向，baseline位姿与原报告完全相同。
+发布conf>1保留约9.7%–100%点，严格top15保留约9.7%–15%（阈值并列）。
+几何间隔焦距搜索令零焦距probe回退10→0，mAA却仍0；另低分probe四分支mAA也均0。
+高分probe为92.2581/94.2652/93.0466/92.4731%；选定probe不代表总体，不替换基线。
+独立核验重算保存的pose/pair/metric及输入链；预测点图未落盘，不能将其哈希断言
+称作独立重推理/重算mask。生成代码绑定、prediction前后哈希一致。
+[作者#76回复](https://github.com/facebookresearch/fast3r/issues/76#issuecomment-2842609184)
+提供portrait/强制landscape输入裁剪线索，不证明本项目根因；应先做同帧GT、固定seed对照。
+正式Table1、训练及整篇复现仍未完成，旧数据/协议/结果不修改。
+
 ## 1. 确认了哪份权重？
 
 重新计算本地两个文件的 SHA256，并只读取公开 HF 小型元数据与配置。

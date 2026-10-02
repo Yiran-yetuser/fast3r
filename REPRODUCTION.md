@@ -2,6 +2,20 @@
 
 这份文档和 [`fast3r_reproduction.ipynb`](fast3r_reproduction.ipynb) 记录了本分支的可重复实验流程，适合第一次接触多视图 3D 重建的同学。
 
+## 最新续接：作者协议纠正与受控PnP诊断（2026-10-03）
+
+作者公开回复说明CO3D实际采用1000次test采样，类别可能超过论文所写41类；
+发布配置为100次。因此已归档41类/100请求仅为候选适配，不能作为作者完整benchmark。
+详见`results/co3d_author_protocol_update_20261003.json`和`PROTOCOL_AUDIT.md`的原始链接。
+3个固定probe、每次前向四分支的焦距×置信度诊断完成：baseline最大位姿差0；
+零焦距probe搜索后PnP回退10→0，但mAA仍0；高分probe仅mask mAA92.2581→94.2652%。
+不计算选定样本的总体平均，不覆盖100请求。Notebook保存真实分析和科学图，
+新结果`results/co3d_candidate_pnp_diagnostic_v1_20261003.json`，独立证明
+`results/co3d_candidate_pnp_diagnostic_verified_20261003.json`。
+CPU复核：`PYTHONPATH=.:scripts python scripts/verify_co3d_pnp_diagnostic.py`。
+下一步先审计作者portrait/landscape输入裁剪约定，再重审51类/1000请求和预算。
+正式Table1与完整训练仍未完成；原数据/权重/历史Notebook输出保留。
+
 ## 复现范围
 
 本分支完成了公开权重的端到端推理、DTU22场景、NRGBD9场景、7-Scenes18条测试轨迹重建，以及视角数/local-global适配实验。CO3D候选100请求位姿评测也已完成并逐项核验，但正式Table1划分和权重对应尚未确认。整篇论文尚未复现完成，逐项状态与实验条件见 [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md)。推理链路为：

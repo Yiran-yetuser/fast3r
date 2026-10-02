@@ -1,0 +1,80 @@
+{
+  "status": "bounded_author_comment_protocol_audit",
+  "observed_at_utc": "2026-10-02T22:45:02.233215+00:00",
+  "network_access": "public read-only GitHub API, no authentication or external messages",
+  "comments": [
+    {
+      "issue": 78,
+      "comment_id": 2844393603,
+      "author": "jedyang97",
+      "author_association": "CONTRIBUTOR",
+      "updated_at": "2025-05-01T08:47:20Z",
+      "url": "https://github.com/facebookresearch/fast3r/issues/78#issuecomment-2844393603",
+      "api_url": "https://api.github.com/repos/facebookresearch/fast3r/issues/comments/2844393603",
+      "response_sha256": "2fe2aef212560197d119d0b86aba7db37f7d394d5945986c903314356f655b08",
+      "comment_body_sha256": "9f6eae6ebbeea1d02ecc42ee9f150eeb92484142564a25d54614f723a90e5e3b",
+      "observation": "Author states 1000 resized CO3D test requests at resolution (512,384), seed777; categories may exceed the paper 41."
+    },
+    {
+      "issue": 77,
+      "comment_id": 2839864793,
+      "author": "jedyang97",
+      "author_association": "CONTRIBUTOR",
+      "updated_at": "2025-04-29T18:36:00Z",
+      "url": "https://github.com/facebookresearch/fast3r/issues/77#issuecomment-2839864793",
+      "api_url": "https://api.github.com/repos/facebookresearch/fast3r/issues/comments/2839864793",
+      "response_sha256": "b44bcf7aa1219f2195700df34602bc983f40affc5a068e4fa4f9b40cebfec11a",
+      "comment_body_sha256": "6ae6839f40d553bf40ae85e660a352fff85ef9df3c6023c367d9491a44abe477",
+      "observation": "Author directs users to DUSt3R preprocessing, not a published exact processed JSON."
+    },
+    {
+      "issue": 76,
+      "comment_id": 2842609184,
+      "author": "jedyang97",
+      "author_association": "CONTRIBUTOR",
+      "updated_at": "2025-04-30T16:49:52Z",
+      "url": "https://github.com/facebookresearch/fast3r/issues/76#issuecomment-2842609184",
+      "api_url": "https://api.github.com/repos/facebookresearch/fast3r/issues/comments/2842609184",
+      "response_sha256": "a779384ceadf7dc38876dd19219a6763b29fe0b2747c5b1f7534c86adcd07b69",
+      "comment_body_sha256": "8a91ac11052d998b94e269e5c7b9908bd40732150c13f0397ac880e43bc8ec77",
+      "observation": "Author suspects portrait/landscape handling and recalls cropping CO3D images to landscape 512x384; this is not proof of this project error cause."
+    },
+    {
+      "issue": 56,
+      "comment_id": 2752636807,
+      "author": "jedyang97",
+      "author_association": "CONTRIBUTOR",
+      "updated_at": "2025-03-25T21:58:43Z",
+      "url": "https://github.com/facebookresearch/fast3r/issues/56#issuecomment-2752636807",
+      "api_url": "https://api.github.com/repos/facebookresearch/fast3r/issues/comments/2752636807",
+      "response_sha256": "7fa10c49e83555beadf6032ce245970053aa11810210870cc1903b285b70f493",
+      "comment_body_sha256": "bbc678f14e8bd4c201b4acb0a6acf69a7c4dfaadb41e0db839d030583b357dda",
+      "observation": "Author explains original evaluation expects a training Lightning checkpoint folder, not the HF checkpoint."
+    }
+  ],
+  "public_config": {
+    "revision": "33104d4b5b8df43795ecded236194958bbdac572",
+    "path": "configs/eval/eval_cam_pose/default.yaml",
+    "sha256": "40e6a30f4fc13594d09b764ce793ddc7a928ead082b00668358a6eb2ac4ee54b",
+    "resized_request_count": 100,
+    "dataset_seed": 777,
+    "resolution_wh": [
+      512,
+      384
+    ]
+  },
+  "author_stated_request_count": 1000,
+  "paper_stated_category_count": 41,
+  "author_acknowledges_more_than_41_categories_possible": true,
+  "historical_seen41_100_request_candidate_is_not_author_confirmed_benchmark": true,
+  "author_exact_processed_sequence_JSON_verified": false,
+  "checkpoint_paper_experiment_mapping_verified": false,
+  "public_HF_model_card": "https://huggingface.co/jedyang97/Fast3R_ViT_Large_512",
+  "portrait_root_cause_proven_for_this_project": false,
+  "next_protocol_priorities": [
+    "Audit author landscape crop convention with unchanged original inputs/GT before another benchmark.",
+    "Reconsider all 51 DUSt3R categories and 1000 resized requests as an author-described candidate, retaining old seen41/100 evidence; exact author split/RNG still unverified."
+  ],
+  "formal_Table1_result": false,
+  "full_paper_completed": false
+}

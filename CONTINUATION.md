@@ -3,6 +3,39 @@
 用户已授权继续整篇论文复现、Notebook归档及逐步推送GitHub，并要求额度刷新后接续。
 分支 `local-demo`，远端 `myfork`。本文件是恢复入口，不是“整篇已完成”的声明。
 
+## 最新恢复入口（2026-10-03：作者协议纠正与3个固定probe完成）
+
+`fast3r-co3d-pnp-diagnostic.service`于06:42:22正常结束0，inactive/dead、MainPID0；
+不重启，日志`results/co3d_candidate_pnp_diagnostic_v1.log`。
+新`results/co3d_candidate_pnp_diagnostic_v1_20261003.json`有request0/2/3的12分支，
+每个request一次前向，baseline poses最大差0，pair/metric独立重算。
+证明`results/co3d_candidate_pnp_diagnostic_verified_20261003.json`；
+入口`scripts/diagnose_co3d_candidate_pnp.py`，核验`scripts/verify_co3d_pnp_diagnostic.py`。
+零焦距probe搜索后回退10→0但mAA仍0；高分probe仅mask mAA92.2581→94.2652%。
+按历史表现挑选的诊断不做总体平均、不覆盖100请求、不作正式Table1。186项离线测试通过。
+5项内存损坏注入（正式误标/缺request/预测哈希/metric/丢identity）全部被独立核验器拒绝，
+没有改存储JSON。Notebook原93单元逐项保留，新2单元已有宿主Jupyter真实输出且无error；图已目视检查。
+
+**重要纠正**：作者#78说明实际1000次CO3D test采样、可能超41类，发布配置却是100次。
+来源`results/co3d_author_protocol_update_20261003.json`；旧41类/100仅候选适配，
+不继续作为作者必要规定。精确processed JSON/采样顺序/HF论文组别仍未确认。
+作者#76提供portrait/landscape输入裁剪线索；两个低分probe是portrait，高分是landscape，
+相关性不证明根因，也不能只把已transpose输出再改一遍。
+
+下一次顺序：
+1. 读最新git历史/本入口，核实宿主后台；新诊断和100请求基线已完成，不重启。
+2. 优先审计**输入裁剪/相机像素几何**并做固定帧对照：作者回忆全landscape512×384，
+   发布基类却自动反转portrait分辨率再transpose tensor。保留GT/RNG；不以GT焦距补分，
+   不修改源数据，不将不同crop输入的对照藏成同输入/同次前向。
+3. 重审51类DUSt3R候选/1000@范围、补采及空间预算；既有41类缓存/输入/报告保留。
+   不重复已归档ZIP目录/100请求实验，不未经预算启动1000前向。原作者清单未确认前，
+   新51类/1000也先标作者描述候选，不自动变正式成绩。
+4. RE10K1756/1832仍缺76；已结束205GB来源扫描不重跑。继续安全推进附录可行性，
+   缺独立权重/128A100的训练实验不以短训练或Demo填补。
+
+本轮磁盘约32GiB只是快照，每次仍宿主重查且保留1GiB。heartbeat保持，无需新增账号/付费预算。
+下方旧启动/失败记录是历史，不当实时指令。
+
 ## 已归档，不重复运行
 
 - `96400ae`：NRGBD9场景配对与7-Scenes数据准备。

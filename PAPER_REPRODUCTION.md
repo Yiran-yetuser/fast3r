@@ -11,7 +11,7 @@
 | §3.1；§3.3；Figure 2 | 多张图是否一次输出 global/local 点图与置信度？ | Notebook 的推理与模块 hook；`config.json` | 推理验证已执行 |
 | §3.2，Eq. (1)–(3) | 归一化点图回归、置信度加权损失 | `results/loss_checks.json` | 数值/梯度检查通过；尚未重新训练 |
 | §3.4；§4.1；Table 2 | 视角数增加时耗时与显存如何变化？ | `results/dtu_paper_experiments.json` 的 performance | 本机适配实验；单卡不覆盖论文 A100/多卡设置 |
-| §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | CO3D候选100请求/4500pair已运行核验；RE10K1832相机记录及265447帧核验 | CO3D候选mAA@30=23.8007%，划分/权重等价未确认；RE10K1756/1832，缺76；正式Table1未完成 |
+| §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | CO3D候选100请求/4500pair已核验，新增3个同次前向PnP诊断；RE10K1832相机记录及265447帧核验 | 候选mAA@30=23.8007%；作者回复指出1000请求/可能超过41类，与发布配置不同，正式Table1未完成；RE10K仍缺76 |
 | §4.3；Table 3 | 7-Scenes / NRGBD 重建 | `results/nrgbd_seed42_stride40.json`；`results/7scenes_paired_seed42_stride20.json` | NRGBD完整9场景、7-Scenes全部18测试轨迹已运行核验；未对齐论文数值 |
 | §4.3；Table 4 | DTU 完整 22 场景重建 | `demo_outputs/paper_eval/dtu_all.json` | 已运行；论文数值尚未对齐 |
 | §5.1；Figure 5 | 测试视角数对重建质量的影响 | 新脚本 3/5/10/20 视角 | 本地均匀采样适配实验 |
@@ -20,6 +20,39 @@
 | §5.3；Figure 8 | 移除训练位置插值后的性能 | 代码中的 image-index embedding | 已核对机制；缺独立训练模型 |
 | §5.4；Table 5 | 使用 aligned local 或 global 点图的差别 | DTU10视角；NRGBD/7-Scenes全量同次预测、双分支指标 | 三个数据集配对已完成；local优势并非所有距离指标均成立 |
 | 附录 C/D/E/F | Gaussian splatting、BA、深度 benchmark 与可视化 | 已有点云；官方 robustmvd 接口 | 点云可视化部分完成；其余未执行 |
+
+## 最新协议纠正与受控PnP诊断（2026-10-03，§4.2 / Table 1）
+
+原41类/100请求是历史候选适配，**不是已确认的作者benchmark**。
+[作者Issue #78回复](https://github.com/facebookresearch/fast3r/issues/78#issuecomment-2844393603)
+说明实际沿用DUSt3R的1000次CO3D test采样、seed777、512×384，可能超过论文所写41类。
+发布配置`configs/eval/eval_cam_pose/default.yaml`仍是100次。此前按PoseDiffusion推导41类
+不能继续当成作者的必要选择规则；旧数据/报告保留，后续重审51类和1000请求。
+回复没有提供原processed JSON或精确RNG顺序，公开HF权重与论文组别映射仍未知。
+来源/日期/正文哈希见`results/co3d_author_protocol_update_20261003.json`。
+
+新`diagnose_co3d_candidate_pnp.py`只选原报告request0/2/3（低分/高分/零焦距），
+每个请求一次前向共享给四个PnP分支。精确RGB/GT/采样state复核，baseline位姿差最大0、
+指标一致；GT不输入网络/焦距/PnP，重复pair和失败回退全部保留。独立核验12分支全部45pair。
+
+| 固定request（非随机代表性样本） | 发布版mAA% | 仅top15 mask | 仅焦距搜索 | 搜索+top15 |
+| --- | ---: | ---: | ---: | ---: |
+| 0 bicycle，portrait | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+| 2 cup，landscape | 92.2581 | 94.2652 | 93.0466 | 92.4731 |
+| 3 stopsign，portrait | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+
+搜索沿发布`fast_pnp(focal=None)`的100个确定性几何间隔候选，不冒充论文随机猜测。
+top15是严格`conf > quantile(.85)`，并列阈值使实际比例不一定15%；全部保留数已记录。
+request3发布/仅mask时10次identity回退；搜索两分支回退为0但mAA仍0：PnP返回不等于正确。
+request0也未被这两项修复；不计算挑选样本的benchmark平均，不覆盖原100请求结果。
+
+[作者Issue #76回复](https://github.com/facebookresearch/fast3r/issues/76#issuecomment-2842609184)
+曾怀疑portrait处理并回忆强制landscape裁剪。这里两个低分probe为portrait、高分为landscape，
+只是线索，不是本机误差因果证明；此前只改变输出transpose的单样本诊断未修复问题。
+下一步检查输入裁剪几何/PnP坐标一致性，不仅凭输出尺寸512×384认定满足作者约定。
+新结果`results/co3d_candidate_pnp_diagnostic_v1_20261003.json`及独立证明
+`results/co3d_candidate_pnp_diagnostic_verified_20261003.json`写入Notebook真实分析。
+没有新增正式Table1成绩、训练或整篇完成声明。
 
 ## 步骤 1：纠正比较口径
 

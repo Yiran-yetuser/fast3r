@@ -1,0 +1,247 @@
+{
+  "status": "three_selected_diagnostic_requests_and_twelve_branches_independently_verified",
+  "report_path": "results/co3d_candidate_pnp_diagnostic_v1_20261003.json",
+  "report_sha256": "3ee21bb9f1da186e7bdcede1aea63a06245f6bb4db91d8979ac5cdfc62048374",
+  "verifier_sha256": "3e5679126ff469d41fda751365bf548f0a67ace07b3e100a4241c8dac1b0a05f",
+  "baseline_report_sha256": "e52f2101a05475dcac4b3a784a27dc7c5e0f10a4e8f35683a62601671c90036d",
+  "request_count": 3,
+  "branch_count": 12,
+  "all_pair_errors_and_metrics_recomputed": true,
+  "all_identity_fallbacks_retained": true,
+  "baseline_poses_and_metrics_reproduced": true,
+  "network_bytes": 0,
+  "model_forward_count": 0,
+  "verification_limit": "Prediction/mask hashes are provenance assertions checked against frozen generating code; raw predicted maps are not stored and are not independently recomputed here.",
+  "formal_Table1_result": false,
+  "full_paper_completed": false,
+  "rows": [
+    {
+      "request": 0,
+      "scene": "bicycle/374_41967_84033",
+      "branch": "released",
+      "metrics": {
+        "RRA_at_5": 0.0,
+        "RRA_at_15": 0.0,
+        "RRA_at_30": 0.0,
+        "RTA_at_5": 0.0,
+        "RTA_at_15": 0.1111111119389534,
+        "RTA_at_30": 0.24444444477558136,
+        "mAA_30": 0.0
+      },
+      "estimated_focal": 28.146942138671875,
+      "pnp_failed_view_count": 0,
+      "retained_mask_fraction_min": 0.7550760904947916,
+      "retained_mask_fraction_max": 0.9965972900390625,
+      "baseline_pose_max_abs_difference": 0.0
+    },
+    {
+      "request": 0,
+      "scene": "bicycle/374_41967_84033",
+      "branch": "top15_only",
+      "metrics": {
+        "RRA_at_5": 0.0,
+        "RRA_at_15": 0.0,
+        "RRA_at_30": 0.02222222276031971,
+        "RTA_at_5": 0.0,
+        "RTA_at_15": 0.0,
+        "RTA_at_30": 0.04444444552063942,
+        "mAA_30": 0.0
+      },
+      "estimated_focal": 28.146942138671875,
+      "pnp_failed_view_count": 0,
+      "retained_mask_fraction_min": 0.149932861328125,
+      "retained_mask_fraction_max": 0.15000406901041666,
+      "baseline_pose_max_abs_difference": 0.0
+    },
+    {
+      "request": 0,
+      "scene": "bicycle/374_41967_84033",
+      "branch": "search_only",
+      "metrics": {
+        "RRA_at_5": 0.0,
+        "RRA_at_15": 0.02222222276031971,
+        "RRA_at_30": 0.04444444552063942,
+        "RTA_at_5": 0.0,
+        "RTA_at_15": 0.02222222276031971,
+        "RTA_at_30": 0.06666667014360428,
+        "mAA_30": 0.0
+      },
+      "estimated_focal": 976.9860771003433,
+      "pnp_failed_view_count": 0,
+      "retained_mask_fraction_min": 0.7550760904947916,
+      "retained_mask_fraction_max": 0.9965972900390625,
+      "baseline_pose_max_abs_difference": 0.0
+    },
+    {
+      "request": 0,
+      "scene": "bicycle/374_41967_84033",
+      "branch": "search_top15",
+      "metrics": {
+        "RRA_at_5": 0.0,
+        "RRA_at_15": 0.0,
+        "RRA_at_30": 0.02222222276031971,
+        "RTA_at_5": 0.0,
+        "RTA_at_15": 0.04444444552063942,
+        "RTA_at_30": 0.1111111119389534,
+        "mAA_30": 0.0
+      },
+      "estimated_focal": 1508.450634558825,
+      "pnp_failed_view_count": 0,
+      "retained_mask_fraction_min": 0.149932861328125,
+      "retained_mask_fraction_max": 0.15000406901041666,
+      "baseline_pose_max_abs_difference": 0.0
+    },
+    {
+      "request": 2,
+      "scene": "cup/400_51462_101232",
+      "branch": "released",
+      "metrics": {
+        "RRA_at_5": 1.0,
+        "RRA_at_15": 1.0,
+        "RRA_at_30": 1.0,
+        "RTA_at_5": 0.9333333373069763,
+        "RTA_at_15": 0.9777777791023254,
+        "RTA_at_30": 1.0,
+        "mAA_30": 0.9225807785987854
+      },
+      "estimated_focal": 515.7849731445312,
+      "pnp_failed_view_count": 0,
+      "retained_mask_fraction_min": 0.9999542236328125,
+      "retained_mask_fraction_max": 1.0,
+      "baseline_pose_max_abs_difference": 0.0
+    },
+    {
+      "request": 2,
+      "scene": "cup/400_51462_101232",
+      "branch": "top15_only",
+      "metrics": {
+        "RRA_at_5": 1.0,
+        "RRA_at_15": 1.0,
+        "RRA_at_30": 1.0,
+        "RTA_at_5": 0.9333333373069763,
+        "RTA_at_15": 0.9777777791023254,
+        "RTA_at_30": 1.0,
+        "mAA_30": 0.9426524043083191
+      },
+      "estimated_focal": 515.7849731445312,
+      "pnp_failed_view_count": 0,
+      "retained_mask_fraction_min": 0.1491241455078125,
+      "retained_mask_fraction_max": 0.14994303385416666,
+      "baseline_pose_max_abs_difference": 0.0
+    },
+    {
+      "request": 2,
+      "scene": "cup/400_51462_101232",
+      "branch": "search_only",
+      "metrics": {
+        "RRA_at_5": 1.0,
+        "RRA_at_15": 1.0,
+        "RRA_at_30": 1.0,
+        "RTA_at_5": 0.9333333373069763,
+        "RTA_at_15": 0.9777777791023254,
+        "RTA_at_30": 1.0,
+        "mAA_30": 0.9304660558700562
+      },
+      "estimated_focal": 500.10842398192835,
+      "pnp_failed_view_count": 0,
+      "retained_mask_fraction_min": 0.9999542236328125,
+      "retained_mask_fraction_max": 1.0,
+      "baseline_pose_max_abs_difference": 0.0
+    },
+    {
+      "request": 2,
+      "scene": "cup/400_51462_101232",
+      "branch": "search_top15",
+      "metrics": {
+        "RRA_at_5": 1.0,
+        "RRA_at_15": 1.0,
+        "RRA_at_30": 1.0,
+        "RTA_at_5": 0.9333333373069763,
+        "RTA_at_15": 0.9777777791023254,
+        "RTA_at_30": 1.0,
+        "mAA_30": 0.9247313141822815
+      },
+      "estimated_focal": 465.18287176502787,
+      "pnp_failed_view_count": 0,
+      "retained_mask_fraction_min": 0.1491241455078125,
+      "retained_mask_fraction_max": 0.14994303385416666,
+      "baseline_pose_max_abs_difference": 0.0
+    },
+    {
+      "request": 3,
+      "scene": "stopsign/249_26596_53531",
+      "branch": "released",
+      "metrics": {
+        "RRA_at_5": 0.08888889104127884,
+        "RRA_at_15": 0.24444444477558136,
+        "RRA_at_30": 0.46666666865348816,
+        "RTA_at_5": 0.0,
+        "RTA_at_15": 0.0,
+        "RTA_at_30": 0.0,
+        "mAA_30": 0.0
+      },
+      "estimated_focal": 0.0,
+      "pnp_failed_view_count": 10,
+      "retained_mask_fraction_min": 0.0970916748046875,
+      "retained_mask_fraction_max": 0.9984334309895834,
+      "baseline_pose_max_abs_difference": 0.0
+    },
+    {
+      "request": 3,
+      "scene": "stopsign/249_26596_53531",
+      "branch": "top15_only",
+      "metrics": {
+        "RRA_at_5": 0.08888889104127884,
+        "RRA_at_15": 0.24444444477558136,
+        "RRA_at_30": 0.46666666865348816,
+        "RTA_at_5": 0.0,
+        "RTA_at_15": 0.0,
+        "RTA_at_30": 0.0,
+        "mAA_30": 0.0
+      },
+      "estimated_focal": 0.0,
+      "pnp_failed_view_count": 10,
+      "retained_mask_fraction_min": 0.0970916748046875,
+      "retained_mask_fraction_max": 0.15000406901041666,
+      "baseline_pose_max_abs_difference": 0.0
+    },
+    {
+      "request": 3,
+      "scene": "stopsign/249_26596_53531",
+      "branch": "search_only",
+      "metrics": {
+        "RRA_at_5": 0.0,
+        "RRA_at_15": 0.0,
+        "RRA_at_30": 0.1111111119389534,
+        "RTA_at_5": 0.0,
+        "RTA_at_15": 0.02222222276031971,
+        "RTA_at_30": 0.04444444552063942,
+        "mAA_30": 0.0
+      },
+      "estimated_focal": 1031.4987727805608,
+      "pnp_failed_view_count": 0,
+      "retained_mask_fraction_min": 0.0970916748046875,
+      "retained_mask_fraction_max": 0.9984334309895834,
+      "baseline_pose_max_abs_difference": 0.0
+    },
+    {
+      "request": 3,
+      "scene": "stopsign/249_26596_53531",
+      "branch": "search_top15",
+      "metrics": {
+        "RRA_at_5": 0.0,
+        "RRA_at_15": 0.0,
+        "RRA_at_30": 0.1111111119389534,
+        "RTA_at_5": 0.0,
+        "RTA_at_15": 0.0,
+        "RTA_at_30": 0.02222222276031971,
+        "mAA_30": 0.0
+      },
+      "estimated_focal": 1031.4987727805608,
+      "pnp_failed_view_count": 0,
+      "retained_mask_fraction_min": 0.0970916748046875,
+      "retained_mask_fraction_max": 0.15000406901041666,
+      "baseline_pose_max_abs_difference": 0.0
+    }
+  ]
+}

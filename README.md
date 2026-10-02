@@ -12,6 +12,15 @@ ${{\color{Red}\Huge{\textsf{  CVPR\ 2025\ \}}}}\$
 [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue)](https://huggingface.co/jedyang97/Fast3R_ViT_Large_512/)
 </div>
 
+> Local reproduction update (2026-10-03): the author's public clarification describes 1,000 CO3D
+> test requests and potentially more than 41 categories, unlike the released 100-request config.
+> The archived seen-41/100-request results remain a candidate adaptation, not confirmed Table 1.
+> Three selected same-forward focal/mask diagnostics reproduced the baseline exactly; focal search
+> removed one probe's 10 PnP fallbacks but did not improve its zero mAA. These selected probes are
+> not a benchmark average. See [protocol evidence](results/co3d_author_protocol_update_20261003.json),
+> [verified diagnostics](results/co3d_candidate_pnp_diagnostic_verified_20261003.json), and the
+> [executed notebook](fast3r_reproduction.ipynb). Full-paper reproduction remains incomplete.
+
 ![Teaser Image](assets/teaser.png)
 
 Official implementation of **Fast3R: Towards 3D Reconstruction of 1000+ Images in One Forward Pass**, CVPR 2025
