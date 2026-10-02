@@ -193,3 +193,22 @@ Neural RGB-D官方9个序列已解压。`bash scripts/queue_nrgbd_reproduction.s
 低分保留，不称Table 1全量成绩或论文效果复现。首次新入口方向断言错误已诊断，保留v1
 证据并修复后v2重试，没有改发布算法或覆盖历史。144项离线测试通过，Notebook新增2个
 报告分析单元有真实输出；下一步方向/focal单变量诊断，连续100@共享状态和训练尚未完成。
+
+### 11:21续接：同一次前向的方向诊断（§4.2/Table 1前提）
+
+新scripts/diagnose_co3d_pose_orientation.py只运行一次已归档draw0的公开HF前向，
+同一global点图/置信度分别走发布版landscape校正和raw portrait不转置。保持GT、seed、
+focal函数、conf>1 PnP、45pairs与metric一致，检查分支未修改原tensor哈希。GT不供focal/PnP。
+方向改变后focal重估，故不是固定focal的独立实验；替代分支只作诊断，不替代发布流程。
+
+| 同次前向分支 | focal(px) | RRA@30 | RTA@30 | mAA@30 | PnP失败 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 发布版方向校正 | 27.9829 | 0% | 13.3333% | 0% | 0/10 |
+| raw portrait不转置 | 553.6604 | 2.2222% | 11.1111% | 0% | 0/10 |
+
+发布版分支所有指标与旧报告逐项完全相同，原低分未覆盖。取消转置仅1/45旋转对落入30°，
+mAA仍0，因此不支持仅取消转置就解决此样本低分，也不证明全场景同因。没有用GT focal
+凑分，不能把这个诊断分数作为Table 1新成绩。结果results/co3d_orientation_diagnostic_20261002.json
+已重新verify-only核验保存poses和45pair误差，无推理重跑。145项离线测试通过；Notebook
+新增1个真实分析单元、原21个未改。下一步继续预测坐标/首视图global-vs-local focal与PnP
+受控接线诊断，保留所有基线；连续100@共享状态及作者划分/权重对应仍未完成。

@@ -427,3 +427,29 @@ Codex当前聊天heartbeat `fast3r` 已创建并读回核验ACTIVE，每30分钟
 再设计连续100@共享invalidate/scene tracker/补采RNG的状态保存与重放；目前只有draw0，
 逐请求重新seed/清tracker不等于公开连续100@。作者划分/权重对应、训练消融仍未完成。
 仅新阶段完成/真实失败/需用户动作通知，无变化保持安静；现有额度续接heartbeat保留。
+
+### 11:21续接：同一次前向的方向诊断（§4.2/Table 1前提）
+
+新scripts/diagnose_co3d_pose_orientation.py只运行一次已归档draw0的公开HF前向，
+同一global点图/置信度分别走发布版landscape校正和raw portrait不转置。保持GT、seed、
+focal函数、conf>1 PnP、45pairs与metric一致，检查分支未修改原tensor哈希。GT不供focal/PnP。
+方向改变后focal重估，故不是固定focal的独立实验；替代分支只作诊断，不替代发布流程。
+
+| 同次前向分支 | focal(px) | RRA@30 | RTA@30 | mAA@30 | PnP失败 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 发布版方向校正 | 27.9829 | 0% | 13.3333% | 0% | 0/10 |
+| raw portrait不转置 | 553.6604 | 2.2222% | 11.1111% | 0% | 0/10 |
+
+发布版分支所有指标与旧报告逐项完全相同，原低分未覆盖。取消转置仅1/45旋转对落入30°，
+mAA仍0，因此不支持仅取消转置就解决此样本低分，也不证明全场景同因。没有用GT focal
+凑分，不能把这个诊断分数作为Table 1新成绩。结果results/co3d_orientation_diagnostic_20261002.json
+已重新verify-only核验保存poses和45pair误差，无推理重跑。145项离线测试通过；Notebook
+新增1个真实分析单元、原21个未改。下一步继续预测坐标/首视图global-vs-local focal与PnP
+受控接线诊断，保留所有基线；连续100@共享状态及作者划分/权重对应仍未完成。
+
+最新恢复入口：提交1d4f32b已推送，旧draw0/方向断言恢复阶段不重复。此次单样本
+同次前向诊断已结束，无新后台GPU进程。复核命令：
+PYTHONPATH=.:scripts python scripts/diagnose_co3d_pose_orientation.py --verify-only
+11:25宿主RE10K扫描仍active/running、PID24596，202714404873/205763619478压缩字节，
+未有完整来源JSON；不要重启健康扫描。下一次优先检查全源报告和SHA/76集合/geometry，
+再继续CO3D受控诊断与连续100@状态设计。原报告不得覆盖，不跳过失败scene。
