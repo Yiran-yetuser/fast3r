@@ -1,0 +1,23 @@
+{
+  "status": "v4_first_three_real_requests_equal_frozen_v1",
+  "paper_mapping": "section 4.2 / Table 1 input preparation only",
+  "verified_request_count": 3,
+  "old_journal_preserved": true,
+  "input_tensors_GT_rng_trace_and_shared_state_equal": true,
+  "modality_bytes_and_npz_arrays_equal": true,
+  "v4_initial_sha256": "2be9f7dbb41ed007871762107b7b0037a0e5463edb4d683789595c4797a8d40b",
+  "v4_request_sha256": {
+    "request_000.json": "e72a97a3f871bf99b93d5dfd7264943dace89833453fcbf75539ccd4fbd4bd90",
+    "request_001.json": "72ca9d10aa61e2889ae849b2617dceeddfb08ea086ebc8986890be016e6b0477",
+    "request_002.json": "95d20d668e894b3c79eede69af203dfaa1729b475718d9ccb0e9594f76b8c2ce"
+  },
+  "verification_code_sha256": "2e2ce795bfa0edaf7ed44aeb6811ed712de12bf1ba173c6245f98644199b77d5",
+  "runner_sha256": "56daa462856db2e80849ea2debd0c0d3f9cb4e814e6bf4b1c737167ac6f26dc5",
+  "inf_proof_sha256": "0507a23c43369c79dadaac538422037e4e3729b8f5457434b59200f38164cc80",
+  "network_bytes_this_verifier": 0,
+  "model_forward_count": 0,
+  "all_100_requests_prepared": false,
+  "formal_pose_metrics_available": false,
+  "author_split_equivalence_verified": false,
+  "full_paper_completed": false
+}

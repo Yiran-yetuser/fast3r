@@ -560,3 +560,28 @@ stopsign/249_26596_53531（不是人工换scene，不等于验证首场景202帧
 未放宽v3。下一次先执行frame45固定参考真实处理并对比NPZ/量化值/原loader，
 重点确认负值uint16转换及background/crop后有效深度；不先补零、删值、跳帧或启动同一v3。
 需要新适配时必须版本化并证明完整前缀/真实第4请求采样等价。heartbeat保持，无用户动作要求。
+
+### §4.2/Table 1：有限负深度参考语义与v4恢复（2026-10-02）
+
+frame45的4个负值在原参考裁剪/resize后仍存在；depth/max*65535→uint16使4个值成为
+正量化值。固定参考未补零/删值。processed最大61952，原loader经mask/crop得到有效视图，
+12985个正深度、loaded最大166.37753（只记录实际数值，不解释为论文性能/物理真值）。
+RGB/depth/mask字节、NPZ数组/dtype及strict/原loader图像、depth/K/pose完全一致。
+诊断results/co3d_finite_negative_reference_diagnostic_20261002.json；实际v4文件证明
+results/co3d_finite_signed_reference_v4_verified_20261002.json。两者网络0、模型前向0。
+v4保留固定参考有符号有限值量化，不先修补负像素；记录raw/processed负值和量化正值计数。
+NaN、负processed最大、有限最大值下−Inf、shape/IO/CRC错误仍硬失败，未经证明不放行。
+独立v4 root/identity和事务；复用冻结v3 loader/metadata/budget，不编辑v1–v3代码或结果。
+前三真实请求输入tensor/GT/trace/共享状态除新identity外等于v1，modality/NPZ相同：
+results/co3d_v4_prefix3_migration_verified_20261002.json。180项离线unittest通过。
+fast3r-co3d-continuous-prepare-v4.service从第4请求恢复，日志results/co3d_continuous_prepare_v4.log。
+此为启动快照，下一次检查宿主最新状态；无新正式Table 1位姿分数，整篇仍未完成。
+候选100@与作者完整协议等价未最终证实，RE10K缺76、训练及独立权重实验仍未完成。
+
+第4请求已完整提交并独立重放验证，不再停在旧3/100边界：
+results/co3d_v4_prefix_snapshot_20261002T1200_verified.json核验4/100完整事务，
+input tensors/GT/rng、load_trace、pool_attempts和每步共享after-state全部一致，网络0/前向0。
+request3 base12089587：原_get_views经首轨迹8个零深度候选后重试到249_26596_53531，
+按原补采规则返回10视图/7个不同frame；不是人工替换场景，不等于审计首轨迹全部202帧。
+后台继续后续准备，此4请求证据是不可变快照，不是100已完成或最新实时数量。
+下一次从v4宿主服务/日志/事务数量接续，不重放或重复归档这份4请求快照。

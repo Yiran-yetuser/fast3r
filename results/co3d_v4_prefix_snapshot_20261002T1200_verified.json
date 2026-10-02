@@ -1,0 +1,21 @@
+{
+  "status": "actual_continuous_prefix_readonly_replay_verified_not_pose_scores",
+  "verified_request_count": 4,
+  "expected_request_count": 100,
+  "initial_sha256": "2be9f7dbb41ed007871762107b7b0037a0e5463edb4d683789595c4797a8d40b",
+  "final_state_sha256": "fb1b3dbe33a426e9b3ee6322b3febd495c6669a2e702fae6e5ef406e7d9e8e49",
+  "request_sha256": {
+    "request_000.json": "e72a97a3f871bf99b93d5dfd7264943dace89833453fcbf75539ccd4fbd4bd90",
+    "request_001.json": "72ca9d10aa61e2889ae849b2617dceeddfb08ea086ebc8986890be016e6b0477",
+    "request_002.json": "95d20d668e894b3c79eede69af203dfaa1729b475718d9ccb0e9594f76b8c2ce",
+    "request_003.json": "f52f3c4f3be294199b0a687f8893b8ddba8728d112816304986561fcc8027a33"
+  },
+  "input_tensors_GT_rng_and_shared_state_exact_equal": true,
+  "network_bytes": 0,
+  "verifier_sha256": "8565014e04cbd4609cec23cceb7684f6b555f1a99ef1897b31604d155ffb7082",
+  "model_forward_count": 0,
+  "all_100_requests_prepared": false,
+  "author_split_equivalence_verified": false,
+  "formal_pose_metrics_available": false,
+  "full_paper_completed": false
+}
