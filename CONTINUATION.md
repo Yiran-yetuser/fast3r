@@ -157,6 +157,37 @@ CO3D下一步：先审计源大坐标在官方float32相对位姿指标中的稳
 当前图像成员CRC/解码、camera NPZ/crop等价性、正式RRA/RTA/mAA均未完成。
 111项离线测试通过，Notebook的16个paper分析单元全部已有真实输出；新增单元只读新JSON，未重跑旧GPU实验。
 
+#### 09:21续接：完整候选GT单精度诊断（最新恢复入口）
+
+`58abff5`已推送，旧目录/相机metadata不重复运行。本轮新脚本
+`scripts/audit_co3d_pose_precision.py`在CPU读取固定metadata并比较float32/float64：
+严格先将OpenCV w2c构造成float32再np.linalg.inv，沿用固定DUSt3R顺序；
+随后调用公开Fast3R closed_form_inverse与translation_angle，不修改GT/指标、不加载模型。
+结果`results/co3d_pose_precision_20261002.json`覆盖41类/2011轨迹/399204帧、
+39,624,443个同轨迹候选相机对；按类别sum/max独立核对，通过Notebook新分析单元。
+
+float64直接相机中心相同1181对；公开计算float32零平移1375对，另194对在float64
+相对矩阵中非零而float32变零（不能自动解释为真实物理基线丢失）。可定义方向的对数39623068，
+3301对方向差>1°，最大89.9804°。为区分近零基线，额外记录
+norm(c64_j-c64_i)>1e-6×max(1,norm(c64_i),norm(c64_j))这个**诊断分组**，
+39619868对中仍340对方向差>1°、最大5.9845°，变零0对；它不是论文阈值，未用于删正式pair。
+GT与自身比较float32平移角有1375对>1°（最大90°），属于零向量/数值计算行为，不是预测误差。
+旋转自检最大0.4070°来自公开角函数的近零处理，不静默更换公式。
+风险条件命中201轨迹，报告只列前20条，完整诊断行的canonical SHA另存；并非只评测20轨迹。
+所有轨迹/源坐标保留，不能宣称“全部float32稳定”、不能把诊断值当RRA/RTA/mAA。
+CPU与当前NumPy/Torch版本不证明CUDA/TF32或真实预测稳定；正式runner需保留原metric并显式报告诊断。
+
+117项离线测试通过，Notebook17个paper分析单元都已有真实输出。仅新增的精度分析执行，旧输出不覆盖。
+RE10K扫描宿主09:31仍active/running、PID24596，压缩字节130755598920/205763619478，
+未生成最终完整来源报告；这是历史快照，后续重新检查，不重启健康进程。
+当前宿主约49.35GB可用，保留1GiB；本轮未下载CO3D图像或改变GPU任务。
+
+下一步实际数据推进：实现有界的官方ZIP Range按成员缓存及CRC/解码验证，先小规模真实
+RGB/depth/mask→固定DUSt3R crop/depth/K/float32 NPZ接线，再接源候选不变的延迟加载。
+保留完整候选池，记录有效mask/depth导致补采和scene retry的实际draws；不把918名义帧当真实ready。
+大ZIP全SHA尚不能由成员CRC代替，作者processed清单与100@采样身份仍未确认，明确协议适配。
+RE10K全来源扫描完成后先核验SHA/76集合/timestamps/图像几何，再考虑正式1832-ID入口。
+
 #### 07:21续接：全ZIP尾部预检与v3恢复（历史恢复入口）
 
 `3d5dd0f`已推送，旧banana恢复分析不要重复归档。v2目录预算服务06:59:12退出1：
