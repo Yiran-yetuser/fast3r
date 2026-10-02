@@ -398,3 +398,32 @@ Codex当前聊天heartbeat `fast3r` 已创建并读回核验ACTIVE，每30分钟
 这是后续触发时尝试接续，不保证精确重置时刻或无缝恢复。不购买额度、不兑换reset权益。
 已启动systemd下载/评测与模型额度独立，但断电/休眠/网络故障仍会中断。
 任务提示要求无变化安静，仅新阶段完成、失败或需用户动作才通知。
+
+## 10:51续接检查点（最新恢复入口，2026-10-02）
+
+上个提交c0ccf8a已推送，真实mapped draw/data核验不重做。本轮接通公开HF单样本位姿：
+- scripts/fast3r_hf_co3d_pose_smoke.py复核draw0、raw/processed/候选/权重SHA；网络只有
+  RGB与true_shape，GT K仍参与crop，但GT不进网络/focal/PnP。初始化后重设seed12303675。
+- fast3r-co3d-pose-smoke.service首次11:01:12退出1，错误仅是新入口形状断言：HF
+  landscape_only=False输出portrait，发布版校正回loader landscape，断言误要求portrait。
+  修正断言、补真实head wrapper测试；旧预检查与失败runner保留，另写v2预检查，日志追加。
+- 同一服务安全等GPU≥10240MiB空闲后重试，11:05:17退出0/inactive/dead/MainPID0。
+  results/co3d_pose_draw0_seed42_20261002.json完整，恢复核验
+  results/co3d_pose_smoke_recovery_verified_20261002.json记录SHA、退出码和失败原因。
+  保存c2w的45pair公开指标重算通过，不重复启动已完成服务。验证命令：
+  PYTHONPATH=.:scripts python scripts/fast3r_hf_co3d_pose_smoke.py --verify-only
+- 10views/9unique、重复pair[0,7]保留，PnP失败0/10；但RRA@30=0%、RTA@30=13.3333%、
+  mAA@30=0%，旋转误差50.1264°–171.6512°，首视图focal27.9829px。低分不删，不能称
+  Table1全量/论文效果复现。GT-self RTA@30=97.7778%是零基线诊断，不是网络成绩。
+- raw confidence[1,512,384]→发布版校正后[1,384,512]；未改发布算法。144项测试通过，
+  Notebook新增CPU预检查与实际位姿分析两单元有真实输出，旧19个不变。
+- RE10K扫描仍健康PID24596，11:04历史快照190928682120/205763619478压缩字节；
+  没有最终完整来源报告。宿主11:04可用42677755904bytes、GPU11145MiB空闲。
+  以上均是历史快照，下次重新查宿主服务/空间/GPU，不重启健康扫描。
+
+接续顺序：先检查RE10K最终源报告；完整时核验全源SHA、76集合、timestamps和原图/GT几何，
+不将候选PNG直接升级正式数据。CO3D先固定同输入、同前向保存发布方向基线与替代方向/focal
+诊断；不是为凑分改公式，不用GT估计focal/PnP，另写独立结果，不能覆盖这个低分基线。
+再设计连续100@共享invalidate/scene tracker/补采RNG的状态保存与重放；目前只有draw0，
+逐请求重新seed/清tracker不等于公开连续100@。作者划分/权重对应、训练消融仍未完成。
+仅新阶段完成/真实失败/需用户动作通知，无变化保持安静；现有额度续接heartbeat保留。

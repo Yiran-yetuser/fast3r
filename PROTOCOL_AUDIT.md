@@ -309,3 +309,19 @@ JPEG/PNG bytes、NPZ arrays一致，GT覆盖13.25%–47.59%，没有网络位姿
 单样本状态不证明作者draw身份，也不证明连续100@跨样本invalidate/scene tracker等价。
 首次NumPy idx序列化失败保留未完整文件，用v2报告安全恢复；缓存重试0bytes不是首次下载流量。
 没有完整ZIP SHA证明，独立fixture从未替换原候选manifest。
+
+### 10:51续接：CO3D公开HF方向契约与真实单样本位姿
+
+固定公开HF配置head_args.landscape_only=False：输入landscape tensor [1,3,384,512]，
+原true_shape [512,384]，实际raw global confidence [1,512,384]。发布版评测
+correct_preds_orientation对portrait转置一次，结果[1,384,512]，不是校正后仍为原portrait。
+首次新入口断言方向相反而退出，无结果JSON；旧预检查/失败代码/日志保留，修复后另写v2。
+没有改发布head/方向算法，也不将断言修复当数学/精度问题已解决。
+
+网络仅RGB/true_shape；GT K参与crop，但GT不供模型或focal/PnP。初始化后重设seed12303675，
+16-mixed、chunk2、原global focal/conf>1 PnP、CPU公开相对角、45pairs和重复pair均保留。
+11:05:17服务退出0，真实结果重算通过：PnP失败0/10，但RRA@30=0%、RTA@30=13.3333%、
+mAA@30=0%，focal约27.9829px，不能称论文效果复现成功。GT-self RTA@30=97.7778%
+仅诊断重复零基线角，不用作模型成绩或删pair依据。方向/focal单变量诊断须另写结果、保留
+低分基线；未证明方向就是低分根因。仅一个mapped draw，连续100@共享状态、原作者
+processed划分/权重对应仍未确认。

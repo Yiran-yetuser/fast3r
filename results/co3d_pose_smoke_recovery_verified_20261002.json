@@ -1,0 +1,140 @@
+{
+  "status": "orientation_assertion_fixed_one_draw_completed_and_saved_verified",
+  "snapshot_time": "2026-10-02T11:06:34.737726+08:00",
+  "service": "fast3r-co3d-pose-smoke.service",
+  "service_properties": {
+    "MainPID": "0",
+    "ExecMainStatus": "0",
+    "ActiveState": "inactive",
+    "SubState": "dead"
+  },
+  "log_path": "results/co3d_pose_smoke_pipeline.log",
+  "log_bytes_at_snapshot": 14166,
+  "log_sha256_at_snapshot": "5e2d20c7572a2acb7f1c320cec3b521fa4360f6073efb989dda97fdd1744f3c7",
+  "initial_failure_time": "2026-10-02T11:01:12+08:00",
+  "completion_time": "2026-10-02T11:05:17+08:00",
+  "initial_error": "ValueError: Wrong corrected prediction orientation",
+  "diagnosis": "Initial wrapper asserted original portrait true_shape after released evaluator transposed it to loader landscape. Public HF head landscape_only=False emits portrait; published correction produces landscape. No published algorithm changed.",
+  "preserved_failed_runner_path": "results/co3d_pose_smoke_progress/runner_orientation_assertion_v1.py",
+  "preserved_failed_runner_sha256": "cc2f7ba6fb54f8416ff54791b9dda1dc7289e0943201d7ac06939c94451a9fa6",
+  "initial_preflight_path": "results/co3d_pose_draw0_input_preflight_20261002.json",
+  "initial_preflight_sha256": "af6f8e72444ad4d88498cd7f70168da2bdbd32ee6efe31d60bd92f8c24daa5dc",
+  "new_preflight_path": "results/co3d_pose_draw0_input_preflight_v2_20261002.json",
+  "new_preflight_sha256": "ab8c1b318e1063c0723ebe87c51f3535a800753ec9c9e1d12f94ed1fe391f1af",
+  "successful_runner_sha256": "20ec7d4490519b197178513faedb625bef3e94233780b2041a4620c8d50269a3",
+  "result_path": "results/co3d_pose_draw0_seed42_20261002.json",
+  "result_sha256": "dcfcb9b0755de9ea570b64a503786a4b21de8599b97a73a921a126790d6842d1",
+  "protocol_sha256": "6565f39a7a33cffe26d72d679ed7362fb011f8a4c400421a6d2589a667c653c4",
+  "raw_prediction_shapes": [
+    [
+      1,
+      512,
+      384
+    ],
+    [
+      1,
+      512,
+      384
+    ],
+    [
+      1,
+      512,
+      384
+    ],
+    [
+      1,
+      512,
+      384
+    ],
+    [
+      1,
+      512,
+      384
+    ],
+    [
+      1,
+      512,
+      384
+    ],
+    [
+      1,
+      512,
+      384
+    ],
+    [
+      1,
+      512,
+      384
+    ],
+    [
+      1,
+      512,
+      384
+    ],
+    [
+      1,
+      512,
+      384
+    ]
+  ],
+  "corrected_prediction_shapes": [
+    [
+      1,
+      384,
+      512
+    ],
+    [
+      1,
+      384,
+      512
+    ],
+    [
+      1,
+      384,
+      512
+    ],
+    [
+      1,
+      384,
+      512
+    ],
+    [
+      1,
+      384,
+      512
+    ],
+    [
+      1,
+      384,
+      512
+    ],
+    [
+      1,
+      384,
+      512
+    ],
+    [
+      1,
+      384,
+      512
+    ],
+    [
+      1,
+      384,
+      512
+    ],
+    [
+      1,
+      384,
+      512
+    ]
+  ],
+  "offline_tests_passed": 144,
+  "model_inference_completed": true,
+  "formal_pose_metrics_available": false,
+  "full_paper_completed": false,
+  "existing_data_or_results_deleted_or_overwritten": false,
+  "other_GPU_jobs_terminated": false,
+  "scope": "one mapped draw, no continuous100@ or full Table1",
+  "resume_verification_command": "PYTHONPATH=.:scripts python scripts/fast3r_hf_co3d_pose_smoke.py --verify-only"
+}

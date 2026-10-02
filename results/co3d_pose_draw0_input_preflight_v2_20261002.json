@@ -1,0 +1,210 @@
+{
+  "status": "one_draw_input_and_public_checkpoint_verified_no_inference",
+  "protocol": {
+    "dataset": "CO3D",
+    "benchmark_scope": "one_draw_adaptation_smoke_not_Table1",
+    "draw_report_sha256": "5425c830c8047a966427f6db649f343bf37e06196f9ff72a075d11338d1d3a66",
+    "reference_report_sha256": "7641c3217a4ff4924e83e8af694b32a3b6954a727de0e95107567fc79a82dcbb",
+    "runner_sha256": "20ec7d4490519b197178513faedb625bef3e94233780b2041a4620c8d50269a3",
+    "pose_helper_sha256": "4e315bc93663afca8a99e7214bb72f7b1b38145e1853295651d1bbd137b6abd1",
+    "module_sha256": "719d4cd7448c697e4f93cd029bfac32c8a3af5006f95ddc0eb31d3ae490488bd",
+    "metric_sha256": "4bcb25d5209645e098c127678c88cd55a31263508de4cfc22864c6eac15352f8",
+    "so3_sha256": "6eb4b2247f4f14376270755de1d9c6d23a52e655bd4ef7ebd57e917b45226c07",
+    "pnp_sha256": "9319e31224b995e068348d8bcc0236c461578da46e61e5c9f751fca0a91acc40",
+    "model_sha256": "673635b09b20ade6cfe519ce13fc5e92ef2a2f7271f7204c2b8b237fe759b075",
+    "inference_sha256": "2c4cd3c3bf4e6bbc849d93e76a18c5b523892e9dc65b24f30e4293cac1acbebd",
+    "checkpoint_weight_sha256": "1357d42e74539ba03510ea1986c7464a7facf17157779e2b7ebd6284e79e0427",
+    "checkpoint_config_sha256": "88edc53ba652ad835b86af27d980a46808d722b4d8f9d0d4360d05c789ada92b",
+    "head_chunk_size": 2,
+    "precision": "16-mixed",
+    "inference_seed": 12303675,
+    "orientation": "HF landscape_only=False emits true_shape; released correction once to loader img shape",
+    "network_input_keys": [
+      "img",
+      "true_shape"
+    ],
+    "gt_used_by_network_or_PnP": false,
+    "focal": "first_view global-head + confidence percentile10; no GT intrinsics",
+    "pnp": "released fast_pnp, conf>1,100 iterations; sequential per-view OpenCV seeds",
+    "fallback": "identity retained and counted",
+    "metric_device": "cpu",
+    "pair_count": 45,
+    "paper_checkpoint_and_draw_mapping_verified": false
+  },
+  "protocol_sha256": "6565f39a7a33cffe26d72d679ed7362fb011f8a4c400421a6d2589a667c653c4",
+  "frame_names": [
+    [
+      "bicycle/374_41967_84033",
+      "frame000144.jpg"
+    ],
+    [
+      "bicycle/374_41967_84033",
+      "frame000042.jpg"
+    ],
+    [
+      "bicycle/374_41967_84033",
+      "frame000041.jpg"
+    ],
+    [
+      "bicycle/374_41967_84033",
+      "frame000151.jpg"
+    ],
+    [
+      "bicycle/374_41967_84033",
+      "frame000020.jpg"
+    ],
+    [
+      "bicycle/374_41967_84033",
+      "frame000028.jpg"
+    ],
+    [
+      "bicycle/374_41967_84033",
+      "frame000052.jpg"
+    ],
+    [
+      "bicycle/374_41967_84033",
+      "frame000144.jpg"
+    ],
+    [
+      "bicycle/374_41967_84033",
+      "frame000010.jpg"
+    ],
+    [
+      "bicycle/374_41967_84033",
+      "frame000001.jpg"
+    ]
+  ],
+  "input_tensor_shapes": [
+    [
+      1,
+      3,
+      384,
+      512
+    ],
+    [
+      1,
+      3,
+      384,
+      512
+    ],
+    [
+      1,
+      3,
+      384,
+      512
+    ],
+    [
+      1,
+      3,
+      384,
+      512
+    ],
+    [
+      1,
+      3,
+      384,
+      512
+    ],
+    [
+      1,
+      3,
+      384,
+      512
+    ],
+    [
+      1,
+      3,
+      384,
+      512
+    ],
+    [
+      1,
+      3,
+      384,
+      512
+    ],
+    [
+      1,
+      3,
+      384,
+      512
+    ],
+    [
+      1,
+      3,
+      384,
+      512
+    ]
+  ],
+  "original_true_shapes": [
+    [
+      [
+        512,
+        384
+      ]
+    ],
+    [
+      [
+        512,
+        384
+      ]
+    ],
+    [
+      [
+        512,
+        384
+      ]
+    ],
+    [
+      [
+        512,
+        384
+      ]
+    ],
+    [
+      [
+        512,
+        384
+      ]
+    ],
+    [
+      [
+        512,
+        384
+      ]
+    ],
+    [
+      [
+        512,
+        384
+      ]
+    ],
+    [
+      [
+        512,
+        384
+      ]
+    ],
+    [
+      [
+        512,
+        384
+      ]
+    ],
+    [
+      [
+        512,
+        384
+      ]
+    ]
+  ],
+  "gt_shape": [
+    10,
+    4,
+    4
+  ],
+  "model_loaded": false,
+  "network_bytes": 0,
+  "gt_used_by_network_or_PnP": false,
+  "formal_pose_metrics_available": false
+}

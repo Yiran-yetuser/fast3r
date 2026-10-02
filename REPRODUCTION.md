@@ -185,3 +185,11 @@ car12项大坐标原值和残差保留，float32指标稳定性、图像/深度/
 Notebook新增预算、源采样与metadata分析；当前续接入口见CONTINUATION。
 
 Neural RGB-D官方9个序列已解压。`bash scripts/queue_nrgbd_reproduction.sh` 会先检查实际目录中的全部RGB/深度帧、非空文件与位姿数量；检查通过即跳过下载和解压，即使ZIP或manifest不存在。只有数据不完整时才恢复下载/解压；已有完整ZIP则复用，无需重下。可运行 `python scripts/check_nrgbd_data.py` 单独检查（这是文件布局/数量检查，不是重新解码PNG或CRC校验）。可选PID参数仅用于数据不完整时等待已有下载进程。后续评测入口支持 `python scripts/fast3r_hf_dtu_eval.py --dataset nrgbd --device cuda --output-json results/nrgbd_seed42_stride40.json`。默认stride40；Table 3比较时将native距离乘100。完整实验状态、限制与余下前提请查阅 [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md)。
+
+2026-10-02 10:51续接已执行CO3D公开HF单样本位姿接线（§4.2/Table 1前提）：
+完整原候选池第0个mapped draw，10views/9unique，RGB-only网络输入、global→focal→PnP，
+45pairs及重复零基线不删除。11:05:17服务正常退出0，保存c2w指标重算通过，PnP失败0/10。
+真实RRA@30=0%、RTA@30=13.3333%、mAA@30=0%，旋转误差50.1264°–171.6512°，
+低分保留，不称Table 1全量成绩或论文效果复现。首次新入口方向断言错误已诊断，保留v1
+证据并修复后v2重试，没有改发布算法或覆盖历史。144项离线测试通过，Notebook新增2个
+报告分析单元有真实输出；下一步方向/focal单变量诊断，连续100@共享状态和训练尚未完成。
