@@ -295,3 +295,34 @@ PYTHONPATH=.:scripts python scripts/verify_co3d_sampling_resume.py --verify-only
 原LazyPreparer processed预算512MiB仍须重新核算，不能静默扩大或删除缓存规避预算。
 作者规定划分与权重对应未确认；RE10K仍1756/1832、缺76，已完成205GB扫描不重复。
 独立训练、全量位姿等仍未完成，现有heartbeat保留；不称整篇论文复现成功。
+
+### 新检查点：真实CO3D连续准备已启动（§4.2/Table 1数据前提）
+
+scripts/prepare_co3d_continuous.py接入原41类/2011轨迹候选池、公开100@ wrapper epoch0
+映射（非作者划分等价声明），单worker顺序加载，不每请求清空invalidate/scene tracker。
+初始Python补采seed=42+首个base index，dataset seed777；无网络模型seed干扰，因为本阶段
+不运行模型。返回结果与after-state同一JSON事务持久化，fsync后排他link提交，不覆盖历史。
+中断只接续完整事务前缀；临时文件不算完成，缺号/状态链损坏/身份变化/CRC或IO错误报错。
+162项离线测试通过，包括完整事务/禁止覆盖、断链、未提交临时文件恢复测试。
+
+第1请求base12303633、bicycle/374_41967_84033，10views/9unique，真实原加载输入
+tensor、相机GT、RNG与已归档draw0逐项相等。独立只读重放还确认共享after-state完全相等，
+网络0bytes，不重复GPU推理。小证据results/co3d_continuous_prefix1_verified_20261002.json
+仅代表1/100请求；不是100完成或新增RRA/RTA/mAA。Notebook新增真实首请求分析。
+本地results/co3d_continuous_prepare_20261002/保存不可变initial及逐请求恢复日志，
+不提交这些可能增长的事务文件、数据、权重或大日志；Git只提交小核验JSON及脚本。
+
+已启动宿主用户级服务fast3r-co3d-continuous-prepare.service（启动PID30700），
+日志results/co3d_continuous_prepare.log，从第2请求接续prepare；不占GPU。
+raw cache上限2GiB、processed512MiB、下载/预处理空闲至少1GiB保持不变，未扩大或清理缓存。
+启动快照服务active/running，空间约39.7GiB；该状态不是后续检查时的当前保证。
+健康运行不重复启动；下一次检查user service/日志/完整事务数量，失败先诊断，不跳过请求。
+恢复命令（仅确认已退出后执行，不改已绑定runner代码）：
+systemd-run --user --unit=fast3r-co3d-continuous-prepare --property=WorkingDirectory=/home/yyz/fast3r --property=StandardOutput=append:/home/yyz/fast3r/results/co3d_continuous_prepare.log --property=StandardError=append:/home/yyz/fast3r/results/co3d_continuous_prepare.log /bin/bash /home/yyz/fast3r/scripts/queue_co3d_continuous_prepare.sh
+只读前缀验证：PYTHONPATH=.:scripts python scripts/verify_co3d_continuous_prefix.py
+只读事务检查：PYTHONPATH=.:scripts python scripts/prepare_co3d_continuous.py --verify-only
+
+接续：完整准备后先对100请求逐项只读重放、核验成员SHA/输入GT/共享状态，再接独立GPU
+评测runner，隔离网络seed与采样RNG，逐项结果+恢复事务不能丢失失败场景。
+100@是100请求，不是全部2011轨迹；当前仍是候选划分的明确适配，不能冒充Table 1正式成绩。
+RE10K缺76及独立权重/训练等未完成；不重复旧205GB扫描，现有heartbeat继续接续。

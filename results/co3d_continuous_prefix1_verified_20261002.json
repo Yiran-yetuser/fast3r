@@ -1,0 +1,18 @@
+{
+  "status": "actual_continuous_prefix_readonly_replay_verified_not_pose_scores",
+  "verified_request_count": 1,
+  "expected_request_count": 100,
+  "initial_sha256": "1915716c4cf9689d9ee13f07b0111c2a0541a64c256d34867d5c5a8f3c971ce8",
+  "final_state_sha256": "198ab322376898861bd27589357ce90d7eda4f58faf1e69ae4cd146fe82423e7",
+  "request_sha256": {
+    "request_000.json": "c08693cf68e257860fd57e413f04c7acece23c7c2fbc4b3e73acfd95edeaf5ca"
+  },
+  "input_tensors_GT_rng_and_shared_state_exact_equal": true,
+  "network_bytes": 0,
+  "verifier_sha256": "48504dcdacecdb5dbfac01e1703e5950560f6e37f90b0fb5da5bb98936877b36",
+  "model_forward_count": 0,
+  "all_100_requests_prepared": false,
+  "author_split_equivalence_verified": false,
+  "formal_pose_metrics_available": false,
+  "full_paper_completed": false
+}
