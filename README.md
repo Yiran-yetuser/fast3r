@@ -12,7 +12,16 @@ ${{\color{Red}\Huge{\textsf{  CVPR\ 2025\ \}}}}\$
 [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue)](https://huggingface.co/jedyang97/Fast3R_ViT_Large_512/)
 </div>
 
-> Local reproduction update (2026-10-03): the author's public clarification describes 1,000 CO3D
+> Latest local diagnostic (2026-10-03): the public HF portrait path has distinct token-grid and
+> pixel-projection interface mismatches. With fixed frames/GT and five new forwards, forced landscape
+> cropping improved two selected probes' mAA from 0 to 59.7133% and 12.4014%; a landscape control
+> stayed at 92.2581%. Shape metadata alone did not fix either low-score probe. Changed crops mean
+> changed inputs/forwards, not a same-forward ablation or an unbiased Table 1 result. See the
+> [independent proof](results/co3d_landscape_input_diagnostic_verified_20261003.json) and
+> [executed notebook](fast3r_reproduction.ipynb). Original reports/data/weights are retained;
+> next is the 51-category/1,000-request candidate protocol and storage budget.
+
+> Archived protocol update (2026-10-03): the author's public clarification describes 1,000 CO3D
 > test requests and potentially more than 41 categories, unlike the released 100-request config.
 > The archived seen-41/100-request results remain a candidate adaptation, not confirmed Table 1.
 > Three selected same-forward focal/mask diagnostics reproduced the baseline exactly; focal search

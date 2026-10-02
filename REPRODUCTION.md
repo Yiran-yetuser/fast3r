@@ -2,7 +2,23 @@
 
 这份文档和 [`fast3r_reproduction.ipynb`](fast3r_reproduction.ipynb) 记录了本分支的可重复实验流程，适合第一次接触多视图 3D 重建的同学。
 
-## 最新续接：作者协议纠正与受控PnP诊断（2026-10-03）
+## 最新续接：输入几何对照完成（2026-10-03 07:15）
+
+对应§4.2/Table1位姿链路，不是重新训练。HF实际PatchEmbedDust3R的portrait
+encoder/DPT token顺序不一致；像素转置后的K也与标准PnP K不一致。合成完美点PnP
+仍可返回success却旋转错约179.84°，不是模型质量分数。
+固定原request0/2/3共5新前向：仅改形状两portrait mAA仍0；强制横向crop后分别
+59.7133%、12.4014%，横向cup控制保持92.2581%。固定帧/GT/seed/PnP不变，
+crop改变像素/视野，不标同次前向、选定probe平均或正式Table1。
+270pair独立重算、RGB/GT/K/RNG重放、196项离线测试通过。
+`results/co3d_landscape_input_diagnostic_verified_20261003.json`与Notebook保存真实证据，
+原95单元/100请求和数据/权重保留。核验器不重跑模型，prediction hash有provenance限制。
+后台`fast3r-co3d-landscape-inputs.service`正常结束，不重启。
+CPU核验：`PYTHONPATH=.:scripts python scripts/verify_co3d_landscape_inputs.py`。
+下一步先预算51类/1000@候选及新crop补采协议；作者精确清单/权重映射、RE10K76、训练仍未完成。
+恢复入口见`CONTINUATION.md`。
+
+## 已归档：作者协议纠正与受控PnP诊断（2026-10-03）
 
 作者公开回复说明CO3D实际采用1000次test采样，类别可能超过论文所写41类；
 发布配置为100次。因此已归档41类/100请求仅为候选适配，不能作为作者完整benchmark。

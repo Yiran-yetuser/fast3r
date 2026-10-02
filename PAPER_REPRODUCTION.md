@@ -11,7 +11,7 @@
 | §3.1；§3.3；Figure 2 | 多张图是否一次输出 global/local 点图与置信度？ | Notebook 的推理与模块 hook；`config.json` | 推理验证已执行 |
 | §3.2，Eq. (1)–(3) | 归一化点图回归、置信度加权损失 | `results/loss_checks.json` | 数值/梯度检查通过；尚未重新训练 |
 | §3.4；§4.1；Table 2 | 视角数增加时耗时与显存如何变化？ | `results/dtu_paper_experiments.json` 的 performance | 本机适配实验；单卡不覆盖论文 A100/多卡设置 |
-| §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | CO3D候选100请求/4500pair已核验，新增3个同次前向PnP诊断；RE10K1832相机记录及265447帧核验 | 候选mAA@30=23.8007%；作者回复指出1000请求/可能超过41类，与发布配置不同，正式Table1未完成；RE10K仍缺76 |
+| §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | CO3D候选100请求/4500pair、3个PnP诊断及新固定帧输入几何对照核验；RE10K1832相机记录及265447帧核验 | 旧候选mAA@30=23.8007%；新横向crop两选定probe改善，非全量成绩；作者描述1000请求/可能超过41类，正式Table1未完成；RE10K仍缺76 |
 | §4.3；Table 3 | 7-Scenes / NRGBD 重建 | `results/nrgbd_seed42_stride40.json`；`results/7scenes_paired_seed42_stride20.json` | NRGBD完整9场景、7-Scenes全部18测试轨迹已运行核验；未对齐论文数值 |
 | §4.3；Table 4 | DTU 完整 22 场景重建 | `demo_outputs/paper_eval/dtu_all.json` | 已运行；论文数值尚未对齐 |
 | §5.1；Figure 5 | 测试视角数对重建质量的影响 | 新脚本 3/5/10/20 视角 | 本地均匀采样适配实验 |
@@ -21,7 +21,37 @@
 | §5.4；Table 5 | 使用 aligned local 或 global 点图的差别 | DTU10视角；NRGBD/7-Scenes全量同次预测、双分支指标 | 三个数据集配对已完成；local优势并非所有距离指标均成立 |
 | 附录 C/D/E/F | Gaussian splatting、BA、深度 benchmark 与可视化 | 已有点云；官方 robustmvd 接口 | 点云可视化部分完成；其余未执行 |
 
-## 最新协议纠正与受控PnP诊断（2026-10-03，§4.2 / Table 1）
+## 最新输入几何对照（2026-10-03 07:15，§4.2 / Table 1）
+
+HF实际使用`PatchEmbedDust3R`，不是ManyAR或DINO；它忽略true_shape，384×512张量
+生成24×32个patch，portrait DPT却按32×24 reshape。实际patch类合成编号测试证实
+reshape≠transpose（99.7396%的编号不匹配，非预测错误率）。另有像素投影不一致：
+loader将网格transpose、K行交换，3D/GT位姿轴不变；PnP改用标准K。
+完美合成点的原PnP旋转误差0°，转置像素/标准K约179.84°仍返回success；这不是网络质量分数。
+CPU证据`results/co3d_portrait_geometry_audit_20261003.json`。历史100候选63全portrait、
+29全landscape、8混合，661/1000视角portrait，不作为作者完整分布。
+
+固定request0/2/3、帧序/GT/权重/seed/精度/焦距/PnP不变，不补采或删除视图。
+原分支引用历史；仅形状标记保留RGB字节；横向crop只去掉基类分辨率自动反转，保留
+其他crop/resize/半像素K语义。共5个新前向，横向控制两条件相同复用1次。
+**不是同输入/同次前向消融**；crop改变视野，不能单独分解机制贡献。
+
+| 选定request（非无偏benchmark） | 历史mAA% | 仅形状标记mAA% | 强制横向crop mAA% |
+| --- | ---: | ---: | ---: |
+| 0 bicycle，portrait | 0.0000 | 0.0000 | 59.7133 |
+| 2 cup，landscape控制 | 92.2581 | 92.2581 | 92.2581 |
+| 3 stopsign，portrait | 0.0000 | 0.0000 | 12.4014 |
+
+6个新分支均无PnP失败，270对含重复视图保留；独立重算saved poses/pair指标并重放
+RGB/GT/crop K与RNG标记。横向控制位姿/焦距/指标匹配历史；196项离线测试通过。
+结果`results/co3d_landscape_input_diagnostic_v1_20261003.json`，证明
+`results/co3d_landscape_input_diagnostic_verified_20261003.json`，Notebook有真实宿主输出与图。
+核验器不重跑网络，预测图未保存，prediction hashes保留为provenance限制。
+6项内存损坏注入均被独立核验器拒绝，未修改存储文件；Notebook原95单元逐项保留，新输出无error。
+不报告选择probe均值，不改旧100成绩，不勾选正式Table1或整篇完成。
+下一步预算51类/1000@作者描述候选，精确processed清单/RNG/权重对应仍未知。
+
+## 已归档协议纠正与受控PnP诊断（2026-10-03，§4.2 / Table 1）
 
 原41类/100请求是历史候选适配，**不是已确认的作者benchmark**。
 [作者Issue #78回复](https://github.com/facebookresearch/fast3r/issues/78#issuecomment-2844393603)

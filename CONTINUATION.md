@@ -1,9 +1,46 @@
-# Fast3R 续接检查点（2026-10-02，Asia/Shanghai）
+# Fast3R 续接检查点（2026-10-03，Asia/Shanghai）
 
 用户已授权继续整篇论文复现、Notebook归档及逐步推送GitHub，并要求额度刷新后接续。
 分支 `local-demo`，远端 `myfork`。本文件是恢复入口，不是“整篇已完成”的声明。
 
-## 最新恢复入口（2026-10-03：作者协议纠正与3个固定probe完成）
+## 最新恢复入口（2026-10-03 07:15：portrait输入几何对照完成）
+
+`fast3r-co3d-landscape-inputs.service`07:15:10正常退出0，inactive/dead、MainPID0；
+日志`results/co3d_landscape_input_diagnostic_v1.log`。不要重启此阶段或原100请求。
+结果`results/co3d_landscape_input_diagnostic_v1_20261003.json`，独立证明
+`results/co3d_landscape_input_diagnostic_verified_20261003.json`，CPU审计
+`results/co3d_portrait_geometry_audit_20261003.json`。原100报告SHA仍e52f2101…036d。
+
+确认公开HF实际为PatchEmbedDust3R（忽略true_shape），不是ManyAR/DINO；portrait时
+encoder24×32 token与DPT32×24 reshape不是空间transpose。第二个问题：loader转置像素后
+K行交换、det<0，发布PnP却用标准K，3D/GT相机轴没相应变化。
+完美点合成测试原PnP误差0°，转置像素+标准K约179.84°仍返回成功。
+原100请求63全portrait/29全landscape/8混合、661个portrait视角；不是作者全量分布。
+
+固定request0/2/3共5个新前向（不是同次前向）：仅改true_shape，两portrait mAA仍0；
+只取消输入crop的portrait/square目标反转后，mAA分别0→59.7133%、0→12.4014%；
+横向cup控制RGB完全不变，两新条件共享1次预测，保持92.2581%，位姿/焦距/指标匹配历史。
+固定帧顺序/重复帧/GT不变，GT不输入网络/焦距/PnP，全部270个新branch pair独立重算。
+改变crop也改变视野，不能分解各机制贡献或报告选择probe平均；仍非正式Table1。
+核验器不重跑训练模型，prediction hash只是代码绑定provenance，限制已列。
+196项离线测试通过；6项内存损坏注入（正式误标/缺request/同次前向误标/RGB/指标/identity）
+均被独立核验器拒绝，存储文件未改。Notebook97单元，原95逐项不变；新宿主真实输出无error，图目视核验。
+
+下一次顺序：
+1. 先读git/本入口并核实宿主后台；此5前向、上次PnP诊断、原100结果全部已完成。
+2. 按作者#78描述重审51类DUSt3R候选/1000@、seed777和强制横向crop，先做
+   候选清单身份、采样/补采变化与**新的可执行空间预算**，再启动新版本按需预处理。
+   不给旧100请求换crop后当作者1000次成绩；原作者清单/RNG/权重组别仍未确认。
+   保留41类/100历史输入、报告及2GiB raw/512MiB processed缓存，不清理旧数据腾空间。
+3. 不重跑旧235 ZIP目录或205GB RE10K来源扫描；RE10K仍1756/1832、缺76。
+   缺独立权重/128A100的训练保持未完成；继续安全审查公开来源和附录可行性。
+
+末次磁盘空闲约31GiB仅为本轮快照；下载前宿主重查、至少留1GiB。heartbeat继续，无新增付费/账号需要。
+CPU核验：`PYTHONPATH=.:scripts python scripts/verify_co3d_landscape_inputs.py`。
+仅有未提交request时后台恢复：`bash scripts/queue_co3d_landscape_inputs.sh`；
+完整结果存在只核验而不加载模型。下方均为历史入口，不作重新启动指令。
+
+## 历史恢复入口（2026-10-03：作者协议纠正与3个固定probe完成）
 
 `fast3r-co3d-pnp-diagnostic.service`于06:42:22正常结束0，inactive/dead、MainPID0；
 不重启，日志`results/co3d_candidate_pnp_diagnostic_v1.log`。

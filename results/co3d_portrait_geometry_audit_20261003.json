@@ -1,0 +1,70 @@
+{
+  "status": "published_HF_portrait_pixel_and_token_geometry_audited",
+  "baseline_report_sha256": "e52f2101a05475dcac4b3a784a27dc7c5e0f10a4e8f35683a62601671c90036d",
+  "checkpoint_config_sha256": "88edc53ba652ad835b86af27d980a46808d722b4d8f9d0d4360d05c789ada92b",
+  "source_sha256": {
+    "/home/yyz/fast3r/scripts/audit_co3d_portrait_geometry.py": "eb9a3743535e4f04de9e41c9227cc7c7d44072fc280cf60339e89b606981ebcb",
+    "/home/yyz/fast3r/fast3r/dust3r/datasets/base/base_stereo_view_dataset.py": "e3aa91f3722ce54b022bc65b282adc642e20d676640fd0c60eacc3b290e46a62",
+    "fast3r/dust3r/patch_embed.py": "d8aabf466189f4a947b68300fd5c28fc006914973ab21e390a416facdd0f9199",
+    "fast3r/dust3r/heads/dpt_head.py": "077826670fcb019e21b9657f6b11e1d20f711db6f0edd096835935d26d00ff53",
+    "fast3r/dust3r/utils/misc.py": "3d66a8c4de69bcef79036cd41a3f2c02eb104a080254c6c7c593b6f5b628c024",
+    "fast3r/models/fast3r.py": "673635b09b20ade6cfe519ce13fc5e92ef2a2f7271f7204c2b8b237fe759b075",
+    "fast3r/models/multiview_dust3r_module.py": "719d4cd7448c697e4f93cd029bfac32c8a3af5006f95ddc0eb31d3ae490488bd",
+    "fast3r/dust3r/cloud_opt/init_im_poses.py": "9319e31224b995e068348d8bcc0236c461578da46e61e5c9f751fca0a91acc40"
+  },
+  "candidate_request_orientation_counts": {
+    "all_portrait": 63,
+    "all_landscape": 29,
+    "mixed": 8
+  },
+  "portrait_view_count": 661,
+  "negative_determinant_loaded_K_count": 661,
+  "public_HF_encoder_patch_class": "PatchEmbedDust3R",
+  "public_HF_head_landscape_only": false,
+  "token_probe": {
+    "patch_class": "PatchEmbedDust3R",
+    "fixture_not_trained_model": true,
+    "encoder_tokens_and_positions_ignore_true_shape": true,
+    "encoder_token_grid_hw": [
+      24,
+      32
+    ],
+    "portrait_head_token_grid_hw": [
+      32,
+      24
+    ],
+    "head_reshape_is_not_spatial_transpose": true,
+    "token_label_mismatch_fraction": 0.9973958134651184
+  },
+  "geometry_probe": {
+    "scope": "synthetic_perfect_world_points_not_model_or_benchmark",
+    "row_swap_matrix_determinant": -1.0,
+    "swapped_K_exact_max_pixel_error": 2.842170943040401e-14,
+    "standard_K_true_pose_median_pixel_error": 29.698484809834994,
+    "PnP": [
+      {
+        "branch": "native_portrait",
+        "rotation_error_deg": 0.0,
+        "median_reprojection_error_px": 2.2504164792221385e-06,
+        "max_reprojection_error_px": 6.75538661736519e-06,
+        "positive_depth_fraction": 1.0,
+        "PnP_returned_success": true
+      },
+      {
+        "branch": "transposed_pixels_standard_K",
+        "rotation_error_deg": 179.84157139717217,
+        "median_reprojection_error_px": 5.0624936060635655,
+        "max_reprojection_error_px": 30.787583627711257,
+        "positive_depth_fraction": 1.0,
+        "PnP_returned_success": true
+      }
+    ],
+    "negative_depth_ambiguity": "A=-S is a proper rotation with reversed z; a projectively equivalent behind-camera solution exists. This is not the measured positive-depth solution above."
+  },
+  "interpretation": "Two distinct portrait interface mismatches: encoder/head token-grid ordering and transposed-pixel intrinsics versus positive-diagonal PnP K. Synthetic evidence is not proof that these fully explain measured model errors.",
+  "GT_used_by_prediction": false,
+  "network_bytes": 0,
+  "trained_model_forward_count": 0,
+  "formal_Table1_result": false,
+  "full_paper_completed": false
+}

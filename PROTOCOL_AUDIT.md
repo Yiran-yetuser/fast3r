@@ -4,7 +4,25 @@
 [`results/protocol_audit_20261001.json`](results/protocol_audit_20261001.json)。
 这是代码、权重和数据前提的审计，不是新增训练或位姿测评成绩。
 
-## 最新作者协议证据与PnP诊断（2026-10-03）
+## 最新：固定帧portrait输入几何（2026-10-03，§4.2 / Table1）
+
+`results/co3d_portrait_geometry_audit_20261003.json`确认HF配置PatchEmbedDust3R/
+landscape_only=False，不是ManyAR/DINO。encoder忽略true_shape，portrait输入loader
+24×32 token却在DPT按32×24 reshape；编号fixture99.7396%与空间transpose不符，非模型误差率。
+另有像素投影不一致：loader交换K行但保持3D与camera_pose轴，fast_pnp用标准正焦距K。
+K'=SK、det(S)=-1，不能当原相机的正深度SO3投影。存在翻转z的负深度投影歧义；
+合成完美点中当前OpenCV实际返回正深度但错误约179.84°。不证明全部实测误差根因。
+
+固定3个历史表现选定request：RGB不变仅改true_shape，两portrait mAA仍0；强制横向crop
+变为59.7133%与12.4014%，cup横向控制仍92.2581%且位姿/焦距/指标匹配历史。
+GT不进入模型/focal/PnP。crop改变视野，共5个新前向，不标同次前向或选择样本benchmark平均。
+固定源帧/顺序/重复/GT；crop RNG独立记录，未称新crop复现原sampler after-state。
+270pair独立重算、输入RGB/GT/K/RNG重放；原100报告与模型/数据未改。
+证明`results/co3d_landscape_input_diagnostic_verified_20261003.json`，对应真实结果v1。
+预测图未保存且核验器不重跑网络，prediction hash只是代码绑定provenance。
+196项离线测试通过，Notebook追加真实宿主分析。下一步51类/1000候选预算，仍非正式Table1。
+
+## 已归档作者协议证据与PnP诊断（2026-10-03）
 
 [作者#78回复](https://github.com/facebookresearch/fast3r/issues/78#issuecomment-2844393603)
 描述1000次DUSt3R式CO3D test采样、seed777、512×384，承认可能超过41类。

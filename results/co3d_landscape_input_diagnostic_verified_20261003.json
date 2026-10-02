@@ -1,0 +1,124 @@
+{
+  "status": "three_fixed_frame_requests_six_new_branches_independently_verified",
+  "report_sha256": "9217a4038c897fe02b6428190e6a82681f5d342f512d46ccbdeb06226305771b",
+  "verifier_sha256": "2ef971acb7084fc2714b0e923c14ccf7be97733bce7730f30322106ecf64e637",
+  "baseline_report_sha256": "e52f2101a05475dcac4b3a784a27dc7c5e0f10a4e8f35683a62601671c90036d",
+  "all_fixed_RGB_tensors_GT_and_crop_intrinsics_replayed": true,
+  "all_270_new_branch_pairs_recomputed": true,
+  "all_identity_fallbacks_retained": true,
+  "landscape_control_matches_archived_baseline": true,
+  "distinct_new_forward_count": 5,
+  "verification_limit": "No trained network re-execution: saved prediction hashes remain provenance assertions. Different input conditions are not same-forward and selected probes have no unbiased average.",
+  "formal_Table1_result": false,
+  "full_paper_completed": false,
+  "rows": [
+    {
+      "request": 0,
+      "scene": "bicycle/374_41967_84033",
+      "branch": "metadata_landscape",
+      "metrics": {
+        "RRA_at_5": 0.02222222276031971,
+        "RRA_at_15": 0.04444444552063942,
+        "RRA_at_30": 0.08888889104127884,
+        "RTA_at_5": 0.0,
+        "RTA_at_15": 0.02222222276031971,
+        "RTA_at_30": 0.08888889104127884,
+        "mAA_30": 0.0
+      },
+      "estimated_focal": 547.146240234375,
+      "pnp_failed_view_count": 0,
+      "original_mAA_30": 0.0,
+      "changed_RGB_view_count": 0
+    },
+    {
+      "request": 0,
+      "scene": "bicycle/374_41967_84033",
+      "branch": "forced_landscape_crop",
+      "metrics": {
+        "RRA_at_5": 0.24444444477558136,
+        "RRA_at_15": 0.7777777910232544,
+        "RRA_at_30": 1.0,
+        "RTA_at_5": 0.24444444477558136,
+        "RTA_at_15": 0.7777777910232544,
+        "RTA_at_30": 0.9333333373069763,
+        "mAA_30": 0.5971326231956482
+      },
+      "estimated_focal": 717.5187377929688,
+      "pnp_failed_view_count": 0,
+      "original_mAA_30": 0.0,
+      "changed_RGB_view_count": 10
+    },
+    {
+      "request": 2,
+      "scene": "cup/400_51462_101232",
+      "branch": "metadata_landscape",
+      "metrics": {
+        "RRA_at_5": 1.0,
+        "RRA_at_15": 1.0,
+        "RRA_at_30": 1.0,
+        "RTA_at_5": 0.9333333373069763,
+        "RTA_at_15": 0.9777777791023254,
+        "RTA_at_30": 1.0,
+        "mAA_30": 0.9225807785987854
+      },
+      "estimated_focal": 515.7849731445312,
+      "pnp_failed_view_count": 0,
+      "original_mAA_30": 0.9225807785987854,
+      "changed_RGB_view_count": 0
+    },
+    {
+      "request": 2,
+      "scene": "cup/400_51462_101232",
+      "branch": "forced_landscape_crop",
+      "metrics": {
+        "RRA_at_5": 1.0,
+        "RRA_at_15": 1.0,
+        "RRA_at_30": 1.0,
+        "RTA_at_5": 0.9333333373069763,
+        "RTA_at_15": 0.9777777791023254,
+        "RTA_at_30": 1.0,
+        "mAA_30": 0.9225807785987854
+      },
+      "estimated_focal": 515.7849731445312,
+      "pnp_failed_view_count": 0,
+      "original_mAA_30": 0.9225807785987854,
+      "changed_RGB_view_count": 0
+    },
+    {
+      "request": 3,
+      "scene": "stopsign/249_26596_53531",
+      "branch": "metadata_landscape",
+      "metrics": {
+        "RRA_at_5": 0.04444444552063942,
+        "RRA_at_15": 0.13333334028720856,
+        "RRA_at_30": 0.2222222238779068,
+        "RTA_at_5": 0.0,
+        "RTA_at_15": 0.06666667014360428,
+        "RTA_at_30": 0.17777778208255768,
+        "mAA_30": 0.0
+      },
+      "estimated_focal": 585.763916015625,
+      "pnp_failed_view_count": 0,
+      "original_mAA_30": 0.0,
+      "changed_RGB_view_count": 0
+    },
+    {
+      "request": 3,
+      "scene": "stopsign/249_26596_53531",
+      "branch": "forced_landscape_crop",
+      "metrics": {
+        "RRA_at_5": 0.20000000298023224,
+        "RRA_at_15": 0.2888889014720917,
+        "RRA_at_30": 0.6000000238418579,
+        "RTA_at_5": 0.02222222276031971,
+        "RTA_at_15": 0.20000000298023224,
+        "RTA_at_30": 0.7777777910232544,
+        "mAA_30": 0.12401434034109116
+      },
+      "estimated_focal": 728.6761474609375,
+      "pnp_failed_view_count": 0,
+      "original_mAA_30": 0.0,
+      "changed_RGB_view_count": 10
+    }
+  ]
+}
