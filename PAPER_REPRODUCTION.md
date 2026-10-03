@@ -1,5 +1,15 @@
 # Fast3R：逐项复现与论文对应表
 
+## DTU阈值诊断归档（2026-10-03，Table4/5差距诊断）
+
+固定scan1、stride1完整序列rounded linspace 10视角、seed1052；一份前向预测复用7组阈值。
+结果见`results/diagnostics/dtu_scan1_threshold_sensitivity_seed42_v1.json`；原始预测SHA前后相同、指标有限。
+baseline mean Acc/Comp=3.9710/1.5382，metric75=1.0783/14.2454：过滤改善Accuracy距离但损害Completion。
+仅单场景诊断，不推荐按GT选择阈值，不升格全量Table4/5。原stride5/标签混用已修复，首次失败无模型加载。
+Notebook新增核验单元已用宿主Jupyter真实执行并通过apply_patch保存输出；原107已归档单元保留。
+245项旧套件通过（4项缺CO3D清单明确skip）及1项新增采样/结果身份回归通过：合计242执行通过、4 skip。
+CO3D仍为用户暂缓，不重新下载。附录依赖/规定split与独立训练消融仍未完成。
+
 核对版本：[arXiv v2，2025-03-19](https://arxiv.org/html/2501.13928v2)。本记录更新于 2026-10-03。
 
 ## 完成标准
@@ -19,7 +29,7 @@
 | §5.2；附录 A/B | 模型规模和训练数据量的影响 | 官方 model/data scaling 配置 | 缺各组训练权重；未执行 |
 | §5.3；Figure 8 | 移除训练位置插值后的性能 | 代码中的 image-index embedding | 已核对机制；缺独立训练模型 |
 | §5.4；Table 5 | 使用 aligned local 或 global 点图的差别 | DTU10视角；NRGBD/7-Scenes全量同次预测、双分支指标 | 三个数据集配对已完成；local优势并非所有距离指标均成立 |
-| 附录 C/D/E/F | Gaussian splatting、BA、深度 benchmark 与可视化 | 已有点云；官方 robustmvd 接口 | 点云可视化部分完成；其余未执行 |
+| 附录 C/D/E/F | Gaussian splatting、BA、深度 benchmark 与可视化 | 有点云可视化；InstantSplat/RMVD依赖或规定数据缺失 | 可视化部分完成；C/D/E论文实验未执行 |
 
 ## 最新：用户暂缓CO3D，改为现有数据上的部分复现（2026-10-03）
 
@@ -31,11 +41,73 @@
 两个queue已加用户暂缓标记保护；未经新授权不再恢复或重下载。
 定时卡片提示更新被权限拒绝，尚未生效；以最新用户指令、恢复文档及代码保护为准。
 
-后续优先整理Table3/4/5已保留数据的真实差距，再设计固定输入的置信度/对齐敏感性诊断，
-并审计附录BA/深度入口可行性。没有新训练权重、完整数据或规定硬件时不把本机适配升格论文成绩。
+Table 3/4/5保留数据聚合与附录C/D/E可行性审计已完成。固定输入的置信度/对齐诊断runner已准备，
+但GPU仍由OpenVLA进程占用，尚未执行；没有新训练权重、完整数据或规定硬件时不把本机适配升格论文成绩。
 RE10K现有数据保留，缺76不静默跳过，也不自动再做大型下载。整篇仍未完成且CO3D为用户暂缓项。
 
-清理验证：Notebook107、原105逐项不变，新增宿主Jupyter分析无error；245测试中241执行通过，
+### 保留数据的 Table 3/4/5 聚合复核（2026-10-03）
+
+[`fast3r_reproduction.ipynb`](fast3r_reproduction.ipynb)末尾新增CPU分析单元，从
+[`results/nrgbd_seed42_stride40.json`](results/nrgbd_seed42_stride40.json)、
+[`results/7scenes_paired_seed42_stride20.json`](results/7scenes_paired_seed42_stride20.json)、
+[`results/dtu_seed42_stride5.json`](results/dtu_seed42_stride5.json)与Table 5配对JSON
+重新计算均值；所有重算值均与已保存aggregate一致。论文参考值来自
+[arXiv v2的Tables 3–5](https://arxiv.org/html/2501.13928v2)。此项只复核旧输出，不执行模型前向。
+Table 3/4的scene数据距离按论文约定乘100，DTU不缩放；Table 5 scene数据也乘100。
+各行数值越低越好，且Table 3/4使用median、Table 5使用mean，不能跨表直接比较。
+
+| 论文表 / 数据集 | Accuracy：本地 / 论文 | 差距 | Completion：本地 / 论文 | 差距 |
+| --- | ---: | ---: | ---: | ---: |
+| Table 3 / NRGBD | 4.0165 / 3.40 | +18.13% | 1.2001 / 1.01 | +18.82% |
+| Table 3 / 7-Scenes | 3.3035 / 1.58 | +109.08% | 3.1058 / 0.93 | +233.96% |
+| Table 4 / DTU | 2.0827 / 1.706 | +22.08% | 1.0311 / 0.857 | +20.31% |
+
+Table 5使用[`results/nrgbd_paired_seed42_stride40.json`](results/nrgbd_paired_seed42_stride40.json)、
+[`results/7scenes_paired_seed42_stride20.json`](results/7scenes_paired_seed42_stride20.json)和
+[`results/dtu_paper_experiments.json`](results/dtu_paper_experiments.json)中的10-view DTU行。
+下表按head对照mean距离；括号中是`global − aligned local`，正值表示global误差更高：
+
+| 数据集 | 本地 local Acc / Comp | 本地 global Acc / Comp | 论文 local Acc / Comp | 论文 global Acc / Comp | 本地Δ Acc / Comp；论文Δ |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| NRGBD | 9.7108 / 3.1292 | 9.2594 / 3.1789 | 4.39 / 1.28 | 4.85 / 1.32 | −0.4514 / +0.0498；+0.46 / +0.04 |
+| 7-Scenes | 6.3613 / 7.0516 | 6.9567 / 6.3510 | 2.84 / 1.37 | 4.81 / 1.64 | +0.5955 / −0.7005；+1.97 / +0.27 |
+| DTU | 4.1451 / 2.3889 | 4.3514 / 2.7941 | 3.91 / 1.41 | 3.88 / 1.41 | +0.2063 / +0.4052；−0.03 / 0.00 |
+
+当前设置下，NRGBD与7-Scenes至少有一个local/global误差方向不同于论文Table 5；
+DTU的local/global方向与论文的细小Accuracy差异也不同。它们是公开权重、本地协议的对照，
+不能由此归因到置信度或对齐实现。checkpoint与论文各表具体实验权重的映射仍未确认。
+
+### 有界置信度/对齐敏感性实验（已准备，等待GPU资源）
+
+实验入口为[`scripts/diagnose_dtu_threshold_sensitivity.py`](scripts/diagnose_dtu_threshold_sensitivity.py)。
+固定DTU `scan1`、512分辨率、stride5及既有报告中的10张视图，进行一次local-head前向，
+在同一份原始预测和GT上比较`alignment percentile = 0/50/85/95`与
+`metric percentile = 0/25/50/75`的7个预先指定组合；85/0为当前评测基线。
+报告会保存输入/GT/原始预测SHA、checkpoint文件SHA和每组完整指标，并核对评测前后原始预测未变。
+这只是固定场景的敏感性诊断，不据此挑选“最佳”阈值或宣称匹配论文。
+
+本轮14:35复查时GPU为100%利用率、显存占用10206/12227MiB，计算进程PID 143582来自
+`/home/yyz/miniconda3/envs/openvla/bin/python`。为避免干扰该运行，没有启动Fast3R前向；
+诊断结果尚未生成。runner要求前向前至少有10240MiB空闲显存。继续时还需确认GPU计算进程列表为空，
+再做两次空闲容量检查。
+
+### 附录 C/D/E 可行性审计（2026-10-03）
+
+按[论文附录 C–E](https://arxiv.org/html/2501.13928v2)核对仓库与当前项目环境：
+
+- Appendix C是基于InstantSplat的Gaussian Splatting定性结果。工作区/项目Python没有InstantSplat、
+  `gaussian_renderer`或`simple_knn`模块；论文示例用7张CO3D图像，而CO3D输入已按用户要求删除并暂缓。
+- Appendix D的GS-BA示例和Table 6使用Tanks & Temples的Family场景。该数据不在`data/`内，
+  InstantSplat环境也缺失；现有PLY点云不能替代Gaussian优化或BA结果。
+- Appendix E/Table 7比较ScanNet、ETH3D、DTU、Tanks & Temples。`scripts/robustmvd_eval.py`
+  直接`import rmvd`，当前项目Python找不到该模块；入口硬编码ScanNet的`robustmvd` split，
+  并含外部绝对输出路径。当前`data/dtu_test_mvsnet_release`用于Table 4重建，
+  不是已验证的RMVD/RobustMVD split；ScanNet、ETH3D和Tanks & Temples数据也未准备。
+- 因此本地没有可按论文协议直接运行的Appendix C/D/E子实验。本次只读审计未下载数据或安装软件，
+  也未启动GPU任务；Table 7、GS-BA和Gaussian渲染仍未完成。重新开展需要单独确认可用数据、
+  依赖版本、输出路径和GPU预算。
+
+清理验证记录：Notebook现110单元；清理阶段原105逐项不变，清理分析当时经宿主Jupyter执行无error；245测试中241执行通过，
 4项需已删真实CO3D清单的集成检查明确skip，不能称删除后完整CO3D输入验证仍可执行。
 
 ## 历史：完整输入门禁与后续位姿队列（2026-10-03 12:27，§4.2/Table1候选；现已暂缓）

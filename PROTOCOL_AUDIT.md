@@ -1,5 +1,15 @@
 # 公开权重与评测协议审计（2026-10-01）
 
+## DTU阈值诊断归档（2026-10-03，Table4/5差距诊断）
+
+固定scan1、stride1完整序列rounded linspace 10视角、seed1052；一份前向预测复用7组阈值。
+结果见`results/diagnostics/dtu_scan1_threshold_sensitivity_seed42_v1.json`；原始预测SHA前后相同、指标有限。
+baseline mean Acc/Comp=3.9710/1.5382，metric75=1.0783/14.2454：过滤改善Accuracy距离但损害Completion。
+仅单场景诊断，不推荐按GT选择阈值，不升格全量Table4/5。原stride5/标签混用已修复，首次失败无模型加载。
+Notebook新增核验单元已用宿主Jupyter真实执行并通过apply_patch保存输出；原107已归档单元保留。
+245项旧套件通过（4项缺CO3D清单明确skip）及1项新增采样/结果身份回归通过：合计242执行通过、4 skip。
+CO3D仍为用户暂缓，不重新下载。附录依赖/规定split与独立训练消融仍未完成。
+
 对应论文 §3.2、§4.2–4.3、§5.4。证据快照见
 [`results/protocol_audit_20261001.json`](results/protocol_audit_20261001.json)。
 这是代码、权重和数据前提的审计，不是新增训练或位姿测评成绩。

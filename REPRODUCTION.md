@@ -1,5 +1,15 @@
 # Fast3R 复现记录
 
+## DTU阈值诊断归档（2026-10-03，Table4/5差距诊断）
+
+固定scan1、stride1完整序列rounded linspace 10视角、seed1052；一份前向预测复用7组阈值。
+结果见`results/diagnostics/dtu_scan1_threshold_sensitivity_seed42_v1.json`；原始预测SHA前后相同、指标有限。
+baseline mean Acc/Comp=3.9710/1.5382，metric75=1.0783/14.2454：过滤改善Accuracy距离但损害Completion。
+仅单场景诊断，不推荐按GT选择阈值，不升格全量Table4/5。原stride5/标签混用已修复，首次失败无模型加载。
+Notebook新增核验单元已用宿主Jupyter真实执行并通过apply_patch保存输出；原107已归档单元保留。
+245项旧套件通过（4项缺CO3D清单明确skip）及1项新增采样/结果身份回归通过：合计242执行通过、4 skip。
+CO3D仍为用户暂缓，不重新下载。附录依赖/规定split与独立训练消融仍未完成。
+
 这份文档和 [`fast3r_reproduction.ipynb`](fast3r_reproduction.ipynb) 记录了本分支的可重复实验流程，适合第一次接触多视图 3D 重建的同学。
 
 ## 最新范围：CO3D由用户暂缓并清理（2026-10-03）
@@ -11,8 +21,11 @@ CO3D两个后台服务已停止，输入止于26/1000、尚未开始新位姿前
 清理凭据与两个queue暂停保护防止自动重启。定时任务提示更新被权限拦截，尚未生效，
 最新指令及保护见`CONTINUATION.md`，不要执行下方历史恢复指令重下载。
 
-下一步只用已保留DTU/NRGBD/7-Scenes整理实测差距，设计固定输入的置信度/对齐敏感性诊断，
-审计附录BA/深度入口；缺独立权重/训练资源的项目列未完成，RE10K缺76不自动大下载。
+本轮已从逐场景JSON重算DTU/NRGBD/7-Scenes的Table3/4/5聚合，补齐DTU Table5对照；
+Notebook新增CPU分析输出，细节见[`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md)。
+已只读审计附录C/D/E依赖与数据：InstantSplat、rmvd及指定评测数据缺失，详见`PAPER_REPRODUCTION.md`。
+下一步在GPU可用时做固定输入的置信度/对齐敏感性诊断；
+缺独立权重/训练资源的项目列未完成，RE10K缺76不自动大下载。
 这是公开权重部分复现，CO3D暂缓项和未完成项明确保留，不能称整篇已经完成。
 
 ## 历史续接：全1000输入门禁与后续位姿队列（2026-10-03 12:27；现已暂缓）

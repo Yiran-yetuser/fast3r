@@ -30,17 +30,36 @@ DTU/NRGBD/7-Scenes/RealEstate10K及其他项目数据。
 如用户希望修改定时卡片文字，需要允许该工具更新或在应用中手动把CO3D重新下载/评测移出。
 
 接下来只用已保留的数据推进：
-1. 整理DTU22/NRGBD9/7-Scenes18实测与论文Table3/4/5差距、网络/数学链路和协议说明。
-   不重复已归档报告，不把数值不匹配说成全面复现。
-2. 用现有重建数据设计固定输入、同次预测的有界置信度/对齐敏感性实验，先核对参数和资源；
-   这是本机适配/差距诊断，不是新的独立训练消融，也不靠GT调参凑论文分数。
-3. 审计附录BA/深度入口能否使用已有图像/GT/权重，确认接口和预算后才执行可支持部分；
+1. 已完成DTU22/NRGBD9/7-Scenes18的Table3/4/5 CPU汇总复核：逐场景重算值与保存aggregate一致，
+   补齐DTU Table5 local/global对照。Notebook从107增至110单元，原107逐项保留；
+   代码单元由项目Python直接执行并保存stdout，没有Jupyter kernel或GPU前向。
+   汇总与当前差距见`PAPER_REPRODUCTION.md`最新小节。
+2. 有界阈值敏感性runner已准备：`scripts/diagnose_dtu_threshold_sensitivity.py`。
+   固定DTU `scan1`、512分辨率、stride1完整序列上rounded linspace选取既有报告的10张视图；先做1次前向，再对同一份
+   原始预测比较7组local置信度/对齐阈值，并核对评测前后原始预测SHA。输入标签改变、GPU空闲显存
+   少于10240MiB或CUDA不可用时会退出；输出使用新文件名，不覆盖历史结果。
+   14:35复查RTX 5070 Ti仍为100%利用率、显存占用10206/12227MiB；PID 143582仍在运行，
+   命令为`/home/yyz/miniconda3/envs/openvla/bin/python /home/yyz/openvla/reproduction/extend_clean_task.py --execute`。
+   未停止该任务，也未启动Fast3R前向。
+   15:48宿主GPU计算进程列表为空、空闲11101MiB后重试：已修复stride5与历史均匀10视角标签混用，
+   并使用历史seed42+scan_id*1000+10；首次错误在模型加载前退出，不产生结果。
+   重试session72645已正常退出，结果`results/diagnostics/dtu_scan1_threshold_sensitivity_seed42_v1.json`已生成。
+   独立CPU检查通过：1次前向、7组有限指标、评测前后原始预测SHA完全相同；无需重跑。
+   baseline Acc/Comp=3.9710/1.5382；metric75=1.0783/14.2454，过滤提高Accuracy却严重损害Completion。
+   这是单场景诊断，不是全量Table4/5或阈值推荐；Notebook核验单元宿主Jupyter真实执行无error。
+   旧245项套件（241 pass、4 CO3D输入缺失skip）与新增1项采样回归通过，合计242 pass、4 skip。
+   恢复时先确认原计算进程结束、GPU计算进程列表为空，
+   并两次确认至少10240MiB空闲；该实验只诊断本机公开权重/指标差距，不是训练消融，也不用于
+   按GT挑阈值凑论文分数。
+3. 已只读审计附录C/D/E：InstantSplat与rmvd缺失，CO3D已暂缓清理，Tanks & Temples、
+   ScanNet/ETH3D及RobustMVD规定split未准备；现有DTU数据不等同Appendix E测试split。
+   本次没有下载或安装依赖。后续有可用数据/GPU后再审查C/D/E支持部分；
    splatting/独立训练模型/128A100条件不足时明确列未完成，不临时大下载/付费。
 4. RE10K缺76，现有1756及归档保留；不自动启动新的大数据下载或用子集冒充正式Table1。
 
-## 清理验证
+## CO3D清理阶段验证快照（2026-10-03；当时Notebook为107单元）
 
-Notebook107单元，原105逐项完全相同，新清理分析经宿主Jupyter真实执行无error。
+清理阶段的Notebook107单元中，原105逐项完全相同，新清理分析经宿主Jupyter真实执行无error。
 测试套件245项：241项执行通过，4项依赖已删除真实CO3D清单的集成检查明确skip并注明原因。
 清理后首次运行这4项报缺manifest，随后仅在用户暂缓标记存在且清单缺失时标明不可运行；
 不自动重下载、不伪称这4项或删除后的全量CO3D输入重放已通过。两个queue保护和bash语法检查通过。
