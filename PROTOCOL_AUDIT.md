@@ -647,3 +647,15 @@ v2零焦距前置拒绝已诊断为比公开fast_pnp更严格；v3让零值沿�
 核验器`scripts/verify_co3d_candidate_pose_report.py`不加载模型或访问网络，
 校验完整结果和逐请求文件同一性、所有原绑定源码/权重哈希、真实输入GT、
 fallback identity、pair误差、逐请求平均和池化汇总。正式Table1、整篇训练/消融仍未完成。
+
+### 51-category / 1000-request budget checkpoint (2026-10-03)
+
+`scripts/audit_co3d_51_1000_protocol_budget.py` is a metadata-only, deterministic checkpoint. It verifies the reconstructed 51-category candidate (51 categories, 2511 trajectories, 498757 frames) against the archived seen41 candidate (41, 2011, 399204), including the 10 added categories and their 500 trajectories / 99553 frames. It proposes 1000 distinct sequences × 10 frame numbers at seed 42; the request-plan digest is `34847924f082fd4536fe710a688cb82fda684f2692597a785289d3f77c9a7933`.
+
+No image member was read and no network/model work occurred. The official 51 metadata ZIPs total 1315929722 bytes. The historical JSON records 33527140352 bytes free. Its raw2GiB/processed512MiB ceilings are NOT a measured 1000-request storage fit proof. The 1000-distinct-sequence/random.sample proposal is NOT the released sampler and will NOT be used for evaluation. Four tests and the then-200-test suite passed. The earlier manually saved text was not an exact host Notebook-cell execution; this turn replaces only those unarchived cells with genuine host Jupyter outputs and preserves the prior97 archived cells.
+
+### Released-source 51-category/1000@ trace (2026-10-03, §4.2/Table1 prerequisite)
+
+`audit_co3d_51_released_sampler.py` calls released `_get_views/_fetch_views_for_pool` and `ResizedDataset`, using a declared all-valid stub: 1000 nominal requests, 836 distinct trajectories, 51 categories, 8835 distinct frames; 581 requests contain duplicate views, minimum6 distinct frames. Original pool order and source clamping/deque order are retained. Dataset seed777 is source/author-stated; Python combination seed42 and epoch0 are audit choices, not recovered author RNG. Plan SHA256 `cd7a0b1ef5ea4633a88360f91823a55e5a4e09d028af4c5967df0068ff75ff32`; report `results/co3d_51_released_sampler_20261003.json`. Independent draw-arithmetic, RNG preservation, epoch, duplication and fail-closed tests pass; Notebook reproduces the entire nominal plan in a host kernel.
+
+Reachability includes every clamped +/-4 jitter position for each of at most5 source scene tries:2205 trajectories/103599 frames. This is a conservative storage superset, NOT actual GT-valid input. `fast3r-co3d51-source-storage.service` audits advertised lengths, reuses38 frozen local category indices and fetches only13 missing categories' bounded directories, with atomic immutable archive/category checkpoints. No old235 complete scan, RGB transfer, GPU, cache eviction or formal Table1 promotion. Only after normal exit and full JSON should `verify_co3d_51_source_storage.py` independently recompute coverage/counts/sizes/recorded source bindings. Processed storage and realized depth validity remain unverified. Exact author JSON/RNG and HF-to-paper experiment mapping remain unresolved.

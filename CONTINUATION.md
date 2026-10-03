@@ -3,7 +3,37 @@
 用户已授权继续整篇论文复现、Notebook归档及逐步推送GitHub，并要求额度刷新后接续。
 分支 `local-demo`，远端 `myfork`。本文件是恢复入口，不是“整篇已完成”的声明。
 
-## 最新恢复入口（2026-10-03 07:15：portrait输入几何对照完成）
+## 最新恢复入口（2026-10-03：51类发布采样器追踪完成，目录预算运行中）
+
+额度已恢复，宿主权限和Jupyter可用。10:33宿主可用33,523,810,304bytes、GPU空闲11,102MiB；
+这些仅是快照。两个旧沙箱Notebook尝试PID95939/95996经命令/路径核实后已结束，未终止GPU任务。
+历史工程提案`results/co3d_51_1000_protocol_budget_20261003.json`保留不变；
+其强制1000不同轨迹/10000帧的策略**不是源采样器**，其缓存上限**不是存储能装下的证明**，后续评测不使用。
+
+新`results/co3d_51_released_sampler_20261003.json`实际调用发布采样器的all-valid stub和1000@：
+51类、836不同轨迹、8835不同帧、581请求含重复视图，最少6不同帧；不是实际GT有效输入。
+data plan`data/co3d_test_metadata/released_nominal_51_1000_seed777_v1.json` SHA256
+`cd7a0b1ef5ea4633a88360f91823a55e5a4e09d028af4c5967df0068ff75ff32`，不提交大清单到Git。
+dataset seed777有发布/作者依据；combination seed42和epoch0为审计选择，原作者RNG/清单仍未知。
+保守±4 jitter/5次scene尝试集合2205轨迹/103599帧，不冒充实际采样或完整GT。
+
+`fast3r-co3d51-source-storage.service`已启动，日志`results/co3d_51_source_storage_v1.log`；
+按archive/category原子断点`data/co3d_51_source_storage_v1`，独立进程可在Codex额度不可用时继续。
+复用38类旧本地索引，只补缺13类的目录记录；不重做旧235包完整扫描、不下载图片、不用GPU。
+代码`scripts/plan_co3d_51_source_storage.py`，512MiB审计文件上限、至少1GiB磁盘预留。
+完成文件`results/co3d_51_source_storage_v1_20261003.json`；有结果且服务退出后，
+运行独立`scripts/verify_co3d_51_source_storage.py`。健康运行不重启；失败先诊断并保留断点。
+仅服务已退出且结果不存在时恢复：`bash scripts/queue_co3d_51_source_storage.sh`。
+旧raw2GiB/processed512MiB缓存及100请求/5个诊断前向全部冻结，不静默扩大或清理。
+下一步按真实目录预算另算processed/断点峰值并声明新版本资源上限，再启动51类1000请求按需准备。
+原作者清单/HF实验对应、RE10K缺76、训练/独立消融/附录实验仍未完成。
+
+Notebook101单元：原97逐项不变，旧工程提案读取及新源采样追踪两个分析单元
+于宿主Jupyter真实执行（10:48），无error；不重跑任何GPUbenchmark。
+完整离线套件218项通过（较此前200项新增18项），Notebook结构与原97单元独立比较通过。
+heartbeat继续，从本入口恢复，不购买额度或使用reset权益，不保证精确重置时刻唤醒。
+
+## 历史恢复入口（2026-10-03 07:15：portrait输入几何对照完成）
 
 `fast3r-co3d-landscape-inputs.service`07:15:10正常退出0，inactive/dead、MainPID0；
 日志`results/co3d_landscape_input_diagnostic_v1.log`。不要重启此阶段或原100请求。
@@ -868,3 +898,9 @@ RE10K仍1756/1832、缺76；已完整扫描的205GB来源不再重跑。
 非identity失败回退、重复pair）全部被独立核验器拒绝；没有修改原报告。
 Notebook原91单元逐项等于提交前历史版本，新2单元含宿主Jupyter真实执行输出，
 无error；科学图已渲染检查，git diff --check通过。
+
+### 2026-10-03 07:52：51 类/1000 请求元数据与空间预算检查点
+
+新增 `scripts/audit_co3d_51_1000_protocol_budget.py` 与小结果 `results/co3d_51_1000_protocol_budget_20261003.json`。不读取图像成员、不联网、不加载模型，仅核验 reconstructed 官方候选 51 类/2511 轨迹/498757 帧、旧 seen41 41 类/2011 轨迹/399204 帧，以及新增 10 类、500 轨迹、99553 帧。固定 seed=42 的 1000 条 distinct-sequence × 10-frame 计划摘要 SHA256=`34847924f082fd4536fe710a688cb82fda684f2692597a785289d3f77c9a7933`。
+
+该历史JSON的磁盘快照为33527140352bytes；raw2GiB/processed512MiB只是缓存上限，不能证明1000请求可装下。4项新增测试和当时200项离线测试通过，但旧Notebook单元先前并非宿主Jupyter输出；本次已修正并真实执行。后续不使用该不同于源采样器的工程计划，不把它当作者Table1。当前可执行入口见本文件顶部。

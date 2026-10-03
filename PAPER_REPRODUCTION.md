@@ -21,7 +21,23 @@
 | §5.4；Table 5 | 使用 aligned local 或 global 点图的差别 | DTU10视角；NRGBD/7-Scenes全量同次预测、双分支指标 | 三个数据集配对已完成；local优势并非所有距离指标均成立 |
 | 附录 C/D/E/F | Gaussian splatting、BA、深度 benchmark 与可视化 | 已有点云；官方 robustmvd 接口 | 点云可视化部分完成；其余未执行 |
 
-## 最新输入几何对照（2026-10-03 07:15，§4.2 / Table 1）
+## 最新源采样审计（2026-10-03，§4.2 / Table 1 前提，非位姿成绩）
+
+真正调用发布`Co3d_Multiview`采样方法和`ResizedDataset(1000)`的all-valid stub，
+名义结果为51类/836轨迹/8835不同帧，581/1000请求含重复帧、最少6不同帧。
+不是1000条不同轨迹，也不是先随机抽10个不同帧。完整原始候选有序池仍为51类/2511轨迹/498757帧。
+旧工程提案的1000不同轨迹/10000帧摘要保留，但不用于后续评测；缓存上限不等于实测空间预算。
+`results/co3d_51_released_sampler_20261003.json`绑定原候选/发布源码/计划哈希；
+Notebook在宿主Jupyter重放计划逐项相同，原97单元保留，新2个分析单元无error。
+新增18项离线源采样/原子断点/目录预算/独立核验测试，完整套件218项通过。
+dataset seed777有作者/发布依据，combination seed42与epoch0为声明的选择，原作者RNG/清单未恢复。
+
+可达补采上界为2205轨迹/103599帧（±4 jitter、最多5个scene尝试），不是实际有效GT集合。
+新独立目录预算服务复用38类本地索引，仅补13类缺失目录；不重做已归档235包扫描。
+目录长度不证明CRC/解码/GT/crop有效，也不证明processed空间可装下；新GPU评测尚未启动。
+进程/恢复/核验入口见`CONTINUATION.md`。原100请求及几何诊断报告保留，正式Table1仍未完成。
+
+## 已归档输入几何对照（2026-10-03 07:15，§4.2 / Table 1）
 
 HF实际使用`PatchEmbedDust3R`，不是ManyAR或DINO；它忽略true_shape，384×512张量
 生成24×32个patch，portrait DPT却按32×24 reshape。实际patch类合成编号测试证实
@@ -694,3 +710,11 @@ Notebook新增分析单元读取小摘要、核对完整报告哈希及逐请求
 并设计固定输入下发布入口与论文PnP描述的单变量诊断。RE10K仍缺76个规定场景；
 已归档205GB来源扫描不重复执行。完整训练、独立训练消融、附录BA/splatting/depth
 仍未完成，不因这一候选成绩而勾选整篇完成。
+
+### 51 类 CO3D / 1000 请求空间预算审计（2026-10-03）
+
+本轮只做元数据与预算，不下载新 RGB/depth/mask，不运行模型或 PnP。官方候选元数据确实包含 **51 类、2511 条轨迹、498757 帧**；此前的 seen41 候选是 **41 类、2011 条轨迹、399204 帧**。两者在共同 41 类上逐项一致，新增 10 类为 `ball, book, couch, frisbee, hotdog, kite, remote, sandwich, skateboard, suitcase`，共新增 500 条轨迹/99553 帧。51 个官方 metadata ZIP 当前合计 1315929722 bytes。
+
+新增 `scripts/audit_co3d_51_1000_protocol_budget.py` 生成固定 seed=42 的 1000 条、每条 10 视角的元数据请求计划（计划摘要 SHA256=`34847924f082fd4536fe710a688cb82fda684f2692597a785289d3f77c9a7933`，10000 个唯一 frame slot），并记录磁盘余量与懒加载边界：raw 2 GiB、processed 512 MiB、至少 1 GiB reserve，当前审计时可用 33524957184 bytes。此计划是工程断点，不是作者 1000 请求身份，也不是 Table 1 成绩；`network_bytes_transferred=0`、`model_forward_count=0`、`formal_Table1_result=false`，GT/RGB/depth 完整性和公开权重映射仍未证实。若未来真实懒加载超过边界，必须 fail-closed 保存断点，不能静默驱逐或宣称完成。
+
+历史提案证据为`results/co3d_51_1000_protocol_budget_20261003.json`（原JSON快照33527140352bytes保持不变）。当时4项新测试、200项离线测试通过，但旧手工输出不是精确Notebook单元的宿主执行。当前`paper-co3d-51-budget`只读取历史提案并明确拒绝将其用于评测，已与新的源采样单元一起真实宿主Jupyter执行；没有GPU前向。本轮新增源采样审计见顶部，不将历史缓存上限当成能装下的证明。

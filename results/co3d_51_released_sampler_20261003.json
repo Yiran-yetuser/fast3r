@@ -1,0 +1,80 @@
+{
+  "status": "released_51_1000_all_valid_trace_verified_not_real_inputs_or_pose",
+  "paper_mapping": "section 4.2 / Table 1 source sampling and storage prerequisites",
+  "audit_script_sha256": "0c040a61715aeac5e9c3ab1935bfd788aaffe4e375b9bc6db5defb7399152f1e",
+  "input_sha256": {
+    "data/co3d_test_metadata/selected_seqs_test_reconstructed.json": "6c51c776f175632e60aedb0a452c47baba72c77f39345a162dfe4ba6de6bdf39",
+    "results/co3d_test_selection_manifest.json": "761002ebadd557bcead3e8119517bd33fd75cb29b355b9929345938782f1d6ce",
+    "results/co3d_test_selection_verified_20261002.json": "67809a44b2bb69188b3969f1ac441a228d9866483d47b275041820ae1a0de0ac",
+    "results/co3d_author_protocol_update_20261003.json": "9daba9265979f9b507dbc306aa704b18349d2ecee06b996e0b42c489f39dfd31",
+    "results/co3d_51_1000_protocol_budget_20261003.json": "1ffb2856b9bd9a64e1bc8357f96e25347b913791ebc517e8dea169a659c460f1"
+  },
+  "source_sha256": {
+    "scripts/audit_co3d_sampling_trace.py": "e83a124c2c8686f28bee9a1681d6cff971ebb1c019916a6bfb7d11ce0dbb915c",
+    "fast3r/dust3r/datasets/co3d_multiview.py": "d307fd6e75b97f47a2efeefcd4ef5fd6f4fce44536b0d3824fa43928539e02f0",
+    "fast3r/dust3r/datasets/base/easy_dataset.py": "6d83a11fcc794a2a4564b3898129685c6ffc20528fe6ed91f49a1dedc5937149",
+    "fast3r/dust3r/datasets/base/base_stereo_view_dataset.py": "e3aa91f3722ce54b022bc65b282adc642e20d676640fd0c60eacc3b290e46a62"
+  },
+  "plan_content_sha256": "8b5cebbd64a7490ed9af0d3364f676b411cf23268a5c42448cd4c073ab89b3b1",
+  "candidate_category_count": 51,
+  "candidate_sequence_count": 2511,
+  "candidate_frame_count": 498757,
+  "request_count": 1000,
+  "views_per_request": 10,
+  "python_combination_seed": 42,
+  "dataset_seed": 777,
+  "resized_epoch": 0,
+  "generated_combination_count": 10000,
+  "combination_actually_used": [
+    0,
+    2,
+    42,
+    24,
+    17,
+    9,
+    44,
+    21,
+    25,
+    36
+  ],
+  "base_dataset_length": 25110000,
+  "nominal_counts": {
+    "nominal_sample_count": 1000,
+    "nominal_distinct_trajectory_count": 836,
+    "nominal_distinct_category_count": 51,
+    "nominal_distinct_frame_count": 8835,
+    "samples_with_duplicate_views": 581,
+    "min_distinct_frames_in_a_sample": 6
+  },
+  "potential_retry_jitter_sequence_count": 2205,
+  "potential_retry_jitter_frame_count": 103599,
+  "legacy_proposal": {
+    "sha256": "1ffb2856b9bd9a64e1bc8357f96e25347b913791ebc517e8dea169a659c460f1",
+    "distinct_sequence_count": 1000,
+    "unique_frame_slots": 10000,
+    "is_released_sampling_protocol": false,
+    "is_storage_fit_proof": false,
+    "will_be_used_for_evaluation": false
+  },
+  "directory_storage_budget_complete": false,
+  "rgb_depth_mask_camera_gt_ready": false,
+  "actual_depth_validity_verified": false,
+  "author_protocol_equivalence_verified": false,
+  "checkpoint_paper_mapping_verified": false,
+  "formal_Table1_result": false,
+  "model_forward_count": 0,
+  "network_bytes_transferred": 0,
+  "full_paper_completed": false,
+  "limitations": [
+    "Uses RELEASED _get_views/_fetch_views_for_pool and ResizedDataset, not random.sample replacement",
+    "Dataset seed777 is source/author stated; combination seed42 and epoch0 are declared choices",
+    "The exact author processed JSON/order, combination RNG and HF training variant are unresolved",
+    "All-valid stub does not test real GT, masked positive depth, crop geometry, CRC or decode",
+    "Source jitter/clamping can duplicate frames; mapping can reuse trajectories",
+    "Zero-depth invalidation/oversampling/scene retries must be realized and checkpointed, not skipped",
+    "Reachability includes all +/-4 jitter positions for up to five scene tries, not actual frames",
+    "Historical raw2GiB/processed512MiB are ceilings, not measured full1000 storage requirements"
+  ],
+  "plan_file": "data/co3d_test_metadata/released_nominal_51_1000_seed777_v1.json",
+  "plan_file_sha256": "cd7a0b1ef5ea4633a88360f91823a55e5a4e09d028af4c5967df0068ff75ff32"
+}

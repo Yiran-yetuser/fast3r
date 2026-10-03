@@ -2,7 +2,19 @@
 
 这份文档和 [`fast3r_reproduction.ipynb`](fast3r_reproduction.ipynb) 记录了本分支的可重复实验流程，适合第一次接触多视图 3D 重建的同学。
 
-## 最新续接：输入几何对照完成（2026-10-03 07:15）
+## 最新续接：51类源采样追踪完成，目录预算后台运行（2026-10-03）
+
+额度恢复后已取得宿主服务/GPU/空间可见性；宿主Jupyter真实执行两份新分析单元。
+发布采样器1000@的all-valid名义追踪为51类/836轨迹/8835不同帧，581请求有重复帧。
+旧1000不同轨迹/10000帧工程提案保留但后续不使用；其缓存上限不是容量证明。
+`results/co3d_51_released_sampler_20261003.json`和101单元Notebook保存可重放证据，原97单元不变。
+完整离线套件218项通过；新增18项验证源抽样算术、重复帧、原子断点和拒绝误标。
+可达补采上界2205轨迹/103599帧；不是实际有效GT或位姿成绩。
+`fast3r-co3d51-source-storage.service`只核算目录预算，复用38类本地索引、补13类缺失目录。
+日志/恢复/独立核验入口见`CONTINUATION.md`，尚未启动新1000请求GPU评测。
+精确作者processed清单/RNG、权重对应、RE10K缺76、训练/独立消融/附录仍未完成。
+
+## 已归档：输入几何对照完成（2026-10-03 07:15）
 
 对应§4.2/Table1位姿链路，不是重新训练。HF实际PatchEmbedDust3R的portrait
 encoder/DPT token顺序不一致；像素转置后的K也与标准PnP K不一致。合成完美点PnP
@@ -500,3 +512,7 @@ Notebook新增真实分析输出与`results/figures/co3d_candidate100_pose.png`�
 重新核验仅需CPU：`PYTHONPATH=.:scripts python scripts/verify_co3d_candidate_pose_report.py`。
 已结束的输入准备、评测与205GB RE10K来源扫描无需重启；
 完整论文状态和后续前提见`PAPER_REPRODUCTION.md`及`CONTINUATION.md`。
+
+### 51 类/1000 请求 CO3D 预算检查点（2026-10-03）
+
+历史CPU提案核验51类/2511轨迹/498757帧与旧seen41差异，但其seed42强制1000不同轨迹/随机10不同帧策略不是发布采样器，后续不使用。原提案摘要`34847924…c9a7933`和JSON保留，真实历史可用空间33527140352bytes。raw2GiB/processed512MiB是缓存上限，不证明容量足够。4项新测试、当时200项测试通过；旧未归档Notebook手工输出已纠正为宿主真实读取历史报告的单元，并新增发布采样重放单元。当前入口见顶部，非Table1成绩。

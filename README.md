@@ -12,7 +12,16 @@ ${{\color{Red}\Huge{\textsf{  CVPR\ 2025\ \}}}}\$
 [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue)](https://huggingface.co/jedyang97/Fast3R_ViT_Large_512/)
 </div>
 
-> Latest local diagnostic (2026-10-03): the public HF portrait path has distinct token-grid and
+> Latest source sampling checkpoint (2026-10-03, §4.2/Table1 prerequisites): the released
+> 1,000@ sampler's all-valid nominal trace covers 51 categories, 836 trajectories and 8,835 unique
+> frames; 581 requests contain duplicate views. The old 1,000-distinct-sequence engineering proposal
+> is retained but will not be used for evaluation; cache ceilings are not a storage fit proof.
+> [Source-bound report](results/co3d_51_released_sampler_20261003.json) and host-executed
+> [Notebook](fast3r_reproduction.ipynb) retain all97 prior cells. A background directory budget
+> reuses38 frozen local indices and fills13 missing categories; no new image/model evaluation yet.
+> See [continuation](CONTINUATION.md). Exact author split/RNG and formal Table1 remain unresolved.
+
+> Archived local diagnostic (2026-10-03): the public HF portrait path has distinct token-grid and
 > pixel-projection interface mismatches. With fixed frames/GT and five new forwards, forced landscape
 > cropping improved two selected probes' mAA from 0 to 59.7133% and 12.4014%; a landscape control
 > stayed at 92.2581%. Shape metadata alone did not fix either low-score probe. Changed crops mean
@@ -583,3 +592,5 @@ Author processed-split equivalence and public-checkpoint mapping to paper experi
 so these are candidate adaptation scores; the full Table 1 reproduction and full-paper training/ablations
 remain incomplete. Paper references, protocol differences and next steps are recorded in
 [PAPER_REPRODUCTION.md](PAPER_REPRODUCTION.md) and [PROTOCOL_AUDIT.md](PROTOCOL_AUDIT.md).
+
+最新 CO3D 预算检查点（2026-10-03）：官方候选元数据覆盖 51 类/2511 轨迹/498757 帧；seen41 候选为 41 类/2011 轨迹/399204 帧。新增 10 类及 500 轨迹已纳入一个 seed=42 的 1000-request 元数据计划（每请求 10 帧，计划 SHA256=`34847924f082fd4536fe710a688cb82fda684f2692597a785289d3f77c9a7933`）。本步不下载图像、不运行模型，network=0、forward=0、正式 Table 1=false；缓存边界和至少 1 GiB 余量见 `results/co3d_51_1000_protocol_budget_20261003.json`。完整离线测试 200 项通过，不能将此计划或旧 100-request 候选结果写成论文全量成绩。
