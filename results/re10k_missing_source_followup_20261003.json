@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-03",
+  "status": "public_candidate_identified_exact_prescribed_coverage_unverified",
+  "scope": "read-only public-source review; no dataset bytes downloaded",
+  "prescribed_split": {
+    "scene_count": 1832,
+    "prepared_scene_count": 1756,
+    "missing_scene_count": 76,
+    "missing_ids_source": "results/re10k_missing_full_source_verified_20261002.json"
+  },
+  "prior_full_source_scan": {
+    "report": "results/re10k_missing_candidates_full_source.json",
+    "verification": "results/re10k_missing_full_source_verified_20261002.json",
+    "compressed_bytes_scanned": 205763619478,
+    "compressed_sha256": "f6055cd8ea1ccce642482ca623f98c21af1c449210760d23d78a43b09e546523",
+    "recognized_scene_count": 4137,
+    "recovered_missing_scene_count": 0,
+    "restarted": false,
+    "scope_limit": "Verified only under the scanner's recognized tar paths and PNG naming protocol; ignored paths were not exhaustively classified."
+  },
+  "public_candidate": {
+    "repository": "ghuijo/realestate10k",
+    "revision": "f97dd586b8b724a9d22d2cfabe6caae1357f061b",
+    "page_reported_license": "cc-by-4.0",
+    "page_reported_total_size_gb": 429,
+    "observed_parts": [
+      "realestate_tv.tar.00.part",
+      "realestate_tv.tar.01.part",
+      "realestate_tv.tar.02.part",
+      "realestate_tv.tar.03.part"
+    ],
+    "preview_example_paths": [
+      "RealEstate10K-tv/test/metadata/de129b4aa11af575",
+      "re10k-tv/test/images/de129b4aa11af575/00000.png"
+    ],
+    "exact_missing_id_coverage_verified": false,
+    "image_geometry_equivalence_verified": false,
+    "source_provenance_and_underlying_rgb_terms_verified": false,
+    "dataset_viewer_state": "Only preview rows were exposed; the full viewer reported a crashed job.",
+    "source_page": "https://huggingface.co/datasets/ghuijo/realestate10k/tree/main",
+    "viewer_page": "https://huggingface.co/datasets/ghuijo/realestate10k",
+    "dataset_payload_bytes_downloaded": 0
+  },
+  "official_google_source": {
+    "page": "https://google.github.io/realestate10k/download.html",
+    "described_download": "720 MB camera-trajectory archive with per-clip timestamps, intrinsics, poses, and video URLs",
+    "rgb_frames_provided_by_this_archive": false
+  },
+  "formal_pose_metrics_available": false,
+  "full_prescribed_split_ready": false,
+  "next_step": "Seek a public, metadata-only way to match the 76 prescribed IDs against the candidate archive. Do not download the 429 GB archive, access gated sources, or repeat the completed 205 GB scan."
+}

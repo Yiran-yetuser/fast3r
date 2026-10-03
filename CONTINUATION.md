@@ -31,22 +31,20 @@ DTU/NRGBD/7-Scenes/RealEstate10K及其他项目数据。
 
 接下来只用已保留的数据推进：
 1. 已完成DTU22/NRGBD9/7-Scenes18的Table3/4/5 CPU汇总复核：逐场景重算值与保存aggregate一致，
-   补齐DTU Table5 local/global对照。Notebook从107增至110单元，原107逐项保留；
-   代码单元由项目Python直接执行并保存stdout，没有Jupyter kernel或GPU前向。
-   汇总与当前差距见`PAPER_REPRODUCTION.md`最新小节。
-2. 有界阈值敏感性runner已准备：`scripts/diagnose_dtu_threshold_sensitivity.py`。
-   固定DTU `scan1`、512分辨率、stride1完整序列上rounded linspace选取既有报告的10张视图；先做1次前向，再对同一份
-   原始预测比较7组local置信度/对齐阈值，并核对评测前后原始预测SHA。输入标签改变、GPU空闲显存
-   少于10240MiB或CUDA不可用时会退出；输出使用新文件名，不覆盖历史结果。
-   14:35复查RTX 5070 Ti仍为100%利用率、显存占用10206/12227MiB；PID 143582仍在运行，
-   命令为`/home/yyz/miniconda3/envs/openvla/bin/python /home/yyz/openvla/reproduction/extend_clean_task.py --execute`。
-   未停止该任务，也未启动Fast3R前向。
-   15:48宿主GPU计算进程列表为空、空闲11101MiB后重试：已修复stride5与历史均匀10视角标签混用，
-   并使用历史seed42+scan_id*1000+10；首次错误在模型加载前退出，不产生结果。
-   重试session72645已正常退出，结果`results/diagnostics/dtu_scan1_threshold_sensitivity_seed42_v1.json`已生成。
-   独立CPU检查通过：1次前向、7组有限指标、评测前后原始预测SHA完全相同；无需重跑。
-   baseline Acc/Comp=3.9710/1.5382；metric75=1.0783/14.2454，过滤提高Accuracy却严重损害Completion。
-   这是单场景诊断，不是全量Table4/5或阈值推荐；Notebook核验单元宿主Jupyter真实执行无error。
+   补齐DTU Table5 local/global对照。结果见`PAPER_REPRODUCTION.md`。
+2. 固定输入阈值诊断已扩展到DTU `scan1`、`scan10`、`scan11`，报告分别为
+   `results/diagnostics/dtu_scan1_threshold_sensitivity_seed42_v1.json`、
+   `results/diagnostics/dtu_scan10_threshold_sensitivity_seed42_v1.json`、
+   `results/diagnostics/dtu_scan11_threshold_sensitivity_seed42_v1.json`。
+   每场景一次前向，在stride1完整序列的rounded linspace 10视角上对照7组阈值；seed为1052/10052/11052。
+   三组输入标签及85/0 baseline的全部8个local指标都与历史`dtu_paper_experiments.json`对应行完全相同；
+   三报告代码/权重指纹相同，预测SHA前后相同，指标均有限。三场景描述性mean Acc/Comp：85/0为6.9304/2.4108，
+   metric75为3.4452/13.1753。阈值升高表现为Accuracy距离下降、Completion恶化；这是覆盖率敏感性，不是全量Table4/5
+   或GT调参推荐。`alignment percentile`参数同时控制local-to-global对齐筛点和GT配准权重，解释结果时需保留这一耦合。
+   14:35时PID143582仍在跑OpenVLA任务，因此当时没有启动Fast3R；15:48后GPU空闲，固定场景任务随后完成。
+   初次stride5/标签混用在加载模型前被拒绝，修正后才正式前向。Notebook现116单元；前114个来自阈值诊断阶段，
+   原始HEAD的112单元逐项相同。新RE10K审计单元在项目Python中CPU执行并保存输出；隔离Jupyter启动无返回后中断，
+   不声称本轮通过宿主Jupyter执行。
    旧245项套件（241 pass、4 CO3D输入缺失skip）与新增1项采样回归通过，合计242 pass、4 skip。
    恢复时先确认原计算进程结束、GPU计算进程列表为空，
    并两次确认至少10240MiB空闲；该实验只诊断本机公开权重/指标差距，不是训练消融，也不用于
@@ -55,7 +53,11 @@ DTU/NRGBD/7-Scenes/RealEstate10K及其他项目数据。
    ScanNet/ETH3D及RobustMVD规定split未准备；现有DTU数据不等同Appendix E测试split。
    本次没有下载或安装依赖。后续有可用数据/GPU后再审查C/D/E支持部分；
    splatting/独立训练模型/128A100条件不足时明确列未完成，不临时大下载/付费。
-4. RE10K缺76，现有1756及归档保留；不自动启动新的大数据下载或用子集冒充正式Table1。
+4. RE10K仍缺76/1832，正式Table1未完成。2026-10-03只读发现公开候选
+   `ghuijo/realestate10k`（页面标注429GB，预览出现test metadata/image路径），但viewer失败，76个规定ID覆盖、
+   图像几何和来源条款均未验证；本轮下载0 bytes。详见
+   `results/re10k_missing_source_followup_20261003.json`。不下载429GB归档、不访问受限源，
+   不重复已完成的205GB扫描或以子集冒充完整Table1。
 
 ## CO3D清理阶段验证快照（2026-10-03；当时Notebook为107单元）
 

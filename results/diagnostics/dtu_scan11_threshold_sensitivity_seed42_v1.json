@@ -1,0 +1,192 @@
+{
+  "mode": "single_forward_threshold_sensitivity_diagnostic",
+  "dataset": "dtu",
+  "split": "test / dtu_test_mvsnet_release",
+  "scene": "scan11",
+  "seed": 42,
+  "scene_seed": 11052,
+  "resolution": 512,
+  "kf_every": 1,
+  "selection_protocol": "full stride1 sequence, rounded linspace 10 views; historical paper-experiment protocol",
+  "selected_indices": [
+    0,
+    5,
+    11,
+    16,
+    21,
+    27,
+    32,
+    37,
+    43,
+    48
+  ],
+  "head_chunk_size": 2,
+  "precision": "16-mixed",
+  "head": "local",
+  "view_count": 10,
+  "input_labels": [
+    "scan11/00000048.jpg",
+    "scan11/00000043.jpg",
+    "scan11/00000037.jpg",
+    "scan11/00000032.jpg",
+    "scan11/00000027.jpg",
+    "scan11/00000021.jpg",
+    "scan11/00000016.jpg",
+    "scan11/00000011.jpg",
+    "scan11/00000005.jpg",
+    "scan11/00000000.jpg"
+  ],
+  "input_labels_sha256": "e75fafa62d6ae1972dbcd70aac9bbd7cce3ee51f310c6440c3f5e3747fd78dbc",
+  "model_inputs_sha256": "6c16cb9bfd3c8ead69eac0955321e71ff5e9aea67c159dfcf89ecbc8f2a29f90",
+  "ground_truth_img_pts_valid_mask_sha256": "2a3cbd8e9864bed05b2b97fb4a1bb5c6db27b83df370e4842c7f6f0b998763ab",
+  "raw_prediction_sha256_before_evaluation": "76e2ed5d13a229fcd264a6916402ccd1ecf1ce5bb5e21f96f64eb6e43ccabacf",
+  "raw_prediction_sha256_after_evaluation": "76e2ed5d13a229fcd264a6916402ccd1ecf1ce5bb5e21f96f64eb6e43ccabacf",
+  "forward_count": 1,
+  "same_forward_for_all_cases": true,
+  "forward_wall_seconds": 1.4063165400002617,
+  "profile_total_seconds": 1.3716912269592285,
+  "peak_allocated_mib": 5025,
+  "gpu_capacity_before_model_load": {
+    "free_mib_before_model_load": 10925,
+    "total_mib": 11749
+  },
+  "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+  "torch": "2.7.1+cu128",
+  "numpy": "1.26.4",
+  "python": "3.11.16",
+  "git_revision": "3b1e5a84a4258e78cbd6f469df8ce9678fac894e",
+  "checkpoint_dir": "/home/yyz/fast3r/checkpoints/Fast3R_ViT_Large_512",
+  "checkpoint_files": [
+    {
+      "path": "config.json",
+      "size_bytes": 941,
+      "sha256": "88edc53ba652ad835b86af27d980a46808d722b4d8f9d0d4360d05c789ada92b"
+    },
+    {
+      "path": "model.safetensors",
+      "size_bytes": 2590286416,
+      "sha256": "1357d42e74539ba03510ea1986c7464a7facf17157779e2b7ebd6284e79e0427"
+    }
+  ],
+  "source_sha256": {
+    "scripts/diagnose_dtu_threshold_sensitivity.py": "dc34a942286698a4ffa68a5cf0cd828302874a6e7c4c4fa6370ba4b054154812",
+    "scripts/fast3r_hf_dtu_eval.py": "80296bcac54829f57855b009ed214a594956a8cd87bfc3d0eaea69441c200ac4",
+    "fast3r/models/multiview_dust3r_module.py": "719d4cd7448c697e4f93cd029bfac32c8a3af5006f95ddc0eb31d3ae490488bd",
+    "fast3r/data/components/spann3r_datasets/dtu.py": "8fc0cf4bb1a4d0abb79eff0371c208183f6ffd5985c88261d7efb53010c7cb26"
+  },
+  "threshold_cases": [
+    {
+      "name": "baseline",
+      "alignment_percentile": 85.0,
+      "metric_percentile": 0.0,
+      "head": "local",
+      "metrics": {
+        "accuracy": 2.992701838919048,
+        "accuracy_median": 1.3441073187783474,
+        "completion": 1.4850298060224234,
+        "completion_median": 0.8282474658376024,
+        "nc1": 0.6814637868363255,
+        "nc1_median": 0.7702097459197602,
+        "nc2": 0.6423873094880999,
+        "nc2_median": 0.7115575404331762
+      }
+    },
+    {
+      "name": "alignment_0",
+      "alignment_percentile": 0.0,
+      "metric_percentile": 0.0,
+      "head": "local",
+      "metrics": {
+        "accuracy": 2.7952733207881892,
+        "accuracy_median": 1.15449367765962,
+        "completion": 1.384919609502365,
+        "completion_median": 0.7166528157482912,
+        "nc1": 0.6756889272577338,
+        "nc1_median": 0.7627123658238933,
+        "nc2": 0.6322352334277448,
+        "nc2_median": 0.6988982331317313
+      }
+    },
+    {
+      "name": "alignment_50",
+      "alignment_percentile": 50.0,
+      "metric_percentile": 0.0,
+      "head": "local",
+      "metrics": {
+        "accuracy": 3.127729900052786,
+        "accuracy_median": 1.351752746714297,
+        "completion": 1.5939646547327875,
+        "completion_median": 0.8200296083069419,
+        "nc1": 0.6751218094722231,
+        "nc1_median": 0.762557421781948,
+        "nc2": 0.631456580614301,
+        "nc2_median": 0.6985877206360269
+      }
+    },
+    {
+      "name": "alignment_95",
+      "alignment_percentile": 95.0,
+      "metric_percentile": 0.0,
+      "head": "local",
+      "metrics": {
+        "accuracy": 5.1113478077153705,
+        "accuracy_median": 3.130675146642811,
+        "completion": 2.7357882711698225,
+        "completion_median": 1.9099230106466716,
+        "nc1": 0.6815027992245215,
+        "nc1_median": 0.7725403957552592,
+        "nc2": 0.6288064715017359,
+        "nc2_median": 0.6946166246916312
+      }
+    },
+    {
+      "name": "metric_25",
+      "alignment_percentile": 85.0,
+      "metric_percentile": 25.0,
+      "head": "local",
+      "metrics": {
+        "accuracy": 2.7502848660830215,
+        "accuracy_median": 1.2831906904417036,
+        "completion": 1.617598376262011,
+        "completion_median": 0.8397365341530743,
+        "nc1": 0.6812520208972145,
+        "nc1_median": 0.7700544140963399,
+        "nc2": 0.643109599563646,
+        "nc2_median": 0.7122010634976769
+      }
+    },
+    {
+      "name": "metric_50",
+      "alignment_percentile": 85.0,
+      "metric_percentile": 50.0,
+      "head": "local",
+      "metrics": {
+        "accuracy": 2.089388373218237,
+        "accuracy_median": 1.0161713818863605,
+        "completion": 4.168664412417034,
+        "completion_median": 1.126369795832185,
+        "nc1": 0.689222217367424,
+        "nc1_median": 0.7792299302437258,
+        "nc2": 0.6504768238180582,
+        "nc2_median": 0.7202002623286898
+      }
+    },
+    {
+      "name": "metric_75",
+      "alignment_percentile": 85.0,
+      "metric_percentile": 75.0,
+      "head": "local",
+      "metrics": {
+        "accuracy": 1.7511918027491198,
+        "accuracy_median": 0.850534322041121,
+        "completion": 10.55560095701995,
+        "completion_median": 2.712936017616695,
+        "nc1": 0.6958362711643294,
+        "nc1_median": 0.7857217332497083,
+        "nc2": 0.6708253669765166,
+        "nc2_median": 0.7451731160797819
+      }
+    }
+  ],
+  "scope_note": "Single-scene sensitivity diagnostic on retained DTU test data using the public Hugging Face inference checkpoint and the repository metric implementation. Thresholds are compared on one unchanged forward and are not selected to fit the paper score; this does not replace the original Lightning checkpoint or the full benchmark evaluation."
+}

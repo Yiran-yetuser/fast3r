@@ -1,14 +1,11 @@
 <div align="center">
 
-## DTU阈值诊断归档（2026-10-03，Table4/5差距诊断）
+## DTU固定前向阈值诊断归档（2026-10-03）
 
-固定scan1、stride1完整序列rounded linspace 10视角、seed1052；一份前向预测复用7组阈值。
-结果见`results/diagnostics/dtu_scan1_threshold_sensitivity_seed42_v1.json`；原始预测SHA前后相同、指标有限。
-baseline mean Acc/Comp=3.9710/1.5382，metric75=1.0783/14.2454：过滤改善Accuracy距离但损害Completion。
-仅单场景诊断，不推荐按GT选择阈值，不升格全量Table4/5。原stride5/标签混用已修复，首次失败无模型加载。
-Notebook新增核验单元已用宿主Jupyter真实执行并通过apply_patch保存输出；原107已归档单元保留。
-245项旧套件通过（4项缺CO3D清单明确skip）及1项新增采样/结果身份回归通过：合计242执行通过、4 skip。
-CO3D仍为用户暂缓，不重新下载。附录依赖/规定split与独立训练消融仍未完成。
+在scan1、scan10、scan11各做一次前向，每个场景用同一份预测比较7组阈值；输入和85/0基线指标与历史10-view结果完全一致。
+metric percentile升高时Accuracy距离下降、Completion明显变差。alignment percentile同时影响local-to-global对齐和GT配准。
+这项三场景敏感性诊断不代表完整Table4/5，也不用于选择阈值。详细数值与方法边界见[论文复现记录](PAPER_REPRODUCTION.md)和Notebook。
+CO3D仍按用户要求暂缓，完整复现及独立训练/附录实验未完成。
 
 # ⚡️Fast3R: Towards 3D Reconstruction of 1000+ Images in One Forward Pass
 
@@ -30,7 +27,10 @@ ${{\color{Red}\Huge{\textsf{  CVPR\ 2025\ \}}}}\$
 > Both queues now refuse automatic restart while the [user-deferred marker](results/co3d_evaluation_deferred_cleanup_20261003.json)
 > is present. Updating the scheduled prompt was permission-blocked and has NOT succeeded; the latest
 > [continuation instructions](CONTINUATION.md) forbid CO3D redownload/restart without new authorization.
-> Next is existing-data reconstruction sensitivity and appendix-entry feasibility, not full-paper completion.
+> A three-scene, same-forward DTU threshold sensitivity diagnostic is now archived. A public 429 GB
+> RE10K mirror candidate was found, but its coverage of the 76 missing prescribed IDs is unverified and
+> no data was downloaded. The remaining work includes those RE10K sequences and experiments requiring unavailable training checkpoints,
+> prescribed data or hardware; this is not full-paper completion.
 
 > Historical continuation (2026-10-03 12:27, §4.2/Table1 candidate; now deferred): source51 actual input preparation
 > remains healthy; a separate pose queue now waits for ALL1,000 prepared requests, independent offline
@@ -85,7 +85,7 @@ Official implementation of **Fast3R: Towards 3D Reconstruction of 1000+ Images i
 
 ## Installation
 
-本地复现进度（2026-10-02）：已完成DTU22场景、NRGBD9场景、7-Scenes全部18测试轨迹的公开权重评测，尚未匹配论文数值或完成整篇实验。RealEstate10K规定1832个相机记录已齐备、55.60GB候选RGB归档已下载；已核验1756场景/265447帧的RGB、官方GT与完整候选集合，仍缺76场景，继续研究补齐来源。新单卡HF位姿入口支持固定采样和断点恢复，正式Table1指标尚未运行。[逐项论文对应](PAPER_REPRODUCTION.md)、[Notebook](fast3r_reproduction.ipynb)、[下一步检查点](CONTINUATION.md)。
+本地复现进度（2026-10-03）：已完成DTU22场景、NRGBD9场景、7-Scenes全部18测试轨迹的公开权重评测，并完成scan1/scan10/scan11三场景同次预测阈值诊断；结果尚未匹配论文数值，也未完成整篇实验。RealEstate10K规定1832个相机记录已齐备、55.60GB候选RGB归档已下载；已核验1756场景/265447帧的RGB、官方GT与完整候选集合，仍缺76场景。CO3D由用户暂缓并清理；正式Table1未完成。[逐项论文对应](PAPER_REPRODUCTION.md)、[Notebook](fast3r_reproduction.ipynb)、[下一步检查点](CONTINUATION.md)。
 
 CO3D §4.2/Table1类别审计：已找到固定PoseDiffusion协议的41类seen名单，生成2011轨迹/399204候选帧的有来源候选，尚未确认Fast3R作者逐轨迹清单等价。41类完整目录预算已结束；按需数据接线继续，不下载整个大ZIP、不冒充全量图像或正式成绩就绪。Notebook保存真实分析输出。
 
@@ -214,6 +214,8 @@ The CO3D public-HF one-draw pose smoke is now complete and revalidated from save
 A new same-forward CO3D orientation diagnostic reproduces the saved published-branch scores exactly. Removing the transpose changes the estimated focal from 27.98px to 553.66px but yields only RRA@30=2.2222%, RTA@30=11.1111%, mAA@30=0%; it does not solve the low-score case or establish paper equivalence. Both branches and all 45 pairs are retained; one new notebook analysis cell was executed. This is not an isolated fixed-focal experiment or a replacement benchmark protocol.
 
 The additional RE10K full-source scan has ended successfully: 205,763,619,478 compressed bytes and the pinned LFS SHA matched, without storing the full archive. Under the verified tar-path/PNG naming protocol it recognized 4,137 source scenes but recovered none of the 76 missing prescribed IDs (0 staged frames). Independent saved-report/official-GT consistency checks passed, not a second full-archive rehash. Coverage remains 1,756/1,832; this does not establish permanent unavailability or full Table 1 readiness. The scan is archived and must not be restarted.
+
+A read-only follow-up found the public [`ghuijo/realestate10k` Hugging Face candidate](https://huggingface.co/datasets/ghuijo/realestate10k/tree/main), listed as 429 GB with test metadata/image paths in preview. The dataset viewer failed and the exact 76-scene coverage, image geometry, and RGB provenance remain unverified; no bytes were downloaded. This candidate does not change RE10K coverage or produce pose metrics. See [`results/re10k_missing_source_followup_20261003.json`](results/re10k_missing_source_followup_20261003.json).
 
 Paired NRGBD local/global evaluation used `--head both` to share one forward pass. The 7-Scenes preparation pipeline reads official TestSplit archives via HTTP Range, checks sequence CRC/SHA256, registers depth using pinned SimpleRecon calibration, and stores only the original stride-20 selected frames. The loader preserves original frame numbering and refuses incompatible sparse-storage protocols. GPU evaluation queues behind NRGBD and free-memory checks; disk usage retains a 1GiB reserve. Eight offline preparation tests and a real 50-view heads-sequence dry-run passed. Full result JSONs must be validated before reporting scores; these pipelines do not constitute complete-paper reproduction. See [`PAPER_REPRODUCTION.md`](PAPER_REPRODUCTION.md) and the notebook for status and remaining training/data requirements.
 

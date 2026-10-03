@@ -1,14 +1,45 @@
 # Fast3R：逐项复现与论文对应表
 
-## DTU阈值诊断归档（2026-10-03，Table4/5差距诊断）
+## DTU固定前向阈值诊断归档（2026-10-03，Table 4/5差距诊断）
 
-固定scan1、stride1完整序列rounded linspace 10视角、seed1052；一份前向预测复用7组阈值。
-结果见`results/diagnostics/dtu_scan1_threshold_sensitivity_seed42_v1.json`；原始预测SHA前后相同、指标有限。
-baseline mean Acc/Comp=3.9710/1.5382，metric75=1.0783/14.2454：过滤改善Accuracy距离但损害Completion。
-仅单场景诊断，不推荐按GT选择阈值，不升格全量Table4/5。原stride5/标签混用已修复，首次失败无模型加载。
-Notebook新增核验单元已用宿主Jupyter真实执行并通过apply_patch保存输出；原107已归档单元保留。
-245项旧套件通过（4项缺CO3D清单明确skip）及1项新增采样/结果身份回归通过：合计242执行通过、4 skip。
-CO3D仍为用户暂缓，不重新下载。附录依赖/规定split与独立训练消融仍未完成。
+在`scan1`、`scan10`、`scan11`各做1次前向；每场景从完整stride1序列按rounded linspace选10视角，
+分别复用同一预测比较7组阈值。三个输入标签集及85/0基线的8项local指标都与历史
+`results/dtu_paper_experiments.json`的对应10-view行完全相同。每份报告保存输入、GT、预测、代码和权重指纹；
+评测前后原始预测SHA相同，所有指标有限。完整结果见下方Notebook分析及
+[`results/diagnostics/`](results/diagnostics/)中的三个JSON。
+
+三场景描述性均值Acc/Comp从85/0基线的6.9304/2.4108变为metric75的3.4452/13.1753：
+置信度筛点降低Accuracy距离，同时显著恶化Completion。仓库中的alignment percentile参数同时影响
+local-to-global对齐筛点和GT配准权重；metric percentile改变参与配准/Accuracy的预测点集合，Completion仍以全部有效GT为目标。
+这些阈值是敏感性对照，不是最优阈值推荐；三个场景均值不代表22场景Table 4结果，也不构成完整Table 5复现。
+CO3D仍按用户要求暂缓，附录规定数据/依赖和独立训练消融仍未完成。
+
+| 阈值组合 | alignment/ICP percentile | metric percentile | 三场景mean Acc | 三场景mean Comp | ΔAcc vs 85/0 | ΔComp vs 85/0 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| baseline | 85 | 0 | 6.9304 | 2.4108 | 0.0000 | 0.0000 |
+| alignment_0 | 0 | 0 | 6.0540 | 2.8598 | −0.8764 | +0.4490 |
+| alignment_50 | 50 | 0 | 6.2488 | 2.3617 | −0.6816 | −0.0491 |
+| alignment_95 | 95 | 0 | 8.7881 | 3.2870 | +1.8578 | +0.8762 |
+| metric_25 | 85 | 25 | 6.3263 | 2.5691 | −0.6040 | +0.1582 |
+| metric_50 | 85 | 50 | 4.9653 | 4.7278 | −1.9651 | +2.3170 |
+| metric_75 | 85 | 75 | 3.4452 | 13.1753 | −3.4852 | +10.7645 |
+
+这里是`scan1`、`scan10`、`scan11`三个场景各自mean distance的算术平均，单位按DTU原始距离，未乘100；
+逐场景结果与baseline复核见Notebook和对应JSON。
+
+### RE10K缺失源补充审计（2026-10-03）
+
+规定测试集仍为1,832个场景，已验证准备1,756个，缺76个。已完成的205,763,619,478-byte源扫描
+按其识别的tar路径/PNG命名规则找到4,137个场景、恢复0个缺失ID；不重跑该扫描，也不把这个边界外推为永久不可用。
+
+本轮只读发现公开候选 [`ghuijo/realestate10k`](https://huggingface.co/datasets/ghuijo/realestate10k/tree/main)，
+其页面标注cc-by-4.0、总计429GB，预览中出现test metadata与image路径；该候选仓库的README只有30 bytes，完整dataset viewer报告任务崩溃。
+目前没有证据确认76个指定ID都在其中，也没有核实图像几何、衍生来源或底层RGB使用条款；本轮未下载数据。
+因此它只是待核对候选，不改变1756/1832覆盖率，不产生新的Table 1位姿成绩。
+
+Google的[官方RealEstate10K下载页](https://google.github.io/realestate10k/download.html)描述的是720MB相机轨迹归档，包含逐帧时间戳、内参、位姿和视频URL；
+该归档本身不是RGB帧。详细证据边界见Notebook及
+[`results/re10k_missing_source_followup_20261003.json`](results/re10k_missing_source_followup_20261003.json)。
 
 核对版本：[arXiv v2，2025-03-19](https://arxiv.org/html/2501.13928v2)。本记录更新于 2026-10-03。
 
@@ -41,8 +72,8 @@ CO3D仍为用户暂缓，不重新下载。附录依赖/规定split与独立训�
 两个queue已加用户暂缓标记保护；未经新授权不再恢复或重下载。
 定时卡片提示更新被权限拒绝，尚未生效；以最新用户指令、恢复文档及代码保护为准。
 
-Table 3/4/5保留数据聚合与附录C/D/E可行性审计已完成。固定输入的置信度/对齐诊断runner已准备，
-但GPU仍由OpenVLA进程占用，尚未执行；没有新训练权重、完整数据或规定硬件时不把本机适配升格论文成绩。
+Table 3/4/5保留数据聚合、附录C/D/E可行性审计和DTU三场景固定前向阈值诊断已完成。
+没有新训练权重、完整数据或规定硬件时不把本机适配升格论文成绩。
 RE10K现有数据保留，缺76不静默跳过，也不自动再做大型下载。整篇仍未完成且CO3D为用户暂缓项。
 
 ### 保留数据的 Table 3/4/5 聚合复核（2026-10-03）
@@ -76,20 +107,6 @@ Table 5使用[`results/nrgbd_paired_seed42_stride40.json`](results/nrgbd_paired_
 当前设置下，NRGBD与7-Scenes至少有一个local/global误差方向不同于论文Table 5；
 DTU的local/global方向与论文的细小Accuracy差异也不同。它们是公开权重、本地协议的对照，
 不能由此归因到置信度或对齐实现。checkpoint与论文各表具体实验权重的映射仍未确认。
-
-### 有界置信度/对齐敏感性实验（已准备，等待GPU资源）
-
-实验入口为[`scripts/diagnose_dtu_threshold_sensitivity.py`](scripts/diagnose_dtu_threshold_sensitivity.py)。
-固定DTU `scan1`、512分辨率、stride5及既有报告中的10张视图，进行一次local-head前向，
-在同一份原始预测和GT上比较`alignment percentile = 0/50/85/95`与
-`metric percentile = 0/25/50/75`的7个预先指定组合；85/0为当前评测基线。
-报告会保存输入/GT/原始预测SHA、checkpoint文件SHA和每组完整指标，并核对评测前后原始预测未变。
-这只是固定场景的敏感性诊断，不据此挑选“最佳”阈值或宣称匹配论文。
-
-本轮14:35复查时GPU为100%利用率、显存占用10206/12227MiB，计算进程PID 143582来自
-`/home/yyz/miniconda3/envs/openvla/bin/python`。为避免干扰该运行，没有启动Fast3R前向；
-诊断结果尚未生成。runner要求前向前至少有10240MiB空闲显存。继续时还需确认GPU计算进程列表为空，
-再做两次空闲容量检查。
 
 ### 附录 C/D/E 可行性审计（2026-10-03）
 
