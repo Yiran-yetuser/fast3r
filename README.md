@@ -32,6 +32,8 @@ ${{\color{Red}\Huge{\textsf{  CVPR\ 2025\ \}}}}\$
 > no data was downloaded. The remaining work includes those RE10K sequences and experiments requiring unavailable training checkpoints,
 > prescribed data or hardware; this is not full-paper completion.
 
+项目的复现步骤、停止边界、科研方法总结和中英文简历写法见[结项交接](REPRODUCTION_HANDOFF.md)。
+
 > Historical continuation (2026-10-03 12:27, §4.2/Table1 candidate; now deferred): source51 actual input preparation
 > remains healthy; a separate pose queue now waits for ALL1,000 prepared requests, independent offline
 > input replay, preparation exit and a fresh replay before loading any model, then waits for free GPU>=10GiB.

@@ -1,5 +1,7 @@
 # Fast3R：逐项复现与论文对应表
 
+> 项目结论与复现流程、科研方法及中英文简历写法见[结项交接](REPRODUCTION_HANDOFF.md)。
+
 ## DTU固定前向阈值诊断归档（2026-10-03，Table 4/5差距诊断）
 
 在`scan1`、`scan10`、`scan11`各做1次前向；每场景从完整stride1序列按rounded linspace选10视角，
