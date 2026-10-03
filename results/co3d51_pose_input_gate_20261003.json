@@ -1,0 +1,15 @@
+{
+  "status": "waiting_for_complete1000_input_preparation_and_replay",
+  "paper_mapping": "section4.2/Table1 source51 public-HF candidate adapter only",
+  "observed_committed_request_file_count": 18,
+  "expected_request_count": 1000,
+  "observed_prefix_count_is_not_independent_input_replay": true,
+  "complete_preparation_summary_present": false,
+  "complete_independent_input_proof_present": false,
+  "model_loaded": false,
+  "model_forward_count": 0,
+  "network_bytes": 0,
+  "formal_Table1_result": false,
+  "full_paper_completed": false,
+  "runner_sha256": "097b1ddbe8d601420ccb86eb69f3735514775d6528eab6cc0a668186c33e70ca"
+}

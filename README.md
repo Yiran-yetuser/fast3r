@@ -12,7 +12,20 @@ ${{\color{Red}\Huge{\textsf{  CVPR\ 2025\ \}}}}\$
 [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue)](https://huggingface.co/jedyang97/Fast3R_ViT_Large_512/)
 </div>
 
-> Latest source sampling checkpoint (2026-10-03, §4.2/Table1 prerequisites): the released
+> Latest continuation (2026-10-03 12:27, §4.2/Table1 candidate): source51 actual input preparation
+> remains healthy; a separate pose queue now waits for ALL1,000 prepared requests, independent offline
+> input replay, preparation exit and a fresh replay before loading any model, then waits for free GPU>=10GiB.
+> The [real gate snapshot](results/co3d51_pose_input_gate_20261003.json) shows18 committed filenames at
+> capture time, NOT current progress or verified full coverage; no model/forward/download was performed.
+> All45 pairs/request, duplicate views and identity PnP fallbacks are retained; GT is excluded from
+> network/focal/PnP. New pose checkpoints are capped512MiB with1GiB reserve. Independent verification
+> recomputes saved poses/errors/aggregates, not a second model inference.244 offline tests passed;
+> the [Notebook](fast3r_reproduction.ipynb) now has105 cells, preserving the previous103 with real host
+> Jupyter output. [Services/recovery/checkpoint](CONTINUATION.md) remain quota-independent while running,
+> but machine suspend/shutdown or data/resource errors can interrupt them. No new pose score, confirmed
+> author Table1 equivalence or full-paper completion is claimed.
+
+> Archived source sampling checkpoint (2026-10-03, §4.2/Table1 prerequisites): the released
 > 1,000@ sampler's all-valid nominal trace covers 51 categories, 836 trajectories and 8,835 unique
 > frames; 581 requests contain duplicate views. The old 1,000-distinct-sequence engineering proposal
 > is retained but will not be used for evaluation; cache ceilings are not a storage fit proof.

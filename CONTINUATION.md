@@ -3,7 +3,54 @@
 用户已授权继续整篇论文复现、Notebook归档及逐步推送GitHub，并要求额度刷新后接续。
 分支 `local-demo`，远端 `myfork`。本文件是恢复入口，不是“整篇已完成”的声明。
 
-## 最新恢复入口（2026-10-03 11:21：目录预算已核验，真实1000请求按需准备运行中）
+## 最新恢复入口（2026-10-03 12:27：完整输入门禁及后续位姿队列已接线）
+
+对应§4.2/Table1候选适配，**没有新位姿成绩，正式Table1/整篇仍未完成**。
+上一已推送检查点`9281815`；旧目录审计/1请求重放/100请求/几何诊断均已归档，不重启。
+12:26宿主准备服务`fast3r-co3d51-source-prepare-v1.service`active/running、MainPID115575，
+最新日志已提交21/1000，继续按需CPU准备。宿主可用33,245,532,160bytes（快照）；
+准备身份绑定的12份代码SHA全部未变，旧raw/processed/历史报告保持不变。
+
+新`scripts/fast3r_hf_co3d51_pose_eval_v1.py`必须先拥有完整1000准备摘要与独立只读重放证明，
+逐项核对1000请求SHA/采样初末state并fresh offline replay，之后才允许加载本地公开HF模型。
+1/100/999请求、缺证明、误标正式成绩、输入/GT/指标损坏均拒绝。GT不输入模型/focal/PnP。
+声明候选为source51、固定横向512×384、seed42+request、16-mixed、DPT chunk2；
+发布conf>1/100次PnP迭代、零焦距原样传递，失败identity和重复视图的全部45pair/request保留。
+1000 request级算术均值与45000 pair pooled指标分别保存，不能拿旧100报告充新1000。
+
+12:26:17启动独立宿主队列`fast3r-co3d51-pose-eval-v1.service`，MainPID124489，
+active/running且日志明确只等待准备服务正常退出、全1000摘要及完整独立证明；**此时未加载模型/占GPU**。
+日志`results/co3d51_pose_eval_v1.log`。满足输入门禁后才等待GPU>=10240MiB空闲两次检查再前向；
+空闲检查不是预约或跨进程互斥，不终止其他任务。源准备失败/退出但缺结果时队列硬停，保留检查点。
+新位姿事务`results/co3d51_pose_seed42_progress_v1`上限512MiB、每次至少留1GiB，
+initial和每request原子新建、权重/config/代码/完整输入证明绑定；完整已验证request可复用。
+任意断电/服务重启恢复未做完整故障实测，不能保证通用崩溃恢复；不覆盖既有最终JSON。
+
+最终候选`results/co3d51_pose_seed42_candidate_v1.json`，独立证明
+`results/co3d51_pose_seed42_verified_20261003.json`；当前两者均未生成。
+队列完成后会自动fresh输入核验和`scripts/verify_co3d51_candidate_pose_v1.py`独立重算
+保存GT/位姿/45000误差/聚合/失败与重复计数。它不是第二次独立网络重推理；保留该限制。
+若最终JSON已有而独立证明未写完，恢复只补核验，不重新前向。
+
+`results/co3d51_pose_input_gate_20261003.json`是12:17采集的18/1000文件计数快照，
+不是最新数量或18请求独立输入证明。实证摘要/证明均缺失时model_loaded=false/forward0/network0。
+105单元Notebook保留原103逐项不变，新门禁分析12:27经宿主Jupyter执行无error；
+完整244项离线测试通过，含完整覆盖门禁、GT隔离、重复/identity/损坏注入及代码路径边界。
+
+下一次顺序：
+1. 读此入口/git；宿主检查两个服务、进程/日志/空间。健康准备或等待中不重复启动。
+2. 准备摘要和完整输入证明出现且准备服务退出后核验归档；GPU队列会自行接续，无需重启。
+3. 仅服务退出且尚未完成时诊断。同一身份恢复准备用
+   `bash scripts/queue_co3d51_source_prepare_v1.sh`；恢复位姿队列用
+   `bash scripts/queue_co3d51_pose_eval_v1.sh`，必须确保对应原服务/进程均已退出，不能并行启动第二份。
+4. 新完整位姿报告/独立证明均出现且位姿服务退出后，再核验唯一实际输入集合/45000pair与聚合，
+   写Notebook真实成绩、更新各文档、测试/提交/推送；所有作者等价/论文组别/正式Table1标记仍false。
+5. RE10K仍1756/1832、缺76；旧来源扫描不重跑。完整训练/独立权重消融/附录仍未完成。
+
+独立后台进程不依赖Codex推理额度，但停机/挂起、数据或资源失败会中断；不能保证额度刷新精确唤醒。
+现有heartbeat继续按检查点接续，不购买额度/重置权益，不因排队慢重复通知或报阻塞。
+
+## 已归档恢复入口（2026-10-03 11:21：目录预算已核验，真实1000请求按需准备运行中）
 
 §4.2/Table1前提继续推进，**不是新位姿成绩或整篇完成**。前一提交`e9c3ee0`已推送`myfork/local-demo`。
 `fast3r-co3d51-source-storage.service`10:57:12正常退出0、MainPID0；阶段已完成，不重启。

@@ -11,7 +11,7 @@
 | §3.1；§3.3；Figure 2 | 多张图是否一次输出 global/local 点图与置信度？ | Notebook 的推理与模块 hook；`config.json` | 推理验证已执行 |
 | §3.2，Eq. (1)–(3) | 归一化点图回归、置信度加权损失 | `results/loss_checks.json` | 数值/梯度检查通过；尚未重新训练 |
 | §3.4；§4.1；Table 2 | 视角数增加时耗时与显存如何变化？ | `results/dtu_paper_experiments.json` 的 performance | 本机适配实验；单卡不覆盖论文 A100/多卡设置 |
-| §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | 旧CO3D100请求/4500pair及受控几何诊断；新51类源1000@采样/目录预算和首请求只读重放；RE10K1832相机记录及265447帧核验 | 新真实1000候选输入按需准备后台运行，尚无新位姿成绩；旧mAA@30=23.8007%为候选适配；原作者清单/权重对应未确认，正式Table1未完成；RE10K缺76 |
+| §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | 旧CO3D100请求/4500pair及受控几何诊断；新51类源1000@采样/目录预算/首请求重放及完整输入门禁；RE10K1832相机记录及265447帧核验 | 新真实1000候选输入准备运行；后续GPU队列只等待完整输入核验，尚无新位姿成绩；旧mAA@30=23.8007%为候选适配；原作者清单/权重对应未确认，正式Table1未完成；RE10K缺76 |
 | §4.3；Table 3 | 7-Scenes / NRGBD 重建 | `results/nrgbd_seed42_stride40.json`；`results/7scenes_paired_seed42_stride20.json` | NRGBD完整9场景、7-Scenes全部18测试轨迹已运行核验；未对齐论文数值 |
 | §4.3；Table 4 | DTU 完整 22 场景重建 | `demo_outputs/paper_eval/dtu_all.json` | 已运行；论文数值尚未对齐 |
 | §5.1；Figure 5 | 测试视角数对重建质量的影响 | 新脚本 3/5/10/20 视角 | 本地均匀采样适配实验 |
@@ -21,7 +21,27 @@
 | §5.4；Table 5 | 使用 aligned local 或 global 点图的差别 | DTU10视角；NRGBD/7-Scenes全量同次预测、双分支指标 | 三个数据集配对已完成；local优势并非所有距离指标均成立 |
 | 附录 C/D/E/F | Gaussian splatting、BA、深度 benchmark 与可视化 | 已有点云；官方 robustmvd 接口 | 点云可视化部分完成；其余未执行 |
 
-## 最新：源目录预算核验完成、真实1000请求准备运行（2026-10-03 11:21，§4.2/Table1前提）
+## 最新：完整输入门禁与后续位姿队列（2026-10-03 12:27，§4.2/Table1候选）
+
+真实准备服务健康运行，12:26日志21/1000；这不是已完成输入的全量独立证明。
+新独立GPU队列已启动，**只等待**全1000准备摘要/独立SHA/CRC、tensor/GT/K/RNG/trace/state重放
+以及CPU服务退出，fresh offline replay后再检查GPU至少10240MiB空闲；当前模型前向0、没有新位姿分数。
+没有更改正在准备的身份绑定代码、旧100请求、数据、权重或历史Notebook输出。
+
+新入口`scripts/fast3r_hf_co3d51_pose_eval_v1.py`沿用公开HF/global点图→预测焦距→发布PnP；
+网络仅img/true_shape、GT不用于模型或焦距/PnP，seed42+request/16-mixed/chunk2。
+重复视图的45pair/request与PnP失败identity/零焦距全部保留；完整1000才分别汇总
+request级算术均值和45000 pair pooled结果。事务目录512MiB、每次至少预留1GiB。
+独立核验`scripts/verify_co3d51_candidate_pose_v1.py`不重新推理网络，只核验保存的输入/GT、位姿和指标。
+作者精确processed清单/RNG及HF论文权重组别仍未知，固定横向crop为声明候选选择，正式Table1不勾选。
+
+真实门禁快照`results/co3d51_pose_input_gate_20261003.json`记录当时18/1000文件计数、
+完整摘要/证明缺失、未加载模型/network0/forward0；不是最新数量或已独立核验18请求。
+105单元Notebook新报告12:27经宿主Jupyter执行，原103逐项保留；244项离线测试通过。
+两服务、日志、恢复和未来候选/独立证明文件见`CONTINUATION.md`；停机/挂起或实际失败仍需处理。
+已有后台进程可在Codex额度不足时继续，但不是绕过额度或精确重置唤醒保证；整篇尚未完成。
+
+## 已归档：源目录预算核验完成、真实1000请求准备运行（2026-10-03 11:21，§4.2/Table1前提）
 
 51类目录预算服务10:57:12正常退出0，独立核验重新计算覆盖/数量/大小/源绑定，复用38类
 旧索引，仅补13类目录。报告`results/co3d_51_source_storage_v1_20261003.json`，证明

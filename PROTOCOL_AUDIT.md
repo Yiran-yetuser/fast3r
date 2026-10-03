@@ -4,7 +4,28 @@
 [`results/protocol_audit_20261001.json`](results/protocol_audit_20261001.json)。
 这是代码、权重和数据前提的审计，不是新增训练或位姿测评成绩。
 
-## 最新：source51/1000@目录预算完成，真实输入接续（2026-10-03 11:21）
+## 最新：source51全1000输入门禁与候选位姿适配（2026-10-03 12:27）
+
+对应§4.2/Table1候选流程，没有新位姿指标。健康CPU准备继续，独立后续队列只等待：
+全1000准备摘要、原始/processed SHA与CRC收据、RGB tensor/GT/K/RNG/trace/共享state独立重放，
+准备服务退出及fresh offline replay。此前1请求证明/旧100结果都不能解锁新全1000模型加载。
+真实门禁快照`results/co3d51_pose_input_gate_20261003.json`记录当时18个提交文件，
+不是18请求独立核验或实时数量；完整摘要/证明缺失、model_loaded=false/forward0/network0。
+
+新位姿协议固定source51/landscape512×384、seed42+request、16-mixed、DPT chunk2。
+网络输入仅img/true_shape；首视角global点图与置信度预测焦距，发布PnP conf>1/100迭代。
+GT pose/K/depth/mask不进入网络/focal/PnP。零焦距传递、失败identity和重复相机对全部保留；
+只有完整1000请求/45000pair才能汇总，宏平均request指标与pooled pair指标分列。
+事务身份绑定权重/config/代码及完整输入证明，512MiB新journal+每次至少1GiB reserve。
+恢复核验已保存完整请求，拒绝身份/GT/输入/误差损坏，任意异常断电恢复仍未实测。
+
+`verify_co3d51_candidate_pose_v1.py`独立重算保存pose/GT/每pair误差/aggregate及重复和失败数量；
+不声称独立网络重推理或网络点图二次核验。代码绝对/相对路径均须绑定本项目scripts/fast3r范围与SHA。
+完整244项离线测试通过；105单元Notebook保留旧103，新宿主Jupyter输出真实保存。
+原作者精确processed JSON/RNG/公开HF论文组别未知，formal/author-equivalence/full-paper均保持false。
+健康排队不作为阻塞；后台与现有heartbeat可接续，但不保证机器挂起/额度刷新时精确唤醒。
+
+## 已归档：source51/1000@目录预算完成，真实输入接续（2026-10-03 11:21）
 
 对应§4.2/Table1输入前提，不是位姿成绩。源all-valid名义8835帧成员合计6,539,401,033bytes，
 保守可达103599帧合计76,458,893,204bytes；51类、38索引只读复用/13新目录，独立重新

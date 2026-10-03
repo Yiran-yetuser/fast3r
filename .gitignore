@@ -9,6 +9,7 @@ results/co3d_pose_100_seed42_progress_v*/
 results/co3d_candidate_pnp_diagnostic_v1_progress/
 results/co3d_landscape_input_diagnostic_v1_progress/
 results/co3d51_source_prepare_v1_progress/
+results/co3d51_pose_seed42_progress_v1/
 
 notebooks/figures/
 notebooks/output/
