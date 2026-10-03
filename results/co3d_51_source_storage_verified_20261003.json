@@ -1,0 +1,54 @@
+{
+  "status": "source_51_directory_budget_independently_recomputed_not_gt_ready",
+  "paper_mapping": "section 4.2 / Table 1 source sampling storage feasibility only",
+  "report_sha256": "c2012cef263e912e87632b115f09d6e9c2d6db33aa9a6e3aaf316bdd7c3f9e81",
+  "verifier_sha256": "d8d56a4f92a6a79ad523cc539f73a2968c802eb95d168b41295b814000c6413a",
+  "category_count": 51,
+  "request_count": 1000,
+  "nominal": {
+    "member_count_by_kind": {
+      "images": 8835,
+      "depths": 8835,
+      "masks": 8835
+    },
+    "advertised_raw_bytes_by_kind": {
+      "images": 790207703,
+      "depths": 5425163331,
+      "masks": 324029999
+    },
+    "advertised_compressed_bytes_by_kind": {
+      "images": 778763736,
+      "depths": 5423763050,
+      "masks": 313055880
+    },
+    "advertised_raw_bytes": 6539401033,
+    "advertised_compressed_bytes": 6515582666
+  },
+  "retry_jitter_closure": {
+    "member_count_by_kind": {
+      "images": 103599,
+      "depths": 103599,
+      "masks": 103599
+    },
+    "advertised_raw_bytes_by_kind": {
+      "images": 9314295285,
+      "depths": 63366467746,
+      "masks": 3778130173
+    },
+    "advertised_compressed_bytes_by_kind": {
+      "images": 9185071578,
+      "depths": 63351971040,
+      "masks": 3650788189
+    },
+    "advertised_raw_bytes": 76458893204,
+    "advertised_compressed_bytes": 76187830807
+  },
+  "reused_index_category_count": 38,
+  "new_directory_category_count": 13,
+  "recorded_new_directory_transport_bytes": 983940951,
+  "raw_rgb_depth_mask_downloaded": false,
+  "actual_gt_validity_verified": false,
+  "processed_storage_budget_measured": false,
+  "formal_Table1_result": false,
+  "full_paper_completed": false
+}

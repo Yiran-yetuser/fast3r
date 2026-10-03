@@ -11,7 +11,7 @@
 | §3.1；§3.3；Figure 2 | 多张图是否一次输出 global/local 点图与置信度？ | Notebook 的推理与模块 hook；`config.json` | 推理验证已执行 |
 | §3.2，Eq. (1)–(3) | 归一化点图回归、置信度加权损失 | `results/loss_checks.json` | 数值/梯度检查通过；尚未重新训练 |
 | §3.4；§4.1；Table 2 | 视角数增加时耗时与显存如何变化？ | `results/dtu_paper_experiments.json` 的 performance | 本机适配实验；单卡不覆盖论文 A100/多卡设置 |
-| §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | CO3D候选100请求/4500pair、3个PnP诊断及新固定帧输入几何对照核验；RE10K1832相机记录及265447帧核验 | 旧候选mAA@30=23.8007%；新横向crop两选定probe改善，非全量成绩；作者描述1000请求/可能超过41类，正式Table1未完成；RE10K仍缺76 |
+| §4.2；Table 1 | CO3D / RealEstate10K 的 RRA、RTA、mAA | 旧CO3D100请求/4500pair及受控几何诊断；新51类源1000@采样/目录预算和首请求只读重放；RE10K1832相机记录及265447帧核验 | 新真实1000候选输入按需准备后台运行，尚无新位姿成绩；旧mAA@30=23.8007%为候选适配；原作者清单/权重对应未确认，正式Table1未完成；RE10K缺76 |
 | §4.3；Table 3 | 7-Scenes / NRGBD 重建 | `results/nrgbd_seed42_stride40.json`；`results/7scenes_paired_seed42_stride20.json` | NRGBD完整9场景、7-Scenes全部18测试轨迹已运行核验；未对齐论文数值 |
 | §4.3；Table 4 | DTU 完整 22 场景重建 | `demo_outputs/paper_eval/dtu_all.json` | 已运行；论文数值尚未对齐 |
 | §5.1；Figure 5 | 测试视角数对重建质量的影响 | 新脚本 3/5/10/20 视角 | 本地均匀采样适配实验 |
@@ -21,7 +21,32 @@
 | §5.4；Table 5 | 使用 aligned local 或 global 点图的差别 | DTU10视角；NRGBD/7-Scenes全量同次预测、双分支指标 | 三个数据集配对已完成；local优势并非所有距离指标均成立 |
 | 附录 C/D/E/F | Gaussian splatting、BA、深度 benchmark 与可视化 | 已有点云；官方 robustmvd 接口 | 点云可视化部分完成；其余未执行 |
 
-## 最新源采样审计（2026-10-03，§4.2 / Table 1 前提，非位姿成绩）
+## 最新：源目录预算核验完成、真实1000请求准备运行（2026-10-03 11:21，§4.2/Table1前提）
+
+51类目录预算服务10:57:12正常退出0，独立核验重新计算覆盖/数量/大小/源绑定，复用38类
+旧索引，仅补13类目录。报告`results/co3d_51_source_storage_v1_20261003.json`，证明
+`results/co3d_51_source_storage_verified_20261003.json`；不重做旧235包完整扫描。
+
+| 源采样集合（不是GT就绪集合） | 每种成员数 | 原始RGB/depth/mask总bytes | 十进制GB |
+| --- | ---: | ---: | ---: |
+| all-valid名义1000@ | 8835 | 6,539,401,033 | 6.54 |
+| jitter/最多5场景尝试保守可达集合 | 103599 | 76,458,893,204 | 76.46 |
+
+目录大小不是CRC/解码/GT或processed预算证明；旧raw2GiB边界不能称1000装得下。
+实际按需准备采用独立raw8GiB/processed3GiB/journal4GiB版本、每次至少留1GiB；
+旧缓存/100请求结果冻结，不下载整个补采集合。包络可装下不保证全部补采完成，碰界硬停。
+
+首个真实请求10视图/7不同帧经过Range/CRC/GT检查与跨进程只读重放，RGB tensor、GT/K、
+RNG、load trace、pool attempts和共享after-state完全相同；证据
+`results/co3d51_source_inputs_prefix1_verified_20261003.json`是不可变1请求快照，**不是1000已完成**。
+横向crop512×384为声明新候选协议，不宣称原作者清单/RNG等价；新阶段模型前向0。
+11:20启动独立CPU后台`fast3r-co3d51-source-prepare-v1.service`，完成请求事务可恢复；
+全1000完成后自动离线只读重放，再核验与归档，当前未启动新GPU评测。
+恢复入口`CONTINUATION.md`。Notebook103单元，原101逐项完全相同；新目录/首请求分析
+11:25经宿主Jupyter真实执行无error，结构校验及完整229项离线测试通过。
+公开HF与论文训练组别映射、RE10K缺76、完整训练/独立消融/附录仍未完成。
+
+## 已归档源采样审计（2026-10-03 10:48，§4.2 / Table 1 前提，非位姿成绩）
 
 真正调用发布`Co3d_Multiview`采样方法和`ResizedDataset(1000)`的all-valid stub，
 名义结果为51类/836轨迹/8835不同帧，581/1000请求含重复帧、最少6不同帧。

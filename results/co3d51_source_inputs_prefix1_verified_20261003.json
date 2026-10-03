@@ -1,0 +1,21 @@
+{
+  "status": "actual_source51_landscape_inputs_readonly_replay_verified_not_pose_scores",
+  "paper_mapping": "section4.2/Table1 public-HF candidate input prerequisites only",
+  "verified_request_count": 1,
+  "expected_full_request_count": 1000,
+  "all_1000_requests_prepared_and_replayed": false,
+  "initial_sha256": "491dc70d5eba3a05e98e8da3f76102067b8c011a55fba0408f85dd75cc8ef015",
+  "final_state_sha256": "87e414840734e7801a0dc0dc5073cf519c6e9d522576174f9f40192b6e23c348",
+  "request_sha256": {
+    "request_000.json": "996b5999c066af59740f244206a3fff2f081f216eb348be0f49932e93278e39a"
+  },
+  "raw_SHA_CRC_processed_SHA_and_receipts_checked": true,
+  "input_tensor_GT_rng_trace_and_shared_state_exact_equal": true,
+  "network_bytes": 0,
+  "model_forward_count": 0,
+  "verifier_sha256": "2162c621aaed379496cb4f8f1f4e9d889af5d67da03fc118ea4f95313778605f",
+  "reference_preprocessing_all_new_frames_independently_recomputed": false,
+  "author_protocol_equivalence_verified": false,
+  "formal_Table1_result": false,
+  "full_paper_completed": false
+}

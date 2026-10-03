@@ -2,7 +2,24 @@
 
 这份文档和 [`fast3r_reproduction.ipynb`](fast3r_reproduction.ipynb) 记录了本分支的可重复实验流程，适合第一次接触多视图 3D 重建的同学。
 
-## 最新续接：51类源采样追踪完成，目录预算后台运行（2026-10-03）
+## 最新续接：目录预算核验完成，真实1000请求准备后台运行（2026-10-03 11:21）
+
+对应§4.2/Table1输入前提，没有新位姿成绩。目录服务10:57:12正常结束0，独立核验51类、
+复用38索引/补13类，名义8835帧原始RGB/depth/mask共6.54GB，补采可达103599帧共76.46GB。
+`results/co3d_51_source_storage_verified_20261003.json`是目录预算，不是GT/解码就绪证明。
+新独立root明确raw8GiB/processed3GiB/request journal4GiB上限，至少留1GiB；
+旧raw2GiB/processed512MiB及100请求结果冻结。包络不是全部补采能完成的保证，碰界停止。
+
+首个真实source51/1000@请求10views/7unique，RGB tensor/GT/K/RNG/trace和共享after-state
+跨进程只读重放完全相同：`results/co3d51_source_inputs_prefix1_verified_20261003.json`。
+它只是不可变1请求快照，不是1000已完成或实时数量。新强制横向512×384 crop与原作者精确
+JSON/RNG等价仍未知；实际depth有效性会触发源oversampling，不能用名义8835当最终输入集合。
+11:20宿主独立CPU服务`fast3r-co3d51-source-prepare-v1.service`继续后续请求，完成后自动全量
+只读重放；当前不使用GPU。请求边界断点及身份校验已接线，任意断电部分文件恢复不保证。
+日志/上限/恢复命令/核验入口见`CONTINUATION.md`。103单元Notebook保留原101，
+完整229项离线测试通过。正式Table1、原作者权重映射、RE10K缺76、训练/独立消融/附录仍未完成。
+
+## 已归档续接：51类源采样追踪完成（2026-10-03 10:48；目录状态是当时快照）
 
 额度恢复后已取得宿主服务/GPU/空间可见性；宿主Jupyter真实执行两份新分析单元。
 发布采样器1000@的all-valid名义追踪为51类/836轨迹/8835不同帧，581请求有重复帧。

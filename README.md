@@ -17,8 +17,13 @@ ${{\color{Red}\Huge{\textsf{  CVPR\ 2025\ \}}}}\$
 > frames; 581 requests contain duplicate views. The old 1,000-distinct-sequence engineering proposal
 > is retained but will not be used for evaluation; cache ceilings are not a storage fit proof.
 > [Source-bound report](results/co3d_51_released_sampler_20261003.json) and host-executed
-> [Notebook](fast3r_reproduction.ipynb) retain all97 prior cells. A background directory budget
-> reuses38 frozen local indices and fills13 missing categories; no new image/model evaluation yet.
+> [Notebook](fast3r_reproduction.ipynb) retain all97 prior cells. The directory audit has now
+> completed and been [independently verified](results/co3d_51_source_storage_verified_20261003.json):
+> nominal raw6.54GB, conservative retry/jitter closure76.46GB; 38 frozen indices reused/13 filled.
+> The [first actual request](results/co3d51_source_inputs_prefix1_verified_20261003.json) (10views/7unique)
+> passed offline tensor/GT/RNG/state replay. An independent CPU service continues the1,000-request
+> preparation under NEW raw8GiB/processed3GiB/journal4GiB caps and1GiB reserve; old caches remain frozen.
+> These are fail-closed ceilings, not a guarantee all retries fit. No new pose score/GPU evaluation yet.
 > See [continuation](CONTINUATION.md). Exact author split/RNG and formal Table1 remain unresolved.
 
 > Archived local diagnostic (2026-10-03): the public HF portrait path has distinct token-grid and
@@ -593,4 +598,4 @@ so these are candidate adaptation scores; the full Table 1 reproduction and full
 remain incomplete. Paper references, protocol differences and next steps are recorded in
 [PAPER_REPRODUCTION.md](PAPER_REPRODUCTION.md) and [PROTOCOL_AUDIT.md](PROTOCOL_AUDIT.md).
 
-最新 CO3D 预算检查点（2026-10-03）：官方候选元数据覆盖 51 类/2511 轨迹/498757 帧；seen41 候选为 41 类/2011 轨迹/399204 帧。新增 10 类及 500 轨迹已纳入一个 seed=42 的 1000-request 元数据计划（每请求 10 帧，计划 SHA256=`34847924f082fd4536fe710a688cb82fda684f2692597a785289d3f77c9a7933`）。本步不下载图像、不运行模型，network=0、forward=0、正式 Table 1=false；缓存边界和至少 1 GiB 余量见 `results/co3d_51_1000_protocol_budget_20261003.json`。完整离线测试 200 项通过，不能将此计划或旧 100-request 候选结果写成论文全量成绩。
+历史 CO3D 工程提案（2026-10-03）：候选51类/2511轨迹/498757帧与seen41差异已核验，旧提案摘要`34847924f082fd4536fe710a688cb82fda684f2692597a785289d3f77c9a7933`及JSON保留。但强制1000不同轨迹/随机10不同帧不是发布源采样器，后续不使用；raw2GiB/processed512MiB上限不是空间能装下的证明。当前源1000@采样、真实目录预算和有界实际准备见顶部；不能把提案、首请求快照或旧100请求当正式Table1。

@@ -3,7 +3,52 @@
 用户已授权继续整篇论文复现、Notebook归档及逐步推送GitHub，并要求额度刷新后接续。
 分支 `local-demo`，远端 `myfork`。本文件是恢复入口，不是“整篇已完成”的声明。
 
-## 最新恢复入口（2026-10-03：51类发布采样器追踪完成，目录预算运行中）
+## 最新恢复入口（2026-10-03 11:21：目录预算已核验，真实1000请求按需准备运行中）
+
+§4.2/Table1前提继续推进，**不是新位姿成绩或整篇完成**。前一提交`e9c3ee0`已推送`myfork/local-demo`。
+`fast3r-co3d51-source-storage.service`10:57:12正常退出0、MainPID0；阶段已完成，不重启。
+完整目录结果`results/co3d_51_source_storage_v1_20261003.json`，独立证明
+`results/co3d_51_source_storage_verified_20261003.json`：51类，复用38类旧索引/补13类，
+all-valid名义8835帧的RGB/depth/mask原始成员共6,539,401,033bytes；保守补采可达集合
+103599帧共76,458,893,204bytes。只代表目录大小，非CRC/解码/真实GT有效证明。
+旧raw2GiB缓存不能据此称1000请求能装下；不预下载整个76.46GB补采集合。
+
+新`scripts/co3d51_source_lazy_v1.py`用独立root和声明资源包络：
+`data/co3d51_source_raw_v1`8GiB、`data/co3d51_source_processed_v1`3GiB、
+`results/co3d51_source_prepare_v1_progress`事务4GiB，下载/写入前至少留1GiB。
+旧raw2GiB/processed512MiB及100请求缓存/数据/结果全部冻结，只允许核验后只读借用旧raw。
+11:20宿主free33,452,740,608bytes（快照）；新完整资源包络15GiB+reserve1GiB可装下，
+但真实补采可能先碰上限，不能保证1000全部完成。到界/IO/GT错误硬停，不清理旧数据或静默跳场景。
+
+首个实际source51/1000@请求10views/7unique已完成、原始成员Range/CRC/SHA和GT检查通过；
+`results/co3d51_source_inputs_prefix1_verified_20261003.json`独立只读重放RGB tensor/GT/K/RNG/
+load trace/pool attempts/每步共享after-state完全相同，network0/forward0。这是不可变1请求快照，
+不是最新实时数量、1000已完成或全部新帧预处理参考的独立重算。
+
+宿主`fast3r-co3d51-source-prepare-v1.service`11:20:51启动，11:21active/running，MainPID115575。
+独立CPU服务从已核验请求边界继续，日志`results/co3d51_source_prepare_v1.log`；不使用GPU。
+单worker完整请求事务绑定代码/候选/资源/crop及invalidity、Python/NumPy RNG、输入SHA；
+跨进程恢复拒绝身份变化。未提交processed文件若断电损坏仍需诊断，不称通用崩溃恢复。
+首个真实前缀跨进程只读重放通过；尚未测试所有异常中断情形。
+
+下一次顺序：
+1. 先读本入口/git，宿主查服务、日志、空间；健康运行不重复启动，不重复归档目录审计/1请求证明。
+2. 仅服务已退出且未生成完整摘要时诊断失败；同一身份恢复命令
+   `bash scripts/queue_co3d51_source_prepare_v1.sh`，保留所有事务与数据。
+3. 完整摘要`results/co3d51_source_prepare_v1_summary_20261003.json`出现后，服务还会自动
+   运行只读`scripts/verify_co3d51_source_inputs_v1.py`，输出
+   `results/co3d51_source_inputs_full_verified_20261003.json`。有两份完整结果且进程退出才归档。
+4. 全1000请求准备/独立重放完成后，按实际GT/重复视图/补采集合再适配公开HF新候选GPU评测。
+   不复用旧100成绩充1000；精确作者processed JSON/RNG和HF论文组别仍未知，正式Table1不自动打勾。
+
+新固定横向512×384 crop取消portrait/square目标反转，其余源采样/补采及V4参考预处理保留；
+crop会改变真实depth validity/RNG消耗，名义8835只是all-valid对照，不是实际最终输入清单。
+RE10K仍1756/1832、缺76；旧205GB来源扫描/235包目录/旧100前向/5诊断前向均已归档不重跑。
+完整训练/独立消融权重/附录实验保持未完成，无新增账号/付费授权需要；heartbeat继续。
+Notebook103单元，新预算/1请求分析11:25经宿主Jupyter真实执行无error；
+Notebook结构校验和原101逐项完全相同比较通过，完整离线229项测试通过。
+
+## 已归档恢复入口（2026-10-03 10:48：51类发布采样追踪完成；下文目录运行是当时快照）
 
 额度已恢复，宿主权限和Jupyter可用。10:33宿主可用33,523,810,304bytes、GPU空闲11,102MiB；
 这些仅是快照。两个旧沙箱Notebook尝试PID95939/95996经命令/路径核实后已结束，未终止GPU任务。

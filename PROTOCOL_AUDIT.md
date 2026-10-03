@@ -4,7 +4,27 @@
 [`results/protocol_audit_20261001.json`](results/protocol_audit_20261001.json)。
 这是代码、权重和数据前提的审计，不是新增训练或位姿测评成绩。
 
-## 最新：固定帧portrait输入几何（2026-10-03，§4.2 / Table1）
+## 最新：source51/1000@目录预算完成，真实输入接续（2026-10-03 11:21）
+
+对应§4.2/Table1输入前提，不是位姿成绩。源all-valid名义8835帧成员合计6,539,401,033bytes，
+保守可达103599帧合计76,458,893,204bytes；51类、38索引只读复用/13新目录，独立重新
+核验目录路径/大小/数量/源SHA。证明`results/co3d_51_source_storage_verified_20261003.json`。
+目录声明大小不证明成员CRC、GT有效性或processed容量；不预下载76.46GB补采集合。
+旧raw2GiB/processed512MiB和100请求保持冻结。新source51-v1独立root声明raw8GiB/
+processed3GiB/request journal4GiB+至少1GiB reserve；到界硬停，不清理或抽样跳过失败。
+
+`prepare_co3d51_source_v1.py`在原候选有序池/发布1000@映射上运行真实depth validity及补采，
+保留帧重复、invalidity/共享RNG/重试顺序；IO/decode/GT错误传播，不走catch-all补采。
+唯一裁剪改动为AST guarded横向512×384取消portrait/square反转，明确非已确认作者等价。
+首请求10views/7unique，独立只读重放SHA/CRC/实际tensor/GT/K/RNG/trace/after-state一致，
+`results/co3d51_source_inputs_prefix1_verified_20261003.json`只证明1请求快照。
+未逐帧独立重算全部新数据预处理参考、未完成1000、未产生新GPU分数；不得提前升格。
+宿主独立CPU服务`fast3r-co3d51-source-prepare-v1.service`11:20启动，完成后自动只读重放。
+恢复仅支持相同代码/池/crop身份的完整请求边界，任意断电/部分文件损坏不是已验证能力。
+229项离线测试通过，包含资源边界、历史caps不变、拒绝误标/硬错/输入和状态损坏。
+原作者processed清单/RNG及HF论文组别仍未知，正式Table1和整篇未完成。
+
+## 已归档：固定帧portrait输入几何（2026-10-03，§4.2 / Table1）
 
 `results/co3d_portrait_geometry_audit_20261003.json`确认HF配置PatchEmbedDust3R/
 landscape_only=False，不是ManyAR/DINO。encoder忽略true_shape，portrait输入loader
@@ -658,4 +678,4 @@ No image member was read and no network/model work occurred. The official 51 met
 
 `audit_co3d_51_released_sampler.py` calls released `_get_views/_fetch_views_for_pool` and `ResizedDataset`, using a declared all-valid stub: 1000 nominal requests, 836 distinct trajectories, 51 categories, 8835 distinct frames; 581 requests contain duplicate views, minimum6 distinct frames. Original pool order and source clamping/deque order are retained. Dataset seed777 is source/author-stated; Python combination seed42 and epoch0 are audit choices, not recovered author RNG. Plan SHA256 `cd7a0b1ef5ea4633a88360f91823a55e5a4e09d028af4c5967df0068ff75ff32`; report `results/co3d_51_released_sampler_20261003.json`. Independent draw-arithmetic, RNG preservation, epoch, duplication and fail-closed tests pass; Notebook reproduces the entire nominal plan in a host kernel.
 
-Reachability includes every clamped +/-4 jitter position for each of at most5 source scene tries:2205 trajectories/103599 frames. This is a conservative storage superset, NOT actual GT-valid input. `fast3r-co3d51-source-storage.service` audits advertised lengths, reuses38 frozen local category indices and fetches only13 missing categories' bounded directories, with atomic immutable archive/category checkpoints. No old235 complete scan, RGB transfer, GPU, cache eviction or formal Table1 promotion. Only after normal exit and full JSON should `verify_co3d_51_source_storage.py` independently recompute coverage/counts/sizes/recorded source bindings. Processed storage and realized depth validity remain unverified. Exact author JSON/RNG and HF-to-paper experiment mapping remain unresolved.
+Reachability includes every clamped +/-4 jitter position for each of at most5 source scene tries:2205 trajectories/103599 frames. This is a conservative storage superset, NOT actual GT-valid input. The directory service subsequently exited normally at10:57:12; `verify_co3d_51_source_storage.py` independently recomputed all51 categories, nominal raw6,539,401,033bytes and closure raw76,458,893,204bytes. It reused38 frozen indices and filled13 missing categories. No old235 complete rescan, RGB/GPU work or formal Table1 promotion occurred during this audit. New separately bounded actual preparation now follows the latest section above; directory lengths remain distinct from realized GT validity and processed storage. Exact author JSON/RNG and HF-to-paper experiment mapping remain unresolved.
