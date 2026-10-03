@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 cd /home/yyz/fast3r
+if [[ -f results/co3d_evaluation_deferred_cleanup_20261003.json ]]; then
+  echo 'CO3D evaluation deferred by user; local input data removed. Do not restart without new explicit authorization.'
+  exit 0
+fi
 exec >> results/co3d51_pose_eval_v1.log 2>&1
 trap 'echo "[$(date -Is)] source51 pose queue/evaluation failed at line $LINENO; checkpoints preserved"' ERR
 TASK_PYTHON=/home/yyz/miniconda3/envs/fast3r/bin/python

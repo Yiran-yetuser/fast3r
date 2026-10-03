@@ -1,0 +1,171 @@
+{
+  "status": "user_deferred_CO3D_evaluation_local_data_permanently_deleted",
+  "timestamp_local": "2026-10-03T12:43:30.888479+08:00",
+  "reason": "User explicitly deferred this CO3D evaluation and requested deletion of its local downloaded/prepared data to reclaim space.",
+  "resume_requires_explicit_user_authorization": true,
+  "deleted_targets": [
+    {
+      "path": "/home/yyz/fast3r/data/co3d51_source_processed_v1",
+      "allocated_bytes_before": 64270336
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d51_source_raw_v1",
+      "allocated_bytes_before": 152428544
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d_51_source_storage_v1",
+      "allocated_bytes_before": 50827264
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d_finite_negative_reference_diagnostic",
+      "allocated_bytes_before": 1028096
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d_finite_signed_reference_v4",
+      "allocated_bytes_before": 790528
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d_inf_reference_v2",
+      "allocated_bytes_before": 1462272
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d_lazy_processed",
+      "allocated_bytes_before": 7356416
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d_lazy_reference_draw0",
+      "allocated_bytes_before": 6762496
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d_lazy_v2_processed",
+      "allocated_bytes_before": 7454720
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d_lazy_v3_processed",
+      "allocated_bytes_before": 8302592
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d_lazy_v4_processed",
+      "allocated_bytes_before": 244760576
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d_negative_reference_diagnostic",
+      "allocated_bytes_before": 2183168
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d_range_cache",
+      "allocated_bytes_before": 1492037632
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d_range_probe",
+      "allocated_bytes_before": 13164544
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d_signed_inf_reference_v3",
+      "allocated_bytes_before": 2084864
+    },
+    {
+      "path": "/home/yyz/fast3r/data/co3d_test_metadata",
+      "allocated_bytes_before": 2515230720
+    }
+  ],
+  "target_allocated_bytes_before": 4570144768,
+  "available_bytes_before_deletion": 33210798080,
+  "last_committed_source51_request_count": 26,
+  "preserved_tracked_CO3D_artifact_sha256": {
+    "results/co3d51_pose_input_gate_20261003.json": "c3031319a3ff5444c13d053f25d2c9c67a5ff759549105aa6abd78b643bd6fca",
+    "results/co3d51_source_inputs_prefix1_verified_20261003.json": "04316b993e788c86206ae83ee9ce03f564a90302580196c572a45e5487afe077",
+    "results/co3d_51_1000_protocol_budget_20261003.json": "1ffb2856b9bd9a64e1bc8357f96e25347b913791ebc517e8dea169a659c460f1",
+    "results/co3d_51_released_sampler_20261003.json": "6dcf40a8035642a9501c8f49f365e075566d6ac54fd5edf77c8e983296af3604",
+    "results/co3d_51_source_storage_v1_20261003.json": "c2012cef263e912e87632b115f09d6e9c2d6db33aa9a6e3aaf316bdd7c3f9e81",
+    "results/co3d_51_source_storage_verified_20261003.json": "81126019bca4b974ee928ed91df459bd15d07b45dc288e237d557803048822db",
+    "results/co3d_aligned_focal_diagnostic_20261002.json": "614093e97b8b6d0b2c47b571507cdd6ee388f329c049fbfec69e93f60e61ba15",
+    "results/co3d_apple_range_probe_20261002.json": "bdfad448e106bc0b30619de02e731c246914ffccb0139d52ca6be97fbf4e75c5",
+    "results/co3d_author_protocol_update_20261003.json": "9daba9265979f9b507dbc306aa704b18349d2ecee06b996e0b42c489f39dfd31",
+    "results/co3d_camera_metadata_audit_v2_20261002.json": "66112f586ce48c546742d3ad313174dbcf166f51413a449507a89c075f1078a6",
+    "results/co3d_candidate_pnp_diagnostic_v1_20261003.json": "3ee21bb9f1da186e7bdcede1aea63a06245f6bb4db91d8979ac5cdfc62048374",
+    "results/co3d_candidate_pnp_diagnostic_verified_20261003.json": "e1809cad4dc7a655f6521a30904d642445797661689fadc153b47e1b8e19cdc1",
+    "results/co3d_candidate_request003_focal_diagnostic_20261003.json": "8f50d0590d008a9025c67fe8dfaec8ac0343dc118b8484c31a4c6ca3d8df4dd8",
+    "results/co3d_continuous_prefix1_verified_20261002.json": "d817a8facfbe7230503340e00914f4b83d934fdf7e64de2d371d5e0a27df3e3a",
+    "results/co3d_continuous_prefix3_verified_20261002.json": "8979edb9a8fd58394fe49644947673fc95cdccde59dd1712054d3dadf9718617",
+    "results/co3d_finite_negative_reference_diagnostic_20261002.json": "206f3da3f99c9c1c2609aa72213dc9ff9ecc0aa378f2f8feb5b89257c302e691",
+    "results/co3d_finite_signed_reference_v4_verified_20261002.json": "0507a23c43369c79dadaac538422037e4e3729b8f5457434b59200f38164cc80",
+    "results/co3d_focal_diagnostic_20261002.json": "a0f1e5a96f6666ec9bce1034e090a75e3be1d8e44ac43adf1a59e0795ca0fe6e",
+    "results/co3d_inf_reference_v2_offline_verified_20261002.json": "34053158cbf5369dca7753bdf554f0f647006084dee7d30aeab2602a7d7ced05",
+    "results/co3d_inf_reference_v2_verified_20261002.json": "1954b49a5cddb9d15f46481cd9c73e2c3de83223d74389d9e8caf4e36834a86f",
+    "results/co3d_landscape_input_diagnostic_v1_20261003.json": "9217a4038c897fe02b6428190e6a82681f5d342f512d46ccbdeb06226305771b",
+    "results/co3d_landscape_input_diagnostic_verified_20261003.json": "6b6248cf99c01d977deabe1dd2e02ec01ac901dadf548897929ee0e3d4a25256",
+    "results/co3d_lazy_draw0_v2_20261002.json": "5425c830c8047a966427f6db649f343bf37e06196f9ff72a075d11338d1d3a66",
+    "results/co3d_lazy_draw0_verified_20261002.json": "7641c3217a4ff4924e83e8af694b32a3b6954a727de0e95107567fc79a82dcbb",
+    "results/co3d_lazy_serialization_recovery_20261002.json": "5e445eec04388915d5590c77c518b0e3ec61fafc13c5eaeb4cceae397179cc00",
+    "results/co3d_negative_reference_diagnostic_20261002.json": "0e8212108ad78f2728c07ff1681dbe9b2363616510733e1065d9ce3ab24906e9",
+    "results/co3d_nonfinite_depth_failure_20261002.json": "058de7ea2a98a89ea873166f25d103d06b548ecc906587c36cd1a2ead1daa3e1",
+    "results/co3d_orientation_diagnostic_20261002.json": "21f2fc975997aa74300dc07d99a8d0cff611d58c31c4fa14014e964da6214752",
+    "results/co3d_portrait_geometry_audit_20261003.json": "f4d5ab55e96555f869fcb55014218a653da32898f5f785bbc4a7537a76109bd7",
+    "results/co3d_pose_100_seed42_verified_summary_20261003.json": "9aaa4a5d3228c98cd2cbe47cfcb46e23e5b8ce5616a777731dccf6171af1dae8",
+    "results/co3d_pose_draw0_input_preflight_20261002.json": "af6f8e72444ad4d88498cd7f70168da2bdbd32ee6efe31d60bd92f8c24daa5dc",
+    "results/co3d_pose_draw0_input_preflight_v2_20261002.json": "ab8c1b318e1063c0723ebe87c51f3535a800753ec9c9e1d12f94ed1fe391f1af",
+    "results/co3d_pose_draw0_seed42_20261002.json": "dcfcb9b0755de9ea570b64a503786a4b21de8599b97a73a921a126790d6842d1",
+    "results/co3d_pose_precision_20261002.json": "a6bb1269c47ea5e0cf60203b2f584aa61f69f94222f704fe6f81f5df61744d9e",
+    "results/co3d_pose_smoke_recovery_verified_20261002.json": "54d861c494c5f062ae016546a213d15955ad7474373edcdb2c23a0303033ccf5",
+    "results/co3d_preprocess_probe_20261002.json": "2cfa492dacb7a765426b4465fa8b1e7782bac0ecab6b8a9d689a20dba2fd8197",
+    "results/co3d_preprocess_probe_verified_20261002.json": "4176124fe14eb7a338a8c076a23688fbcaba976a5edc1d1a7ff340d1dc114ca9",
+    "results/co3d_sampling_resume_synthetic_20261002.json": "c2860bf9fe3a81a5048340ee0e2b2863892b3b3e0f7202da0c1e806aa849c180",
+    "results/co3d_sampling_trace_20261002.json": "d4f989ed02f0d0208aa54b24f65f70a1fbd94d3b4ac6d0e1030719d848873a6c",
+    "results/co3d_seen41_protocol_20261002.json": "c6decfdcd5d960cbedb20930fde32a329a8e6ff3d0d2431953b77a5f62fb6c07",
+    "results/co3d_seen41_storage_budget_v3_20261002.json": "e3ec5445315197bcfd254b8ce6c4d6dbfc59d6ac28681091117d269955b6bc00",
+    "results/co3d_signed_inf_reference_v3_verified_20261002.json": "7808dbcda2981a73e3f928ce4aaec6b830d0404d6c55130431f4657259278e17",
+    "results/co3d_storage_budget_verified_20261002.json": "a109ebb1d0bd2bab0c463c9447ba75c740ffe9f2713395ddcb3845e738cdd6e9",
+    "results/co3d_storage_feasibility_20261002.json": "b1bb5b2d4ecf8c6b55f1e6c78812644dfcd98f72a798a824fe8d7b41c7b85fad",
+    "results/co3d_storage_footer_recovery_20261002.json": "ca2032c5e5996ba7cba0f414c4db5b29e144121c52d847d2f82ed4e3025bbdc7",
+    "results/co3d_storage_recovery_20261002.json": "e0ed730e4f7721de7616ae67a5601e7fd838f42b06d2fca28719f32d141543a5",
+    "results/co3d_test_selection_summary_20261002.json": "c4c3a60ce76268d6b4b7de598dfce4dd0ed5b70992297b7bf09f0bcf637296d6",
+    "results/co3d_test_selection_verified_20261002.json": "67809a44b2bb69188b3969f1ac441a228d9866483d47b275041820ae1a0de0ac",
+    "results/co3d_v2_prefix3_migration_verified_20261002.json": "4f62cf712b2a5a3f843f280966b2f8361ae260bb7db61763c9ca5a1de1d66d01",
+    "results/co3d_v2_request4_failure_20261002.json": "a78363fd5be011ad3e161486284c5a5cf096bc016465bcd6579cef6a8640425e",
+    "results/co3d_v3_prefix3_migration_verified_20261002.json": "4d2a20c09cab75c8005206a154cdb766317fb126d48fa815bfbcd47f24c52363",
+    "results/co3d_v3_request4_failure_20261002.json": "c9b88b65894283977cb849bd0320fe9c7b42a00252891faa5cc5dd958ada4ea6",
+    "results/co3d_v4_prefix3_migration_verified_20261002.json": "9b0297c89808783a4d88181af1ebf573d8d0d8afebdea2049778df3288a740f8",
+    "results/co3d_v4_prefix_full_20261003.json": "6a4f995b52b94a50300d6c4322d1b079e0eefed6f2353823b8bfadc7f8597878",
+    "results/co3d_v4_prefix_snapshot_20261002T1200_verified.json": "82aa2a3d52c9980b3e7db353c102512f2c2f43c20fd6782d637039a2c9c8e66d",
+    "results/co3d_zip_footer_preflight_20261002.json": "dcbf28d16d071ae60c0dffb470bfc0ce903321f0a0329369464c6e08338c5da2",
+    "results/figures/co3d_candidate100_pose.png": "ad3e3b4b4f0ee61fedd5e00cf2c19fcde02988836bd6cbbe133585f730b87d3e",
+    "results/figures/co3d_landscape_input_diagnostic.png": "cf98aace936f7d65359a90fbd3b05e4be5a50b135b576ed48787e54897c685a3",
+    "results/figures/co3d_pnp_factorial_diagnostic.png": "ad4242961413d715ed7a816efa9fc75f6664bbc0e940a63f8d3e29a933b89267"
+  },
+  "preserved_scope": [
+    "source code",
+    "Notebook and historical outputs",
+    "results JSON/figures and journals",
+    "public model weights",
+    "DTU/NRGBD/7-Scenes/RealEstate10K datasets"
+  ],
+  "stopped_units": [
+    "fast3r-co3d51-source-prepare-v1.service",
+    "fast3r-co3d51-pose-eval-v1.service"
+  ],
+  "formal_Table1_result": false,
+  "full_paper_completed": false,
+  "cleanup_verified_at_local": "2026-10-03T13:04:09.685834+08:00",
+  "all_16_targets_absent": true,
+  "available_bytes_after_deletion": 37773111296,
+  "tracked_CO3D_artifacts_preserved_exact": true,
+  "automatic_restart_queue_guards_enabled": true,
+  "automation_prompt_update_applied": false,
+  "automation_update_error": "MCP tool call requires approval, but approval policy is never",
+  "deletion_method": "permanent deletion of explicitly validated16 CO3D data directories; no trash recovery",
+  "raw_inputs_required_for_local_replay_present": false,
+  "post_cleanup_validation": {
+    "discovered_test_count": 245,
+    "executed_passed_count": 241,
+    "explicitly_skipped_live_manifest_integration_count": 4,
+    "skip_reason": "User explicitly removed CO3D real manifests; these original-data integration checks are unavailable, not reproduced.",
+    "initial_post_cleanup_suite_missing_manifest_errors": 4,
+    "offline_queue_guard_test_passed": true,
+    "bash_syntax_checks_passed": true,
+    "notebook_cell_count": 107,
+    "prior_105_cells_preserved_exact": true,
+    "new_cleanup_analysis_host_Jupyter_executed_without_error": true
+  },
+  "observed_available_bytes_increase": 4562313216
+}

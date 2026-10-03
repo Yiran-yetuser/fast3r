@@ -12,7 +12,17 @@ ${{\color{Red}\Huge{\textsf{  CVPR\ 2025\ \}}}}\$
 [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue)](https://huggingface.co/jedyang97/Fast3R_ViT_Large_512/)
 </div>
 
-> Latest continuation (2026-10-03 12:27, §4.2/Table1 candidate): source51 actual input preparation
+> Current user scope (2026-10-03): CO3D pose evaluation is deferred. Both related services were
+> stopped at26/1,000 input requests, before any new model forward.16 explicitly validated CO3D data
+> directories were permanently deleted, reclaiming about4.25GiB; weights, other datasets, code,
+> historical Notebook outputs and result artifacts were retained.59 tracked CO3D artifact SHAs match.
+> Deleted raw/processed/metadata inputs mean historical full local replay is no longer available.
+> Both queues now refuse automatic restart while the [user-deferred marker](results/co3d_evaluation_deferred_cleanup_20261003.json)
+> is present. Updating the scheduled prompt was permission-blocked and has NOT succeeded; the latest
+> [continuation instructions](CONTINUATION.md) forbid CO3D redownload/restart without new authorization.
+> Next is existing-data reconstruction sensitivity and appendix-entry feasibility, not full-paper completion.
+
+> Historical continuation (2026-10-03 12:27, §4.2/Table1 candidate; now deferred): source51 actual input preparation
 > remains healthy; a separate pose queue now waits for ALL1,000 prepared requests, independent offline
 > input replay, preparation exit and a fresh replay before loading any model, then waits for free GPU>=10GiB.
 > The [real gate snapshot](results/co3d51_pose_input_gate_20261003.json) shows18 committed filenames at

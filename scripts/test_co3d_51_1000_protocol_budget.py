@@ -5,6 +5,10 @@ from pathlib import Path
 from audit_co3d_51_1000_protocol_budget import audit, build_plan
 
 
+@unittest.skipIf(
+    Path('results/co3d_evaluation_deferred_cleanup_20261003.json').is_file()
+    and not Path('data/co3d_test_metadata/selected_seqs_test_reconstructed.json').is_file(),
+    'User deferred CO3D and removed real manifests; four live-manifest integration checks unavailable, not reproduced.')
 class Co3d51BudgetTests(unittest.TestCase):
     def test_real_manifest_has_51_categories_and_expected_delta(self):
         result = audit(Path("."), requests=1000)
