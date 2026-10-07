@@ -1,5 +1,7 @@
 # Fast3R 论文复现与评测审计
 
+> **结项清理（2026-10-07）：** 经用户授权，本地数据集、下载包和模型权重已永久删除，释放约86.44GiB；定时续接任务已关闭。代码、Notebook、历史结果和科学图保留。历史实验结论不变，但本地推理和数据依赖评测需重新下载后才能重跑；不能将历史输出视为当前执行结果。清理凭据见[记录](results/project_storage_cleanup_20261007.json)。
+
 > **项目定位：公开预训练权重下的部分复现。** 复现了推理与多数据集重建评测流程，并对照论文核验结果；Table 1 位姿评测、训练型消融和若干附录实验尚未完成。本项目不宣称完整复现，也不宣称达到论文指标。
 >
 > **Project status:** Partial reproduction using public pretrained weights. The evaluation pipeline and several reconstruction benchmarks were run and audited. Pose evaluation, training-based ablations, and several appendix experiments remain incomplete.

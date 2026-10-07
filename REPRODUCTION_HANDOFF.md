@@ -1,5 +1,7 @@
 # Fast3R 论文复现：结项交接
 
+> 2026-10-07结项清理：用户授权删除本地数据/下载包及模型权重，定时续接已关闭；代码、Notebook、历史结果和科学图保留。本地数据依赖评测与推理须重新下载才能重跑，不将历史输出误标为当前执行。记录见`results/project_storage_cleanup_20261007.json`。
+
 更新日期：2026-10-03。项目结论是**公开权重部分复现**，不是整篇论文复现完成。详细实验、参数和每轮证据见[逐项复现记录](PAPER_REPRODUCTION.md)、[Notebook](fast3r_reproduction.ipynb)和[续接记录](CONTINUATION.md)。
 
 ## 复现流程
